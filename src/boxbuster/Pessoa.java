@@ -9,6 +9,10 @@ public class Pessoa {
     protected int cpf;
     protected int idade;
 
+    public Pessoa(){
+    
+    }
+    
     public Pessoa(String nome, int cpf, int idade) {
         this.nome = nome;
         this.cpf = cpf;
