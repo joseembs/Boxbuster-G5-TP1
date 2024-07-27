@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package boxbuster;
 
-/**
- *
- * @author Adm
- */
 public class Filmes extends Produtos{
     private String genero;
     private String diretor;
