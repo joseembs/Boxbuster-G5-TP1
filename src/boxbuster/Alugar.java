@@ -2,8 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package projetoo;
+package boxbuster;
+
 import java.util.Date;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -13,12 +16,12 @@ public class Alugar {
     private Date dataPedido;
     private Date dataDevolucao;
     private Cliente cliente;
-    private Produto produto;
+    private Produtos produto;
 
     public Alugar() {
     }
 
-    public Alugar(Date dataPedido, Date dataDevolucao, Cliente cliente, Produto produto) {
+    public Alugar(Date dataPedido, Date dataDevolucao, Cliente cliente, Produtos produto) {
         this.dataPedido = dataPedido;
         this.dataDevolucao = dataDevolucao;
         this.cliente = cliente;
@@ -49,11 +52,11 @@ public class Alugar {
         this.cliente = cliente;
     }
 
-    public Produto getProduto() {
+    public Produtos getProduto() {
         return produto;
     }
 
-    public void setProduto(Produto produto) {
+    public void setProduto(Produtos produto) {
         this.produto = produto;
     }
     
