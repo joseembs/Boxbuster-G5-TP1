@@ -13,6 +13,6 @@ public class Visitante extends Cliente {
             totalDivida += alugados.get(i).getProduto().getPreco();
         }
 
-        this.divida = totalDivida;
+        setDivida(totalDivida);
     }
 }
