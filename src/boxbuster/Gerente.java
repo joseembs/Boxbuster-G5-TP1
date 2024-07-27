@@ -1,19 +1,21 @@
 package boxbuster;
+
+import java.util.ArrayList; // import the ArrayList class
 /**
  *
  * @author elisrb
  */
+
+
 public class Gerente extends Funcionario {
-    protected Caixa[] caixas;
-    private int index;
+    protected ArrayList<Caixa> caixas;
 
     public Gerente(/*Caixa[] caixas,*/ String senha, int codigoFunc, String nome, int cpf, int idade) {
         super(senha, codigoFunc, nome, cpf, idade);
-        //this.caixas = caixas;
-        this.index = 0;
+        this.caixas = new ArrayList<Caixa>();
     }
 
-    public Caixa[] getCaixas() {
+    public ArrayList<Caixa> getCaixas() {
         return caixas;
     }
 
@@ -38,8 +40,7 @@ public class Gerente extends Funcionario {
     }
 
     public void setCaixas(Caixa caixa) {
-        this.caixas[index] = caixa;
-        this.index++;
+        this.caixas.add(caixa);
         caixa.setGerente(this);
     }
 
