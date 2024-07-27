@@ -1,4 +1,4 @@
-package projetoo;
+package boxbuster;
 
 import java.util.ArrayList;
 
@@ -46,18 +46,7 @@ public abstract class Cliente extends Pessoa {
         this.pedidos.add(pedido);
     }
     
-    
-    
-    
-    
-
-    
     public abstract void calculaDivida();
-
-  
-    
-    
-
     
     public void addAlugado(Alugar alugado) {
         this.alugados.add(alugado);
