@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package projetoo;
+package boxbuster;
 
 import java.util.ArrayList;
+
 public class Cadastrado extends Cliente {
     private String senha;
     private int codigoCliente;
@@ -34,7 +35,7 @@ public class Cadastrado extends Cliente {
             totalDivida += (alugados.get(i).getProduto().getPreco()) * 0.9;
         }
 
-        this.divida = totalDivida;
+        setDivida(totalDivida);
     }
     
 }
