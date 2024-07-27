@@ -5,9 +5,9 @@ package boxbuster;
  * @author elisrb
  */
 public class Pessoa {
-    String nome;
-    int cpf;
-    int idade;
+    protected String nome;
+    protected int cpf;
+    protected int idade;
 
     public Pessoa(String nome, int cpf, int idade) {
         this.nome = nome;
