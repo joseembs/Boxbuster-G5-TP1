@@ -26,64 +26,125 @@ public class MainScr extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        pnlMain = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        btnLojaMain = new javax.swing.JButton();
+        btnCliMain = new javax.swing.JButton();
+        btnFuncMain = new javax.swing.JButton();
+        btnSairMain = new javax.swing.JButton();
+        menuBarMain = new javax.swing.JMenuBar();
+        menuMain = new javax.swing.JMenu();
+        menuLojaMain = new javax.swing.JMenuItem();
+        menuCliMain = new javax.swing.JMenuItem();
+        menuFuncMain = new javax.swing.JMenuItem();
+        separatorMain = new javax.swing.JPopupMenu.Separator();
+        menuSairMain = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(640, 480));
 
-        jButton2.setText("Área do cliente");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setFont(new java.awt.Font("Biondi", 1, 36)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogoBig.png"))); // NOI18N
+        jLabel1.setText("BOXBUSTER");
+
+        btnLojaMain.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnLojaMain.setText("Loja");
+        btnLojaMain.setToolTipText("Ver produtos");
+        btnLojaMain.setRequestFocusEnabled(false);
+        btnLojaMain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnLojaMainActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Loja");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCliMain.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnCliMain.setText("Área do cliente");
+        btnCliMain.setToolTipText("Cadastrar-se ou ver seu perfil");
+        btnCliMain.setRequestFocusEnabled(false);
+        btnCliMain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCliMainActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Área do funcionário");
+        btnFuncMain.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnFuncMain.setText("Área do funcionário");
+        btnFuncMain.setToolTipText("Ver seu perfil");
+        btnFuncMain.setRequestFocusEnabled(false);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(69, 69, 69)
-                .addComponent(jButton3)
-                .addGap(70, 70, 70))
+        btnSairMain.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnSairMain.setText("Sair");
+        btnSairMain.setToolTipText("Fechar programa");
+        btnSairMain.setRequestFocusEnabled(false);
+        btnSairMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairMainActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
+        pnlMain.setLayout(pnlMainLayout);
+        pnlMainLayout.setHorizontalGroup(
+            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMainLayout.createSequentialGroup()
+                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlMainLayout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(jLabel1))
+                    .addGroup(pnlMainLayout.createSequentialGroup()
+                        .addGap(263, 263, 263)
+                        .addComponent(btnSairMain))
+                    .addGroup(pnlMainLayout.createSequentialGroup()
+                        .addGap(206, 206, 206)
+                        .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnLojaMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnFuncMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCliMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
-                .addContainerGap(218, Short.MAX_VALUE))
+        pnlMainLayout.setVerticalGroup(
+            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMainLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnLojaMain)
+                .addGap(18, 18, 18)
+                .addComponent(btnCliMain)
+                .addGap(18, 18, 18)
+                .addComponent(btnFuncMain)
+                .addGap(18, 18, 18)
+                .addComponent(btnSairMain)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        menuMain.setText("Menu");
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        menuLojaMain.setText("Loja");
+        menuLojaMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLojaMainActionPerformed(evt);
+            }
+        });
+        menuMain.add(menuLojaMain);
 
-        setJMenuBar(jMenuBar1);
+        menuCliMain.setText("Área do cliente");
+        menuCliMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCliMainActionPerformed(evt);
+            }
+        });
+        menuMain.add(menuCliMain);
+
+        menuFuncMain.setText("Área do funcionário");
+        menuMain.add(menuFuncMain);
+        menuMain.add(separatorMain);
+
+        menuSairMain.setText("Sair");
+        menuMain.add(menuSairMain);
+
+        menuBarMain.add(menuMain);
+
+        setJMenuBar(menuBarMain);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,27 +152,39 @@ public class MainScr extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnCliMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCliMainActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnCliMainActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnLojaMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLojaMainActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnLojaMainActionPerformed
+
+    private void menuLojaMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLojaMainActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuLojaMainActionPerformed
+
+    private void menuCliMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCliMainActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuCliMainActionPerformed
+
+    private void btnSairMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairMainActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSairMainActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,12 +222,18 @@ public class MainScr extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton btnCliMain;
+    private javax.swing.JButton btnFuncMain;
+    private javax.swing.JButton btnLojaMain;
+    private javax.swing.JButton btnSairMain;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuBar menuBarMain;
+    private javax.swing.JMenuItem menuCliMain;
+    private javax.swing.JMenuItem menuFuncMain;
+    private javax.swing.JMenuItem menuLojaMain;
+    private javax.swing.JMenu menuMain;
+    private javax.swing.JMenuItem menuSairMain;
+    private javax.swing.JPanel pnlMain;
+    private javax.swing.JPopupMenu.Separator separatorMain;
     // End of variables declaration//GEN-END:variables
 }
