@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author User
+ * @author hsaless
  */
 public class Alugar {
     private Date dataPedido;

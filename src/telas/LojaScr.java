@@ -14,6 +14,7 @@ public class LojaScr extends javax.swing.JFrame {
      * Creates new form LojaScr
      */
     public LojaScr() {
+        setLocationRelativeTo(null);
         initComponents();
     }
 
