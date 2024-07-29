@@ -6,7 +6,7 @@ package boxbuster;
 
 /**
  *
- * @author User
+ * @author hsaless
  */
 public class Pedido {
     private int codigoPedido;
