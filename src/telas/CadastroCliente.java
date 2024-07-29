@@ -1,14 +1,14 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package telas;
 
 /**
  *
- * @author User
+ * @author Adm
  */
-public class CadastroCliente extends javax.swing.JPanel {
+public class CadastroCliente extends javax.swing.JFrame {
 
     /**
      * Creates new form CadastroCliente
@@ -40,6 +40,13 @@ public class CadastroCliente extends javax.swing.JPanel {
         txtSenha = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        menuBarCadCli = new javax.swing.JMenuBar();
+        menuCadCli = new javax.swing.JMenu();
+        menuVoltarCadCli = new javax.swing.JMenuItem();
+        separatorCadCli = new javax.swing.JPopupMenu.Separator();
+        menuSairCadCli = new javax.swing.JMenuItem();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         txt.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Cliente"));
 
@@ -72,7 +79,7 @@ public class CadastroCliente extends javax.swing.JPanel {
                 .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(txtLayout.createSequentialGroup()
                         .addComponent(lblPropaganda)
-                        .addContainerGap(34, Short.MAX_VALUE))
+                        .addContainerGap(22, Short.MAX_VALUE))
                     .addGroup(txtLayout.createSequentialGroup()
                         .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(txtLayout.createSequentialGroup()
@@ -121,7 +128,7 @@ public class CadastroCliente extends javax.swing.JPanel {
                         .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblIdade)
                             .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblCadastro)
                         .addGap(15, 15, 15)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -134,20 +141,86 @@ public class CadastroCliente extends javax.swing.JPanel {
                         .addGap(30, 30, 30))))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        menuCadCli.setText("Menu");
+
+        menuVoltarCadCli.setText("Voltar");
+        menuVoltarCadCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuVoltarCadCliActionPerformed(evt);
+            }
+        });
+        menuCadCli.add(menuVoltarCadCli);
+        menuCadCli.add(separatorCadCli);
+
+        menuSairCadCli.setText("Sair");
+        menuCadCli.add(menuSairCadCli);
+
+        menuBarCadCli.add(menuCadCli);
+
+        setJMenuBar(menuBarCadCli);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGap(0, 640, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(txt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 457, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, 445, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void menuVoltarCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarCadCliActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuVoltarCadCliActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new CadastroCliente().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
@@ -159,6 +232,11 @@ public class CadastroCliente extends javax.swing.JPanel {
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblPropaganda;
     private javax.swing.JLabel lblSenha;
+    private javax.swing.JMenuBar menuBarCadCli;
+    private javax.swing.JMenu menuCadCli;
+    private javax.swing.JMenuItem menuSairCadCli;
+    private javax.swing.JMenuItem menuVoltarCadCli;
+    private javax.swing.JPopupMenu.Separator separatorCadCli;
     private javax.swing.JPanel txt;
     private javax.swing.JTextField txtCPF;
     private javax.swing.JTextField txtIdade;

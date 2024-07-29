@@ -1,20 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package boxbuster;
 
 import boxbuster.Jogos;
 
 /**
  *
- * @author Adm
+ * @author joseembs
  */
 public class Videogames extends Jogos{
     private String genero;
     private String console;
     private String autor;
 
+    public Videogames() {
+    }
+    
     public Videogames(String genero, String console, String autor, String nomeProd, double preco, int ano, int codigoProd, int faixaEtaria, boolean alugado, int numJogadores) {
         super(nomeProd, preco, ano, codigoProd, faixaEtaria, alugado, numJogadores);
         this.genero = genero;

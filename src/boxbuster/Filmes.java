@@ -1,8 +1,15 @@
 package boxbuster;
 
+/**
+ *
+ * @author joseembs
+ */
 public class Filmes extends Produtos{
     private String genero;
     private String diretor;
+    
+    public Filmes() {
+    }
 
     public Filmes(String nomeProd, double preco, int ano, int codigoProd, int faixaEtaria, boolean alugado, String genero, String diretor) {
         super(nomeProd, preco, ano, codigoProd, faixaEtaria, alugado);

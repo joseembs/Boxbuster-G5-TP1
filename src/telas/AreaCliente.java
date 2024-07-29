@@ -41,6 +41,11 @@ public class AreaCliente extends javax.swing.JFrame {
         lblHistAluguel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        menuBarAreaCli = new javax.swing.JMenuBar();
+        menuAreaCli = new javax.swing.JMenu();
+        menuVoltarAreaCli = new javax.swing.JMenuItem();
+        separatorAreaCli = new javax.swing.JPopupMenu.Separator();
+        menuSairAreaCli = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,23 +53,23 @@ public class AreaCliente extends javax.swing.JFrame {
 
         lblNome.setText("Nome:");
 
-        lblNomeObj.setText("a");
+        lblNomeObj.setText("-----");
 
         lblDivida.setText("Dívida");
 
-        lblDividaObj.setText("a");
+        lblDividaObj.setText("-----");
 
         lblProdutosAlugados.setText("Produtos Alugados");
 
         lblCPF.setText("CPF:");
 
-        lblProdutosAlugadosObj.setText("a");
+        lblProdutosAlugadosObj.setText("-----");
 
-        lblCPFObj.setText("a");
+        lblCPFObj.setText("-----");
 
         lblIdade.setText("Idade:");
 
-        lblIdadeObj.setText("a");
+        lblIdadeObj.setText("-----");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogoBig.png"))); // NOI18N
 
@@ -72,15 +77,23 @@ public class AreaCliente extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nome", "Tipo", "Data Inicial", "Devolução", "Status"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout pnlAreaClienteLayout = new javax.swing.GroupLayout(pnlAreaCliente);
@@ -90,9 +103,6 @@ public class AreaCliente extends javax.swing.JFrame {
             .addGroup(pnlAreaClienteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlAreaClienteLayout.createSequentialGroup()
-                        .addComponent(lblHistAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlAreaClienteLayout.createSequentialGroup()
                         .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblCPF)
@@ -115,12 +125,17 @@ public class AreaCliente extends javax.swing.JFrame {
                                         .addComponent(lblProdutosAlugados)
                                         .addGap(18, 18, 18)
                                         .addComponent(lblProdutosAlugadosObj, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
                         .addComponent(jLabel1)
-                        .addGap(37, 37, 37))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAreaClienteLayout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                        .addGap(37, 37, 37))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAreaClienteLayout.createSequentialGroup()
+                        .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlAreaClienteLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblHistAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 474, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addContainerGap())))
         );
         pnlAreaClienteLayout.setVerticalGroup(
             pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,12 +161,29 @@ public class AreaCliente extends javax.swing.JFrame {
                     .addGroup(pnlAreaClienteLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblHistAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        menuAreaCli.setText("Menu");
+
+        menuVoltarAreaCli.setText("Voltar");
+        menuVoltarAreaCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuVoltarAreaCliActionPerformed(evt);
+            }
+        });
+        menuAreaCli.add(menuVoltarAreaCli);
+        menuAreaCli.add(separatorAreaCli);
+
+        menuSairAreaCli.setText("Sair");
+        menuAreaCli.add(menuSairAreaCli);
+
+        menuBarAreaCli.add(menuAreaCli);
+
+        setJMenuBar(menuBarAreaCli);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,11 +193,17 @@ public class AreaCliente extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlAreaCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlAreaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 480, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuVoltarAreaCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarAreaCliActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuVoltarAreaCliActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,7 +216,7 @@ public class AreaCliente extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows XP".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -217,6 +255,11 @@ public class AreaCliente extends javax.swing.JFrame {
     private javax.swing.JLabel lblNomeObj;
     private javax.swing.JLabel lblProdutosAlugados;
     private javax.swing.JLabel lblProdutosAlugadosObj;
+    private javax.swing.JMenu menuAreaCli;
+    private javax.swing.JMenuBar menuBarAreaCli;
+    private javax.swing.JMenuItem menuSairAreaCli;
+    private javax.swing.JMenuItem menuVoltarAreaCli;
     private javax.swing.JPanel pnlAreaCliente;
+    private javax.swing.JPopupMenu.Separator separatorAreaCli;
     // End of variables declaration//GEN-END:variables
 }

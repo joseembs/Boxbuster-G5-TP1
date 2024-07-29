@@ -1,16 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package boxbuster;
 
+import java.util.ArrayList;
 import boxbuster.Musica;
 import boxbuster.Jogos;
 import boxbuster.Filmes;
 
 /**
  *
- * @author Adm
+ * @author joseembs
  */
 public class Produtos {
     private String nomeProd;
@@ -20,9 +17,8 @@ public class Produtos {
     private int faixaEtaria;
     private boolean alugado;
     
-    private Filmes[] listaFilmes;
-    private Musica[] listaMusicas;
-    private Jogos[] listaJogos;
+    public Produtos() {
+    }
 
     public Produtos(String nomeProd, double preco, int ano, int codigoProd, int faixaEtaria, boolean alugado) {
         this.nomeProd = nomeProd;
@@ -31,12 +27,6 @@ public class Produtos {
         this.codigoProd = codigoProd;
         this.faixaEtaria = faixaEtaria;
         this.alugado = alugado;
-    }
-
-    public Produtos(Filmes[] listaFilmes, Musica[] listaMusicas, Jogos[] listaJogos) {
-        this.listaFilmes = listaFilmes;
-        this.listaMusicas = listaMusicas;
-        this.listaJogos = listaJogos;
     }
 
     public String getNomeProd() {
@@ -86,29 +76,4 @@ public class Produtos {
     public void setAlugado(boolean alugado) {
         this.alugado = alugado;
     }
-
-    public Filmes[] getListaFilmes() {
-        return listaFilmes;
-    }
-
-    public void setListaFilmes(Filmes[] listaFilmes) {
-        this.listaFilmes = listaFilmes;
-    }
-
-    public Musica[] getListaMusicas() {
-        return listaMusicas;
-    }
-
-    public void setListaMusicas(Musica[] listaMusicas) {
-        this.listaMusicas = listaMusicas;
-    }
-
-    public Jogos[] getListaJogos() {
-        return listaJogos;
-    }
-
-    public void setListaJogos(Jogos[] listaJogos) {
-        this.listaJogos = listaJogos;
-    }
-    
 }

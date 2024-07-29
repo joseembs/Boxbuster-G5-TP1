@@ -1,16 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package boxbuster;
 
 /**
  *
- * @author Adm
+ * @author joseembs
  */
 public class Musica extends Produtos{
     private String estilo;
     private String autor;
+    
+    public Musica() {
+    }
 
     public Musica(String estilo, String autor, String nomeProd, double preco, int ano, int codigoProd, int faixaEtaria, boolean alugado){
         super(nomeProd, preco, ano, codigoProd, faixaEtaria, alugado);

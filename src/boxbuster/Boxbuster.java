@@ -2,7 +2,7 @@ package boxbuster;
 
 /**
  *
- * @author Adm
+ * @author joseembs
  */
 public class Boxbuster {
 
