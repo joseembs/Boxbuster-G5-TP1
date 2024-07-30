@@ -3,7 +3,7 @@ package boxbuster;
  *
  * @author elisrb
  */
-public class Funcionario extends Pessoa {
+public abstract class Funcionario extends Pessoa {
     protected String senha;
     protected int codigoFunc;
 

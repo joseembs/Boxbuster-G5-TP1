@@ -22,12 +22,7 @@ public abstract class Cliente extends Pessoa {
         this.alugados = new ArrayList<>();
         this.pedidos = new ArrayList<>();
     }
-
-    
-    
-    
     
     public abstract void calculaDivida();
-    
     
 }

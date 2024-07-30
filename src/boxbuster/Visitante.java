@@ -65,9 +65,6 @@ public class Visitante extends Cliente {
     public void setIdade(int idade) {
         this.idade = idade;
     }
-    
-    
-    
 
     @Override
     public void calculaDivida() {

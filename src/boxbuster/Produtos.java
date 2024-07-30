@@ -9,7 +9,7 @@ import boxbuster.Filmes;
  *
  * @author joseembs
  */
-public class Produtos {
+public abstract class Produtos {
     private String nomeProd;
     private double preco;
     private int ano;

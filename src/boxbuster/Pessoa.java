@@ -4,13 +4,12 @@ package boxbuster;
  *
  * @author elisrb
  */
-public class Pessoa {
+public abstract class Pessoa {
     protected String nome;
     protected int cpf;
     protected int idade;
 
     public Pessoa(){
-    
     }
     
     public Pessoa(String nome, int cpf, int idade) {

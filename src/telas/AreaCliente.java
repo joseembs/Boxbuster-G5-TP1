@@ -28,19 +28,18 @@ public class AreaCliente extends javax.swing.JFrame {
 
         pnlAreaCliente = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
-        lblNomeObj = new javax.swing.JLabel();
         lblDivida = new javax.swing.JLabel();
-        lblDividaObj = new javax.swing.JLabel();
         lblProdutosAlugados = new javax.swing.JLabel();
         lblCPF = new javax.swing.JLabel();
-        lblProdutosAlugadosObj = new javax.swing.JLabel();
-        lblCPFObj = new javax.swing.JLabel();
         lblIdade = new javax.swing.JLabel();
-        lblIdadeObj = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lblHistAluguel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btnLojaMain = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jButton3 = new javax.swing.JButton();
+        lblHistAluguel1 = new javax.swing.JLabel();
         menuBarAreaCli = new javax.swing.JMenuBar();
         menuAreaCli = new javax.swing.JMenu();
         menuVoltarAreaCli = new javax.swing.JMenuItem();
@@ -51,28 +50,24 @@ public class AreaCliente extends javax.swing.JFrame {
 
         pnlAreaCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Área do Cliente"));
 
-        lblNome.setText("Nome:");
+        lblNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblNome.setText("Nome: -----");
 
-        lblNomeObj.setText("-----");
+        lblDivida.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblDivida.setText("Dívida: R$ --,--");
 
-        lblDivida.setText("Dívida");
+        lblProdutosAlugados.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblProdutosAlugados.setText("Produtos Alugados: --");
 
-        lblDividaObj.setText("-----");
+        lblCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblCPF.setText("CPF: -----");
 
-        lblProdutosAlugados.setText("Produtos Alugados");
-
-        lblCPF.setText("CPF:");
-
-        lblProdutosAlugadosObj.setText("-----");
-
-        lblCPFObj.setText("-----");
-
-        lblIdade.setText("Idade:");
-
-        lblIdadeObj.setText("-----");
+        lblIdade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblIdade.setText("Idade: --");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogoBig.png"))); // NOI18N
 
+        lblHistAluguel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblHistAluguel.setText("Histórico de Aluguel:");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -96,75 +91,96 @@ public class AreaCliente extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        btnLojaMain.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnLojaMain.setText("Ir para a loja");
+        btnLojaMain.setToolTipText("Ver produtos");
+        btnLojaMain.setRequestFocusEnabled(false);
+        btnLojaMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLojaMainActionPerformed(evt);
+            }
+        });
+
+        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton3.setText("Deslogar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        lblHistAluguel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblHistAluguel1.setText("Suas informações:");
+
         javax.swing.GroupLayout pnlAreaClienteLayout = new javax.swing.GroupLayout(pnlAreaCliente);
         pnlAreaCliente.setLayout(pnlAreaClienteLayout);
         pnlAreaClienteLayout.setHorizontalGroup(
             pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAreaClienteLayout.createSequentialGroup()
+                .addGap(222, 222, 222)
+                .addComponent(lblHistAluguel)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(pnlAreaClienteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1)
                     .addGroup(pnlAreaClienteLayout.createSequentialGroup()
-                        .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblCPF)
-                            .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDivida))
-                        .addGap(18, 18, 18)
                         .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNomeObj, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnlAreaClienteLayout.createSequentialGroup()
                                 .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCPFObj, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblDividaObj, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                    .addComponent(lblCPF)
+                                    .addComponent(lblNome)
+                                    .addComponent(lblDivida))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                                .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblIdade)
+                                    .addComponent(lblProdutosAlugados))
+                                .addGap(60, 60, 60))
+                            .addGroup(pnlAreaClienteLayout.createSequentialGroup()
                                 .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pnlAreaClienteLayout.createSequentialGroup()
-                                        .addComponent(lblIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lblIdadeObj, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(74, 74, 74)
+                                        .addComponent(lblHistAluguel1))
                                     .addGroup(pnlAreaClienteLayout.createSequentialGroup()
-                                        .addComponent(lblProdutosAlugados)
+                                        .addGap(44, 44, 44)
+                                        .addComponent(jButton3)
                                         .addGap(18, 18, 18)
-                                        .addComponent(lblProdutosAlugadosObj, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                                        .addComponent(btnLojaMain)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(jLabel1)
-                        .addGap(37, 37, 37))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAreaClienteLayout.createSequentialGroup()
-                        .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlAreaClienteLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblHistAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 474, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addContainerGap())))
+                        .addGap(35, 35, 35))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         pnlAreaClienteLayout.setVerticalGroup(
             pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAreaClienteLayout.createSequentialGroup()
                 .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlAreaClienteLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblNome)
-                            .addComponent(lblNomeObj, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCPF)
-                            .addComponent(lblCPFObj)
-                            .addComponent(lblIdade)
-                            .addComponent(lblIdadeObj))
-                        .addGap(30, 30, 30)
-                        .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblDivida)
-                            .addComponent(lblDividaObj)
-                            .addComponent(lblProdutosAlugados)
-                            .addComponent(lblProdutosAlugadosObj)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlAreaClienteLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblHistAluguel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblNome)
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCPF)
+                            .addComponent(lblIdade))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDivida)
+                            .addComponent(lblProdutosAlugados))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton3)
+                            .addComponent(btnLojaMain))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblHistAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblHistAluguel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(96, 96, 96))
         );
 
         menuAreaCli.setText("Menu");
@@ -189,13 +205,17 @@ public class AreaCliente extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlAreaCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlAreaCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlAreaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 480, Short.MAX_VALUE))
+                .addComponent(pnlAreaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 445, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -204,6 +224,14 @@ public class AreaCliente extends javax.swing.JFrame {
     private void menuVoltarAreaCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarAreaCliActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuVoltarAreaCliActionPerformed
+
+    private void btnLojaMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLojaMainActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLojaMainActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,20 +269,19 @@ public class AreaCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLojaMain;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCPF;
-    private javax.swing.JLabel lblCPFObj;
     private javax.swing.JLabel lblDivida;
-    private javax.swing.JLabel lblDividaObj;
     private javax.swing.JLabel lblHistAluguel;
+    private javax.swing.JLabel lblHistAluguel1;
     private javax.swing.JLabel lblIdade;
-    private javax.swing.JLabel lblIdadeObj;
     private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblNomeObj;
     private javax.swing.JLabel lblProdutosAlugados;
-    private javax.swing.JLabel lblProdutosAlugadosObj;
     private javax.swing.JMenu menuAreaCli;
     private javax.swing.JMenuBar menuBarAreaCli;
     private javax.swing.JMenuItem menuSairAreaCli;

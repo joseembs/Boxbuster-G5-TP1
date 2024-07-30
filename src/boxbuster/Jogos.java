@@ -6,7 +6,7 @@ import java.util.ArrayList;
  *
  * @author joseembs
  */
-public class Jogos extends Produtos{
+public abstract class Jogos extends Produtos{
     private int numJogadores;
     
     public Jogos() {
