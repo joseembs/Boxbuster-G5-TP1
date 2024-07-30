@@ -66,6 +66,8 @@ public class FinalizarPedido extends javax.swing.JFrame {
         menuSairCart = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Pedido");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogo.png")).getImage());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

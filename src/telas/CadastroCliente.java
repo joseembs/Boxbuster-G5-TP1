@@ -51,6 +51,8 @@ public class CadastroCliente extends javax.swing.JFrame {
         menuSairCadCli = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela de cadastro");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogo.png")).getImage());
 
         txt.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Cliente"));
 

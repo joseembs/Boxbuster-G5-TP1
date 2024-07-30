@@ -62,6 +62,8 @@ public class AreaCaixa extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Área do caixa");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogo.png")).getImage());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Área do caixa"), "Área do Caixa"));
 
@@ -79,10 +81,7 @@ public class AreaCaixa extends javax.swing.JFrame {
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Código", "Quantidade", "Produtos", "Cliente", "Preço", "Status"
@@ -153,13 +152,12 @@ public class AreaCaixa extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(216, 216, 216)
                         .addComponent(lblHistAluguel))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(lblNome))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(229, 229, 229)
-                            .addComponent(lblHistAluguel1))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblNome))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(229, 229, 229)
+                        .addComponent(lblHistAluguel1)))
                 .addContainerGap(228, Short.MAX_VALUE))
             .addComponent(jScrollPane3)
         );

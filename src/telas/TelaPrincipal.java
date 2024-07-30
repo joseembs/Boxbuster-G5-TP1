@@ -42,6 +42,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuSairMain = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela principal");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogo.png")).getImage());
 
         jLabel1.setFont(new java.awt.Font("Biondi", 1, 36)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogoBig.png"))); // NOI18N
@@ -115,7 +117,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(btnFuncMain)
                 .addGap(18, 18, 18)
                 .addComponent(btnSairMain)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         menuMain.setText("Menu");

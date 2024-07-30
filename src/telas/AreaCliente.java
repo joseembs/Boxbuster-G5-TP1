@@ -47,6 +47,8 @@ public class AreaCliente extends javax.swing.JFrame {
         menuSairAreaCli = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Área do cliente");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogo.png")).getImage());
 
         pnlAreaCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Área do Cliente"));
 
@@ -72,10 +74,7 @@ public class AreaCliente extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Nome", "Tipo", "Data Inicial", "Devolução", "Status"
