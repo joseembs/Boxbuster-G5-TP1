@@ -1,5 +1,5 @@
 package boxbuster;
-
+import java.util.Date;
 /**
  *
  * @author elisrb
@@ -7,14 +7,14 @@ package boxbuster;
 public abstract class Pessoa {
     protected String nome;
     protected int cpf;
-    protected int idade;
+    protected Date dataNascimento;
 
     public Pessoa(){
     }
     
-    public Pessoa(String nome, int cpf, int idade) {
+    public Pessoa(String nome, int cpf, Date dataNascimento) {
         this.nome = nome;
         this.cpf = cpf;
-        this.idade = idade;
+        this.dataNascimento = dataNascimento;
     }
 }
