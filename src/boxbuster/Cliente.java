@@ -1,6 +1,7 @@
 package boxbuster;
 
 import java.util.ArrayList;
+import java.util.Date;
 /**
  *
  * @author hsaless
@@ -16,8 +17,8 @@ public abstract class Cliente extends Pessoa {
         this.pedidos = new ArrayList<>();
     }
 
-    public Cliente(String nome, int CPF, int idade, double divida) {
-        super(nome, CPF, idade);
+    public Cliente(String nome, int CPF, Date dataNascimento, double divida) {
+        super(nome, CPF, dataNascimento);
         this.divida = divida;
         this.alugados = new ArrayList<>();
         this.pedidos = new ArrayList<>();
