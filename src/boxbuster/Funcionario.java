@@ -1,4 +1,5 @@
 package boxbuster;
+import java.util.Date;
 /**
  *
  * @author elisrb
@@ -7,8 +8,8 @@ public abstract class Funcionario extends Pessoa {
     protected String senha;
     protected int codigoFunc;
 
-    public Funcionario(String senha, int codigoFunc, String nome, int cpf, int idade) {
-        super(nome, cpf, idade);
+    public Funcionario(String senha, int codigoFunc, String nome, int cpf, Date dataNascimento) {
+        super(nome, cpf, dataNascimento);
         this.senha = senha;
         this.codigoFunc = codigoFunc;
     }
