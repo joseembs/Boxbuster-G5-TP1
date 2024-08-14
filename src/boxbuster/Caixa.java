@@ -1,4 +1,5 @@
 package boxbuster;
+import java.util.Date;
 /**
  *
  * @author elisrb
@@ -6,8 +7,8 @@ package boxbuster;
 public class Caixa extends Funcionario {
     protected Gerente gerente;
 
-    public Caixa(Gerente gerente, String senha, int codigoFunc, String nome, int cpf, int idade) {
-        super(senha, codigoFunc, nome, cpf, idade);
+    public Caixa(Gerente gerente, String senha, int codigoFunc, String nome, int cpf, Date dataNascimento) {
+        super(senha, codigoFunc, nome, cpf, dataNascimento);
         this.gerente = gerente;
     }
 
@@ -31,9 +32,10 @@ public class Caixa extends Funcionario {
         return cpf;
     }
 
-    public int getIdade() {
-        return idade;
+    public Date getDataNascimento() {
+        return dataNascimento;
     }
+
 
     public void setGerente(Gerente gerente) {
         this.gerente = gerente;
@@ -55,7 +57,9 @@ public class Caixa extends Funcionario {
         this.cpf = cpf;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
-    } 
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    
 }
