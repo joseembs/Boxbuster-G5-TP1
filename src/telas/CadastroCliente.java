@@ -15,6 +15,14 @@ public class CadastroCliente extends javax.swing.JFrame {
      */
     public CadastroCliente() {
         initComponents();
+        txtNome.setEnabled(false);
+        txtCPF.setEnabled(false);
+        txtDataNascimento.setEnabled(false);
+        lblSenha.setVisible(false);
+        txtSenha.setVisible(false);
+        txtSenha.setEnabled(false);
+        btnLogin.setEnabled(false);
+        btnPerfil.setEnabled(false);
     }
 
     /**
@@ -30,19 +38,19 @@ public class CadastroCliente extends javax.swing.JFrame {
         lblPropaganda = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
         lblCPF = new javax.swing.JLabel();
-        lblIdade = new javax.swing.JLabel();
+        lblDataNascimento = new javax.swing.JLabel();
         lblCadastro = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         txtCPF = new javax.swing.JTextField();
-        txtIdade = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtDataNascimento = new javax.swing.JTextField();
+        CBoxCadastro = new javax.swing.JComboBox<>();
         lblSenha = new javax.swing.JLabel();
         txtSenha = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lblPropaganda1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnPerfil = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         menuBarCadCli = new javax.swing.JMenuBar();
         menuCadCli = new javax.swing.JMenu();
@@ -50,7 +58,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         separatorCadCli = new javax.swing.JPopupMenu.Separator();
         menuSairCadCli = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela de cadastro");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogo.png")).getImage());
 
@@ -67,16 +75,27 @@ public class CadastroCliente extends javax.swing.JFrame {
         lblCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCPF.setText("CPF:");
 
-        lblIdade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblIdade.setText("Idade:");
+        lblDataNascimento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblDataNascimento.setText("Data de nascimento:");
 
         lblCadastro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCadastro.setText("Você quer se cadastrar?");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "Quero me cadastrar", "Não quero me cadastrar", "Já sou cadastrado" }));
+        CBoxCadastro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "Quero me cadastrar", "Não quero me cadastrar", "Já sou cadastrado" }));
+        CBoxCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBoxCadastroActionPerformed(evt);
+            }
+        });
 
         lblSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblSenha.setText("Senha:");
+
+        txtSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSenhaActionPerformed(evt);
+            }
+        });
 
         btnLogin.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnLogin.setText("Cadastrar-se");
@@ -101,9 +120,9 @@ public class CadastroCliente extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton4.setText("Ver perfil");
-        jButton4.setEnabled(false);
+        btnPerfil.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnPerfil.setText("Ver perfil");
+        btnPerfil.setEnabled(false);
 
         jButton5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton5.setText("Entrar e ir à loja");
@@ -127,79 +146,83 @@ public class CadastroCliente extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(txtLayout.createSequentialGroup()
                         .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(txtLayout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblPropaganda)
-                                    .addGroup(txtLayout.createSequentialGroup()
-                                        .addGap(30, 30, 30)
-                                        .addComponent(lblPropaganda1))))
-                            .addGroup(txtLayout.createSequentialGroup()
-                                .addComponent(lblSenha)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(83, Short.MAX_VALUE))
-                    .addGroup(txtLayout.createSequentialGroup()
-                        .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCadastro)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CBoxCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(txtLayout.createSequentialGroup()
                                 .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblNome)
                                     .addComponent(lblCPF)
-                                    .addComponent(lblIdade))
+                                    .addComponent(lblDataNascimento))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtNome)
                                     .addGroup(txtLayout.createSequentialGroup()
                                         .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 131, Short.MAX_VALUE)))))
+                                            .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(40, 40, 40))))
             .addGroup(txtLayout.createSequentialGroup()
-                .addGap(164, 164, 164)
-                .addComponent(btnLogin)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(txtLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(lblPropaganda))
+                    .addGroup(txtLayout.createSequentialGroup()
+                        .addComponent(lblSenha)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(txtLayout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(lblPropaganda1)))
+                .addContainerGap(79, Short.MAX_VALUE))
+            .addGroup(txtLayout.createSequentialGroup()
+                .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(txtLayout.createSequentialGroup()
+                        .addGap(164, 164, 164)
+                        .addComponent(btnLogin)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPerfil))
+                    .addGroup(txtLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblCadastro)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         txtLayout.setVerticalGroup(
             txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, txtLayout.createSequentialGroup()
-                .addContainerGap(11, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblPropaganda)
                 .addGap(2, 2, 2)
                 .addComponent(lblPropaganda1)
-                .addGap(18, 18, 18)
+                .addGap(3, 3, 3)
+                .addComponent(lblCadastro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(txtLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(CBoxCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
                         .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNome)
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGap(20, 20, 20)
+                        .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblCPF)
                             .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(20, 20, 20)
                         .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblIdade)
-                            .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(lblCadastro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                            .addComponent(lblDataNascimento)
+                            .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
                         .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblSenha)
                             .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(txtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
@@ -261,6 +284,36 @@ public class CadastroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSenhaActionPerformed
+
+    private void CBoxCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBoxCadastroActionPerformed
+        int index = CBoxCadastro.getSelectedIndex();
+        if(index == 1 || index == 3){
+            txtNome.setEnabled(true);
+            txtCPF.setEnabled(true);
+            txtDataNascimento.setEnabled(true);
+            lblSenha.setVisible(true);
+            txtSenha.setVisible(true);
+            txtSenha.setEnabled(true);
+            btnLogin.setEnabled(true);
+            btnPerfil.setEnabled(true);
+            
+        }
+        else if(index == 2){
+            txtNome.setEnabled(true);
+            txtCPF.setEnabled(true);
+            txtDataNascimento.setEnabled(true);
+            lblSenha.setVisible(false);
+            txtSenha.setVisible(false);
+            txtSenha.setEnabled(false);
+            btnLogin.setEnabled(true);
+            btnPerfil.setEnabled(true);
+            
+        }
+    }//GEN-LAST:event_CBoxCadastroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -297,15 +350,15 @@ public class CadastroCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> CBoxCadastro;
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnPerfil;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblCadastro;
-    private javax.swing.JLabel lblIdade;
+    private javax.swing.JLabel lblDataNascimento;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblPropaganda;
     private javax.swing.JLabel lblPropaganda1;
@@ -317,7 +370,7 @@ public class CadastroCliente extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator separatorCadCli;
     private javax.swing.JPanel txt;
     private javax.swing.JTextField txtCPF;
-    private javax.swing.JTextField txtIdade;
+    private javax.swing.JTextField txtDataNascimento;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtSenha;
     // End of variables declaration//GEN-END:variables
