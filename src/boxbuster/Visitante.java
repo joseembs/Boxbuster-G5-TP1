@@ -1,6 +1,7 @@
 package boxbuster;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -14,8 +15,8 @@ public class Visitante extends Cliente {
         
     }
 
-    public Visitante(String nome, int CPF, int idade, double divida) {
-        super(nome, CPF, idade, divida);
+    public Visitante(String nome, int CPF, Date dataNascimento, double divida) {
+        super(nome, CPF, dataNascimento, divida);
     }
 
     public double getDivida() {
@@ -58,13 +59,15 @@ public class Visitante extends Cliente {
         this.cpf = cpf;
     }
 
-    public int getIdade() {
-        return idade;
+    public Date getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
+
+    
 
     @Override
     public void calculaDivida() {
