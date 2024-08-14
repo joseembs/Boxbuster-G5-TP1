@@ -1,6 +1,7 @@
 package boxbuster;
 
-import java.util.ArrayList; // import the ArrayList class
+import java.util.ArrayList;// import the ArrayList class
+import java.util.Date;
 /**
  *
  * @author elisrb
@@ -10,8 +11,8 @@ import java.util.ArrayList; // import the ArrayList class
 public class Gerente extends Funcionario {
     protected ArrayList<Caixa> caixas;
 
-    public Gerente(/*Caixa[] caixas,*/ String senha, int codigoFunc, String nome, int cpf, int idade) {
-        super(senha, codigoFunc, nome, cpf, idade);
+    public Gerente(/*Caixa[] caixas,*/ String senha, int codigoFunc, String nome, int cpf, Date dataNascimento) {
+        super(senha, codigoFunc, nome, cpf, dataNascimento);
         this.caixas = new ArrayList<Caixa>();
     }
 
@@ -35,9 +36,11 @@ public class Gerente extends Funcionario {
         return cpf;
     }
 
-    public int getIdade() {
-        return idade;
+    public Date getDataNascimento() {
+        return dataNascimento;
     }
+
+    
 
     public void setCaixas(Caixa caixa) {
         this.caixas.add(caixa);
@@ -60,8 +63,10 @@ public class Gerente extends Funcionario {
         this.cpf = cpf;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
+
+    
       
 }
