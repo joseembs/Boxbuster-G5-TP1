@@ -1,6 +1,7 @@
 package boxbuster;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -15,8 +16,8 @@ public class Cadastrado extends Cliente {
         this.pedidos = new ArrayList<>();
     }
 
-    public Cadastrado(String nome, int CPF, int idade, double divida, String senha, int codigoCliente) {
-        super(nome, CPF, idade, divida);
+    public Cadastrado(String nome, int CPF, Date dataNascimento, double divida, String senha, int codigoCliente) {
+        super(nome, CPF, dataNascimento, divida);
         this.senha = senha;
         this.codigoCliente = codigoCliente;
         this.alugados = new ArrayList<>();
@@ -84,13 +85,15 @@ public class Cadastrado extends Cliente {
         this.cpf = cpf;
     }
 
-    public int getIdade() {
-        return idade;
+    public Date getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
+
+    
     
     public void addAlugado(Pedido pedido) {
         this.pedidos.add(pedido);
