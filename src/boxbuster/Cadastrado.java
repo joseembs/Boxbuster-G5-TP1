@@ -94,7 +94,6 @@ public class Cadastrado extends Cliente {
     }
 
     
-    
     public void addAlugado(Pedido pedido) {
         this.pedidos.add(pedido);
     }
