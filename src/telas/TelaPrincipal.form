@@ -29,6 +29,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#xc1;rea do funcion&#xe1;rio"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuFuncMainActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="separatorMain">
             </MenuItem>
@@ -36,6 +39,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sair"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuSairMainActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -99,16 +105,16 @@
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="263" max="-2" attributes="0"/>
-                          <Component id="btnSairMain" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="btnLojaMain" max="32767" attributes="0"/>
                               <Component id="btnFuncMain" max="32767" attributes="0"/>
                               <Component id="btnCliMain" max="32767" attributes="0"/>
                           </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="265" max="-2" attributes="0"/>
+                          <Component id="btnSairMain" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="95" max="32767" attributes="0"/>
@@ -180,6 +186,9 @@
             <Property name="toolTipText" type="java.lang.String" value="Ver seu perfil"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFuncMainActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnSairMain">
           <Properties>

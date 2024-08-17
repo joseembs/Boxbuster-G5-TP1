@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package telasprojeto;
+package telas;
 
 /**
  *
@@ -14,6 +14,7 @@ public class AreaCaixa extends javax.swing.JFrame {
      * Creates new form AreaFuncionario
      */
     public AreaCaixa() {
+        setLocationRelativeTo(null);
         initComponents();
     }
 
@@ -42,6 +43,7 @@ public class AreaCaixa extends javax.swing.JFrame {
         lblIdade = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         lblIdade1 = new javax.swing.JLabel();
+        lblIdade2 = new javax.swing.JLabel();
         menuBarAreaCx = new javax.swing.JMenuBar();
         menuAreaCx = new javax.swing.JMenu();
         menuVoltarAreaCx = new javax.swing.JMenuItem();
@@ -107,7 +109,7 @@ public class AreaCaixa extends javax.swing.JFrame {
         lblHistAluguel1.setText("Suas informações:");
 
         lblCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblCPF.setText("CPF: -----");
+        lblCPF.setText("CPF 000.000.000-00");
 
         lblIdade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblIdade.setText("Idade: --");
@@ -123,29 +125,13 @@ public class AreaCaixa extends javax.swing.JFrame {
         lblIdade1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblIdade1.setText("Código: -----");
 
+        lblIdade2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblIdade2.setText("Data de nascimento: 00/00/0000");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton5)
-                        .addGap(127, 127, 127))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblIdade1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblCPF)
-                        .addGap(102, 102, 102)
-                        .addComponent(lblIdade)
-                        .addGap(114, 114, 114)
-                        .addComponent(jButton3)
-                        .addContainerGap())))
             .addComponent(jSeparator1)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,13 +139,37 @@ public class AreaCaixa extends javax.swing.JFrame {
                         .addGap(216, 216, 216)
                         .addComponent(lblHistAluguel))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblNome))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(229, 229, 229)
                         .addComponent(lblHistAluguel1)))
-                .addContainerGap(228, Short.MAX_VALUE))
-            .addComponent(jScrollPane3)
+                .addGap(66, 228, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton5)
+                        .addGap(127, 127, 127))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblNome)
+                                .addGap(151, 151, 151))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton3)
+                                .addGap(149, 149, 149)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblIdade)
+                            .addComponent(lblIdade1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblIdade2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblCPF, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addContainerGap())))
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,12 +177,14 @@ public class AreaCaixa extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblHistAluguel1)
                 .addGap(18, 18, 18)
-                .addComponent(lblNome)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNome)
+                    .addComponent(lblIdade1)
+                    .addComponent(lblCPF))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
-                    .addComponent(lblIdade1)
-                    .addComponent(lblCPF)
+                    .addComponent(lblIdade2)
                     .addComponent(lblIdade))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -226,15 +238,17 @@ public class AreaCaixa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void menuVoltarAreaCxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarAreaCxActionPerformed
-        // TODO add your handling code here:
+        new TelaPrincipal().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_menuVoltarAreaCxActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        new TelaPrincipal().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -248,7 +262,7 @@ public class AreaCaixa extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows XP".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -289,6 +303,7 @@ public class AreaCaixa extends javax.swing.JFrame {
     private javax.swing.JLabel lblHistAluguel1;
     private javax.swing.JLabel lblIdade;
     private javax.swing.JLabel lblIdade1;
+    private javax.swing.JLabel lblIdade2;
     private javax.swing.JLabel lblNome;
     private javax.swing.JMenu menuAreaCx;
     private javax.swing.JMenuBar menuBarAreaCx;

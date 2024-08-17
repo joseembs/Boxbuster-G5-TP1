@@ -73,6 +73,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnFuncMain.setText("Área do funcionário");
         btnFuncMain.setToolTipText("Ver seu perfil");
         btnFuncMain.setRequestFocusEnabled(false);
+        btnFuncMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFuncMainActionPerformed(evt);
+            }
+        });
 
         btnSairMain.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnSairMain.setText("Sair");
@@ -94,14 +99,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGap(77, 77, 77)
                         .addComponent(jLabel1))
                     .addGroup(pnlMainLayout.createSequentialGroup()
-                        .addGap(263, 263, 263)
-                        .addComponent(btnSairMain))
-                    .addGroup(pnlMainLayout.createSequentialGroup()
                         .addGap(206, 206, 206)
                         .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnLojaMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnFuncMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCliMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnCliMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(pnlMainLayout.createSequentialGroup()
+                        .addGap(265, 265, 265)
+                        .addComponent(btnSairMain)))
                 .addContainerGap(95, Short.MAX_VALUE))
         );
         pnlMainLayout.setVerticalGroup(
@@ -139,10 +144,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuMain.add(menuCliMain);
 
         menuFuncMain.setText("Área do funcionário");
+        menuFuncMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuFuncMainActionPerformed(evt);
+            }
+        });
         menuMain.add(menuFuncMain);
         menuMain.add(separatorMain);
 
         menuSairMain.setText("Sair");
+        menuSairMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSairMainActionPerformed(evt);
+            }
+        });
         menuMain.add(menuSairMain);
 
         menuBarMain.add(menuMain);
@@ -170,24 +185,42 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCliMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCliMainActionPerformed
-        // TODO add your handling code here:
+        new CadastroCliente().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnCliMainActionPerformed
 
     private void btnLojaMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLojaMainActionPerformed
-        // TODO add your handling code here:
+        new Loja().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnLojaMainActionPerformed
 
     private void menuLojaMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLojaMainActionPerformed
-        // TODO add your handling code here:
+        new Loja().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_menuLojaMainActionPerformed
 
     private void menuCliMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCliMainActionPerformed
-        // TODO add your handling code here:
+        new CadastroCliente().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_menuCliMainActionPerformed
 
     private void btnSairMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairMainActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_btnSairMainActionPerformed
+
+    private void menuSairMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairMainActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_menuSairMainActionPerformed
+
+    private void btnFuncMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFuncMainActionPerformed
+        new LoginFuncionario().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnFuncMainActionPerformed
+
+    private void menuFuncMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFuncMainActionPerformed
+        new LoginFuncionario().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_menuFuncMainActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,7 +233,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows XP".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

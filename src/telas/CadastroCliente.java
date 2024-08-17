@@ -14,6 +14,7 @@ public class CadastroCliente extends javax.swing.JFrame {
      * Creates new form CadastroCliente
      */
     public CadastroCliente() {
+        setLocationRelativeTo(null);
         initComponents();
         txtNome.setEnabled(false);
         txtCPF.setEnabled(false);
@@ -242,6 +243,11 @@ public class CadastroCliente extends javax.swing.JFrame {
         menuCadCli.add(separatorCadCli);
 
         menuSairCadCli.setText("Sair");
+        menuSairCadCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSairCadCliActionPerformed(evt);
+            }
+        });
         menuCadCli.add(menuSairCadCli);
 
         menuBarCadCli.add(menuCadCli);
@@ -269,23 +275,28 @@ public class CadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuVoltarCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarCadCliActionPerformed
-        // TODO add your handling code here:
+        new TelaPrincipal().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_menuVoltarCadCliActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+        new AreaCliente().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        new TelaPrincipal().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        new Loja().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
-        // TODO add your handling code here:
+        new AreaCliente().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_txtSenhaActionPerformed
 
     private void CBoxCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBoxCadastroActionPerformed
@@ -314,6 +325,10 @@ public class CadastroCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CBoxCadastroActionPerformed
 
+    private void menuSairCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairCadCliActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_menuSairCadCliActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -325,7 +340,7 @@ public class CadastroCliente extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows XP".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

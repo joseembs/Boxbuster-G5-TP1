@@ -497,6 +497,11 @@ public class Loja extends javax.swing.JFrame {
         });
 
         btnFinalizarLoja.setText("Finalizar pedido");
+        btnFinalizarLoja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarLojaActionPerformed(evt);
+            }
+        });
 
         btnAddCartLoja.setText("Adicionar itens ao carrinho");
 
@@ -551,6 +556,11 @@ public class Loja extends javax.swing.JFrame {
         menuLoja.add(separatorLoja);
 
         menuSairLoja.setText("Sair");
+        menuSairLoja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSairLojaActionPerformed(evt);
+            }
+        });
         menuLoja.add(menuSairLoja);
 
         menuBarLoja.add(menuLoja);
@@ -582,7 +592,8 @@ public class Loja extends javax.swing.JFrame {
     }//GEN-LAST:event_menuVoltarLojaActionPerformed
 
     private void menuFinalizarLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFinalizarLojaActionPerformed
-        // TODO add your handling code here:
+        new FinalizarPedido().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_menuFinalizarLojaActionPerformed
 
     private void btnDetalhesMv1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesMv1ActionPerformed
@@ -590,7 +601,8 @@ public class Loja extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDetalhesMv1ActionPerformed
 
     private void btnVoltarLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarLojaActionPerformed
-        // TODO add your handling code here:
+        new TelaPrincipal().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnVoltarLojaActionPerformed
 
     private void btnDetalhesMv2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesMv2ActionPerformed
@@ -613,6 +625,15 @@ public class Loja extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDetalhesMv6ActionPerformed
 
+    private void menuSairLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairLojaActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_menuSairLojaActionPerformed
+
+    private void btnFinalizarLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarLojaActionPerformed
+        new FinalizarPedido().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnFinalizarLojaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -624,7 +645,7 @@ public class Loja extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows XP".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

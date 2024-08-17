@@ -14,6 +14,7 @@ public class AreaCliente extends javax.swing.JFrame {
      * Creates new form AreaCliente
      */
     public AreaCliente() {
+        setLocationRelativeTo(null);
         initComponents();
     }
 
@@ -40,6 +41,7 @@ public class AreaCliente extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jButton3 = new javax.swing.JButton();
         lblHistAluguel1 = new javax.swing.JLabel();
+        lblIdade1 = new javax.swing.JLabel();
         menuBarAreaCli = new javax.swing.JMenuBar();
         menuAreaCli = new javax.swing.JMenu();
         menuVoltarAreaCli = new javax.swing.JMenuItem();
@@ -62,7 +64,7 @@ public class AreaCliente extends javax.swing.JFrame {
         lblProdutosAlugados.setText("Produtos Alugados: --");
 
         lblCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblCPF.setText("CPF: -----");
+        lblCPF.setText("CPF: 000.000.000-00");
 
         lblIdade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblIdade.setText("Idade: --");
@@ -111,6 +113,9 @@ public class AreaCliente extends javax.swing.JFrame {
         lblHistAluguel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblHistAluguel1.setText("Suas informações:");
 
+        lblIdade1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblIdade1.setText("Data de nasc.: 00/00/0000");
+
         javax.swing.GroupLayout pnlAreaClienteLayout = new javax.swing.GroupLayout(pnlAreaCliente);
         pnlAreaCliente.setLayout(pnlAreaClienteLayout);
         pnlAreaClienteLayout.setHorizontalGroup(
@@ -119,20 +124,21 @@ public class AreaCliente extends javax.swing.JFrame {
                 .addGap(222, 222, 222)
                 .addComponent(lblHistAluguel)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(pnlAreaClienteLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAreaClienteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
-                    .addGroup(pnlAreaClienteLayout.createSequentialGroup()
+                .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAreaClienteLayout.createSequentialGroup()
                         .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlAreaClienteLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAreaClienteLayout.createSequentialGroup()
                                 .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblCPF)
                                     .addComponent(lblNome)
                                     .addComponent(lblDivida))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                                 .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblIdade)
+                                    .addComponent(lblIdade1)
                                     .addComponent(lblProdutosAlugados))
                                 .addGap(60, 60, 60))
                             .addGroup(pnlAreaClienteLayout.createSequentialGroup()
@@ -141,15 +147,14 @@ public class AreaCliente extends javax.swing.JFrame {
                                         .addGap(74, 74, 74)
                                         .addComponent(lblHistAluguel1))
                                     .addGroup(pnlAreaClienteLayout.createSequentialGroup()
-                                        .addGap(44, 44, 44)
                                         .addComponent(jButton3)
-                                        .addGap(18, 18, 18)
+                                        .addGap(92, 92, 92)
                                         .addComponent(btnLojaMain)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(jLabel1)
-                        .addGap(35, 35, 35))
-                    .addComponent(jScrollPane1))
+                        .addGap(35, 35, 35)))
                 .addContainerGap())
+            .addComponent(jScrollPane1)
         );
         pnlAreaClienteLayout.setVerticalGroup(
             pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +165,9 @@ public class AreaCliente extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(lblHistAluguel1)
                         .addGap(18, 18, 18)
-                        .addComponent(lblNome)
+                        .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNome)
+                            .addComponent(lblIdade1))
                         .addGap(18, 18, 18)
                         .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCPF)
@@ -178,8 +185,8 @@ public class AreaCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblHistAluguel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99))
         );
 
         menuAreaCli.setText("Menu");
@@ -194,6 +201,11 @@ public class AreaCliente extends javax.swing.JFrame {
         menuAreaCli.add(separatorAreaCli);
 
         menuSairAreaCli.setText("Sair");
+        menuSairAreaCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSairAreaCliActionPerformed(evt);
+            }
+        });
         menuAreaCli.add(menuSairAreaCli);
 
         menuBarAreaCli.add(menuAreaCli);
@@ -204,7 +216,7 @@ public class AreaCliente extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlAreaCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -221,16 +233,23 @@ public class AreaCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuVoltarAreaCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarAreaCliActionPerformed
-        // TODO add your handling code here:
+        new TelaPrincipal().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_menuVoltarAreaCliActionPerformed
 
     private void btnLojaMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLojaMainActionPerformed
-        // TODO add your handling code here:
+        new Loja().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnLojaMainActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        new TelaPrincipal().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void menuSairAreaCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairAreaCliActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_menuSairAreaCliActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,7 +262,7 @@ public class AreaCliente extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows XP".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -279,6 +298,7 @@ public class AreaCliente extends javax.swing.JFrame {
     private javax.swing.JLabel lblHistAluguel;
     private javax.swing.JLabel lblHistAluguel1;
     private javax.swing.JLabel lblIdade;
+    private javax.swing.JLabel lblIdade1;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblProdutosAlugados;
     private javax.swing.JMenu menuAreaCli;

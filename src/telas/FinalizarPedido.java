@@ -156,8 +156,18 @@ public class FinalizarPedido extends javax.swing.JFrame {
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Cartão", "Pix" }));
 
         jButton3.setText("Voltar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Finalizar compra");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setText("Data atual: XX/XX/XXXX");
@@ -366,6 +376,11 @@ public class FinalizarPedido extends javax.swing.JFrame {
         menuCart.add(separatorCart);
 
         menuSairCart.setText("Sair");
+        menuSairCart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSairCartActionPerformed(evt);
+            }
+        });
         menuCart.add(menuSairCart);
 
         menuBarCart.add(menuCart);
@@ -392,7 +407,8 @@ public class FinalizarPedido extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuVoltarCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarCartActionPerformed
-        // TODO add your handling code here:
+        new Loja().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_menuVoltarCartActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -411,6 +427,20 @@ public class FinalizarPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void menuSairCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairCartActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_menuSairCartActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        new Loja().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        new CadastroCliente().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -422,7 +452,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows XP".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

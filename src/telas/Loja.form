@@ -31,6 +31,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sair"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuSairLojaActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -822,6 +825,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Finalizar pedido"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFinalizarLojaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnAddCartLoja">
           <Properties>
