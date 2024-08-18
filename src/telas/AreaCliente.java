@@ -28,24 +28,24 @@ public class AreaCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlAreaCliente = new javax.swing.JPanel();
+        lblInfo = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
-        lblDivida = new javax.swing.JLabel();
-        lblProdutosAlugados = new javax.swing.JLabel();
+        lblDataNasc = new javax.swing.JLabel();
         lblCPF = new javax.swing.JLabel();
         lblIdade = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        lblHistAluguel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        lblDivida = new javax.swing.JLabel();
+        lblProdutosAlugados = new javax.swing.JLabel();
+        btnDeslogar = new javax.swing.JButton();
         btnLojaMain = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        jButton3 = new javax.swing.JButton();
-        lblHistAluguel1 = new javax.swing.JLabel();
-        lblIdade1 = new javax.swing.JLabel();
+        logoBoxbuster = new javax.swing.JLabel();
+        separator2AreaCli = new javax.swing.JSeparator();
+        lblHistAluguel = new javax.swing.JLabel();
+        scrlAluguel = new javax.swing.JScrollPane();
+        tableAluguel = new javax.swing.JTable();
         menuBarAreaCli = new javax.swing.JMenuBar();
         menuAreaCli = new javax.swing.JMenu();
         menuVoltarAreaCli = new javax.swing.JMenuItem();
-        separatorAreaCli = new javax.swing.JPopupMenu.Separator();
+        separator1AreaCli = new javax.swing.JPopupMenu.Separator();
         menuSairAreaCli = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -54,14 +54,14 @@ public class AreaCliente extends javax.swing.JFrame {
 
         pnlAreaCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Área do Cliente"));
 
+        lblInfo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblInfo.setText("Suas informações:");
+
         lblNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblNome.setText("Nome: -----");
 
-        lblDivida.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblDivida.setText("Dívida: R$ --,--");
-
-        lblProdutosAlugados.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblProdutosAlugados.setText("Produtos Alugados: --");
+        lblDataNasc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblDataNasc.setText("Data de nasc.: 00/00/0000");
 
         lblCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCPF.setText("CPF: 000.000.000-00");
@@ -69,12 +69,36 @@ public class AreaCliente extends javax.swing.JFrame {
         lblIdade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblIdade.setText("Idade: --");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogoBig.png"))); // NOI18N
+        lblDivida.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblDivida.setText("Dívida: R$ --,--");
+
+        lblProdutosAlugados.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblProdutosAlugados.setText("Produtos Alugados: --");
+
+        btnDeslogar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnDeslogar.setText("Deslogar");
+        btnDeslogar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeslogarActionPerformed(evt);
+            }
+        });
+
+        btnLojaMain.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnLojaMain.setText("Ir para a loja");
+        btnLojaMain.setToolTipText("Ver produtos");
+        btnLojaMain.setRequestFocusEnabled(false);
+        btnLojaMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLojaMainActionPerformed(evt);
+            }
+        });
+
+        logoBoxbuster.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogoBig.png"))); // NOI18N
 
         lblHistAluguel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblHistAluguel.setText("Histórico de Aluguel:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableAluguel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -90,31 +114,7 @@ public class AreaCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-
-        btnLojaMain.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnLojaMain.setText("Ir para a loja");
-        btnLojaMain.setToolTipText("Ver produtos");
-        btnLojaMain.setRequestFocusEnabled(false);
-        btnLojaMain.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLojaMainActionPerformed(evt);
-            }
-        });
-
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton3.setText("Deslogar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        lblHistAluguel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblHistAluguel1.setText("Suas informações:");
-
-        lblIdade1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblIdade1.setText("Data de nasc.: 00/00/0000");
+        scrlAluguel.setViewportView(tableAluguel);
 
         javax.swing.GroupLayout pnlAreaClienteLayout = new javax.swing.GroupLayout(pnlAreaCliente);
         pnlAreaCliente.setLayout(pnlAreaClienteLayout);
@@ -127,7 +127,7 @@ public class AreaCliente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAreaClienteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(separator2AreaCli, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAreaClienteLayout.createSequentialGroup()
                         .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAreaClienteLayout.createSequentialGroup()
@@ -138,36 +138,36 @@ public class AreaCliente extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                                 .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblIdade)
-                                    .addComponent(lblIdade1)
+                                    .addComponent(lblDataNasc)
                                     .addComponent(lblProdutosAlugados))
                                 .addGap(60, 60, 60))
                             .addGroup(pnlAreaClienteLayout.createSequentialGroup()
                                 .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pnlAreaClienteLayout.createSequentialGroup()
                                         .addGap(74, 74, 74)
-                                        .addComponent(lblHistAluguel1))
+                                        .addComponent(lblInfo))
                                     .addGroup(pnlAreaClienteLayout.createSequentialGroup()
-                                        .addComponent(jButton3)
+                                        .addComponent(btnDeslogar)
                                         .addGap(92, 92, 92)
                                         .addComponent(btnLojaMain)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(jLabel1)
+                        .addComponent(logoBoxbuster)
                         .addGap(35, 35, 35)))
                 .addContainerGap())
-            .addComponent(jScrollPane1)
+            .addComponent(scrlAluguel)
         );
         pnlAreaClienteLayout.setVerticalGroup(
             pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAreaClienteLayout.createSequentialGroup()
                 .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(logoBoxbuster, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlAreaClienteLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblHistAluguel1)
+                        .addComponent(lblInfo)
                         .addGap(18, 18, 18)
                         .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNome)
-                            .addComponent(lblIdade1))
+                            .addComponent(lblDataNasc))
                         .addGap(18, 18, 18)
                         .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCPF)
@@ -178,14 +178,14 @@ public class AreaCliente extends javax.swing.JFrame {
                             .addComponent(lblProdutosAlugados))
                         .addGap(18, 18, 18)
                         .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
+                            .addComponent(btnDeslogar)
                             .addComponent(btnLojaMain))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(separator2AreaCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblHistAluguel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scrlAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99))
         );
 
@@ -198,7 +198,7 @@ public class AreaCliente extends javax.swing.JFrame {
             }
         });
         menuAreaCli.add(menuVoltarAreaCli);
-        menuAreaCli.add(separatorAreaCli);
+        menuAreaCli.add(separator1AreaCli);
 
         menuSairAreaCli.setText("Sair");
         menuSairAreaCli.addActionListener(new java.awt.event.ActionListener() {
@@ -242,10 +242,10 @@ public class AreaCliente extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnLojaMainActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnDeslogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeslogarActionPerformed
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnDeslogarActionPerformed
 
     private void menuSairAreaCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairAreaCliActionPerformed
         System.exit(0);
@@ -287,25 +287,25 @@ public class AreaCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDeslogar;
     private javax.swing.JButton btnLojaMain;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCPF;
+    private javax.swing.JLabel lblDataNasc;
     private javax.swing.JLabel lblDivida;
     private javax.swing.JLabel lblHistAluguel;
-    private javax.swing.JLabel lblHistAluguel1;
     private javax.swing.JLabel lblIdade;
-    private javax.swing.JLabel lblIdade1;
+    private javax.swing.JLabel lblInfo;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblProdutosAlugados;
+    private javax.swing.JLabel logoBoxbuster;
     private javax.swing.JMenu menuAreaCli;
     private javax.swing.JMenuBar menuBarAreaCli;
     private javax.swing.JMenuItem menuSairAreaCli;
     private javax.swing.JMenuItem menuVoltarAreaCli;
     private javax.swing.JPanel pnlAreaCliente;
-    private javax.swing.JPopupMenu.Separator separatorAreaCli;
+    private javax.swing.JScrollPane scrlAluguel;
+    private javax.swing.JPopupMenu.Separator separator1AreaCli;
+    private javax.swing.JSeparator separator2AreaCli;
+    private javax.swing.JTable tableAluguel;
     // End of variables declaration//GEN-END:variables
 }

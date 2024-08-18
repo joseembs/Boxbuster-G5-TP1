@@ -11,6 +11,7 @@ public class Estoque {
     private ArrayList<Musica> listaMusicas;
     private ArrayList<Tabuleiro> listaTabuleiros;
     private ArrayList<Videogames> listaVideogames;
+    private ArrayList<Produtos> listaProdutos;
 
     public Estoque() {
         this.listaFilmes = new ArrayList<>();
@@ -56,6 +57,14 @@ public class Estoque {
     public void setListaVideogames(ArrayList<Videogames> listaVideogames) {
         this.listaVideogames = listaVideogames;
     }
+    
+    public ArrayList<Produtos> getListaProdutos() {
+        return listaProdutos;
+    }
+    
+    public void setListaProdutos(ArrayList<Produtos> listaProdutos) {
+        this.listaProdutos = listaProdutos;
+    }
 
     public void addFilme (Filmes filme){
         this.listaFilmes.add(filme);
@@ -73,4 +82,7 @@ public class Estoque {
         this.listaVideogames.add(videogame);
     }
     
+    public void addProduto (Produtos produto){
+        this.listaProdutos.add(produto);
+    }
 }

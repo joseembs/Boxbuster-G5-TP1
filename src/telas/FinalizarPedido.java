@@ -28,48 +28,93 @@ public class FinalizarPedido extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlCart = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jLabel15 = new javax.swing.JLabel();
+        lblIdentificacao = new javax.swing.JLabel();
+        lblSituacao = new javax.swing.JLabel();
+        cmbSituacao = new javax.swing.JComboBox<>();
+        btnCadastrar = new javax.swing.JButton();
+        lblNome = new javax.swing.JLabel();
+        txtfNome = new javax.swing.JTextField();
+        lblCPF = new javax.swing.JLabel();
+        txtfCPF = new javax.swing.JTextField();
+        lblSenha = new javax.swing.JLabel();
+        txtfSenha = new javax.swing.JTextField();
+        btnEntrar = new javax.swing.JButton();
+        separator2Cart = new javax.swing.JSeparator();
+        lblCart = new javax.swing.JLabel();
+        scrlCart = new javax.swing.JScrollPane();
+        tableCart = new javax.swing.JTable();
+        btnEditar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnPronto = new javax.swing.JButton();
+        separator3Cart = new javax.swing.JSeparator();
+        lblFinalizacao = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
+        lblPagamento = new javax.swing.JLabel();
+        cmbPagamento = new javax.swing.JComboBox<>();
+        lblDataAtual = new javax.swing.JLabel();
+        lblDataFinal = new javax.swing.JLabel();
+        lblCaixa = new javax.swing.JLabel();
+        cmbCaixa = new javax.swing.JComboBox<>();
+        lblFilial = new javax.swing.JLabel();
+        lblValor = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JButton();
+        btnFinalizar = new javax.swing.JButton();
         menuBarCart = new javax.swing.JMenuBar();
         menuCart = new javax.swing.JMenu();
         menuVoltarCart = new javax.swing.JMenuItem();
-        separatorCart = new javax.swing.JPopupMenu.Separator();
+        separator1Cart = new javax.swing.JPopupMenu.Separator();
         menuSairCart = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pedido");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogo.png")).getImage());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        lblIdentificacao.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblIdentificacao.setText("Identificação:");
+
+        lblSituacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblSituacao.setText("Já possui cadastro?");
+
+        cmbSituacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "Sim", "Não" }));
+        cmbSituacao.setToolTipText("");
+
+        btnCadastrar.setText("Cadastrar-se");
+        btnCadastrar.setEnabled(false);
+
+        lblNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblNome.setText("Nome:");
+
+        txtfNome.setEnabled(false);
+
+        lblCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblCPF.setText("CPF:");
+
+        txtfCPF.setEnabled(false);
+        txtfCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfCPFActionPerformed(evt);
+            }
+        });
+
+        lblSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblSenha.setText("Senha:");
+
+        txtfSenha.setEnabled(false);
+        txtfSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfSenhaActionPerformed(evt);
+            }
+        });
+
+        btnEntrar.setText("Entrar");
+        btnEntrar.setEnabled(false);
+
+        separator2Cart.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        lblCart.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblCart.setText("Carrinho:");
+
+        tableCart.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -92,123 +137,78 @@ public class FinalizarPedido extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(20);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(200);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(60);
+        scrlCart.setViewportView(tableCart);
+        if (tableCart.getColumnModel().getColumnCount() > 0) {
+            tableCart.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tableCart.getColumnModel().getColumn(1).setPreferredWidth(200);
+            tableCart.getColumnModel().getColumn(2).setPreferredWidth(60);
         }
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setText("Identificação:");
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Já possui cadastro?");
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel3.setText("Carrinho:");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione uma opção", "Sim", "Não" }));
-        jComboBox1.setToolTipText("");
-
-        jButton1.setText("Cadastrar-se");
-        jButton1.setEnabled(false);
-
-        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("CPF:");
-
-        jTextField1.setEnabled(false);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("Senha:");
-
-        jTextField2.setEnabled(false);
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluir.setText("Excluir");
+        btnExcluir.setEnabled(false);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                btnExcluirActionPerformed(evt);
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel6.setText("Nome:");
+        btnPronto.setText("Pronto");
+        btnPronto.setEnabled(false);
 
-        jTextField3.setEnabled(false);
+        lblFinalizacao.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblFinalizacao.setText("Finalização:");
 
-        jButton2.setText("Entrar");
-        jButton2.setEnabled(false);
+        lblUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblUsuario.setText("Usuário atual: -----");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel7.setText("Finalização:");
+        lblPagamento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblPagamento.setText("Forma de pagamento:");
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel8.setText("Usuário atual: -----");
+        cmbPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Cartão", "Pix" }));
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setText("Forma de pagamento:");
+        lblDataAtual.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblDataAtual.setText("Data atual: XX/XX/XXXX");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Cartão", "Pix" }));
+        lblDataFinal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblDataFinal.setText("Data máx. de devolução: XX/XX/XXXX");
 
-        jButton3.setText("Voltar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        lblCaixa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblCaixa.setText("Caixa:");
+
+        cmbCaixa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
+
+        lblFilial.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblFilial.setText("Filial: -----");
+
+        lblValor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblValor.setText("Valor total: R$ 00,00");
+
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnVoltarActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Finalizar compra");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnFinalizar.setText("Finalizar compra");
+        btnFinalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnFinalizarActionPerformed(evt);
             }
         });
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel10.setText("Data atual: XX/XX/XXXX");
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel11.setText("Data máx. de devolução: XX/XX/XXXX");
-
-        jButton5.setText("Editar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jButton6.setText("Excluir");
-        jButton6.setEnabled(false);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        jButton7.setText("Pronto");
-        jButton7.setEnabled(false);
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel12.setText("Valor total: R$ 00,00");
-
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel14.setText("Caixa:");
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
-
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel15.setText("Filial: -----");
 
         javax.swing.GroupLayout pnlCartLayout = new javax.swing.GroupLayout(pnlCart);
         pnlCart.setLayout(pnlCartLayout);
         pnlCartLayout.setHorizontalGroup(
             pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
+            .addComponent(separator3Cart)
             .addGroup(pnlCartLayout.createSequentialGroup()
                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlCartLayout.createSequentialGroup()
@@ -217,82 +217,82 @@ public class FinalizarPedido extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pnlCartLayout.createSequentialGroup()
-                                        .addComponent(jLabel6)
+                                        .addComponent(lblNome)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField3))
+                                        .addComponent(txtfNome))
                                     .addGroup(pnlCartLayout.createSequentialGroup()
                                         .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(pnlCartLayout.createSequentialGroup()
-                                                .addComponent(jLabel4)
+                                                .addComponent(lblCPF)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jTextField1))
+                                                .addComponent(txtfCPF))
                                             .addGroup(pnlCartLayout.createSequentialGroup()
-                                                .addComponent(jLabel5)
+                                                .addComponent(lblSenha)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextField2)))
+                                                .addComponent(txtfSenha)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton2))))
+                                        .addComponent(btnEntrar))))
                             .addGroup(pnlCartLayout.createSequentialGroup()
                                 .addGap(95, 95, 95)
-                                .addComponent(jLabel1)
+                                .addComponent(lblIdentificacao)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(12, 12, 12))
                     .addGroup(pnlCartLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
+                            .addComponent(lblSituacao)
                             .addGroup(pnlCartLayout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1)))
+                                .addComponent(btnCadastrar)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(separator2Cart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCartLayout.createSequentialGroup()
                         .addGap(122, 122, 122)
-                        .addComponent(jLabel3)
+                        .addComponent(lblCart)
                         .addGap(125, 125, 125))
                     .addGroup(pnlCartLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlCartLayout.createSequentialGroup()
                                 .addGap(21, 21, 21)
-                                .addComponent(jButton5)
+                                .addComponent(btnEditar)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton6)
+                                .addComponent(btnExcluir)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton7))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnPronto))
+                            .addComponent(scrlCart, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCartLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlCartLayout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(btnVoltar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 425, Short.MAX_VALUE)
-                        .addComponent(jButton4))
+                        .addComponent(btnFinalizar))
                     .addGroup(pnlCartLayout.createSequentialGroup()
                         .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnlCartLayout.createSequentialGroup()
                                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel10)
+                                    .addComponent(lblDataFinal)
+                                    .addComponent(lblUsuario)
+                                    .addComponent(lblDataAtual)
                                     .addGroup(pnlCartLayout.createSequentialGroup()
-                                        .addComponent(jLabel9)
+                                        .addComponent(lblPagamento)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(cmbPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel15)
+                                    .addComponent(lblValor)
+                                    .addComponent(lblFilial)
                                     .addGroup(pnlCartLayout.createSequentialGroup()
-                                        .addComponent(jLabel14)
+                                        .addComponent(lblCaixa)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(cmbCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(pnlCartLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel7)
+                                .addComponent(lblFinalizacao)
                                 .addGap(126, 126, 126)))
                         .addGap(144, 144, 144))))
         );
@@ -303,64 +303,64 @@ public class FinalizarPedido extends javax.swing.JFrame {
                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlCartLayout.createSequentialGroup()
                         .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1))
+                            .addComponent(lblCart)
+                            .addComponent(lblIdentificacao))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlCartLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel2)
+                                .addComponent(lblSituacao)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1))
+                                    .addComponent(cmbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnCadastrar))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblNome)
+                                    .addComponent(txtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblCPF)
+                                    .addComponent(txtfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2)))
+                                    .addComponent(lblSenha)
+                                    .addComponent(txtfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnEntrar)))
                             .addGroup(pnlCartLayout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(scrlCart, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton5)
-                                    .addComponent(jButton6)
-                                    .addComponent(jButton7))))
+                                    .addComponent(btnEditar)
+                                    .addComponent(btnExcluir)
+                                    .addComponent(btnPronto))))
                         .addGap(12, 12, 12))
                     .addGroup(pnlCartLayout.createSequentialGroup()
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(separator2Cart, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)))
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(separator3Cart, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
+                .addComponent(lblFinalizacao)
                 .addGap(11, 11, 11)
-                .addComponent(jLabel8)
+                .addComponent(lblUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblPagamento)
+                    .addComponent(cmbPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCaixa)
+                    .addComponent(cmbCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel15))
+                    .addComponent(lblDataAtual)
+                    .addComponent(lblFilial))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12))
+                    .addComponent(lblDataFinal)
+                    .addComponent(lblValor))
                 .addGap(18, 18, 18)
                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(btnVoltar)
+                    .addComponent(btnFinalizar))
                 .addGap(12, 12, 12))
         );
 
@@ -373,7 +373,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
             }
         });
         menuCart.add(menuVoltarCart);
-        menuCart.add(separatorCart);
+        menuCart.add(separator1Cart);
 
         menuSairCart.setText("Sair");
         menuSairCart.addActionListener(new java.awt.event.ActionListener() {
@@ -411,35 +411,35 @@ public class FinalizarPedido extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_menuVoltarCartActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfSenhaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtfSenhaActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtfCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfCPFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtfCPFActionPerformed
 
     private void menuSairCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairCartActionPerformed
         System.exit(0);
     }//GEN-LAST:event_menuSairCartActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         new Loja().setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         new CadastroCliente().setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnFinalizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -480,42 +480,42 @@ public class FinalizarPedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEntrar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnFinalizar;
+    private javax.swing.JButton btnPronto;
+    private javax.swing.JButton btnVoltar;
+    private javax.swing.JComboBox<String> cmbCaixa;
+    private javax.swing.JComboBox<String> cmbPagamento;
+    private javax.swing.JComboBox<String> cmbSituacao;
+    private javax.swing.JLabel lblCPF;
+    private javax.swing.JLabel lblCaixa;
+    private javax.swing.JLabel lblCart;
+    private javax.swing.JLabel lblDataAtual;
+    private javax.swing.JLabel lblDataFinal;
+    private javax.swing.JLabel lblFilial;
+    private javax.swing.JLabel lblFinalizacao;
+    private javax.swing.JLabel lblIdentificacao;
+    private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblPagamento;
+    private javax.swing.JLabel lblSenha;
+    private javax.swing.JLabel lblSituacao;
+    private javax.swing.JLabel lblUsuario;
+    private javax.swing.JLabel lblValor;
     private javax.swing.JMenuBar menuBarCart;
     private javax.swing.JMenu menuCart;
     private javax.swing.JMenuItem menuSairCart;
     private javax.swing.JMenuItem menuVoltarCart;
     private javax.swing.JPanel pnlCart;
-    private javax.swing.JPopupMenu.Separator separatorCart;
+    private javax.swing.JScrollPane scrlCart;
+    private javax.swing.JPopupMenu.Separator separator1Cart;
+    private javax.swing.JSeparator separator2Cart;
+    private javax.swing.JSeparator separator3Cart;
+    private javax.swing.JTable tableCart;
+    private javax.swing.JTextField txtfCPF;
+    private javax.swing.JTextField txtfNome;
+    private javax.swing.JTextField txtfSenha;
     // End of variables declaration//GEN-END:variables
 }

@@ -29,25 +29,25 @@ public class AreaCaixa extends javax.swing.JFrame {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        lblHistAluguel = new javax.swing.JLabel();
+        pnlAreaCx = new javax.swing.JPanel();
+        lblInformacoes = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
-        lblHistAluguel1 = new javax.swing.JLabel();
+        lblCodigo = new javax.swing.JLabel();
         lblCPF = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JButton();
         lblIdade = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        lblIdade1 = new javax.swing.JLabel();
-        lblIdade2 = new javax.swing.JLabel();
+        lblDataNasc = new javax.swing.JLabel();
+        separator2AreaCx = new javax.swing.JSeparator();
+        lblHistAluguel = new javax.swing.JLabel();
+        txtCodigoPesquisa = new javax.swing.JLabel();
+        txtfCodigoPesquisa = new javax.swing.JTextField();
+        btnPesquisar = new javax.swing.JButton();
+        scrlPedidos = new javax.swing.JScrollPane();
+        tablePedidos = new javax.swing.JTable();
         menuBarAreaCx = new javax.swing.JMenuBar();
         menuAreaCx = new javax.swing.JMenu();
         menuVoltarAreaCx = new javax.swing.JMenuItem();
-        separatorAreaCx = new javax.swing.JPopupMenu.Separator();
+        separator1AreaCx = new javax.swing.JPopupMenu.Separator();
         menuSairAreaCx = new javax.swing.JMenuItem();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -67,21 +67,50 @@ public class AreaCaixa extends javax.swing.JFrame {
         setTitle("Área do caixa");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogo.png")).getImage());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Área do caixa"), "Área do Caixa"));
+        pnlAreaCx.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Área do caixa"), "Área do Caixa"));
 
-        jButton5.setText("Pesquisar Pedido");
+        lblInformacoes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblInformacoes.setText("Suas informações:");
 
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        lblNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblNome.setText("Nome: -----");
+
+        lblCodigo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblCodigo.setText("Código: -----");
+
+        lblCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblCPF.setText("CPF 000.000.000-00");
+
+        btnVoltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                btnVoltarActionPerformed(evt);
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel8.setText("Código do Pedido:");
+        lblIdade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblIdade.setText("Idade: --");
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        lblDataNasc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblDataNasc.setText("Data de nascimento: 00/00/0000");
+
+        lblHistAluguel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblHistAluguel.setText("Histórico de pedidos:");
+
+        txtCodigoPesquisa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtCodigoPesquisa.setText("Código do Pedido:");
+
+        txtfCodigoPesquisa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtfCodigoPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfCodigoPesquisaActionPerformed(evt);
+            }
+        });
+
+        btnPesquisar.setText("Pesquisar Pedido");
+
+        tablePedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -97,106 +126,77 @@ public class AreaCaixa extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
+        scrlPedidos.setViewportView(tablePedidos);
 
-        lblHistAluguel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblHistAluguel.setText("Histórico de pedidos:");
-
-        lblNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblNome.setText("Nome: -----");
-
-        lblHistAluguel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblHistAluguel1.setText("Suas informações:");
-
-        lblCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblCPF.setText("CPF 000.000.000-00");
-
-        lblIdade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblIdade.setText("Idade: --");
-
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton3.setText("Voltar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        lblIdade1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblIdade1.setText("Código: -----");
-
-        lblIdade2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblIdade2.setText("Data de nascimento: 00/00/0000");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlAreaCxLayout = new javax.swing.GroupLayout(pnlAreaCx);
+        pnlAreaCx.setLayout(pnlAreaCxLayout);
+        pnlAreaCxLayout.setHorizontalGroup(
+            pnlAreaCxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(separator2AreaCx)
+            .addGroup(pnlAreaCxLayout.createSequentialGroup()
+                .addGroup(pnlAreaCxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlAreaCxLayout.createSequentialGroup()
                         .addGap(216, 216, 216)
                         .addComponent(lblHistAluguel))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(pnlAreaCxLayout.createSequentialGroup()
                         .addGap(229, 229, 229)
-                        .addComponent(lblHistAluguel1)))
+                        .addComponent(lblInformacoes)))
                 .addGap(66, 228, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(pnlAreaCxLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(pnlAreaCxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlAreaCxLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel8)
+                        .addComponent(txtCodigoPesquisa)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtfCodigoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5)
+                        .addComponent(btnPesquisar)
                         .addGap(127, 127, 127))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAreaCxLayout.createSequentialGroup()
+                        .addGroup(pnlAreaCxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAreaCxLayout.createSequentialGroup()
                                 .addComponent(lblNome)
                                 .addGap(151, 151, 151))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton3)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAreaCxLayout.createSequentialGroup()
+                                .addComponent(btnVoltar)
                                 .addGap(149, 149, 149)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlAreaCxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblIdade)
-                            .addComponent(lblIdade1))
+                            .addComponent(lblCodigo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblIdade2, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(pnlAreaCxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDataNasc, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblCPF, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addContainerGap())))
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(scrlPedidos, javax.swing.GroupLayout.Alignment.TRAILING)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlAreaCxLayout.setVerticalGroup(
+            pnlAreaCxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAreaCxLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblHistAluguel1)
+                .addComponent(lblInformacoes)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlAreaCxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome)
-                    .addComponent(lblIdade1)
+                    .addComponent(lblCodigo)
                     .addComponent(lblCPF))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(lblIdade2)
+                .addGroup(pnlAreaCxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVoltar)
+                    .addComponent(lblDataNasc)
                     .addComponent(lblIdade))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(separator2AreaCx, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblHistAluguel)
                 .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(jButton5))
+                .addGroup(pnlAreaCxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtfCodigoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodigoPesquisa)
+                    .addComponent(btnPesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
+                .addComponent(scrlPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
         );
 
         menuAreaCx.setText("Menu");
@@ -208,7 +208,7 @@ public class AreaCaixa extends javax.swing.JFrame {
             }
         });
         menuAreaCx.add(menuVoltarAreaCx);
-        menuAreaCx.add(separatorAreaCx);
+        menuAreaCx.add(separator1AreaCx);
 
         menuSairAreaCx.setText("Sair");
         menuAreaCx.add(menuSairAreaCx);
@@ -223,33 +223,33 @@ public class AreaCaixa extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlAreaCx, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlAreaCx, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtfCodigoPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfCodigoPesquisaActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtfCodigoPesquisaActionPerformed
 
     private void menuVoltarAreaCxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarAreaCxActionPerformed
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_menuVoltarAreaCxActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -288,27 +288,27 @@ public class AreaCaixa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton btnPesquisar;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblCPF;
+    private javax.swing.JLabel lblCodigo;
+    private javax.swing.JLabel lblDataNasc;
     private javax.swing.JLabel lblHistAluguel;
-    private javax.swing.JLabel lblHistAluguel1;
     private javax.swing.JLabel lblIdade;
-    private javax.swing.JLabel lblIdade1;
-    private javax.swing.JLabel lblIdade2;
+    private javax.swing.JLabel lblInformacoes;
     private javax.swing.JLabel lblNome;
     private javax.swing.JMenu menuAreaCx;
     private javax.swing.JMenuBar menuBarAreaCx;
     private javax.swing.JMenuItem menuSairAreaCx;
     private javax.swing.JMenuItem menuVoltarAreaCx;
-    private javax.swing.JPopupMenu.Separator separatorAreaCx;
+    private javax.swing.JPanel pnlAreaCx;
+    private javax.swing.JScrollPane scrlPedidos;
+    private javax.swing.JPopupMenu.Separator separator1AreaCx;
+    private javax.swing.JSeparator separator2AreaCx;
+    private javax.swing.JTable tablePedidos;
+    private javax.swing.JLabel txtCodigoPesquisa;
+    private javax.swing.JTextField txtfCodigoPesquisa;
     // End of variables declaration//GEN-END:variables
 }

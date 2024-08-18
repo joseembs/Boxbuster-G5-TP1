@@ -78,7 +78,7 @@ public class Loja extends javax.swing.JFrame {
         btnVoltarLoja = new javax.swing.JButton();
         btnFinalizarLoja = new javax.swing.JButton();
         btnAddCartLoja = new javax.swing.JButton();
-        txtCartLoja = new javax.swing.JLabel();
+        lblCartLoja = new javax.swing.JLabel();
         menuBarLoja = new javax.swing.JMenuBar();
         menuLoja = new javax.swing.JMenu();
         menuFinalizarLoja = new javax.swing.JMenuItem();
@@ -505,7 +505,7 @@ public class Loja extends javax.swing.JFrame {
 
         btnAddCartLoja.setText("Adicionar itens ao carrinho");
 
-        txtCartLoja.setText("Carrinho: 0 itens");
+        lblCartLoja.setText("Carrinho: 0 itens");
 
         javax.swing.GroupLayout pnlLojaLayout = new javax.swing.GroupLayout(pnlLoja);
         pnlLoja.setLayout(pnlLojaLayout);
@@ -518,7 +518,7 @@ public class Loja extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAddCartLoja)
                 .addGap(18, 18, 18)
-                .addComponent(txtCartLoja)
+                .addComponent(lblCartLoja)
                 .addGap(68, 68, 68)
                 .addComponent(btnFinalizarLoja)
                 .addContainerGap())
@@ -532,7 +532,7 @@ public class Loja extends javax.swing.JFrame {
                     .addComponent(btnVoltarLoja)
                     .addComponent(btnFinalizarLoja)
                     .addComponent(btnAddCartLoja)
-                    .addComponent(txtCartLoja))
+                    .addComponent(lblCartLoja))
                 .addContainerGap())
         );
 
@@ -698,6 +698,7 @@ public class Loja extends javax.swing.JFrame {
     private javax.swing.JLabel imgMv4;
     private javax.swing.JLabel imgMv5;
     private javax.swing.JLabel imgMv6;
+    private javax.swing.JLabel lblCartLoja;
     private javax.swing.JMenuBar menuBarLoja;
     private javax.swing.JMenuItem menuFinalizarLoja;
     private javax.swing.JMenu menuLoja;
@@ -728,6 +729,5 @@ public class Loja extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrollMusica;
     private javax.swing.JPopupMenu.Separator separatorLoja;
     private javax.swing.JTabbedPane tabbedPnlLoja;
-    private javax.swing.JLabel txtCartLoja;
     // End of variables declaration//GEN-END:variables
 }

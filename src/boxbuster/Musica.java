@@ -11,7 +11,7 @@ public class Musica extends Produtos{
     public Musica() {
     }
 
-    public Musica(String estilo, String autor, String nomeProd, double preco, int ano, int codigoProd, int faixaEtaria, boolean alugado){
+    public Musica(String nomeProd, double preco, int ano, int codigoProd, int faixaEtaria, boolean alugado, String estilo, String autor){
         super(nomeProd, preco, ano, codigoProd, faixaEtaria, alugado);
         this.estilo = estilo;
         this.autor = autor;

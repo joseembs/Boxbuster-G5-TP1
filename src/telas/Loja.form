@@ -97,7 +97,7 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="btnAddCartLoja" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="txtCartLoja" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCartLoja" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                   <Component id="btnFinalizarLoja" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -113,7 +113,7 @@
                       <Component id="btnVoltarLoja" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnFinalizarLoja" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnAddCartLoja" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtCartLoja" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCartLoja" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -834,7 +834,7 @@
             <Property name="text" type="java.lang.String" value="Adicionar itens ao carrinho"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="txtCartLoja">
+        <Component class="javax.swing.JLabel" name="lblCartLoja">
           <Properties>
             <Property name="text" type="java.lang.String" value="Carrinho: 0 itens"/>
           </Properties>

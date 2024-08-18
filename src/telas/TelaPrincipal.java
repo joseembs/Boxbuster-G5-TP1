@@ -28,7 +28,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlMain = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        logoBoxbuster = new javax.swing.JLabel();
         btnLojaMain = new javax.swing.JButton();
         btnCliMain = new javax.swing.JButton();
         btnFuncMain = new javax.swing.JButton();
@@ -45,9 +45,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setTitle("Tela principal");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogo.png")).getImage());
 
-        jLabel1.setFont(new java.awt.Font("Biondi", 1, 36)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogoBig.png"))); // NOI18N
-        jLabel1.setText("BOXBUSTER");
+        logoBoxbuster.setFont(new java.awt.Font("Biondi", 1, 36)); // NOI18N
+        logoBoxbuster.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogoBig.png"))); // NOI18N
+        logoBoxbuster.setText("BOXBUSTER");
 
         btnLojaMain.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnLojaMain.setText("Loja");
@@ -97,7 +97,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlMainLayout.createSequentialGroup()
                         .addGap(77, 77, 77)
-                        .addComponent(jLabel1))
+                        .addComponent(logoBoxbuster))
                     .addGroup(pnlMainLayout.createSequentialGroup()
                         .addGap(206, 206, 206)
                         .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -113,7 +113,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMainLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel1)
+                .addComponent(logoBoxbuster)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLojaMain)
                 .addGap(18, 18, 18)
@@ -263,7 +263,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnFuncMain;
     private javax.swing.JButton btnLojaMain;
     private javax.swing.JButton btnSairMain;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel logoBoxbuster;
     private javax.swing.JMenuBar menuBarMain;
     private javax.swing.JMenuItem menuCliMain;
     private javax.swing.JMenuItem menuFuncMain;

@@ -8,17 +8,17 @@ import boxbuster.Jogos;
  */
 public class Videogames extends Jogos{
     private String genero;
-    private String console;
-    private String autor;
+    private String plataforma;
+    private String estudio;
 
     public Videogames() {
     }
     
-    public Videogames(String genero, String console, String autor, String nomeProd, double preco, int ano, int codigoProd, int faixaEtaria, boolean alugado, int numJogadores) {
+    public Videogames(String nomeProd, double preco, int ano, int codigoProd, int faixaEtaria, boolean alugado, int numJogadores, String genero, String plataforma, String autor) {
         super(nomeProd, preco, ano, codigoProd, faixaEtaria, alugado, numJogadores);
         this.genero = genero;
-        this.console = console;
-        this.autor = autor;
+        this.plataforma = plataforma;
+        this.estudio = autor;
     }
     
     public String getGenero() {
@@ -29,20 +29,20 @@ public class Videogames extends Jogos{
         this.genero = genero;
     }
 
-    public String getConsole() {
-        return console;
+    public String getPlataforma() {
+        return plataforma;
     }
 
-    public void setConsole(String console) {
-        this.console = console;
+    public void setPlataforma(String console) {
+        this.plataforma = console;
     }
 
-    public String getAutor() {
-        return autor;
+    public String getEstudio() {
+        return estudio;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
+    public void setEstudio(String autor) {
+        this.estudio = autor;
     }
     
 }

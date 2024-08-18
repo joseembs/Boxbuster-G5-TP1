@@ -6,14 +6,16 @@ package boxbuster;
  */
 public class Filmes extends Produtos{
     private String genero;
+    private String estudio;
     private String diretor;
     
     public Filmes() {
     }
 
-    public Filmes(String nomeProd, double preco, int ano, int codigoProd, int faixaEtaria, boolean alugado, String genero, String diretor) {
+    public Filmes(String nomeProd, double preco, int ano, int codigoProd, int faixaEtaria, boolean alugado, String genero, String estudio, String diretor) {
         super(nomeProd, preco, ano, codigoProd, faixaEtaria, alugado);
         this.genero = genero;
+        this.estudio = estudio;
         this.diretor = diretor;
     }
 
@@ -23,6 +25,14 @@ public class Filmes extends Produtos{
 
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+
+    public String getEstudio() {
+        return estudio;
+    }
+
+    public void setEstudio(String estudio) {
+        this.estudio = estudio;
     }
 
     public String getDiretor() {
