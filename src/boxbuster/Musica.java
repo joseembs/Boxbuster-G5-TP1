@@ -11,7 +11,7 @@ public class Musica extends Produtos{
     public Musica() {
     }
 
-    public Musica(String nomeProd, double preco, int ano, int codigoProd, int faixaEtaria, boolean alugado, String estilo, String autor){
+    public Musica(String estilo, String autor, String nomeProd, double preco, int ano, int codigoProd, int faixaEtaria, boolean alugado){
         super(nomeProd, preco, ano, codigoProd, faixaEtaria, alugado);
         this.estilo = estilo;
         this.autor = autor;
@@ -33,4 +33,8 @@ public class Musica extends Produtos{
         this.autor = autor;
     }
     
+    @Override
+    public String toString() {
+        return "Musica " + super.toString() + " " + estilo + " " + autor;
+    }
 }
