@@ -55,6 +55,13 @@ public class Alugar {
     public void setProduto(Produtos produto) {
         this.produto = produto;
     }
+
+    @Override
+    public String toString() {
+        return dataPedido + " " + dataDevolucao + " " + produto.toString();
+    }
+
+   
     
     
     
