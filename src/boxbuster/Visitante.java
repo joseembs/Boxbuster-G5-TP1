@@ -83,7 +83,14 @@ public class Visitante extends Cliente {
 
     @Override
     public String toString() {
-        return "Visitante " + super.toString();
+        String aux = "Visitante " + super.toString();
+        if(!alugados.isEmpty()){
+            for (Alugar alugar : alugados) {
+                aux += "\n" + alugar.toString();
+            }
+        }
+        
+        return aux;
     }
     
     
