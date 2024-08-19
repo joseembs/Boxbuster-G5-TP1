@@ -35,4 +35,9 @@ public class Tabuleiro extends Jogos{
         this.marca = marca;
     }
     
+    @Override
+    public String toString() {
+        return "Tabuleiro " + super.toString() + " " + tipo + " " + marca;
+    }
+    
 }
