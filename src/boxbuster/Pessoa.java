@@ -17,4 +17,11 @@ public abstract class Pessoa {
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
     }
+
+    @Override
+    public String toString() {
+        return nome + " " + cpf + " " + dataNascimento;
+    }
+    
+    
 }
