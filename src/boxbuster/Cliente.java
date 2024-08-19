@@ -25,5 +25,16 @@ public abstract class Cliente extends Pessoa {
     }
     
     public abstract void calculaDivida();
+
+    @Override
+    public String toString() {
+        return super.toString() + " " + divida + " " + alugados + " " + pedidos;
+    }
+    
+    
+    
+    
+    
+    
     
 }
