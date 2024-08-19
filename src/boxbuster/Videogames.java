@@ -45,4 +45,9 @@ public class Videogames extends Jogos{
         this.estudio = autor;
     }
     
+    @Override
+    public String toString() {
+        return "Videogame " + super.toString() + " " + genero + " " + plataforma + " " + estudio;
+    }
+    
 }
