@@ -94,6 +94,7 @@ public class Cadastrado extends Cliente {
     }
 
     
+    
     public void addAlugado(Pedido pedido) {
         this.pedidos.add(pedido);
     }
@@ -115,6 +116,16 @@ public class Cadastrado extends Cliente {
 
         setDivida(totalDivida);
     }
+
+    @Override
+    public String toString() {
+        return "Cadastrado " + super.toString() + " " + senha;
+    }
+    
+    
+    
+    
+    
     
     
 }
