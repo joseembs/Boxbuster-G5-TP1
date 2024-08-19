@@ -14,14 +14,16 @@ public class BancoDeDadosClientes {
     }
 
     public void adicionarPessoa(Cliente cliente) {
-        try (FileWriter fw = new FileWriter(arquivo, true);
-             BufferedWriter bw = new BufferedWriter(fw);
-             PrintWriter out = new PrintWriter(bw)) {
-            out.println(cliente.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    try (FileWriter fw = new FileWriter(arquivo, true);
+         BufferedWriter bw = new BufferedWriter(fw);
+         PrintWriter out = new PrintWriter(bw)) {
+        out.println(cliente.toString());
+        out.println("-------------------------------------------"); 
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
+
 
     public ArrayList<String> lerPessoas() {
         ArrayList<String> pessoas = new ArrayList<>();
