@@ -24,4 +24,11 @@ public abstract class Jogos extends Produtos{
     public void setNumJogadores(int numJogadores) {
         this.numJogadores = numJogadores;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " " + numJogadores;
+    }
+    
+    
 }
