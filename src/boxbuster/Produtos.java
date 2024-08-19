@@ -76,4 +76,11 @@ public abstract class Produtos {
     public void setAlugado(boolean alugado) {
         this.alugado = alugado;
     }
+
+    @Override
+    public String toString() {
+        return nomeProd + " " + preco + " " + ano + " " + codigoProd + " " + faixaEtaria + " " + nomeProd + " " + alugado;
+    }
+    
+    
 }
