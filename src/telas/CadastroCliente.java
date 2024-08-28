@@ -4,6 +4,8 @@
  */
 package telas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Adm
@@ -17,13 +19,21 @@ public class CadastroCliente extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         initComponents();
         txtfNome.setEnabled(false);
+        lblNome.setVisible(false);
+        txtfNome.setVisible(false);
+        lblCPF.setVisible(false);
         txtfCPF.setEnabled(false);
+        txtfCPF.setVisible(false);
+        lblDataNascimento.setVisible(false);
         txtfDataNascimento.setEnabled(false);
+        txtfDataNascimento.setVisible(false);
         lblSenha.setVisible(false);
         txtfSenha.setVisible(false);
         txtfSenha.setEnabled(false);
-        btnCadastrar.setEnabled(false);
-        btnPerfil.setEnabled(false);
+        btnLogin.setVisible(false);
+        btnLogin.setEnabled(false);
+        
+        
     }
 
     /**
@@ -49,8 +59,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         lblSenha = new javax.swing.JLabel();
         txtfSenha = new javax.swing.JTextField();
         logoBoxbuster = new javax.swing.JLabel();
-        btnCadastrar = new javax.swing.JButton();
-        btnPerfil = new javax.swing.JButton();
+        btnLogin = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
         btnLoja = new javax.swing.JButton();
         menuBarCadCli = new javax.swing.JMenuBar();
@@ -93,6 +102,12 @@ public class CadastroCliente extends javax.swing.JFrame {
         lblDataNascimento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblDataNascimento.setText("Data de nascimento:");
 
+        txtfDataNascimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfDataNascimentoActionPerformed(evt);
+            }
+        });
+
         lblSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblSenha.setText("Senha:");
 
@@ -104,18 +119,14 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         logoBoxbuster.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogoBig.png"))); // NOI18N
 
-        btnCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnCadastrar.setText("Cadastrar-se");
-        btnCadastrar.setEnabled(false);
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        btnLogin.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnLogin.setText("Cadastrar-se");
+        btnLogin.setEnabled(false);
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
+                btnLoginActionPerformed(evt);
             }
         });
-
-        btnPerfil.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnPerfil.setText("Ver perfil");
-        btnPerfil.setEnabled(false);
 
         btnVoltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnVoltar.setText("Voltar");
@@ -147,21 +158,24 @@ public class CadastroCliente extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(pnlCadCliLayout.createSequentialGroup()
                         .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnlCadCliLayout.createSequentialGroup()
-                                .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNome)
-                                    .addComponent(lblCPF)
-                                    .addComponent(lblDataNascimento))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtfNome)
+                                .addComponent(lblNome)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtfNome)
+                                .addGap(19, 19, 19))
+                            .addGroup(pnlCadCliLayout.createSequentialGroup()
+                                .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(pnlCadCliLayout.createSequentialGroup()
-                                        .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtfDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblDataNascimento)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtfDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cmbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblSenha)
+                                    .addGroup(pnlCadCliLayout.createSequentialGroup()
+                                        .addComponent(lblCPF)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(txtfCPF)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(logoBoxbuster)
                         .addGap(40, 40, 40))))
             .addGroup(pnlCadCliLayout.createSequentialGroup()
@@ -170,8 +184,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                         .addGap(52, 52, 52)
                         .addComponent(lblPropaganda1))
                     .addGroup(pnlCadCliLayout.createSequentialGroup()
-                        .addComponent(lblSenha)
-                        .addGap(18, 18, 18)
+                        .addGap(58, 58, 58)
                         .addComponent(txtfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlCadCliLayout.createSequentialGroup()
                         .addGap(151, 151, 151)
@@ -180,13 +193,11 @@ public class CadastroCliente extends javax.swing.JFrame {
             .addGroup(pnlCadCliLayout.createSequentialGroup()
                 .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlCadCliLayout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addComponent(btnCadastrar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPerfil))
-                    .addGroup(pnlCadCliLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblSituacao)))
+                        .addComponent(lblSituacao))
+                    .addGroup(pnlCadCliLayout.createSequentialGroup()
+                        .addGap(188, 188, 188)
+                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pnlCadCliLayout.setVerticalGroup(
@@ -208,11 +219,11 @@ public class CadastroCliente extends javax.swing.JFrame {
                         .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNome)
                             .addComponent(txtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
-                        .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(22, 22, 22)
+                        .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCPF)
                             .addComponent(txtfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
+                        .addGap(18, 18, 18)
                         .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblDataNascimento)
                             .addComponent(txtfDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -221,9 +232,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                             .addComponent(lblSenha)
                             .addComponent(txtfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(20, 20, 20)
-                .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVoltar)
@@ -279,10 +288,32 @@ public class CadastroCliente extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_menuVoltarCadCliActionPerformed
 
-    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        int index = cmbSituacao.getSelectedIndex();
+        if(index == 1){
+            if(txtfNome.getText().equals("") || txtfCPF.getText().equals("") || txtfDataNascimento.getText().equals("") || txtfSenha.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            }
+            else{
+                String nome = txtfNome.getText();
+                String CPF = txtfCPF.getText();
+                String dataNascimento = txtfDataNascimento.getText();
+                String senha = txtfSenha.getText();
+            }
+        }
+        else if(index == 2){
+            if(txtfNome.getText().equals("") || txtfCPF.getText().equals("") || txtfDataNascimento.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            }
+        }
+        else if(index == 3){
+            if(txtfNome.getText().equals("") || txtfCPF.getText().equals("") || txtfDataNascimento.getText().equals("") || txtfSenha.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            }
+        }
         new AreaCliente().setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnCadastrarActionPerformed
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         new TelaPrincipal().setVisible(true);
@@ -301,15 +332,41 @@ public class CadastroCliente extends javax.swing.JFrame {
 
     private void cmbSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSituacaoActionPerformed
         int index = cmbSituacao.getSelectedIndex();
-        if(index == 1 || index == 3){
+        if(index == 1){
             txtfNome.setEnabled(true);
+            lblNome.setVisible(true);
+            txtfNome.setVisible(true);
+            lblCPF.setVisible(true);
+            txtfCPF.setVisible(true);
             txtfCPF.setEnabled(true);
             txtfDataNascimento.setEnabled(true);
+            lblDataNascimento.setVisible(true);
+            txtfDataNascimento.setVisible(true);
             lblSenha.setVisible(true);
             txtfSenha.setVisible(true);
             txtfSenha.setEnabled(true);
-            btnCadastrar.setEnabled(true);
-            btnPerfil.setEnabled(true);
+            btnLogin.setEnabled(true);
+            btnLogin.setVisible(true);
+            btnLogin.setText("Cadastrar-se");
+            
+            
+        }
+        else if(index == 3){
+            txtfNome.setEnabled(true);
+            lblNome.setVisible(true);
+            txtfNome.setVisible(true);
+            lblCPF.setVisible(true);
+            txtfCPF.setVisible(true);
+            txtfCPF.setEnabled(true);
+            txtfDataNascimento.setEnabled(true);
+            lblDataNascimento.setVisible(true);
+            txtfDataNascimento.setVisible(true);
+            lblSenha.setVisible(true);
+            txtfSenha.setVisible(true);
+            txtfSenha.setEnabled(true);
+            btnLogin.setEnabled(true);
+            btnLogin.setVisible(true);
+            btnLogin.setText("Ver Perfil");
             
         }
         else if(index == 2){
@@ -319,8 +376,28 @@ public class CadastroCliente extends javax.swing.JFrame {
             lblSenha.setVisible(false);
             txtfSenha.setVisible(false);
             txtfSenha.setEnabled(false);
-            btnCadastrar.setEnabled(true);
-            btnPerfil.setEnabled(true);
+            btnLogin.setEnabled(true);
+            btnLogin.setEnabled(true);
+            btnLogin.setVisible(true);
+            btnLogin.setText("Cadastrar-se");
+            
+            
+        }
+        else{
+            txtfNome.setEnabled(false);
+            lblNome.setVisible(false);
+            txtfNome.setVisible(false);
+            lblCPF.setVisible(false);
+            txtfCPF.setEnabled(false);
+            txtfCPF.setVisible(false);
+            lblDataNascimento.setVisible(false);
+            txtfDataNascimento.setEnabled(false);
+            txtfDataNascimento.setVisible(false);
+            lblSenha.setVisible(false);
+            txtfSenha.setVisible(false);
+            txtfSenha.setEnabled(false);
+            btnLogin.setEnabled(false);
+            btnLogin.setVisible(false);
             
         }
     }//GEN-LAST:event_cmbSituacaoActionPerformed
@@ -328,6 +405,10 @@ public class CadastroCliente extends javax.swing.JFrame {
     private void menuSairCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairCadCliActionPerformed
         System.exit(0);
     }//GEN-LAST:event_menuSairCadCliActionPerformed
+
+    private void txtfDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfDataNascimentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfDataNascimentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -365,9 +446,8 @@ public class CadastroCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnLoja;
-    private javax.swing.JButton btnPerfil;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cmbSituacao;
     private javax.swing.JLabel lblCPF;
