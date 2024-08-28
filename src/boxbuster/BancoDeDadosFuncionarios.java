@@ -1,0 +1,66 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package boxbuster;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author elisrb
+ */
+public class BancoDeDadosFuncionarios implements BancoDeDados{
+    private String arquivo;
+
+    public BancoDeDadosFuncionarios(String arquivo) {
+        this.arquivo = arquivo;
+    }
+
+    public void adicionarPessoa(Funcionario func) {
+    try (FileWriter fw = new FileWriter(arquivo, true);
+         BufferedWriter bw = new BufferedWriter(fw);
+         PrintWriter out = new PrintWriter(bw)) {
+        out.println(func.toString());
+        out.println("-------------------------------------------"); 
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    }
+
+    @Override
+    public ArrayList<String> lerPessoas() {
+        ArrayList<String> pessoas = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                pessoas.add(linha);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return pessoas;
+    }
+    
+    @Override
+    public String buscarPessoa(String busca) {
+    try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
+        String linha;
+        while ((linha = br.readLine()) != null) {
+            if (linha.contains(busca)) {
+                return linha;
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    
+    return "Pessoa não encontrada"; 
+    }
+}
