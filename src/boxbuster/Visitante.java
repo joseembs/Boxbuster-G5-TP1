@@ -15,7 +15,7 @@ public class Visitante extends Cliente {
         
     }
 
-    public Visitante(String nome, int CPF, Date dataNascimento, double divida) {
+    public Visitante(String nome, String CPF, Date dataNascimento, double divida) {
         super(nome, CPF, dataNascimento, divida);
     }
 
@@ -51,11 +51,11 @@ public class Visitante extends Cliente {
         this.nome = nome;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
