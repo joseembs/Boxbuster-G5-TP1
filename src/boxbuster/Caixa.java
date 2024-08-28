@@ -7,7 +7,7 @@ import java.util.Date;
 public class Caixa extends Funcionario {
     protected Gerente gerente;
 
-    public Caixa(Gerente gerente, String senha, int codigoFunc, String nome, int cpf, Date dataNascimento) {
+    public Caixa(Gerente gerente, String senha, int codigoFunc, String nome, String cpf, Date dataNascimento) {
         super(senha, codigoFunc, nome, cpf, dataNascimento);
         this.gerente = gerente;
     }
@@ -28,7 +28,7 @@ public class Caixa extends Funcionario {
         return nome;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
@@ -53,7 +53,7 @@ public class Caixa extends Funcionario {
         this.nome = nome;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
