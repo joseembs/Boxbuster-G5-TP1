@@ -6,7 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-public class BancoDeDadosClientes {
+
+public class BancoDeDadosClientes implements BancoDeDados{
     private String arquivo;
 
     public BancoDeDadosClientes(String arquivo) {
@@ -24,7 +25,7 @@ public class BancoDeDadosClientes {
     }
 }
 
-
+    @Override
     public ArrayList<String> lerPessoas() {
         ArrayList<String> pessoas = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
@@ -38,6 +39,7 @@ public class BancoDeDadosClientes {
         return pessoas;
     }
     
+    @Override
     public String buscarPessoa(String CPF) {
     try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
         String linha;
