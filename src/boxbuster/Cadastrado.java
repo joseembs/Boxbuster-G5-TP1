@@ -16,7 +16,7 @@ public class Cadastrado extends Cliente {
         this.pedidos = new ArrayList<>();
     }
 
-    public Cadastrado(String nome, int CPF, Date dataNascimento, double divida, String senha, int codigoCliente) {
+    public Cadastrado(String nome, String CPF, Date dataNascimento, double divida, String senha, int codigoCliente) {
         super(nome, CPF, dataNascimento, divida);
         this.senha = senha;
         this.codigoCliente = codigoCliente;
@@ -77,11 +77,11 @@ public class Cadastrado extends Cliente {
         this.nome = nome;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
