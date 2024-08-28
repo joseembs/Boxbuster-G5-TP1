@@ -11,7 +11,7 @@ import java.util.Date;
 public class Gerente extends Funcionario {
     protected ArrayList<Caixa> caixas;
 
-    public Gerente(/*Caixa[] caixas,*/ String senha, int codigoFunc, String nome, int cpf, Date dataNascimento) {
+    public Gerente(/*Caixa[] caixas,*/ String senha, int codigoFunc, String nome, String cpf, Date dataNascimento) {
         super(senha, codigoFunc, nome, cpf, dataNascimento);
         this.caixas = new ArrayList<Caixa>();
     }
@@ -32,7 +32,7 @@ public class Gerente extends Funcionario {
         return nome;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
@@ -59,7 +59,7 @@ public class Gerente extends Funcionario {
         this.nome = nome;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
