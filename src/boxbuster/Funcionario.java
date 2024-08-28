@@ -8,7 +8,7 @@ public abstract class Funcionario extends Pessoa {
     protected String senha;
     protected int codigoFunc;
 
-    public Funcionario(String senha, int codigoFunc, String nome, int cpf, Date dataNascimento) {
+    public Funcionario(String senha, int codigoFunc, String nome, String cpf, Date dataNascimento) {
         super(nome, cpf, dataNascimento);
         this.senha = senha;
         this.codigoFunc = codigoFunc;
