@@ -17,7 +17,7 @@ public abstract class Cliente extends Pessoa {
         this.pedidos = new ArrayList<>();
     }
 
-    public Cliente(String nome, int CPF, Date dataNascimento, double divida) {
+    public Cliente(String nome, String CPF, Date dataNascimento, double divida) {
         super(nome, CPF, dataNascimento);
         this.divida = divida;
         this.alugados = new ArrayList<>();
