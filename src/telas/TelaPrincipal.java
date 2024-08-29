@@ -4,12 +4,18 @@
  */
 package telas;
 
+import boxbuster.Filmes;
+import boxbuster.Musica;
+import boxbuster.Tabuleiro;
+import boxbuster.Videogames;
+import java.util.ArrayList;
+
 /**
  *
  * @author Adm
  */
 public class TelaPrincipal extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form MainScr
      */

@@ -4,6 +4,7 @@
  */
 package telas;
 
+import boxbuster.Estoque;
 import boxbuster.Filmes;
 import boxbuster.Musica;
 import boxbuster.Produtos;
@@ -12,6 +13,7 @@ import boxbuster.Videogames;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,13 +23,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AreaGerente extends javax.swing.JFrame {
     
-    int cont = 1;
+    static int cont = 1;
     
-    private ArrayList<Produtos> allProducts;
-    private ArrayList<Filmes> tempFilmes = new ArrayList();
-    private ArrayList<Musica> tempMusicas = new ArrayList();
-    private ArrayList<Tabuleiro> tempTabuleiros = new ArrayList();
-    private ArrayList<Videogames> tempVideogames = new ArrayList();
+    private ArrayList<Produtos> allProducts = new ArrayList();
+    private ArrayList<Filmes> tempFilmes = Estoque.getListaFilmes();
+    private ArrayList<Musica> tempMusicas = Estoque.getListaMusicas();
+    private ArrayList<Tabuleiro> tempTabuleiros = Estoque.getListaTabuleiros();
+    private ArrayList<Videogames> tempVideogames = Estoque.getListaVideogames();
     
     boolean ok = false;
     
@@ -62,6 +64,13 @@ public class AreaGerente extends javax.swing.JFrame {
         }
         
         tableProdutos.setModel(tabela);
+        
+        Estoque.setListaFilmes(tempFilmes);
+        Estoque.setListaMusicas(tempMusicas);
+        Estoque.setListaTabuleiros(tempTabuleiros);
+        Estoque.setListaVideogames(tempVideogames);
+        Estoque.setListaProdutos(allProducts);
+        
     }
 
     /**
@@ -70,9 +79,9 @@ public class AreaGerente extends javax.swing.JFrame {
     public AreaGerente() {
         setLocationRelativeTo(null);
         
-        //updateProdList();
-        
         initComponents();
+        
+        updateProdList();
     }
 
     /**

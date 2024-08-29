@@ -7,82 +7,82 @@ import java.util.ArrayList;
  * @author joseembs
  */
 public class Estoque {
-    private ArrayList<Filmes> listaFilmes;
-    private ArrayList<Musica> listaMusicas;
-    private ArrayList<Tabuleiro> listaTabuleiros;
-    private ArrayList<Videogames> listaVideogames;
-    private ArrayList<Produtos> listaProdutos;
+    static private ArrayList<Filmes> listaFilmes = new ArrayList<>();
+    static private ArrayList<Musica> listaMusicas = new ArrayList<>();
+    static private ArrayList<Tabuleiro> listaTabuleiros = new ArrayList<>();
+    static private ArrayList<Videogames> listaVideogames = new ArrayList<>();
+    static private ArrayList<Produtos> listaProdutos = new ArrayList<>();
 
-    public Estoque() {
-        this.listaFilmes = new ArrayList<>();
-        this.listaMusicas = new ArrayList<>();
-        this.listaTabuleiros = new ArrayList<>();
-    }
+//    public Estoque() {
+//        listaFilmes = new ArrayList<>();
+//        listaMusicas = new ArrayList<>();
+//        listaTabuleiros = new ArrayList<>();
+//    }
 
-    public Estoque(ArrayList<Filmes> listaFilmes, ArrayList<Musica> listaMusicas, ArrayList<Tabuleiro> listaTabuleiro, ArrayList<Videogames> listaVideogames) {
-        this.listaFilmes = listaFilmes;
-        this.listaMusicas = listaMusicas;
-        this.listaTabuleiros = listaTabuleiro;
-        this.listaVideogames = listaVideogames;
-    }
+//    public Estoque(ArrayList<Filmes> listaFilmes, ArrayList<Musica> listaMusicas, ArrayList<Tabuleiro> listaTabuleiro, ArrayList<Videogames> listaVideogames) {
+//        listaFilmes = listaFilmes;
+//        listaMusicas = listaMusicas;
+//        listaTabuleiros = listaTabuleiro;
+//        listaVideogames = listaVideogames;
+//    }
 
-    public ArrayList<Filmes> getListaFilmes() {
+    static public ArrayList<Filmes> getListaFilmes() {
         return listaFilmes;
     }
 
-    public void setListaFilmes(ArrayList<Filmes> listaFilmes) {
-        this.listaFilmes = listaFilmes;
+    static public void setListaFilmes(ArrayList<Filmes> listaFilmes) {
+        listaFilmes = listaFilmes;
     }
 
-    public ArrayList<Musica> getListaMusicas() {
+    static public ArrayList<Musica> getListaMusicas() {
         return listaMusicas;
     }
 
-    public void setListaMusicas(ArrayList<Musica> listaMusicas) {
-        this.listaMusicas = listaMusicas;
+    static public void setListaMusicas(ArrayList<Musica> listaMusicas) {
+        listaMusicas = listaMusicas;
     }
 
-    public ArrayList<Tabuleiro> getListaTabuleiro() {
+    static public ArrayList<Tabuleiro> getListaTabuleiros() {
         return listaTabuleiros;
     }
 
-    public void setListaTabuleiro(ArrayList<Tabuleiro> listaTabuleiro) {
-        this.listaTabuleiros = listaTabuleiro;
+    static public void setListaTabuleiros(ArrayList<Tabuleiro> listaTabuleiro) {
+        listaTabuleiros = listaTabuleiro;
     }
 
-    public ArrayList<Videogames> getListaVideogames() {
+    static public ArrayList<Videogames> getListaVideogames() {
         return listaVideogames;
     }
 
-    public void setListaVideogames(ArrayList<Videogames> listaVideogames) {
-        this.listaVideogames = listaVideogames;
+    static public void setListaVideogames(ArrayList<Videogames> listaVideogames) {
+        listaVideogames = listaVideogames;
     }
     
-    public ArrayList<Produtos> getListaProdutos() {
+    static public ArrayList<Produtos> getListaProdutos() {
         return listaProdutos;
     }
     
-    public void setListaProdutos(ArrayList<Produtos> listaProdutos) {
-        this.listaProdutos = listaProdutos;
+    static public void setListaProdutos(ArrayList<Produtos> listaProdutos) {
+        listaProdutos = listaProdutos;
     }
 
-    public void addFilme (Filmes filme){
-        this.listaFilmes.add(filme);
+    static public void addFilme (Filmes filme){
+        listaFilmes.add(filme);
     }
     
-    public void addMusica (Musica musica){
-        this.listaMusicas.add(musica);
+    static public void addMusica (Musica musica){
+        listaMusicas.add(musica);
     }
     
-    public void addTabuleiro (Tabuleiro tabuleiro){
-        this.listaTabuleiros.add(tabuleiro);
+    static public void addTabuleiro (Tabuleiro tabuleiro){
+        listaTabuleiros.add(tabuleiro);
     }
     
-    public void addVideogame (Videogames videogame){
-        this.listaVideogames.add(videogame);
+    static public void addVideogame (Videogames videogame){
+        listaVideogames.add(videogame);
     }
     
-    public void addProduto (Produtos produto){
-        this.listaProdutos.add(produto);
+    static public void addProduto (Produtos produto){
+        listaProdutos.add(produto);
     }
 }
