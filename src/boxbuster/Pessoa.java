@@ -1,4 +1,5 @@
 package boxbuster;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 /**
  *
@@ -20,7 +21,9 @@ public abstract class Pessoa {
 
     @Override
     public String toString() {
-        return nome + " " + cpf + " " + dataNascimento;
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada = formato.format(dataNascimento);
+        return nome + " " + cpf + " " + dataFormatada;
     }
     
     
