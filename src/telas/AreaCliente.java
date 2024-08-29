@@ -285,7 +285,30 @@ public class AreaCliente extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    public void alterarNome(String novoNome) {
+        lblNome.setText("Nome: " + novoNome);
+    }
+     
+    public void alterarCPF(String novoCPF) {
+        lblCPF.setText("CPF: " + novoCPF);
+    }
+    
+    public void alterarDataNascimento(String novaDataNascimento) {
+        lblDataNasc.setText("Data de nasc: " + novaDataNascimento);
+    }
+    
+    public void alterarDivida(String novaDivida) {
+        lblDivida.setText("Dívida: R$ " + novaDivida);
+    }
+    
+    public void alterarAlugados(String novoAlugados){
+        lblProdutosAlugados.setText("Produtos Alugados: " + novoAlugados);
+    }
+    
+    public void alterarIdade(String novaIdade){
+        lblIdade.setText("Idade: " + novaIdade);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeslogar;
     private javax.swing.JButton btnLojaMain;

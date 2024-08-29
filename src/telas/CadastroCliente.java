@@ -4,6 +4,16 @@
  */
 package telas;
 
+import boxbuster.BancoDeDadosClientes;
+import boxbuster.Cadastrado;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,9 +22,8 @@ import javax.swing.JOptionPane;
  */
 public class CadastroCliente extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CadastroCliente
-     */
+    BancoDeDadosClientes bdClientes = new BancoDeDadosClientes("clientes.txt");
+    
     public CadastroCliente() {
         setLocationRelativeTo(null);
         initComponents();
@@ -32,6 +41,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         txtfSenha.setEnabled(false);
         btnLogin.setVisible(false);
         btnLogin.setEnabled(false);
+        
         
         
     }
@@ -295,10 +305,34 @@ public class CadastroCliente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
             }
             else{
+                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                 String nome = txtfNome.getText();
                 String CPF = txtfCPF.getText();
-                String dataNascimento = txtfDataNascimento.getText();
+                Date dataNascimento = null;
+                String dataNascimentoString = txtfDataNascimento.getText();
+                LocalDate dataAtual = LocalDate.now();
+                try {
+                    dataNascimento = formato.parse(dataNascimentoString);
+                } catch (ParseException ex) {
+                    Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                LocalDate dataNascimentoLocal = dataNascimento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                int idade = Period.between(dataNascimentoLocal, dataAtual).getYears();
+                String idadeString = String.valueOf(idade);
                 String senha = txtfSenha.getText();
+                Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, 0, senha);
+                bdClientes.adicionarPessoa(cadastrado);
+                AreaCliente telaCliente = new AreaCliente();
+                telaCliente.alterarNome(nome);
+                telaCliente.alterarCPF(CPF);
+                telaCliente.alterarDataNascimento(dataNascimentoString);
+                telaCliente.alterarDivida("00,00");
+                telaCliente.alterarAlugados("0");
+                telaCliente.alterarIdade(idadeString);
+                telaCliente.setVisible(true);
+                
+                this.setVisible(false);
+                
             }
         }
         else if(index == 2){
@@ -307,12 +341,63 @@ public class CadastroCliente extends javax.swing.JFrame {
             }
         }
         else if(index == 3){
-            if(txtfNome.getText().equals("") || txtfCPF.getText().equals("") || txtfDataNascimento.getText().equals("") || txtfSenha.getText().equals("")){
+            if(txtfCPF.getText().equals("")|| txtfSenha.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
             }
+            else{
+                String CPF = txtfCPF.getText();
+                Date dataNascimento = null;
+                String senha = txtfSenha.getText();
+                String pessoa = bdClientes.buscarPessoa(CPF);
+                if(pessoa.equals("Pessoa não encontrada")){
+                    JOptionPane.showMessageDialog(null, "Não existe nenhuma pessoa já cadastrada com esse CPF", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                }
+                else{
+                    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                    String[] palavras = pessoa.split(" ");
+                    String nome = "";
+                    int indice = 1;
+                    while(!palavras[indice].equals(CPF)){
+                        nome += palavras[indice];
+                        indice++;
+                    }
+                    String dataNascimentoString = palavras[indice+1];
+                    String divida = palavras[indice+2];
+                    String senhaChecar = palavras[indice+3];
+                    try {
+                        dataNascimento = formato.parse(dataNascimentoString);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    if(!senha.equals(senhaChecar)){
+                        JOptionPane.showMessageDialog(null, "A senha está incorreta.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                        
+                    }
+                    else{
+                        Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, 0, senha);
+                        AreaCliente telaCliente = new AreaCliente();
+                        LocalDate dataAtual = LocalDate.now();
+                        LocalDate dataNascimentoLocal = dataNascimento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                        int idade = Period.between(dataNascimentoLocal, dataAtual).getYears();
+                        String idadeString = String.valueOf(idade);
+                        telaCliente.alterarNome(nome);
+                        telaCliente.alterarCPF(CPF);
+                        telaCliente.alterarDataNascimento(dataNascimentoString);
+                        telaCliente.alterarDivida(divida);
+                        telaCliente.alterarAlugados("0");
+                        telaCliente.alterarIdade(idadeString);
+                        telaCliente.setVisible(true);
+
+                        this.setVisible(false);
+                    }
+                    
+                }
+                
+                
+            }
         }
-        new AreaCliente().setVisible(true);
-        this.setVisible(false);
+        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -366,13 +451,25 @@ public class CadastroCliente extends javax.swing.JFrame {
             txtfSenha.setEnabled(true);
             btnLogin.setEnabled(true);
             btnLogin.setVisible(true);
+            txtfNome.setEnabled(false);
+            lblNome.setVisible(false);
+            txtfNome.setVisible(false);
+            lblDataNascimento.setVisible(false);
+            txtfDataNascimento.setEnabled(false);
+            txtfDataNascimento.setVisible(false);
             btnLogin.setText("Ver Perfil");
             
         }
         else if(index == 2){
             txtfNome.setEnabled(true);
+            lblNome.setVisible(true);
+            txtfNome.setVisible(true);
+            lblCPF.setVisible(true);
+            txtfCPF.setVisible(true);
             txtfCPF.setEnabled(true);
             txtfDataNascimento.setEnabled(true);
+            lblDataNascimento.setVisible(true);
+            txtfDataNascimento.setVisible(true);
             lblSenha.setVisible(false);
             txtfSenha.setVisible(false);
             txtfSenha.setEnabled(false);
