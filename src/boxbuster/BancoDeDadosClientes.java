@@ -7,6 +7,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author hsaless
+ */
+
 public class BancoDeDadosClientes implements BancoDeDados{
     private String arquivo;
 
