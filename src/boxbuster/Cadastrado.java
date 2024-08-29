@@ -9,17 +9,16 @@ import java.util.Date;
  */
 public class Cadastrado extends Cliente {
     private String senha;
-    private int codigoCliente;
+    
 
     public Cadastrado() {
         this.alugados = new ArrayList<>();
         this.pedidos = new ArrayList<>();
     }
 
-    public Cadastrado(String nome, String CPF, Date dataNascimento, double divida, String senha, int codigoCliente) {
+    public Cadastrado(String nome, String CPF, Date dataNascimento, double divida, String senha) {
         super(nome, CPF, dataNascimento, divida);
         this.senha = senha;
-        this.codigoCliente = codigoCliente;
         this.alugados = new ArrayList<>();
         this.pedidos = new ArrayList<>();
         
@@ -37,13 +36,7 @@ public class Cadastrado extends Cliente {
         this.senha = senha;
     }
 
-    public int getCodigoCliente() {
-        return codigoCliente;
-    }
-
-    public void setCodigoCliente(int codigoCliente) {
-        this.codigoCliente = codigoCliente;
-    }
+    
 
     public double getDivida() {
         return divida;
