@@ -33,6 +33,26 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
         e.printStackTrace();
     }
     }
+    
+    public int[] quantidades() {
+        int caixas = 0, gerentes = 0;            
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                if(linha.contains(" Caixa")){
+                    caixas++;
+                }
+                else if(linha.contains(" Gerente")){
+                    gerentes++;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        int[] ans = {caixas, gerentes};
+        return ans;
+    }
 
     @Override
     public ArrayList<String> lerPessoas() {
