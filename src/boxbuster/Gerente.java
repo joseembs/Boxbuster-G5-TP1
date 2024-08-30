@@ -67,6 +67,15 @@ public class Gerente extends Funcionario {
         this.dataNascimento = dataNascimento;
     }
 
-    
+    @Override
+    public String toString() {
+        String aux = super.toString() + " Gerente gerencia";
+        if(!caixas.isEmpty()){
+            for (Caixa caixa : caixas) {
+                aux += " " + caixa.getNome();
+            }
+        }
+        return aux;
+    }
       
 }
