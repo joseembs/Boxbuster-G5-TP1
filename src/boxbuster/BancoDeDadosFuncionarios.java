@@ -17,13 +17,13 @@ import java.util.ArrayList;
  * @author elisrb
  */
 public class BancoDeDadosFuncionarios implements BancoDeDados{
-    private String arquivo;
+    private static String arquivo;
 
     public BancoDeDadosFuncionarios(String arquivo) {
         this.arquivo = arquivo;
     }
 
-    public void adicionarPessoa(Funcionario func) {
+    public static void adicionarPessoa(Funcionario func) {
     try (FileWriter fw = new FileWriter(arquivo, true);
          BufferedWriter bw = new BufferedWriter(fw);
          PrintWriter out = new PrintWriter(bw)) {
