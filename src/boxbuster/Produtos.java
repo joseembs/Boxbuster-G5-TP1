@@ -82,5 +82,8 @@ public abstract class Produtos {
         return nomeProd + "_" + preco + "_" + ano + "_" + codigoProd + "_" + faixaEtaria + "_" + alugado;
     }
     
-    
+    @Override
+    public boolean equals(Object produto) {
+        return this.toString().equals(produto.toString());        
+    }
 }

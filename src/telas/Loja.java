@@ -7,6 +7,7 @@ package telas;
 import boxbuster.Estoque;
 import boxbuster.Filmes;
 import boxbuster.Musicas;
+import boxbuster.Pedido;
 import boxbuster.Produtos;
 import boxbuster.Tabuleiros;
 import boxbuster.Videogames;
@@ -24,25 +25,18 @@ public class Loja extends javax.swing.JFrame {
     private ArrayList<Tabuleiros> listaTabuleiros;
     private ArrayList<Videogames> listaVideogames;
     
-    private double valorTotal = 0.0;
+    static private double valorTotal = 0.0;
     
     private ArrayList<javax.swing.JRadioButton> tempBtnSelected = new ArrayList<>();
     private ArrayList<javax.swing.JRadioButton> finalBtnSelected = new ArrayList<>();
     private ArrayList<Produtos> tempPedido = new ArrayList<>();
-    static private ArrayList<Produtos> finalPedido = new ArrayList<>();
+    private ArrayList<Produtos> finalPedido = Pedido.getPedidoAtual();
     
     /**
      * Creates new form LojaScr
-     */
+     */    
     public Loja() {
-        setLocationRelativeTo(null);
-        initComponents();
-        
-        setLoja();
-    }
-    
-    public Loja(ArrayList<Produtos> pedidoIn) {
-        finalPedido = pedidoIn;
+        //finalPedido = Pedido.getPedidoAtual();
         setLocationRelativeTo(null);
         initComponents();
         
@@ -108,7 +102,7 @@ public class Loja extends javax.swing.JFrame {
             listNomeMv[i].setText(filme.getNomeProd());
             listDescMv[i].setText(Integer.toString(filme.getAno()) + " - A" + filme.getFaixaEtaria());
             listPrecoMv[i].setText("R$ " + Double.toString(filme.getPreco()) + "0");
-            listAlugarMv[i].setEnabled(!filme.isAlugado());
+            listAlugarMv[i].setEnabled(!filme.isAlugado());            
             if(finalPedido.contains(filme)){
                 listAlugarMv[i].setText("Remover do carrinho");
                 valorTotal += filme.getPreco();
@@ -3227,7 +3221,7 @@ public class Loja extends javax.swing.JFrame {
     }//GEN-LAST:event_menuVoltarLojaActionPerformed
 
     private void menuFinalizarLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFinalizarLojaActionPerformed
-        new FinalizarPedido(finalPedido).setVisible(true);
+        new FinalizarPedido().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_menuFinalizarLojaActionPerformed
 
@@ -3265,7 +3259,7 @@ public class Loja extends javax.swing.JFrame {
     }//GEN-LAST:event_menuSairLojaActionPerformed
 
     private void btnFinalizarLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarLojaActionPerformed
-        new FinalizarPedido(finalPedido).setVisible(true);
+        new FinalizarPedido().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnFinalizarLojaActionPerformed
 
@@ -3562,6 +3556,8 @@ public class Loja extends javax.swing.JFrame {
             btn.setSelected(false);
         }
         
+        Pedido.setPedidoAtual(finalPedido);
+        
         tempBtnSelected.clear();
         tempPedido.clear();
         
@@ -3599,7 +3595,7 @@ public class Loja extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Loja(finalPedido).setVisible(true);
+                new Loja().setVisible(true);
             }
         });
     }

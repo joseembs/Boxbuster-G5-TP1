@@ -4,6 +4,7 @@
  */
 package telas;
 
+import boxbuster.Pedido;
 import boxbuster.Produtos;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -14,25 +15,25 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FinalizarPedido extends javax.swing.JFrame {
 
-    static private ArrayList<Produtos> listaPedido;
+    private ArrayList<Produtos> listaPedido = Pedido.getPedidoAtual();
     
     double valorTotal = 0;
     
     /**
      * Creates new form CarrinhoScr
      */
-    public FinalizarPedido(ArrayList<Produtos> pedidoIn) {
-        listaPedido = pedidoIn;
+    public FinalizarPedido() {
+        //listaPedido = pedidoIn;
         
         setLocationRelativeTo(null);
         initComponents();
         
-        updateProdList();
+        updateProdTable();
         
         lblValor.setText("Valor total: R$ " + valorTotal + "0");
     }
 
-    private void updateProdList() {        
+    private void updateProdTable() {        
         
         DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Nº", "Título", "Preço"}, 0);
         valorTotal = 0;
@@ -449,7 +450,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuVoltarCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarCartActionPerformed
-        new Loja(listaPedido).setVisible(true);
+        new Loja().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_menuVoltarCartActionPerformed
 
@@ -474,7 +475,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_menuSairCartActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        new Loja(listaPedido).setVisible(true);
+        new Loja().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
@@ -520,7 +521,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FinalizarPedido(listaPedido).setVisible(true);
+                new FinalizarPedido().setVisible(true);
             }
         });
     }

@@ -190,6 +190,7 @@ public class AreaGerente extends javax.swing.JFrame {
         btnCancelarEst = new javax.swing.JButton();
         scrlProdutos = new javax.swing.JScrollPane();
         tableProdutos = new javax.swing.JTable();
+        btnEditarProd1 = new javax.swing.JButton();
         menuBarAreaGr = new javax.swing.JMenuBar();
         menuAreaGr = new javax.swing.JMenu();
         menuVoltarAreaGr = new javax.swing.JMenuItem();
@@ -575,6 +576,13 @@ public class AreaGerente extends javax.swing.JFrame {
         });
         scrlProdutos.setViewportView(tableProdutos);
 
+        btnEditarProd1.setText("Excluir");
+        btnEditarProd1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarProd1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlEstoqueLayout = new javax.swing.GroupLayout(pnlEstoque);
         pnlEstoque.setLayout(pnlEstoqueLayout);
         pnlEstoqueLayout.setHorizontalGroup(
@@ -610,7 +618,9 @@ public class AreaGerente extends javax.swing.JFrame {
                                 .addGap(26, 26, 26)
                                 .addComponent(btnPesquisarProd)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnEditarProd)))
+                                .addComponent(btnEditarProd)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEditarProd1)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(pnlEstoqueLayout.createSequentialGroup()
@@ -631,7 +641,7 @@ public class AreaGerente extends javax.swing.JFrame {
                         .addComponent(lblTipoProd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbTipoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
                         .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblQuantTipo)
                             .addGroup(pnlEstoqueLayout.createSequentialGroup()
@@ -666,7 +676,8 @@ public class AreaGerente extends javax.swing.JFrame {
                     .addComponent(btnPesquisarProd)
                     .addComponent(btnNovoProd)
                     .addComponent(btnVoltarEst)
-                    .addComponent(btnEditarProd))
+                    .addComponent(btnEditarProd)
+                    .addComponent(btnEditarProd1))
                 .addGap(18, 18, 18)
                 .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlEstoqueLayout.createSequentialGroup()
@@ -716,7 +727,7 @@ public class AreaGerente extends javax.swing.JFrame {
                         .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblVar4)
                             .addComponent(txtfVar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCancelarEst, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnConfirmarEst, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -737,7 +748,7 @@ public class AreaGerente extends javax.swing.JFrame {
         );
         pnlGerenteLayout.setVerticalGroup(
             pnlGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 526, Short.MAX_VALUE)
+            .addGap(0, 530, Short.MAX_VALUE)
             .addGroup(pnlGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlGerenteLayout.createSequentialGroup()
                     .addComponent(tabbedPnlGerente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -925,7 +936,24 @@ public class AreaGerente extends javax.swing.JFrame {
     private void btnConfirmarEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEstActionPerformed
         rowClick = -1;
         
-        if(action.equals("new") || action.equals("edit")) {
+        if(action.equals("delete")){
+            String prodType = (String) cmbTipoProd.getSelectedItem();
+            
+            if (prodType.equals("Filme")){
+                Estoque.getListaFilmes().remove(selectedProdInd);
+            } else if (prodType.equals("Música")){
+                Estoque.getListaMusicas().remove(selectedProdInd);
+            } else if (prodType.equals("Tabuleiro")){
+                Estoque.getListaTabuleiros().remove(selectedProdInd);
+            } else if (prodType.equals("Videogame")){
+                Estoque.getListaVideogames().remove(selectedProdInd);
+            } 
+            
+            Estoque.reescreverEstoque();
+            updateProdList();
+            
+            clearFields();
+        } else if(action.equals("new") || action.equals("edit")) {
             int codigo = Integer.parseInt(txtfCodigoProd.getText());
             String faixaEtaria = txtfFaixaEtaria.getText();
             String preco = txtfPreco.getText();
@@ -993,7 +1021,6 @@ public class AreaGerente extends javax.swing.JFrame {
                             Estoque.addTabuleiro(newTabuleiro);
                             Estoque.salvarProduto(newTabuleiro);
                         }
-                        
                     }
                 } else if (prodType.equals("Videogame")){
                     String genero = txtfVar1.getText();
@@ -1019,23 +1046,30 @@ public class AreaGerente extends javax.swing.JFrame {
                 if(ok){
                     cont++;
                     Estoque.setCont(cont);
+                    Estoque.reescreverEstoque();
 
                     updateProdList();
 
                     disableBaseFields();
                     clearFields();
 
-                    JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso.");
+                    switch(action){
+                        case "new":
+                            JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso.");
+                            break;
+                        case "edit":
+                            JOptionPane.showMessageDialog(null, "Produto editado com sucesso.");
+                            break;
+                        case "delete":
+                            JOptionPane.showMessageDialog(null, "Produto deletado com sucesso.");
+                            break;
+                    }
                 }
             }
-        } else if (action.equals("edit")){
-            
-            
-            Estoque.reescreverEstoque();
-            updateProdList();
         }
         
         action = "confirm";
+        cont = Estoque.getCont()+1;
     }//GEN-LAST:event_btnConfirmarEstActionPerformed
 
     private void btnCancelarEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEstActionPerformed
@@ -1114,7 +1148,7 @@ public class AreaGerente extends javax.swing.JFrame {
                 txtfVar3.setText(Integer.toString(((Videogames) selectedProd).getNumJogadores()));
                 txtfVar4.setText(((Videogames) selectedProd).getPlataforma());
             }
-            if(action.equals("confirm") || action.equals("cancel")){
+            if(action.equals("confirm") || action.equals("cancel") || action.equals("delete")){
                 disableBaseFields();
             
                 txtfVar1.setEnabled(false);
@@ -1122,7 +1156,9 @@ public class AreaGerente extends javax.swing.JFrame {
                 txtfVar3.setEnabled(false);
                 txtfVar4.setEnabled(false);
                 
-                btnConfirmarEst.setEnabled(false);
+                if(!action.equals("delete")){
+                    btnConfirmarEst.setEnabled(false);
+                }
             } else {
                 enableBaseFields();
             }
@@ -1243,6 +1279,26 @@ public class AreaGerente extends javax.swing.JFrame {
         disableEquipe();
     }//GEN-LAST:event_btnCancelarEqActionPerformed
 
+    private void btnEditarProd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProd1ActionPerformed
+        action = "delete";
+        
+        if (rowClick >= 0 && rowClick < allProducts.size()){
+            //cmbTipoProd.setSelectedItem(cmbTipoProd.getSelectedItem()); //caso o usuário clique no botão após escolher um produto reseta a combo box para os campos específicos ativarem
+            
+            Produtos selectedProd = allProducts.get(rowClick);
+            
+            txtfCodigoProd.setText(Integer.toString(selectedProd.getCodigoProd()));
+            
+            //enableBaseFields();
+            
+            btnConfirmarEst.setEnabled(true);
+        } else {
+            txtfCodigoProd.setText("");
+            disableBaseFields();
+        }
+        btnCancelarEst.setEnabled(true);
+    }//GEN-LAST:event_btnEditarProd1ActionPerformed
+
     public void disableBaseFields(){
         cmbTipoProd.setEnabled(false);
         checkAlugado.setEnabled(false);
@@ -1349,6 +1405,7 @@ public class AreaGerente extends javax.swing.JFrame {
     private javax.swing.JButton btnConfirmarEst;
     private javax.swing.JButton btnEditarEq;
     private javax.swing.JButton btnEditarProd;
+    private javax.swing.JButton btnEditarProd1;
     private javax.swing.JButton btnNovoFunc;
     private javax.swing.JButton btnNovoProd;
     private javax.swing.JButton btnPesquisarEq;

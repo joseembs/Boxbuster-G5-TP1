@@ -148,6 +148,8 @@ public class Estoque {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+        Estoque.loadEstoque(); // mantém tudo sincronizado
     }
 
     static public ArrayList<String> lerEstoque() {

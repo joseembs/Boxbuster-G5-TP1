@@ -4,48 +4,61 @@
  */
 package boxbuster;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author hsaless
  */
 public class Pedido {
-    private int codigoPedido;
-    private Cliente cliente;
-    private Caixa caixa;
+    static private int codigoPedido;
+    static private Cliente cliente;
+    static private Caixa caixa;
+    
+    static private ArrayList<Produtos> pedidoAtual = new ArrayList<>(); 
 
     public Pedido() {
     }
 
     public Pedido(int codigoPedido, Cliente cliente, Caixa caixa) {
-        this.codigoPedido = codigoPedido;
-        this.cliente = cliente;
-        this.caixa = caixa;
+        Pedido.codigoPedido = codigoPedido;
+        Pedido.cliente = cliente;
+        Pedido.caixa = caixa;
     }
 
-    public int getCodigoPedido() {
+    public static int getCodigoPedido() {
         return codigoPedido;
     }
 
-    public void setCodigoPedido(int codigoPedido) {
-        this.codigoPedido = codigoPedido;
+    public static void setCodigoPedido(int codigoPedido) {
+        Pedido.codigoPedido = codigoPedido;
     }
 
-    public Cliente getCliente() {
+    public static Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public static void setCliente(Cliente cliente) {
+        Pedido.cliente = cliente;
     }
 
-    public Caixa getCaixa() {
+    public static Caixa getCaixa() {
         return caixa;
     }
 
-    public void setCaixa(Caixa caixa) {
-        this.caixa = caixa;
+    public static void setCaixa(Caixa caixa) {
+        Pedido.caixa = caixa;
+    }
+
+    public static ArrayList<Produtos> getPedidoAtual() {
+        return pedidoAtual;
+    }
+
+    public static void setPedidoAtual(ArrayList<Produtos> pedidoAtual) {
+        Pedido.pedidoAtual = pedidoAtual;
     }
     
-    
-    
+    public static void addProduto(Produtos produto){
+        Pedido.pedidoAtual.add(produto);
+    }
 }
