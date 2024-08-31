@@ -1,4 +1,4 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
@@ -12,5 +12,5 @@ import java.util.ArrayList;
  */
 public interface BancoDeDados {
     public ArrayList<String> lerPessoas();
-    public String buscarPessoa(String busca);
+    public ArrayList<String> buscarPessoa(String busca);
 }
