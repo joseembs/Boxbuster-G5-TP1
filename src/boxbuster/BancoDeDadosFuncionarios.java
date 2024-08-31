@@ -53,7 +53,7 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
         int[] ans = {caixas, gerentes};
         return ans;
     }
-
+    
     @Override
     public ArrayList<String> lerPessoas() {
         ArrayList<String> pessoas = new ArrayList<>();
@@ -69,18 +69,21 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
     }
     
     @Override
-    public String buscarPessoa(String busca) {
+    public ArrayList<String> buscarPessoa(String busca) {
+        ArrayList<String> ans = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;
             while ((linha = br.readLine()) != null) {
                 if (linha.contains(busca)) {
-                    return linha;
+                    for(String i : linha.split(" ")){
+                        ans.add(i);
+                    }
+                    return ans;
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return "Pessoa não encontrada"; 
+        return ans;
     }
 }
