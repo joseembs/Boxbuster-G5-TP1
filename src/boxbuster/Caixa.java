@@ -60,10 +60,10 @@ public class Caixa extends Funcionario {
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
-       
+    
     @Override
     public String toString() {
         return super.toString() + " Caixa " + "Gerenciado por " + gerente.getNome();
     }
-    
+
 }

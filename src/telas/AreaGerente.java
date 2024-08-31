@@ -4,6 +4,7 @@
  */
 package telas;
 
+import boxbuster.BancoDeDadosFuncionarios;
 import boxbuster.Estoque;
 import boxbuster.Filmes;
 import boxbuster.Musicas;
@@ -23,7 +24,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AreaGerente extends javax.swing.JFrame {
     
-    int cont = Estoque.getCont()+1;
+    BancoDeDadosFuncionarios bdFunc = new BancoDeDadosFuncionarios("funcionarios.txt");
+
+    static int cont = 1;
     
     private ArrayList<Produtos> allProducts = new ArrayList();
                 
@@ -46,6 +49,10 @@ public class AreaGerente extends javax.swing.JFrame {
         cont = Estoque.getCont()+1;
         
         updateProdList();
+        
+        int[] total = bdFunc.quantidades();
+        lblTotalCaixas.setText("Total de caixas: " + total[0]);
+        lblTotalGerentes.setText("Total de gerentes: " + total[1]);
     }
 
     private void updateProdList() {
@@ -68,7 +75,7 @@ public class AreaGerente extends javax.swing.JFrame {
         
         tableProdutos.setModel(tabela);        
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
