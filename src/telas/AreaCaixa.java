@@ -109,6 +109,11 @@ public class AreaCaixa extends javax.swing.JFrame {
         });
 
         btnPesquisar.setText("Pesquisar Pedido");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         tablePedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -251,6 +256,10 @@ public class AreaCaixa extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -287,6 +296,25 @@ public class AreaCaixa extends javax.swing.JFrame {
         });
     }
 
+    public void alterarNome(String novoNome) {
+        lblNome.setText("Nome: " + novoNome);
+    }
+     
+    public void alterarCPF(String novoCPF) {
+        lblCPF.setText("CPF: " + novoCPF);
+    }
+    
+    public void alterarDataNascimento(String novaDataNascimento) {
+        lblDataNasc.setText("Data de nasc: " + novaDataNascimento);
+    }
+    
+    public void alterarIdade(String novaIdade){
+        lblIdade.setText("Idade: " + novaIdade);
+    }
+    
+    public void alterarCodigo(String novoCodigo){
+        lblCodigo.setText("Código: " + novoCodigo);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnVoltar;

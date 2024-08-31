@@ -4,11 +4,21 @@
  */
 package telas;
 
+import boxbuster.BancoDeDadosFuncionarios;
 import boxbuster.Filmes;
 import boxbuster.Musicas;
 import boxbuster.Tabuleiros;
 import boxbuster.Videogames;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,11 +26,12 @@ import java.util.ArrayList;
  */
 public class LoginFuncionario extends javax.swing.JFrame {
 
+    BancoDeDadosFuncionarios bdFunc = new BancoDeDadosFuncionarios("funcionarios.txt");
     private ArrayList<Filmes> listFilmes = new ArrayList();
     private ArrayList<Musicas> listMusicas = new ArrayList();
     private ArrayList<Tabuleiros> listTabuleiros = new ArrayList();
     private ArrayList<Videogames> listVideogames = new ArrayList();
-    
+
     /**
      * Creates new form CadastroFuncionario
      */
@@ -64,6 +75,11 @@ public class LoginFuncionario extends javax.swing.JFrame {
         lblTipo.setText("Tipo:");
 
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Caixa", "Gerente" }));
+        cmbTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTipoActionPerformed(evt);
+            }
+        });
 
         lblCodigo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCodigo.setText("Código:");
@@ -197,8 +213,65 @@ public class LoginFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_txtfSenhaActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        new AreaGerente().setVisible(true);
-        this.setVisible(false);
+        if(txtfCodigo.getText().equals("")|| txtfSenha.getText().equals("")||cmbTipo.getSelectedIndex()==0){
+                JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            }
+        else{
+            String codigo = txtfCodigo.getText();
+            String senha = txtfSenha.getText();
+            int t = cmbTipo.getSelectedIndex();
+            String tipo;
+            if(t==1){
+                tipo = "Caixa";
+            }
+            else{
+                tipo = "Gerente";
+            }
+
+            String pessoa = bdFunc.buscarPessoa(" " + codigo + " ");
+            if(pessoa.equals("Pessoa não encontrada")){
+                JOptionPane.showMessageDialog(null, "Não existe funcionário com este código.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            }
+            else if(!pessoa.contains(" " + codigo + " " + tipo)){
+                //JOptionPane.showMessageDialog(null, "O tipo está incorreto.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, pessoa, "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            }
+            else if(!pessoa.contains(" " + senha + " " + codigo + " " + tipo)){
+                JOptionPane.showMessageDialog(null, "A senha está incorreta.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            }
+            else{
+                if(tipo.equals("Caixa")){
+                    String[] palavras = pessoa.split(" ");
+                    AreaCaixa telaCaixa = new AreaCaixa();
+                    
+                    String nome = palavras[0], CPF = palavras[1], dataString = palavras[2], cod = palavras[4];
+                    
+                    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                    Date data = null;
+                    try {
+                        data = formato.parse(dataString);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    LocalDate dataAtual = LocalDate.now();
+                    LocalDate dataNascimentoLocal = data.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    int idade = Period.between(dataNascimentoLocal, dataAtual).getYears();
+                    String idadeString = String.valueOf(idade);
+                    
+                    telaCaixa.alterarNome(nome);
+                    telaCaixa.alterarCPF(CPF);
+                    telaCaixa.alterarDataNascimento(dataString);
+                    telaCaixa.alterarIdade(idadeString);
+                    telaCaixa.alterarCodigo(codigo);
+                    telaCaixa.setVisible(true);
+                }
+                else{
+                    new AreaGerente().setVisible(true);
+                }
+                this.setVisible(false);
+            }
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void menuVoltarLoginFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarLoginFuncActionPerformed
@@ -214,6 +287,10 @@ public class LoginFuncionario extends javax.swing.JFrame {
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void cmbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTipoActionPerformed
 
     /**
      * @param args the command line arguments
