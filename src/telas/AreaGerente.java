@@ -913,7 +913,9 @@ public class AreaGerente extends javax.swing.JFrame {
             txtfVar3.setEnabled(false);
             txtfVar4.setEnabled(false);
 
-            btnConfirmarEst.setEnabled(false);
+            if(!action.equals("search")){
+                btnConfirmarEst.setEnabled(false);
+            }
         } 
     }//GEN-LAST:event_cmbTipoProdActionPerformed
 
@@ -953,12 +955,74 @@ public class AreaGerente extends javax.swing.JFrame {
             updateProdList();
             
             clearFields();
+            
+        } else if(action == "search"){
+            tableProdutos.removeAll();
+            DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Código", "Tipo", "Nome", "Faixa", "Ano", "Preço", "Alugado"}, 0);
+
+            String tipo = (String) cmbTipoProd.getSelectedItem(),
+                    codigo = txtfCodigoProd.getText(),
+                    faixaEtaria = txtfFaixaEtaria.getText(),
+                    preco = txtfPreco.getText(),
+                    nome = txtfNome.getText(),
+                    ano = txtfAno.getText(),
+                    alugado = String.valueOf(checkAlugado.isSelected()),
+                    var1 = txtfVar1.getText(),
+                    var2 = txtfVar2.getText(),
+                    var3 = txtfVar3.getText(),
+                    var4 = txtfVar4.getText();
+            if(tipo.equals("Selecione")){
+                tipo = "";
+            }
+            for(Produtos prod : allProducts){
+                
+                String[] info = prod.toString().split("_");
+                
+                boolean ok3 = true;
+                boolean ok4 = true;
+                
+                if(info.length >= 10 && !info[9].contains(var3)){
+                    ok3 = false;
+                }
+                if(info.length >= 11 && !info[10].contains(var4)){
+                    ok4 = false;
+                }
+                
+                if(info[0].contains(tipo) &&
+                        info[1].contains(nome) &&
+                        info[2].contains(preco) &&
+                        info[3].contains(ano) &&
+                        info[4].contains(codigo) &&
+                        info[5].contains(faixaEtaria) &&
+                        info[6].contains(alugado) &&
+                        info[7].contains(var1) &&
+                        info[8].contains(var2) &&
+                        ok3 && ok4){
+                    System.out.println("achou");
+                    
+
+                    Object linha[] = new Object[]{
+                    info[4],
+                    info[0]+"s",
+                    info[1],
+                    info[5],
+                    info[3],
+                    info[2],
+                    info[6]};
+
+                    tabela.addRow(linha);
+                    System.out.println("colocou linha");
+                    
+                }
+            }
+            tableProdutos.setModel(tabela);
+    
         } else if(action.equals("new") || action.equals("edit")) {
             int codigo = Integer.parseInt(txtfCodigoProd.getText());
-            String faixaEtaria = txtfFaixaEtaria.getText();
-            String preco = txtfPreco.getText();
-            String nome = txtfNome.getText();
-            String ano = txtfAno.getText();
+            String faixaEtaria = txtfFaixaEtaria.getText(),
+                    preco = txtfPreco.getText(),
+                    nome = txtfNome.getText(),
+                    ano = txtfAno.getText();
             boolean alugado = checkAlugado.isSelected();
 
             String prodType = (String) cmbTipoProd.getSelectedItem();
@@ -970,9 +1034,9 @@ public class AreaGerente extends javax.swing.JFrame {
                 ok = false;
             } else {
                 if (prodType.equals("Filme")){
-                    String genero = txtfVar1.getText();
-                    String estudio = txtfVar2.getText();
-                    String diretor = txtfVar3.getText();
+                    String genero = txtfVar1.getText(),
+                            estudio = txtfVar2.getText(),
+                            diretor = txtfVar3.getText();
 
                     if(genero.isEmpty() || estudio.isEmpty() || diretor.isEmpty()){
                         JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
@@ -988,8 +1052,8 @@ public class AreaGerente extends javax.swing.JFrame {
                         }
                     }
                 } else if (prodType.equals("Música")){
-                    String estilo = txtfVar1.getText();
-                    String autor = txtfVar2.getText();
+                    String estilo = txtfVar1.getText(),
+                            autor = txtfVar2.getText();
 
                     if(estilo.isEmpty() || autor.isEmpty()){
                         JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
@@ -1005,9 +1069,9 @@ public class AreaGerente extends javax.swing.JFrame {
                         }
                     }
                 } else if (prodType.equals("Tabuleiro")){
-                    String tipo = txtfVar1.getText();
-                    String marca = txtfVar2.getText();
-                    String numJogadores = txtfVar3.getText();
+                    String tipo = txtfVar1.getText(),
+                            marca = txtfVar2.getText(),
+                            numJogadores = txtfVar3.getText();
 
                     if(tipo.isEmpty() || marca.isEmpty() || numJogadores.isEmpty()){
                         JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
@@ -1023,10 +1087,10 @@ public class AreaGerente extends javax.swing.JFrame {
                         }
                     }
                 } else if (prodType.equals("Videogame")){
-                    String genero = txtfVar1.getText();
-                    String estudio = txtfVar2.getText();
-                    String numJogadores = txtfVar3.getText();
-                    String plataforma = txtfVar4.getText();
+                    String genero = txtfVar1.getText(),
+                            estudio = txtfVar2.getText(),
+                            numJogadores = txtfVar3.getText(),
+                            plataforma = txtfVar4.getText();
 
                     if(genero.isEmpty() || estudio.isEmpty() || numJogadores.isEmpty() || plataforma.isEmpty()){
                         JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
@@ -1068,7 +1132,9 @@ public class AreaGerente extends javax.swing.JFrame {
             }
         }
         
-        action = "confirm";
+        if(!action.equals("search")){
+            action = "confirm";
+        }
         cont = Estoque.getCont()+1;
     }//GEN-LAST:event_btnConfirmarEstActionPerformed
 
@@ -1079,6 +1145,8 @@ public class AreaGerente extends javax.swing.JFrame {
         
         disableBaseFields();
         clearFields();
+        
+        updateProdList();
     }//GEN-LAST:event_btnCancelarEstActionPerformed
 
     private void btnPesquisarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarProdActionPerformed
@@ -1095,6 +1163,7 @@ public class AreaGerente extends javax.swing.JFrame {
         }
         
         enableBaseFields();
+        btnConfirmarEst.setEnabled(true);
     }//GEN-LAST:event_btnPesquisarProdActionPerformed
 
     private void tableProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProdutosMouseClicked
@@ -1197,7 +1266,7 @@ public class AreaGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoFuncActionPerformed
 
     private void btnConfirmarEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEqActionPerformed
-        if(action == "new"){
+        if("new".equals(action)){
             if(txtfCodigoEq.getText().equals("")|| txtfNomeEq.getText().equals("")|| txtfDataEq.getText().equals("")||
                     txtfCPFEq.getText().equals("")||cmbTipoEq.getSelectedIndex()==0||(cmbTipoEq.getSelectedIndex()==1 && cmbGerenteEq.getSelectedIndex()==0)){
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
@@ -1208,7 +1277,7 @@ public class AreaGerente extends javax.swing.JFrame {
             }
             updateFuncionarios();
         }
-        else if(action == "edit"){
+        else if("edit".equals(action)){
             int i = tableEquipe.getSelectedRow();
         
             if(i >= 0 && i < totalFunc) {
@@ -1216,7 +1285,7 @@ public class AreaGerente extends javax.swing.JFrame {
             }
             updateFuncionarios();
         }
-        else if(action == "search"){
+        else if("search".equals(action)){
             funcionarios = bdFunc.lerPessoas();
             tableEquipe.removeAll();
             DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Nome", "CPF", "Data de Nascimento", "Código", "Cargo", "Gerente"}, 0);
