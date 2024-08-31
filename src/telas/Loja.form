@@ -98,7 +98,7 @@
                   <Component id="btnAddCartLoja" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="lblCartLoja" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="btnFinalizarLoja" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -232,7 +232,7 @@
                                       <Component id="btnAlugarMv1" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnDetalhesMv1" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="97" max="32767" attributes="0"/>
+                                  <EmptySpace pref="193" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -261,11 +261,6 @@
                       </Layout>
                       <SubComponents>
                         <Component class="javax.swing.JLabel" name="imgMv1">
-                          <Properties>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/imagens/filmes/MissingPoster.png"/>
-                            </Property>
-                          </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="nomeMv1">
                           <Properties>
@@ -288,7 +283,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarMv1">
@@ -299,6 +294,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMv1ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMv1">
                           <Properties>
@@ -332,7 +330,7 @@
                                       <Component id="btnAlugarMv2" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnDetalhesMv2" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="97" max="32767" attributes="0"/>
+                                  <EmptySpace pref="193" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -354,18 +352,13 @@
                                           <Component id="btnDetalhesMv2" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                                  <EmptySpace pref="20" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
                         <Component class="javax.swing.JLabel" name="imgMv2">
-                          <Properties>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/imagens/filmes/MissingPoster.png"/>
-                            </Property>
-                          </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="nomeMv2">
                           <Properties>
@@ -388,7 +381,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarMv2">
@@ -399,6 +392,9 @@
                             <Property name="text" type="java.lang.String" value="Alugar"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMv2ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMv2">
                           <Properties>
@@ -432,7 +428,7 @@
                                       <Component id="btnAlugarMv3" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnDetalhesMv3" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="97" max="32767" attributes="0"/>
+                                  <EmptySpace pref="193" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -461,11 +457,6 @@
                       </Layout>
                       <SubComponents>
                         <Component class="javax.swing.JLabel" name="imgMv3">
-                          <Properties>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/imagens/filmes/MissingPoster.png"/>
-                            </Property>
-                          </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="nomeMv3">
                           <Properties>
@@ -488,7 +479,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarMv3">
@@ -499,6 +490,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMv3ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMv3">
                           <Properties>
@@ -532,7 +526,7 @@
                                       <Component id="btnAlugarMv4" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnDetalhesMv4" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="97" max="32767" attributes="0"/>
+                                  <EmptySpace pref="193" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -554,18 +548,13 @@
                                           <Component id="btnDetalhesMv4" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                                  <EmptySpace pref="20" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
                         <Component class="javax.swing.JLabel" name="imgMv4">
-                          <Properties>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/imagens/filmes/MissingPoster.png"/>
-                            </Property>
-                          </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="nomeMv4">
                           <Properties>
@@ -599,6 +588,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMv4ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMv4">
                           <Properties>
@@ -632,7 +624,7 @@
                                       <Component id="btnAlugarMv5" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnDetalhesMv5" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="97" max="32767" attributes="0"/>
+                                  <EmptySpace pref="193" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -654,18 +646,13 @@
                                           <Component id="btnDetalhesMv5" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                                  <EmptySpace pref="20" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
                         <Component class="javax.swing.JLabel" name="imgMv5">
-                          <Properties>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/imagens/filmes/MissingPoster.png"/>
-                            </Property>
-                          </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="nomeMv5">
                           <Properties>
@@ -688,7 +675,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarMv5">
@@ -699,6 +686,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMv5ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMv5">
                           <Properties>
@@ -732,7 +722,7 @@
                                       <Component id="btnAlugarMv6" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnDetalhesMv6" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="97" max="32767" attributes="0"/>
+                                  <EmptySpace pref="193" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -754,18 +744,13 @@
                                           <Component id="btnDetalhesMv6" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                                  <EmptySpace pref="20" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
                         <Component class="javax.swing.JLabel" name="imgMv6">
-                          <Properties>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/imagens/filmes/MissingPoster.png"/>
-                            </Property>
-                          </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="nomeMv6">
                           <Properties>
@@ -788,7 +773,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarMv6">
@@ -799,6 +784,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMv6ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMv6">
                           <Properties>
@@ -832,7 +820,7 @@
                                       <Component id="btnAlugarMv7" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnDetalhesMv7" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="97" max="32767" attributes="0"/>
+                                  <EmptySpace pref="193" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -854,18 +842,13 @@
                                           <Component id="btnDetalhesMv7" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                                  <EmptySpace pref="20" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
                         <Component class="javax.swing.JLabel" name="imgMv7">
-                          <Properties>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/imagens/filmes/MissingPoster.png"/>
-                            </Property>
-                          </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="nomeMv7">
                           <Properties>
@@ -888,7 +871,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarMv7">
@@ -899,6 +882,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMv7ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMv7">
                           <Properties>
@@ -932,7 +918,7 @@
                                       <Component id="btnAlugarMv8" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnDetalhesMv8" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="97" max="32767" attributes="0"/>
+                                  <EmptySpace pref="193" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -954,18 +940,13 @@
                                           <Component id="btnDetalhesMv8" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                                  <EmptySpace pref="20" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
                         <Component class="javax.swing.JLabel" name="imgMv8">
-                          <Properties>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/imagens/filmes/MissingPoster.png"/>
-                            </Property>
-                          </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="nomeMv8">
                           <Properties>
@@ -988,7 +969,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarMv8">
@@ -999,6 +980,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMv8ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMv8">
                           <Properties>
@@ -1032,7 +1016,7 @@
                                       <Component id="btnAlugarMv9" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnDetalhesMv9" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="97" max="32767" attributes="0"/>
+                                  <EmptySpace pref="193" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1054,18 +1038,13 @@
                                           <Component id="btnDetalhesMv9" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                                  <EmptySpace pref="20" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
                         <Component class="javax.swing.JLabel" name="imgMv9">
-                          <Properties>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/imagens/filmes/MissingPoster.png"/>
-                            </Property>
-                          </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="nomeMv9">
                           <Properties>
@@ -1088,7 +1067,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarMv9">
@@ -1099,6 +1078,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMv9ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMv9">
                           <Properties>
@@ -1132,7 +1114,7 @@
                                       <Component id="btnAlugarMv10" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnDetalhesMv10" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="97" max="32767" attributes="0"/>
+                                  <EmptySpace pref="193" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1154,18 +1136,13 @@
                                           <Component id="btnDetalhesMv10" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                                  <EmptySpace pref="20" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
                         <Component class="javax.swing.JLabel" name="imgMv10">
-                          <Properties>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/imagens/filmes/MissingPoster.png"/>
-                            </Property>
-                          </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="nomeMv10">
                           <Properties>
@@ -1199,6 +1176,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMv10ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMv10">
                           <Properties>
@@ -1370,7 +1350,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                             <Property name="toolTipText" type="java.lang.String" value=""/>
                           </Properties>
                         </Component>
@@ -1382,6 +1362,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMus1ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMus1">
                           <Properties>
@@ -1466,7 +1449,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarMus2">
@@ -1477,6 +1460,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMus2ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMus2">
                           <Properties>
@@ -1561,7 +1547,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarMus3">
@@ -1572,6 +1558,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMus3ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMus3">
                           <Properties>
@@ -1656,7 +1645,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarMus4">
@@ -1667,6 +1656,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMus4ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMus4">
                           <Properties>
@@ -1751,7 +1743,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarMus5">
@@ -1762,6 +1754,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMus5ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMus5">
                           <Properties>
@@ -1846,7 +1841,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarMus6">
@@ -1857,6 +1852,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMus6ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMus6">
                           <Properties>
@@ -1941,7 +1939,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarMus7">
@@ -1952,6 +1950,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMus7ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMus7">
                           <Properties>
@@ -2036,7 +2037,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarMus8">
@@ -2047,6 +2048,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMus8ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMus8">
                           <Properties>
@@ -2132,7 +2136,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarMus9">
@@ -2143,6 +2147,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMus9ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMus9">
                           <Properties>
@@ -2227,7 +2234,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarMus10">
@@ -2238,6 +2245,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarMus10ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesMus10">
                           <Properties>
@@ -2395,7 +2405,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarTab1">
@@ -2406,6 +2416,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarTab1ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesTab1">
                           <Properties>
@@ -2490,7 +2503,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarTab2">
@@ -2501,6 +2514,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarTab2ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesTab2">
                           <Properties>
@@ -2585,7 +2601,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarTab3">
@@ -2596,6 +2612,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarTab3ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesTab3">
                           <Properties>
@@ -2680,7 +2699,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarTab4">
@@ -2778,7 +2797,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarTab5">
@@ -2887,6 +2906,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarTab6ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesTab6">
                           <Properties>
@@ -3061,7 +3083,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarVid1">
@@ -3072,6 +3094,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarVid1ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesVid1">
                           <Properties>
@@ -3156,7 +3181,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarVid2">
@@ -3254,7 +3279,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarVid3">
@@ -3265,6 +3290,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarVid3ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesVid3">
                           <Properties>
@@ -3349,7 +3377,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarVid4">
@@ -3360,6 +3388,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarVid4ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesVid4">
                           <Properties>
@@ -3444,7 +3475,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarVid5">
@@ -3455,6 +3486,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarVid5ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesVid5">
                           <Properties>
@@ -3539,7 +3573,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarVid6">
@@ -3550,6 +3584,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarVid6ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesVid6">
                           <Properties>
@@ -3634,7 +3671,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarVid7">
@@ -3645,6 +3682,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarVid7ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesVid7">
                           <Properties>
@@ -3729,7 +3769,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarVid8">
@@ -3740,6 +3780,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarVid8ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesVid8">
                           <Properties>
@@ -3824,7 +3867,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarVid9">
@@ -3835,6 +3878,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarVid9ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesVid9">
                           <Properties>
@@ -3919,7 +3965,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="R$ --,--"/>
+                            <Property name="text" type="java.lang.String" value="R$ --.--"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="btnAlugarVid10">
@@ -3930,6 +3976,9 @@
                             <Property name="text" type="java.lang.String" value="-----"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlugarVid10ActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnDetalhesVid10">
                           <Properties>
@@ -3966,12 +4015,15 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnAddCartLoja">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Adicionar itens ao carrinho"/>
+            <Property name="text" type="java.lang.String" value="Atualizar carrinho"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddCartLojaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblCartLoja">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Carrinho: 0 itens"/>
+            <Property name="text" type="java.lang.String" value="Carrinho: 0 itens - R$ 0,00"/>
           </Properties>
         </Component>
       </SubComponents>

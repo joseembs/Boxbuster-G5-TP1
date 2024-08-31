@@ -4,14 +4,14 @@ package boxbuster;
  *
  * @author joseembs
  */
-public class Musica extends Produtos{
+public class Musicas extends Produtos{
     private String estilo;
     private String autor;
     
-    public Musica() {
+    public Musicas() {
     }
 
-    public Musica(String nomeProd, double preco, int ano, int codigoProd, int faixaEtaria, boolean alugado, String estilo, String autor){
+    public Musicas(String nomeProd, double preco, int ano, int codigoProd, String faixaEtaria, boolean alugado, String estilo, String autor){
         super(nomeProd, preco, ano, codigoProd, faixaEtaria, alugado);
         this.estilo = estilo;
         this.autor = autor;
@@ -35,6 +35,6 @@ public class Musica extends Produtos{
     
     @Override
     public String toString() {
-        return "Musica " + super.toString() + " " + estilo + " " + autor;
+        return "Musica_" + super.toString() + "_" + estilo + "_" + autor;
     }
 }

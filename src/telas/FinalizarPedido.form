@@ -450,9 +450,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnPronto">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Pronto"/>
+            <Property name="text" type="java.lang.String" value="Confirmar"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProntoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="separator3Cart">
         </Component>
@@ -543,7 +546,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Valor total: R$ 00,00"/>
+            <Property name="text" type="java.lang.String" value="Valor total: R$ --.--"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnVoltar">

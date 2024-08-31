@@ -24,14 +24,14 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
     }
 
     public void adicionarPessoa(Funcionario func) {
-    try (FileWriter fw = new FileWriter(arquivo, true);
-         BufferedWriter bw = new BufferedWriter(fw);
-         PrintWriter out = new PrintWriter(bw)) {
-        out.println(func.toString());
-        out.println("-------------------------------------------"); 
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+        try (FileWriter fw = new FileWriter(arquivo, true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+            out.println(func.toString());
+            out.println("-------------------------------------------"); 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -50,17 +50,17 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
     
     @Override
     public String buscarPessoa(String busca) {
-    try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
-        String linha;
-        while ((linha = br.readLine()) != null) {
-            if (linha.contains(busca)) {
-                return linha;
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                if (linha.contains(busca)) {
+                    return linha;
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-    
-    return "Pessoa não encontrada"; 
+
+        return "Pessoa não encontrada"; 
     }
 }

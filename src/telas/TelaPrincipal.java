@@ -5,8 +5,9 @@
 package telas;
 
 import boxbuster.Filmes;
-import boxbuster.Musica;
-import boxbuster.Tabuleiro;
+import boxbuster.Musicas;
+import boxbuster.Produtos;
+import boxbuster.Tabuleiros;
 import boxbuster.Videogames;
 import java.util.ArrayList;
 

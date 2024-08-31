@@ -6,14 +6,14 @@ import boxbuster.Jogos;
  *
  * @author joseembs
  */
-public class Tabuleiro extends Jogos{
+public class Tabuleiros extends Jogos{
     private String tipo;
     private String marca;
     
-    public Tabuleiro() {
+    public Tabuleiros() {
     }
 
-    public Tabuleiro(String nomeProd, double preco, int ano, int codigoProd, int faixaEtaria, boolean alugado, int numJogadores, String tipo, String marca) {
+    public Tabuleiros(String nomeProd, double preco, int ano, int codigoProd, String faixaEtaria, boolean alugado, int numJogadores, String tipo, String marca) {
         super(nomeProd, preco, ano, codigoProd, faixaEtaria, alugado, numJogadores);
         this.tipo = tipo;
         this.marca = marca;
@@ -37,7 +37,7 @@ public class Tabuleiro extends Jogos{
     
     @Override
     public String toString() {
-        return "Tabuleiro " + super.toString() + " " + tipo + " " + marca;
+        return "Tabuleiro_" + super.toString() + "_" + tipo + "_" + marca;
     }
     
 }

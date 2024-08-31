@@ -6,9 +6,9 @@ package telas;
 
 import boxbuster.Estoque;
 import boxbuster.Filmes;
-import boxbuster.Musica;
+import boxbuster.Musicas;
 import boxbuster.Produtos;
-import boxbuster.Tabuleiro;
+import boxbuster.Tabuleiros;
 import boxbuster.Videogames;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,30 +23,33 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AreaGerente extends javax.swing.JFrame {
     
-    static int cont = 1;
+    int cont = Estoque.getCont()+1;
     
     private ArrayList<Produtos> allProducts = new ArrayList();
-    private ArrayList<Filmes> tempFilmes = Estoque.getListaFilmes();
-    private ArrayList<Musica> tempMusicas = Estoque.getListaMusicas();
-    private ArrayList<Tabuleiro> tempTabuleiros = Estoque.getListaTabuleiros();
-    private ArrayList<Videogames> tempVideogames = Estoque.getListaVideogames();
-    
+                
     boolean ok = false;
     
+    String action = "cancel";
+    
+    int rowClick = -1;
+    int selectedProdInd;
+
+    /**
+     * Creates new form AreaGerente
+     */
+    public AreaGerente() {
+        setLocationRelativeTo(null);
+        
+        initComponents();
+        
+        Estoque.loadEstoque();
+        cont = Estoque.getCont()+1;
+        
+        updateProdList();
+    }
+
     private void updateProdList() {
-        allProducts = new ArrayList();
-        
-        allProducts.addAll(tempFilmes);
-        allProducts.addAll(tempMusicas);
-        allProducts.addAll(tempTabuleiros);
-        allProducts.addAll(tempVideogames);
-        
-        Collections.sort(allProducts, new Comparator<Produtos>(){
-            public int compare (Produtos p1, Produtos p2) {
-                int comp = p1.getCodigoProd() - p2.getCodigoProd();
-                return comp;
-            }
-        });
+        allProducts = Estoque.atualizarLista();
         
         DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Código", "Tipo", "Nome", "Faixa", "Ano", "Preço", "Alugado"}, 0);
 
@@ -63,27 +66,9 @@ public class AreaGerente extends javax.swing.JFrame {
             tabela.addRow(linha);
         }
         
-        tableProdutos.setModel(tabela);
-        
-        Estoque.setListaFilmes(tempFilmes);
-        Estoque.setListaMusicas(tempMusicas);
-        Estoque.setListaTabuleiros(tempTabuleiros);
-        Estoque.setListaVideogames(tempVideogames);
-        Estoque.setListaProdutos(allProducts);
-        
+        tableProdutos.setModel(tabela);        
     }
-
-    /**
-     * Creates new form AreaGerente
-     */
-    public AreaGerente() {
-        setLocationRelativeTo(null);
-        
-        initComponents();
-        
-        updateProdList();
-    }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -721,7 +706,9 @@ public class AreaGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtfPrecoActionPerformed
 
     private void btnNovoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoProdActionPerformed
-        cmbTipoProd.setSelectedItem(cmbTipoProd.getSelectedItem()); //caso o usuário clique no botão após escolher um produto
+        action = "new";
+        
+        cmbTipoProd.setSelectedItem(cmbTipoProd.getSelectedItem()); //caso o usuário clique no botão após escolher um produto reseta a combo box para os campos específicos ativarem
         
         enableBaseFields();
         txtfCodigoProd.setEnabled(false);
@@ -800,7 +787,7 @@ public class AreaGerente extends javax.swing.JFrame {
             txtfVar4.setText("");
         } else if (prodType.equals("Videogame")){
             lblVar1.setText("Gênero:");
-            lblVar2.setText("Estúdio:");
+            lblVar2.setText("Desenvolvedor:");
             lblVar3.setText("Nº de jogadores:");
             lblVar4.setText("Plataforma:");
             txtfVar1.setEnabled(true);
@@ -838,152 +825,231 @@ public class AreaGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtfVar4ActionPerformed
 
     private void btnConfirmarEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEstActionPerformed
-        //String codigo = txtfCodigo.getText();
-        int codigo = cont;
-        String faixaEtaria = txtfFaixaEtaria.getText();
-        String preco = txtfPreco.getText();
-        String nome = txtfNome.getText();
-        String ano = txtfAno.getText();
-        boolean alugado = checkAlugado.isSelected();
+        rowClick = -1;
         
-        String prodType = (String) cmbTipoProd.getSelectedItem();
-        
-        ok = true;
-        
-        if(faixaEtaria.isEmpty() || preco.isEmpty() || nome.isEmpty() || ano.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
-            ok = false;
-        } else {
-            if (prodType.equals("Filme")){
-                String genero = txtfVar1.getText();
-                String estudio = txtfVar2.getText();
-                String diretor = txtfVar3.getText();
-                
-                if(genero.isEmpty() || estudio.isEmpty() || diretor.isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
-                    ok = false;
-                } else {
-                    Filmes newFilme = new Filmes(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, Integer.parseInt(faixaEtaria), alugado, genero, estudio, diretor);
-                    
-                    tempFilmes.add(newFilme);
-                }
-            } else if (prodType.equals("Música")){
-                String estilo = txtfVar1.getText();
-                String autor = txtfVar2.getText();
-                
-                if(estilo.isEmpty() || autor.isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
-                    ok = false;
-                } else {
-                    Musica newMusica = new Musica(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, Integer.parseInt(faixaEtaria), alugado, estilo, autor);
-                    
-                    tempMusicas.add(newMusica);
-                }
-            } else if (prodType.equals("Tabuleiro")){
-                String tipo = txtfVar1.getText();
-                String marca = txtfVar2.getText();
-                String numJogadores = txtfVar3.getText();
+        if(action.equals("new") || action.equals("edit")) {
+            int codigo = Integer.parseInt(txtfCodigoProd.getText());
+            String faixaEtaria = txtfFaixaEtaria.getText();
+            String preco = txtfPreco.getText();
+            String nome = txtfNome.getText();
+            String ano = txtfAno.getText();
+            boolean alugado = checkAlugado.isSelected();
 
-                if(tipo.isEmpty() || marca.isEmpty() || numJogadores.isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
-                    ok = false;
-                } else {
-                    Tabuleiro newTabuleiro = new Tabuleiro(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, Integer.parseInt(faixaEtaria), alugado, Integer.parseInt(numJogadores), tipo, marca);
-                    
-                    tempTabuleiros.add(newTabuleiro);
-                }
-            } else if (prodType.equals("Videogame")){
-                String genero = txtfVar1.getText();
-                String estudio = txtfVar2.getText();
-                String numJogadores = txtfVar3.getText();
-                String plataforma = txtfVar4.getText();
+            String prodType = (String) cmbTipoProd.getSelectedItem();
 
-                if(genero.isEmpty() || estudio.isEmpty() || numJogadores.isEmpty() || plataforma.isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
-                    ok = false;
-                } else {
-                    Videogames newVideogame = new Videogames(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, Integer.parseInt(faixaEtaria), alugado, Integer.parseInt(numJogadores), genero, plataforma, estudio);
-                    
-                    tempVideogames.add(newVideogame);
+            ok = true;
+
+            if(faixaEtaria.isEmpty() || preco.isEmpty() || nome.isEmpty() || ano.isEmpty()){
+                JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
+                ok = false;
+            } else {
+                if (prodType.equals("Filme")){
+                    String genero = txtfVar1.getText();
+                    String estudio = txtfVar2.getText();
+                    String diretor = txtfVar3.getText();
+
+                    if(genero.isEmpty() || estudio.isEmpty() || diretor.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
+                        ok = false;
+                    } else {
+                        Filmes newFilme = new Filmes(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, alugado, genero, estudio, diretor);
+
+                        if(action.equals("edit")){
+                            Estoque.getListaFilmes().set(selectedProdInd, newFilme);
+                        } else if (action.equals("new")){
+                            Estoque.addFilme(newFilme);
+                            Estoque.salvarProduto(newFilme);
+                        }
+                    }
+                } else if (prodType.equals("Música")){
+                    String estilo = txtfVar1.getText();
+                    String autor = txtfVar2.getText();
+
+                    if(estilo.isEmpty() || autor.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
+                        ok = false;
+                    } else {
+                        Musicas newMusica = new Musicas(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, alugado, estilo, autor);
+
+                        if(action.equals("edit")){
+                            Estoque.getListaMusicas().set(selectedProdInd, newMusica);
+                        } else if (action.equals("new")){
+                            Estoque.addMusica(newMusica);
+                            Estoque.salvarProduto(newMusica);;
+                        }
+                    }
+                } else if (prodType.equals("Tabuleiro")){
+                    String tipo = txtfVar1.getText();
+                    String marca = txtfVar2.getText();
+                    String numJogadores = txtfVar3.getText();
+
+                    if(tipo.isEmpty() || marca.isEmpty() || numJogadores.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
+                        ok = false;
+                    } else {
+                        Tabuleiros newTabuleiro = new Tabuleiros(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, alugado, Integer.parseInt(numJogadores), tipo, marca);
+
+                        if(action.equals("edit")){
+                            Estoque.getListaTabuleiros().set(selectedProdInd, newTabuleiro);
+                        } else if (action.equals("new")){
+                            Estoque.addTabuleiro(newTabuleiro);
+                            Estoque.salvarProduto(newTabuleiro);
+                        }
+                        
+                    }
+                } else if (prodType.equals("Videogame")){
+                    String genero = txtfVar1.getText();
+                    String estudio = txtfVar2.getText();
+                    String numJogadores = txtfVar3.getText();
+                    String plataforma = txtfVar4.getText();
+
+                    if(genero.isEmpty() || estudio.isEmpty() || numJogadores.isEmpty() || plataforma.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
+                        ok = false;
+                    } else {
+                        Videogames newVideogame = new Videogames(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, alugado, Integer.parseInt(numJogadores), genero, plataforma, estudio);
+
+                        if(action.equals("edit")){
+                            Estoque.getListaVideogames().set(selectedProdInd, newVideogame);
+                        } else if (action.equals("new")){
+                            Estoque.addVideogame(newVideogame);
+                            Estoque.salvarProduto(newVideogame);
+                        }
+                    }
+                }
+
+                if(ok){
+                    cont++;
+                    Estoque.setCont(cont);
+
+                    updateProdList();
+
+                    disableBaseFields();
+                    clearFields();
+
+                    JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso.");
                 }
             }
+        } else if (action.equals("edit")){
             
-            if(ok){
-                cont++;
             
-                updateProdList();
-
-                disableBaseFields();
-                clearFields();
-
-                JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso.");
-            }
+            Estoque.reescreverEstoque();
+            updateProdList();
         }
+        
+        action = "confirm";
     }//GEN-LAST:event_btnConfirmarEstActionPerformed
 
     private void btnCancelarEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEstActionPerformed
+        action = "cancel";
+        
+        rowClick = -1;
+        
         disableBaseFields();
         clearFields();
     }//GEN-LAST:event_btnCancelarEstActionPerformed
 
     private void btnPesquisarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarProdActionPerformed
-        cmbTipoProd.setSelectedItem(cmbTipoProd.getSelectedItem()); //caso o usuário clique no botão após escolher um produto
+        action = "search";
         
-        enableBaseFields();
-    }//GEN-LAST:event_btnPesquisarProdActionPerformed
-
-    private void tableProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProdutosMouseClicked
-        int rowClick = tableProdutos.getSelectedRow();
+        cmbTipoProd.setSelectedItem(cmbTipoProd.getSelectedItem()); //caso o usuário clique no botão após escolher um produto reseta a combo box para os campos específicos ativarem
         
         if (rowClick >= 0 && rowClick < allProducts.size()){
             Produtos selectedProd = allProducts.get(rowClick);
             
             txtfCodigoProd.setText(Integer.toString(selectedProd.getCodigoProd()));
+        } else {
+            txtfCodigoProd.setText("");
+        }
+        
+        enableBaseFields();
+    }//GEN-LAST:event_btnPesquisarProdActionPerformed
+
+    private void tableProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProdutosMouseClicked
+        rowClick = tableProdutos.getSelectedRow();
+        
+        if (rowClick >= 0 && rowClick < allProducts.size()){
+            Produtos selectedProd = allProducts.get(rowClick);
+            
+            if(!action.equals("new")){
+                txtfCodigoProd.setText(Integer.toString(selectedProd.getCodigoProd()));
+            } else {
+                txtfCodigoProd.setEnabled(false);
+            }
             txtfNome.setText(selectedProd.getNomeProd());
-            txtfFaixaEtaria.setText(Integer.toString(selectedProd.getFaixaEtaria()));
+            txtfFaixaEtaria.setText(selectedProd.getFaixaEtaria());
             txtfAno.setText(Integer.toString(selectedProd.getAno()));
             txtfPreco.setText(Double.toString(selectedProd.getPreco()));
             
             checkAlugado.setSelected(selectedProd.isAlugado());
             
             if(selectedProd.getClass().getSimpleName().equals("Filmes")){
+                selectedProdInd = Estoque.getListaFilmes().indexOf(selectedProd);
+                
                 cmbTipoProd.setSelectedItem("Filme");
                 
                 txtfVar1.setText(((Filmes) selectedProd).getGenero());
                 txtfVar2.setText(((Filmes) selectedProd).getEstudio());
                 txtfVar3.setText(((Filmes) selectedProd).getDiretor());
             } else if(selectedProd.getClass().getSimpleName().equals("Musica")){
+                selectedProdInd = Estoque.getListaMusicas().indexOf(selectedProd);
+                
                 cmbTipoProd.setSelectedItem("Música");
                 
-                txtfVar1.setText(((Musica) selectedProd).getEstilo());
-                txtfVar2.setText(((Musica) selectedProd).getAutor());
+                txtfVar1.setText(((Musicas) selectedProd).getEstilo());
+                txtfVar2.setText(((Musicas) selectedProd).getAutor());
             } else if(selectedProd.getClass().getSimpleName().equals("Tabuleiro")){
+                selectedProdInd = Estoque.getListaTabuleiros().indexOf(selectedProd);
+                
                 cmbTipoProd.setSelectedItem("Tabuleiro");
                 
-                txtfVar1.setText(((Tabuleiro) selectedProd).getTipo());
-                txtfVar2.setText(((Tabuleiro) selectedProd).getMarca());
-                txtfVar3.setText(Integer.toString(((Tabuleiro) selectedProd).getNumJogadores()));
+                txtfVar1.setText(((Tabuleiros) selectedProd).getTipo());
+                txtfVar2.setText(((Tabuleiros) selectedProd).getMarca());
+                txtfVar3.setText(Integer.toString(((Tabuleiros) selectedProd).getNumJogadores()));
             } else if(selectedProd.getClass().getSimpleName().equals("Videogames")){
+                selectedProdInd = Estoque.getListaVideogames().indexOf(selectedProd);
+                
                 cmbTipoProd.setSelectedItem("Videogame");
                 
                 txtfVar1.setText(((Videogames) selectedProd).getGenero());
-                txtfVar2.setText(((Videogames) selectedProd).getEstudio());
+                txtfVar2.setText(((Videogames) selectedProd).getDesenvolvedor());
                 txtfVar3.setText(Integer.toString(((Videogames) selectedProd).getNumJogadores()));
                 txtfVar4.setText(((Videogames) selectedProd).getPlataforma());
             }
-            disableBaseFields();
+            if(action.equals("confirm") || action.equals("cancel")){
+                disableBaseFields();
             
-            txtfVar1.setEnabled(false);
-            txtfVar2.setEnabled(false);
-            txtfVar3.setEnabled(false);
-            txtfVar4.setEnabled(false);
-            btnConfirmarEst.setEnabled(false);
+                txtfVar1.setEnabled(false);
+                txtfVar2.setEnabled(false);
+                txtfVar3.setEnabled(false);
+                txtfVar4.setEnabled(false);
+                
+                btnConfirmarEst.setEnabled(false);
+            } else {
+                enableBaseFields();
+            }
+                        
             btnCancelarEst.setEnabled(true);
         }
     }//GEN-LAST:event_tableProdutosMouseClicked
 
     private void btnEditarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProdActionPerformed
-       
+        action = "edit";
+                
+        if (rowClick >= 0 && rowClick < allProducts.size()){
+            cmbTipoProd.setSelectedItem(cmbTipoProd.getSelectedItem()); //caso o usuário clique no botão após escolher um produto reseta a combo box para os campos específicos ativarem
+            
+            Produtos selectedProd = allProducts.get(rowClick);
+            
+            txtfCodigoProd.setText(Integer.toString(selectedProd.getCodigoProd()));
+            
+            enableBaseFields();
+            
+            btnConfirmarEst.setEnabled(true);
+        } else {
+            txtfCodigoProd.setText("");
+            disableBaseFields();
+        }
     }//GEN-LAST:event_btnEditarProdActionPerformed
 
     private void btnVoltarEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarEqActionPerformed
@@ -1011,7 +1077,7 @@ public class AreaGerente extends javax.swing.JFrame {
         cmbTipoProd.setEnabled(true);
         checkAlugado.setEnabled(true);
         txtfCodigoProd.setEnabled(true);
-        txtfCodigoProd.setText("");
+        //txtfCodigoProd.setText("");
         txtfFaixaEtaria.setEnabled(true);
         txtfPreco.setEnabled(true);
         txtfNome.setEnabled(true);

@@ -5,8 +5,8 @@
 package telas;
 
 import boxbuster.Filmes;
-import boxbuster.Musica;
-import boxbuster.Tabuleiro;
+import boxbuster.Musicas;
+import boxbuster.Tabuleiros;
 import boxbuster.Videogames;
 import java.util.ArrayList;
 
@@ -17,8 +17,8 @@ import java.util.ArrayList;
 public class LoginFuncionario extends javax.swing.JFrame {
 
     private ArrayList<Filmes> listFilmes = new ArrayList();
-    private ArrayList<Musica> listMusicas = new ArrayList();
-    private ArrayList<Tabuleiro> listTabuleiros = new ArrayList();
+    private ArrayList<Musicas> listMusicas = new ArrayList();
+    private ArrayList<Tabuleiros> listTabuleiros = new ArrayList();
     private ArrayList<Videogames> listVideogames = new ArrayList();
     
     /**

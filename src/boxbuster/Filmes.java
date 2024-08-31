@@ -12,7 +12,7 @@ public class Filmes extends Produtos{
     public Filmes() {
     }
 
-     public Filmes(String nomeProd, double preco, int ano, int codigoProd, int faixaEtaria, boolean alugado, String genero, String estudio, String diretor) {
+     public Filmes(String nomeProd, double preco, int ano, int codigoProd, String faixaEtaria, boolean alugado, String genero, String estudio, String diretor) {
         super(nomeProd, preco, ano, codigoProd, faixaEtaria, alugado);
         this.genero = genero;
         this.estudio = estudio;
@@ -46,7 +46,7 @@ public class Filmes extends Produtos{
     
     @Override
     public String toString() {
-        return "Filme " + super.toString() + " " + genero + " " + estudio + " " + diretor;
+        return "Filme_" + super.toString() + "_" + genero + "_" + estudio + "_" + diretor;
     }
     
 }

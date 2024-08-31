@@ -12,7 +12,7 @@ public abstract class Jogos extends Produtos{
     public Jogos() {
     }
 
-    public Jogos(String nomeProd, double preco, int ano, int codigoProd, int faixaEtaria, boolean alugado, int numJogadores) {
+    public Jogos(String nomeProd, double preco, int ano, int codigoProd, String faixaEtaria, boolean alugado, int numJogadores) {
         super(nomeProd, preco, ano, codigoProd, faixaEtaria, alugado);
         this.numJogadores = numJogadores;
     }
@@ -27,7 +27,7 @@ public abstract class Jogos extends Produtos{
 
     @Override
     public String toString() {
-        return super.toString() + " " + numJogadores;
+        return super.toString() + "_" + numJogadores;
     }
     
     

@@ -6,8 +6,9 @@ package telas;
 
 import boxbuster.Estoque;
 import boxbuster.Filmes;
-import boxbuster.Musica;
-import boxbuster.Tabuleiro;
+import boxbuster.Musicas;
+import boxbuster.Produtos;
+import boxbuster.Tabuleiros;
 import boxbuster.Videogames;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -18,10 +19,17 @@ import javax.swing.JOptionPane;
  */
 public class Loja extends javax.swing.JFrame {
 
-    private ArrayList<Filmes> listaFilmes = Estoque.getListaFilmes();
-    private ArrayList<Musica> listaMusicas = Estoque.getListaMusicas();
-    private ArrayList<Tabuleiro> listaTabuleiros = Estoque.getListaTabuleiros();
-    private ArrayList<Videogames> listaVideogames = Estoque.getListaVideogames();
+    private ArrayList<Filmes> listaFilmes;
+    private ArrayList<Musicas> listaMusicas;
+    private ArrayList<Tabuleiros> listaTabuleiros;
+    private ArrayList<Videogames> listaVideogames;
+    
+    private double valorTotal = 0.0;
+    
+    private ArrayList<javax.swing.JRadioButton> tempBtnSelected = new ArrayList<>();
+    private ArrayList<javax.swing.JRadioButton> finalBtnSelected = new ArrayList<>();
+    private ArrayList<Produtos> tempPedido = new ArrayList<>();
+    static private ArrayList<Produtos> finalPedido = new ArrayList<>();
     
     /**
      * Creates new form LojaScr
@@ -32,7 +40,300 @@ public class Loja extends javax.swing.JFrame {
         
         setLoja();
     }
+    
+    public Loja(ArrayList<Produtos> pedidoIn) {
+        finalPedido = pedidoIn;
+        setLocationRelativeTo(null);
+        initComponents();
+        
+        setLoja();
+        lblCartLoja.setText("Carrinho: " + finalPedido.size() + " itens - R$ " + valorTotal + "0");
+    }
 
+    private String[] detalhesMv = new String[10];
+    private String[] detalhesMus = new String[10];
+    private String[] detalhesTab = new String[6];
+    private String[] detalhesVid = new String[10];
+    
+    private void setLoja() {
+        Estoque.loadEstoque();
+        
+        listaFilmes = Estoque.getListaFilmes();
+        listaMusicas = Estoque.getListaMusicas();
+        listaTabuleiros = Estoque.getListaTabuleiros();
+        listaVideogames = Estoque.getListaVideogames();
+        
+        javax.swing.JLabel[] listImgMv = {imgMv1, imgMv2, imgMv3, imgMv4, imgMv5, imgMv6, imgMv7, imgMv8, imgMv9, imgMv10};
+        javax.swing.JLabel[] listNomeMv = {nomeMv1, nomeMv2, nomeMv3, nomeMv4, nomeMv5, nomeMv6, nomeMv7, nomeMv8, nomeMv9, nomeMv10};
+        javax.swing.JLabel[] listDescMv = {descMv1, descMv2, descMv3, descMv4, descMv5, descMv6, descMv7, descMv8, descMv9, descMv10};
+        javax.swing.JLabel[] listPrecoMv = {precoMv1, precoMv2, precoMv3, precoMv4, precoMv5, precoMv6, precoMv7, precoMv8, precoMv9, precoMv10};
+        javax.swing.JRadioButton[] listAlugarMv = {btnAlugarMv1, btnAlugarMv2, btnAlugarMv3, btnAlugarMv4, btnAlugarMv5, btnAlugarMv6, btnAlugarMv7, btnAlugarMv8, btnAlugarMv9, btnAlugarMv10};
+        javax.swing.JButton[] btnDetalhesMv = {btnDetalhesMv1, btnDetalhesMv2, btnDetalhesMv3, btnDetalhesMv4, btnDetalhesMv5, btnDetalhesMv6, btnDetalhesMv7, btnDetalhesMv8, btnDetalhesMv9, btnDetalhesMv10};
+        
+        for(int i = 0; i < 10 && i < listaFilmes.size(); i++){
+            Filmes filme = listaFilmes.get(i);
+            
+            switch(filme.getNomeProd()){
+                case "De Volta Para o Futuro":
+                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/DeVoltaParaoFuturo.png")));
+                    break;
+                case "Matrix":
+                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/Matrix.png")));
+                    break;
+                case "O Enigma de Outro Mundo":
+                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/OEnigmadeOutroMundo.png")));
+                    break;
+                case "O Rei Leão":
+                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/OReiLeao.png")));
+                    break;
+                case "O Senhor dos Anéis":
+                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/OSenhordosAneis.png")));
+                    break;
+                case "Os Vingadores":
+                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/OsVingadores.png")));
+                    break;
+                case "Shrek":
+                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/Shrek.png")));
+                    break;
+                case "Titanic":
+                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/Titanic.png")));
+                    break;
+                case "Toy Story":
+                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/ToyStory.png")));
+                    break;
+                default:
+                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/MissingPoster.png")));
+            }
+            
+            listNomeMv[i].setText(filme.getNomeProd());
+            listDescMv[i].setText(Integer.toString(filme.getAno()) + " - A" + filme.getFaixaEtaria());
+            listPrecoMv[i].setText("R$ " + Double.toString(filme.getPreco()) + "0");
+            listAlugarMv[i].setEnabled(!filme.isAlugado());
+            if(finalPedido.contains(filme)){
+                listAlugarMv[i].setText("Remover do carrinho");
+                valorTotal += filme.getPreco();
+            } else if(filme.isAlugado()){
+                listAlugarMv[i].setText("Esgotado");
+            } else {
+                listAlugarMv[i].setText("Alugar");
+            }
+            btnDetalhesMv[i].setEnabled(true);
+            detalhesMv[i] = filme.getNomeProd() + "\nValor do aluguel: R$ " + Double.toString(filme.getPreco()) + "0" + "\nGênero: " + filme.getGenero() + "\nEstudio: " + filme.getEstudio()  + "\nDiretor: " + filme.getDiretor() + "\nAno: " + Integer.toString(filme.getAno()) +  "\nFaixa etária: " + filme.getFaixaEtaria();
+        }
+        
+        javax.swing.JLabel[] listImgMus = {imgMus1, imgMus2, imgMus3, imgMus4, imgMus5, imgMus6, imgMus7, imgMus8, imgMus9, imgMus10};
+        javax.swing.JLabel[] listNomeMus = {nomeMus1, nomeMus2, nomeMus3, nomeMus4, nomeMus5, nomeMus6, nomeMus7, nomeMus8, nomeMus9, nomeMus10};
+        javax.swing.JLabel[] listDescMus = {descMus1, descMus2, descMus3, descMus4, descMus5, descMus6, descMus7, descMus8, descMus9, descMus10};
+        javax.swing.JLabel[] listPrecoMus = {precoMus1, precoMus2, precoMus3, precoMus4, precoMus5, precoMus6, precoMus7, precoMus8, precoMus9, precoMus10};
+        javax.swing.JRadioButton[] listAlugarMus = {btnAlugarMus1, btnAlugarMus2, btnAlugarMus3, btnAlugarMus4, btnAlugarMus5, btnAlugarMus6, btnAlugarMus7, btnAlugarMus8, btnAlugarMus9, btnAlugarMus10};
+        javax.swing.JButton[] btnDetalhesMus = {btnDetalhesMus1, btnDetalhesMus2, btnDetalhesMus3, btnDetalhesMus4, btnDetalhesMus5, btnDetalhesMus6, btnDetalhesMus7, btnDetalhesMus8, btnDetalhesMus9, btnDetalhesMus10};
+        
+        for(int i = 0; i < 10 && i < listaMusicas.size(); i++){
+            Musicas musica = listaMusicas.get(i);
+            
+            switch(musica.getNomeProd()){
+                case "De Volta Para o Futuro":
+                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/DeVoltaParaoFuturo.png")));
+                    break;
+                case "Matrix":
+                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/Matrix.png")));
+                    break;
+                case "O Enigma de Outro Mundo":
+                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/OEnigmadeOutroMundo.png")));
+                    break;
+                case "O Rei Leão":
+                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/OReiLeao.png")));
+                    break;
+                case "O Senhor dos Anéis":
+                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/OSenhordosAneis.png")));
+                    break;
+                case "Os Vingadores":
+                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/OsVingadores.png")));
+                    break;
+                case "Shrek":
+                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/Shrek.png")));
+                    break;
+                case "Titanic":
+                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/Titanic.png")));
+                    break;
+                case "Toy Story":
+                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/ToyStory.png")));
+                    break;
+                default:
+                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/MissingPoster.png")));
+            }
+            
+            listNomeMus[i].setText(musica.getNomeProd());
+            listDescMus[i].setText(Integer.toString(musica.getAno()) + " - A" + musica.getFaixaEtaria());
+            listPrecoMus[i].setText("R$ " + Double.toString(musica.getPreco()) + "0");
+            listAlugarMus[i].setEnabled(!musica.isAlugado());
+            if(finalPedido.contains(musica)){
+                listAlugarMus[i].setText("Remover do carrinho");
+                valorTotal += musica.getPreco();
+            } else if(musica.isAlugado()){
+                listAlugarMus[i].setText("Esgotado");
+            } else {
+                listAlugarMus[i].setText("Alugar");
+            }
+            btnDetalhesMus[i].setEnabled(true);
+            detalhesMus[i] = musica.getNomeProd() + "\nValor do aluguel: R$ " + Double.toString(musica.getPreco()) + "0" + "\nEstilo: " + musica.getEstilo() + "\nAutor: " + musica.getAutor() + "\nAno: " + Integer.toString(musica.getAno()) +  "\nFaixa etária: " + musica.getFaixaEtaria();
+        }
+        
+        javax.swing.JLabel[] listImgTab = {imgTab1, imgTab2, imgTab3, imgTab4, imgTab5, imgTab6};
+        javax.swing.JLabel[] listNomeTab = {nomeTab1, nomeTab2, nomeTab3, nomeTab4, nomeTab5, nomeTab6};
+        javax.swing.JLabel[] listDescTab = {descTab1, descTab2, descTab3, descTab4, descTab5, descTab6};
+        javax.swing.JLabel[] listPrecoTab = {precoTab1, precoTab2, precoTab3, precoTab4, precoTab5, precoTab6};
+        javax.swing.JRadioButton[] listAlugarTab = {btnAlugarTab1, btnAlugarTab2, btnAlugarTab3, btnAlugarTab4, btnAlugarTab5, btnAlugarTab6};
+        javax.swing.JButton[] btnDetalhesTab = {btnDetalhesTab1, btnDetalhesTab2, btnDetalhesTab3, btnDetalhesTab4, btnDetalhesTab5, btnDetalhesTab6};
+        
+        for(int i = 0; i < 6 && i < listaTabuleiros.size(); i++){
+            Tabuleiros tabuleiro = listaTabuleiros.get(i);
+            
+            switch(tabuleiro.getNomeProd()){
+                case "De Volta Para o Futuro":
+                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/DeVoltaParaoFuturo.png")));
+                    break;
+                case "Matrix":
+                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/Matrix.png")));
+                    break;
+                case "O Enigma de Outro Mundo":
+                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/OEnigmadeOutroMundo.png")));
+                    break;
+                case "O Rei Leão":
+                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/OReiLeao.png")));
+                    break;
+                case "O Senhor dos Anéis":
+                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/OSenhordosAneis.png")));
+                    break;
+                case "Os Vingadores":
+                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/OsVingadores.png")));
+                    break;
+                case "Shrek":
+                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/Shrek.png")));
+                    break;
+                case "Titanic":
+                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/Titanic.png")));
+                    break;
+                case "Toy Story":
+                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/ToyStory.png")));
+                    break;
+                default:
+                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/MissingPoster.png")));
+            }
+            
+            listNomeTab[i].setText(tabuleiro.getNomeProd());
+            listDescTab[i].setText(Integer.toString(tabuleiro.getAno()) + " - A" + tabuleiro.getFaixaEtaria());
+            listPrecoTab[i].setText("R$ " + Double.toString(tabuleiro.getPreco()) + "0");
+            listAlugarTab[i].setEnabled(!tabuleiro.isAlugado());
+            if(finalPedido.contains(tabuleiro)){
+                listAlugarTab[i].setText("Remover do carrinho");
+                valorTotal += tabuleiro.getPreco();
+            } else if(tabuleiro.isAlugado()){
+                listAlugarTab[i].setText("Esgotado");
+            } else {
+                listAlugarTab[i].setText("Alugar");
+            }
+            btnDetalhesTab[i].setEnabled(true);
+            detalhesTab[i] = tabuleiro.getNomeProd() + "\nValor do aluguel: R$ " + Double.toString(tabuleiro.getPreco()) + "0" + "\nTipo: " + tabuleiro.getTipo() + "\nNúmero de jogadores: " + tabuleiro.getNumJogadores() + "\nMarca: " + tabuleiro.getMarca() + "\nAno: " + Integer.toString(tabuleiro.getAno()) +  "\nFaixa etária: " + tabuleiro.getFaixaEtaria();
+        }
+        
+        javax.swing.JLabel[] listImgVid = {imgVid1, imgVid2, imgVid3, imgVid4, imgVid5, imgVid6, imgVid7, imgVid8, imgVid9, imgVid10};
+        javax.swing.JLabel[] listNomeVid = {nomeVid1, nomeVid2, nomeVid3, nomeVid4, nomeVid5, nomeVid6, nomeVid7, nomeVid8, nomeVid9, nomeVid10};
+        javax.swing.JLabel[] listDescVid = {descVid1, descVid2, descVid3, descVid4, descVid5, descVid6, descVid7, descVid8, descVid9, descVid10};
+        javax.swing.JLabel[] listPrecoVid = {precoVid1, precoVid2, precoVid3, precoVid4, precoVid5, precoVid6, precoVid7, precoVid8, precoVid9, precoVid10};
+        javax.swing.JRadioButton[] listAlugarVid = {btnAlugarVid1, btnAlugarVid2, btnAlugarVid3, btnAlugarVid4, btnAlugarVid5, btnAlugarVid6, btnAlugarVid7, btnAlugarVid8, btnAlugarVid9, btnAlugarVid10};
+        javax.swing.JButton[] btnDetalhesVid = {btnDetalhesVid1, btnDetalhesVid2, btnDetalhesVid3, btnDetalhesVid4, btnDetalhesVid5, btnDetalhesVid6, btnDetalhesVid7, btnDetalhesVid8, btnDetalhesVid9, btnDetalhesVid10};
+        
+        for(int i = 0; i < 10 && i < listaVideogames.size(); i++){
+            Videogames videogame = listaVideogames.get(i);
+            
+            switch(videogame.getNomeProd()){
+                case "De Volta Para o Futuro":
+                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/DeVoltaParaoFuturo.png")));
+                    break;
+                case "Matrix":
+                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/Matrix.png")));
+                    break;
+                case "O Enigma de Outro Mundo":
+                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/OEnigmadeOutroMundo.png")));
+                    break;
+                case "O Rei Leão":
+                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/OReiLeao.png")));
+                    break;
+                case "O Senhor dos Anéis":
+                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/OSenhordosAneis.png")));
+                    break;
+                case "Os Vingadores":
+                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/OsVingadores.png")));
+                    break;
+                case "Shrek":
+                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/Shrek.png")));
+                    break;
+                case "Titanic":
+                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/Titanic.png")));
+                    break;
+                case "Toy Story":
+                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/ToyStory.png")));
+                    break;
+                default:
+                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/MissingPoster.png")));
+            }
+            
+            listNomeVid[i].setText(videogame.getNomeProd());
+            listDescVid[i].setText(Integer.toString(videogame.getAno()) + " - A" + videogame.getFaixaEtaria());
+            listPrecoVid[i].setText("R$ " + Double.toString(videogame.getPreco()) + "0");
+            listAlugarVid[i].setEnabled(!videogame.isAlugado());
+            if(finalPedido.contains(videogame)){
+                listAlugarVid[i].setText("Remover do carrinho");
+                valorTotal += videogame.getPreco();
+            } else if(videogame.isAlugado()){
+                listAlugarVid[i].setText("Esgotado");
+            } else {
+                listAlugarVid[i].setText("Alugar");
+            }
+            btnDetalhesVid[i].setEnabled(true);
+            detalhesVid[i] = videogame.getNomeProd() + "\nValor do aluguel: R$ " + Double.toString(videogame.getPreco()) + "0" + "\nPlataforma: " + videogame.getPlataforma() + "\nGênero: " + videogame.getGenero() + "\nDesenvolvedor: " + videogame.getDesenvolvedor() + "\nNúmero de jogadores: " + videogame.getNumJogadores() + "\nAno: " + Integer.toString(videogame.getAno()) +  "\nFaixa etária: " + videogame.getFaixaEtaria();
+        }
+    }
+    
+    private void addItem(javax.swing.JRadioButton btn, String tipo, int ind){
+        if(btn.isSelected()){
+            tempBtnSelected.add(btn);
+            switch(tipo){
+                case "Mv":
+                    tempPedido.add(listaFilmes.get(ind-1));
+                    break;
+                case "Mus":
+                    tempPedido.add(listaMusicas.get(ind-1));
+                    break;
+                case "Tab":
+                    tempPedido.add(listaTabuleiros.get(ind-1));
+                    break;
+                case "Vid":
+                    tempPedido.add(listaVideogames.get(ind-1));
+                    break;
+            }
+            System.out.println(tipo);
+        } else {
+            tempBtnSelected.remove(btn);
+            switch(tipo){
+                case "Mv":
+                    tempPedido.remove(listaFilmes.get(ind-1));
+                    break;
+                case "Mus":
+                    tempPedido.remove(listaMusicas.get(ind-1));
+                    break;
+                case "Tab":
+                    tempPedido.remove(listaTabuleiros.get(ind-1));
+                    break;
+                case "Vid":
+                    tempPedido.remove(listaVideogames.get(ind-1));
+                    break;
+            }
+            System.out.println(tipo);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -323,8 +624,6 @@ public class Loja extends javax.swing.JFrame {
 
         pnlMv1.setPreferredSize(new java.awt.Dimension(190, 190));
 
-        imgMv1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/MissingPoster.png"))); // NOI18N
-
         nomeMv1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nomeMv1.setText("-----");
 
@@ -332,11 +631,16 @@ public class Loja extends javax.swing.JFrame {
         descMv1.setText("-----");
 
         precoMv1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoMv1.setText("R$ --,--");
+        precoMv1.setText("R$ --.--");
 
         btnAlugarMv1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMv1.setText("-----");
         btnAlugarMv1.setEnabled(false);
+        btnAlugarMv1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMv1ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMv1.setText("Detalhes");
         btnDetalhesMv1.setEnabled(false);
@@ -360,7 +664,7 @@ public class Loja extends javax.swing.JFrame {
                     .addComponent(precoMv1)
                     .addComponent(btnAlugarMv1)
                     .addComponent(btnDetalhesMv1))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         pnlMv1Layout.setVerticalGroup(
             pnlMv1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -383,8 +687,6 @@ public class Loja extends javax.swing.JFrame {
 
         pnlMv2.setPreferredSize(new java.awt.Dimension(190, 190));
 
-        imgMv2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/MissingPoster.png"))); // NOI18N
-
         nomeMv2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nomeMv2.setText("-----");
 
@@ -392,11 +694,16 @@ public class Loja extends javax.swing.JFrame {
         descMv2.setText("-----");
 
         precoMv2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoMv2.setText("R$ --,--");
+        precoMv2.setText("R$ --.--");
 
         btnAlugarMv2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMv2.setText("Alugar");
         btnAlugarMv2.setEnabled(false);
+        btnAlugarMv2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMv2ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMv2.setText("Detalhes");
         btnDetalhesMv2.setEnabled(false);
@@ -420,7 +727,7 @@ public class Loja extends javax.swing.JFrame {
                     .addComponent(precoMv2)
                     .addComponent(btnAlugarMv2)
                     .addComponent(btnDetalhesMv2))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         pnlMv2Layout.setVerticalGroup(
             pnlMv2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,12 +745,10 @@ public class Loja extends javax.swing.JFrame {
                         .addComponent(btnAlugarMv2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDetalhesMv2)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pnlMv3.setPreferredSize(new java.awt.Dimension(190, 190));
-
-        imgMv3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/MissingPoster.png"))); // NOI18N
 
         nomeMv3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nomeMv3.setText("-----");
@@ -452,11 +757,16 @@ public class Loja extends javax.swing.JFrame {
         descMv3.setText("-----");
 
         precoMv3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoMv3.setText("R$ --,--");
+        precoMv3.setText("R$ --.--");
 
         btnAlugarMv3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMv3.setText("-----");
         btnAlugarMv3.setEnabled(false);
+        btnAlugarMv3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMv3ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMv3.setText("Detalhes");
         btnDetalhesMv3.setEnabled(false);
@@ -480,7 +790,7 @@ public class Loja extends javax.swing.JFrame {
                     .addComponent(precoMv3)
                     .addComponent(btnAlugarMv3)
                     .addComponent(btnDetalhesMv3))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         pnlMv3Layout.setVerticalGroup(
             pnlMv3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -503,8 +813,6 @@ public class Loja extends javax.swing.JFrame {
 
         pnlMv4.setPreferredSize(new java.awt.Dimension(190, 190));
 
-        imgMv4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/MissingPoster.png"))); // NOI18N
-
         nomeMv4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nomeMv4.setText("-----");
 
@@ -517,6 +825,11 @@ public class Loja extends javax.swing.JFrame {
         btnAlugarMv4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMv4.setText("-----");
         btnAlugarMv4.setEnabled(false);
+        btnAlugarMv4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMv4ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMv4.setText("Detalhes");
         btnDetalhesMv4.setEnabled(false);
@@ -540,7 +853,7 @@ public class Loja extends javax.swing.JFrame {
                     .addComponent(precoMv4)
                     .addComponent(btnAlugarMv4)
                     .addComponent(btnDetalhesMv4))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         pnlMv4Layout.setVerticalGroup(
             pnlMv4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -558,12 +871,10 @@ public class Loja extends javax.swing.JFrame {
                         .addComponent(btnAlugarMv4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDetalhesMv4)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pnlMv5.setPreferredSize(new java.awt.Dimension(190, 190));
-
-        imgMv5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/MissingPoster.png"))); // NOI18N
 
         nomeMv5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nomeMv5.setText("-----");
@@ -572,11 +883,16 @@ public class Loja extends javax.swing.JFrame {
         descMv5.setText("-----");
 
         precoMv5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoMv5.setText("R$ --,--");
+        precoMv5.setText("R$ --.--");
 
         btnAlugarMv5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMv5.setText("-----");
         btnAlugarMv5.setEnabled(false);
+        btnAlugarMv5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMv5ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMv5.setText("Detalhes");
         btnDetalhesMv5.setEnabled(false);
@@ -600,7 +916,7 @@ public class Loja extends javax.swing.JFrame {
                     .addComponent(precoMv5)
                     .addComponent(btnAlugarMv5)
                     .addComponent(btnDetalhesMv5))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         pnlMv5Layout.setVerticalGroup(
             pnlMv5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -618,12 +934,10 @@ public class Loja extends javax.swing.JFrame {
                         .addComponent(btnAlugarMv5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDetalhesMv5)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pnlMv6.setPreferredSize(new java.awt.Dimension(190, 190));
-
-        imgMv6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/MissingPoster.png"))); // NOI18N
 
         nomeMv6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nomeMv6.setText("-----");
@@ -632,11 +946,16 @@ public class Loja extends javax.swing.JFrame {
         descMv6.setText("-----");
 
         precoMv6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoMv6.setText("R$ --,--");
+        precoMv6.setText("R$ --.--");
 
         btnAlugarMv6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMv6.setText("-----");
         btnAlugarMv6.setEnabled(false);
+        btnAlugarMv6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMv6ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMv6.setText("Detalhes");
         btnDetalhesMv6.setEnabled(false);
@@ -660,7 +979,7 @@ public class Loja extends javax.swing.JFrame {
                     .addComponent(precoMv6)
                     .addComponent(btnAlugarMv6)
                     .addComponent(btnDetalhesMv6))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         pnlMv6Layout.setVerticalGroup(
             pnlMv6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -678,12 +997,10 @@ public class Loja extends javax.swing.JFrame {
                         .addComponent(btnAlugarMv6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDetalhesMv6)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pnlMv7.setPreferredSize(new java.awt.Dimension(190, 190));
-
-        imgMv7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/MissingPoster.png"))); // NOI18N
 
         nomeMv7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nomeMv7.setText("-----");
@@ -692,11 +1009,16 @@ public class Loja extends javax.swing.JFrame {
         descMv7.setText("-----");
 
         precoMv7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoMv7.setText("R$ --,--");
+        precoMv7.setText("R$ --.--");
 
         btnAlugarMv7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMv7.setText("-----");
         btnAlugarMv7.setEnabled(false);
+        btnAlugarMv7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMv7ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMv7.setText("Detalhes");
         btnDetalhesMv7.setEnabled(false);
@@ -720,7 +1042,7 @@ public class Loja extends javax.swing.JFrame {
                     .addComponent(precoMv7)
                     .addComponent(btnAlugarMv7)
                     .addComponent(btnDetalhesMv7))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         pnlMv7Layout.setVerticalGroup(
             pnlMv7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -738,12 +1060,10 @@ public class Loja extends javax.swing.JFrame {
                         .addComponent(btnAlugarMv7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDetalhesMv7)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pnlMv8.setPreferredSize(new java.awt.Dimension(190, 190));
-
-        imgMv8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/MissingPoster.png"))); // NOI18N
 
         nomeMv8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nomeMv8.setText("-----");
@@ -752,11 +1072,16 @@ public class Loja extends javax.swing.JFrame {
         descMv8.setText("-----");
 
         precoMv8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoMv8.setText("R$ --,--");
+        precoMv8.setText("R$ --.--");
 
         btnAlugarMv8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMv8.setText("-----");
         btnAlugarMv8.setEnabled(false);
+        btnAlugarMv8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMv8ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMv8.setText("Detalhes");
         btnDetalhesMv8.setEnabled(false);
@@ -780,7 +1105,7 @@ public class Loja extends javax.swing.JFrame {
                     .addComponent(precoMv8)
                     .addComponent(btnAlugarMv8)
                     .addComponent(btnDetalhesMv8))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         pnlMv8Layout.setVerticalGroup(
             pnlMv8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -798,12 +1123,10 @@ public class Loja extends javax.swing.JFrame {
                         .addComponent(btnAlugarMv8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDetalhesMv8)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pnlMv9.setPreferredSize(new java.awt.Dimension(190, 190));
-
-        imgMv9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/MissingPoster.png"))); // NOI18N
 
         nomeMv9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nomeMv9.setText("-----");
@@ -812,11 +1135,16 @@ public class Loja extends javax.swing.JFrame {
         descMv9.setText("-----");
 
         precoMv9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoMv9.setText("R$ --,--");
+        precoMv9.setText("R$ --.--");
 
         btnAlugarMv9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMv9.setText("-----");
         btnAlugarMv9.setEnabled(false);
+        btnAlugarMv9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMv9ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMv9.setText("Detalhes");
         btnDetalhesMv9.setEnabled(false);
@@ -840,7 +1168,7 @@ public class Loja extends javax.swing.JFrame {
                     .addComponent(precoMv9)
                     .addComponent(btnAlugarMv9)
                     .addComponent(btnDetalhesMv9))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         pnlMv9Layout.setVerticalGroup(
             pnlMv9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -858,12 +1186,10 @@ public class Loja extends javax.swing.JFrame {
                         .addComponent(btnAlugarMv9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDetalhesMv9)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pnlMv10.setPreferredSize(new java.awt.Dimension(190, 190));
-
-        imgMv10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/MissingPoster.png"))); // NOI18N
 
         nomeMv10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nomeMv10.setText("-----");
@@ -877,6 +1203,11 @@ public class Loja extends javax.swing.JFrame {
         btnAlugarMv10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMv10.setText("-----");
         btnAlugarMv10.setEnabled(false);
+        btnAlugarMv10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMv10ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMv10.setText("Detalhes");
         btnDetalhesMv10.setEnabled(false);
@@ -900,7 +1231,7 @@ public class Loja extends javax.swing.JFrame {
                     .addComponent(precoMv10)
                     .addComponent(btnAlugarMv10)
                     .addComponent(btnDetalhesMv10))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         pnlMv10Layout.setVerticalGroup(
             pnlMv10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -918,7 +1249,7 @@ public class Loja extends javax.swing.JFrame {
                         .addComponent(btnAlugarMv10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDetalhesMv10)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlFilmesLayout = new javax.swing.GroupLayout(pnlFilmes);
@@ -989,12 +1320,17 @@ public class Loja extends javax.swing.JFrame {
         descMus1.setText("-----");
 
         precoMus1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoMus1.setText("R$ --,--");
+        precoMus1.setText("R$ --.--");
         precoMus1.setToolTipText("");
 
         btnAlugarMus1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMus1.setText("-----");
         btnAlugarMus1.setEnabled(false);
+        btnAlugarMus1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMus1ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMus1.setText("Detalhes");
         btnDetalhesMus1.setEnabled(false);
@@ -1048,11 +1384,16 @@ public class Loja extends javax.swing.JFrame {
         descMus2.setText("-----");
 
         precoMus2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoMus2.setText("R$ --,--");
+        precoMus2.setText("R$ --.--");
 
         btnAlugarMus2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMus2.setText("-----");
         btnAlugarMus2.setEnabled(false);
+        btnAlugarMus2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMus2ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMus2.setText("Detalhes");
         btnDetalhesMus2.setEnabled(false);
@@ -1106,11 +1447,16 @@ public class Loja extends javax.swing.JFrame {
         descMus3.setText("-----");
 
         precoMus3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoMus3.setText("R$ --,--");
+        precoMus3.setText("R$ --.--");
 
         btnAlugarMus3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMus3.setText("-----");
         btnAlugarMus3.setEnabled(false);
+        btnAlugarMus3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMus3ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMus3.setText("Detalhes");
         btnDetalhesMus3.setEnabled(false);
@@ -1164,11 +1510,16 @@ public class Loja extends javax.swing.JFrame {
         descMus4.setText("-----");
 
         precoMus4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoMus4.setText("R$ --,--");
+        precoMus4.setText("R$ --.--");
 
         btnAlugarMus4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMus4.setText("-----");
         btnAlugarMus4.setEnabled(false);
+        btnAlugarMus4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMus4ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMus4.setText("Detalhes");
         btnDetalhesMus4.setEnabled(false);
@@ -1222,11 +1573,16 @@ public class Loja extends javax.swing.JFrame {
         descMus5.setText("-----");
 
         precoMus5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoMus5.setText("R$ --,--");
+        precoMus5.setText("R$ --.--");
 
         btnAlugarMus5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMus5.setText("-----");
         btnAlugarMus5.setEnabled(false);
+        btnAlugarMus5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMus5ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMus5.setText("Detalhes");
         btnDetalhesMus5.setEnabled(false);
@@ -1280,11 +1636,16 @@ public class Loja extends javax.swing.JFrame {
         descMus6.setText("-----");
 
         precoMus6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoMus6.setText("R$ --,--");
+        precoMus6.setText("R$ --.--");
 
         btnAlugarMus6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMus6.setText("-----");
         btnAlugarMus6.setEnabled(false);
+        btnAlugarMus6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMus6ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMus6.setText("Detalhes");
         btnDetalhesMus6.setEnabled(false);
@@ -1338,11 +1699,16 @@ public class Loja extends javax.swing.JFrame {
         descMus7.setText("-----");
 
         precoMus7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoMus7.setText("R$ --,--");
+        precoMus7.setText("R$ --.--");
 
         btnAlugarMus7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMus7.setText("-----");
         btnAlugarMus7.setEnabled(false);
+        btnAlugarMus7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMus7ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMus7.setText("Detalhes");
         btnDetalhesMus7.setEnabled(false);
@@ -1396,11 +1762,16 @@ public class Loja extends javax.swing.JFrame {
         descMus8.setText("-----");
 
         precoMus8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoMus8.setText("R$ --,--");
+        precoMus8.setText("R$ --.--");
 
         btnAlugarMus8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMus8.setText("-----");
         btnAlugarMus8.setEnabled(false);
+        btnAlugarMus8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMus8ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMus8.setText("Detalhes");
         btnDetalhesMus8.setEnabled(false);
@@ -1455,11 +1826,16 @@ public class Loja extends javax.swing.JFrame {
         descMus9.setText("-----");
 
         precoMus9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoMus9.setText("R$ --,--");
+        precoMus9.setText("R$ --.--");
 
         btnAlugarMus9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMus9.setText("-----");
         btnAlugarMus9.setEnabled(false);
+        btnAlugarMus9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMus9ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMus9.setText("Detalhes");
         btnDetalhesMus9.setEnabled(false);
@@ -1513,11 +1889,16 @@ public class Loja extends javax.swing.JFrame {
         descMus10.setText("-----");
 
         precoMus10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoMus10.setText("R$ --,--");
+        precoMus10.setText("R$ --.--");
 
         btnAlugarMus10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMus10.setText("-----");
         btnAlugarMus10.setEnabled(false);
+        btnAlugarMus10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarMus10ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesMus10.setText("Detalhes");
         btnDetalhesMus10.setEnabled(false);
@@ -1630,11 +2011,16 @@ public class Loja extends javax.swing.JFrame {
         descTab1.setText("-----");
 
         precoTab1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoTab1.setText("R$ --,--");
+        precoTab1.setText("R$ --.--");
 
         btnAlugarTab1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarTab1.setText("-----");
         btnAlugarTab1.setEnabled(false);
+        btnAlugarTab1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarTab1ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesTab1.setText("Detalhes");
         btnDetalhesTab1.setEnabled(false);
@@ -1688,11 +2074,16 @@ public class Loja extends javax.swing.JFrame {
         descTab2.setText("-----");
 
         precoTab2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoTab2.setText("R$ --,--");
+        precoTab2.setText("R$ --.--");
 
         btnAlugarTab2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarTab2.setText("-----");
         btnAlugarTab2.setEnabled(false);
+        btnAlugarTab2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarTab2ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesTab2.setText("Detalhes");
         btnDetalhesTab2.setEnabled(false);
@@ -1746,11 +2137,16 @@ public class Loja extends javax.swing.JFrame {
         descTab3.setText("-----");
 
         precoTab3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoTab3.setText("R$ --,--");
+        precoTab3.setText("R$ --.--");
 
         btnAlugarTab3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarTab3.setText("-----");
         btnAlugarTab3.setEnabled(false);
+        btnAlugarTab3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarTab3ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesTab3.setText("Detalhes");
         btnDetalhesTab3.setEnabled(false);
@@ -1804,7 +2200,7 @@ public class Loja extends javax.swing.JFrame {
         descTab4.setText("-----");
 
         precoTab4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoTab4.setText("R$ --,--");
+        precoTab4.setText("R$ --.--");
 
         btnAlugarTab4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarTab4.setText("-----");
@@ -1867,7 +2263,7 @@ public class Loja extends javax.swing.JFrame {
         descTab5.setText("-----");
 
         precoTab5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoTab5.setText("R$ --,--");
+        precoTab5.setText("R$ --.--");
 
         btnAlugarTab5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarTab5.setText("-----");
@@ -1935,6 +2331,11 @@ public class Loja extends javax.swing.JFrame {
         btnAlugarTab6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarTab6.setText("-----");
         btnAlugarTab6.setEnabled(false);
+        btnAlugarTab6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarTab6ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesTab6.setText("Detalhes");
         btnDetalhesTab6.setEnabled(false);
@@ -2037,11 +2438,16 @@ public class Loja extends javax.swing.JFrame {
         descVid1.setText("-----");
 
         precoVid1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoVid1.setText("R$ --,--");
+        precoVid1.setText("R$ --.--");
 
         btnAlugarVid1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarVid1.setText("-----");
         btnAlugarVid1.setEnabled(false);
+        btnAlugarVid1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarVid1ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesVid1.setText("Detalhes");
         btnDetalhesVid1.setEnabled(false);
@@ -2095,7 +2501,7 @@ public class Loja extends javax.swing.JFrame {
         descVid2.setText("-----");
 
         precoVid2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoVid2.setText("R$ --,--");
+        precoVid2.setText("R$ --.--");
 
         btnAlugarVid2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarVid2.setText("-----");
@@ -2158,11 +2564,16 @@ public class Loja extends javax.swing.JFrame {
         descVid3.setText("-----");
 
         precoVid3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoVid3.setText("R$ --,--");
+        precoVid3.setText("R$ --.--");
 
         btnAlugarVid3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarVid3.setText("-----");
         btnAlugarVid3.setEnabled(false);
+        btnAlugarVid3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarVid3ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesVid3.setText("Detalhes");
         btnDetalhesVid3.setEnabled(false);
@@ -2216,11 +2627,16 @@ public class Loja extends javax.swing.JFrame {
         descVid4.setText("-----");
 
         precoVid4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoVid4.setText("R$ --,--");
+        precoVid4.setText("R$ --.--");
 
         btnAlugarVid4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarVid4.setText("-----");
         btnAlugarVid4.setEnabled(false);
+        btnAlugarVid4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarVid4ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesVid4.setText("Detalhes");
         btnDetalhesVid4.setEnabled(false);
@@ -2274,11 +2690,16 @@ public class Loja extends javax.swing.JFrame {
         descVid5.setText("-----");
 
         precoVid5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoVid5.setText("R$ --,--");
+        precoVid5.setText("R$ --.--");
 
         btnAlugarVid5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarVid5.setText("-----");
         btnAlugarVid5.setEnabled(false);
+        btnAlugarVid5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarVid5ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesVid5.setText("Detalhes");
         btnDetalhesVid5.setEnabled(false);
@@ -2332,11 +2753,16 @@ public class Loja extends javax.swing.JFrame {
         descVid6.setText("-----");
 
         precoVid6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoVid6.setText("R$ --,--");
+        precoVid6.setText("R$ --.--");
 
         btnAlugarVid6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarVid6.setText("-----");
         btnAlugarVid6.setEnabled(false);
+        btnAlugarVid6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarVid6ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesVid6.setText("Detalhes");
         btnDetalhesVid6.setEnabled(false);
@@ -2390,11 +2816,16 @@ public class Loja extends javax.swing.JFrame {
         descVid7.setText("-----");
 
         precoVid7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoVid7.setText("R$ --,--");
+        precoVid7.setText("R$ --.--");
 
         btnAlugarVid7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarVid7.setText("-----");
         btnAlugarVid7.setEnabled(false);
+        btnAlugarVid7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarVid7ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesVid7.setText("Detalhes");
         btnDetalhesVid7.setEnabled(false);
@@ -2448,11 +2879,16 @@ public class Loja extends javax.swing.JFrame {
         descVid8.setText("-----");
 
         precoVid8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoVid8.setText("R$ --,--");
+        precoVid8.setText("R$ --.--");
 
         btnAlugarVid8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarVid8.setText("-----");
         btnAlugarVid8.setEnabled(false);
+        btnAlugarVid8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarVid8ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesVid8.setText("Detalhes");
         btnDetalhesVid8.setEnabled(false);
@@ -2506,11 +2942,16 @@ public class Loja extends javax.swing.JFrame {
         descVid9.setText("-----");
 
         precoVid9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoVid9.setText("R$ --,--");
+        precoVid9.setText("R$ --.--");
 
         btnAlugarVid9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarVid9.setText("-----");
         btnAlugarVid9.setEnabled(false);
+        btnAlugarVid9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarVid9ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesVid9.setText("Detalhes");
         btnDetalhesVid9.setEnabled(false);
@@ -2564,11 +3005,16 @@ public class Loja extends javax.swing.JFrame {
         descVid10.setText("-----");
 
         precoVid10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoVid10.setText("R$ --,--");
+        precoVid10.setText("R$ --.--");
 
         btnAlugarVid10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarVid10.setText("-----");
         btnAlugarVid10.setEnabled(false);
+        btnAlugarVid10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlugarVid10ActionPerformed(evt);
+            }
+        });
 
         btnDetalhesVid10.setText("Detalhes");
         btnDetalhesVid10.setEnabled(false);
@@ -2686,9 +3132,14 @@ public class Loja extends javax.swing.JFrame {
             }
         });
 
-        btnAddCartLoja.setText("Adicionar itens ao carrinho");
+        btnAddCartLoja.setText("Atualizar carrinho");
+        btnAddCartLoja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddCartLojaActionPerformed(evt);
+            }
+        });
 
-        lblCartLoja.setText("Carrinho: 0 itens");
+        lblCartLoja.setText("Carrinho: 0 itens - R$ 0,00");
 
         javax.swing.GroupLayout pnlLojaLayout = new javax.swing.GroupLayout(pnlLoja);
         pnlLoja.setLayout(pnlLojaLayout);
@@ -2702,7 +3153,7 @@ public class Loja extends javax.swing.JFrame {
                 .addComponent(btnAddCartLoja)
                 .addGap(18, 18, 18)
                 .addComponent(lblCartLoja)
-                .addGap(68, 68, 68)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnFinalizarLoja)
                 .addContainerGap())
         );
@@ -2769,36 +3220,6 @@ public class Loja extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private String[] detalhesMv = new String[10];
-    private String[] detalhesMus = new String[10];
-    private String[] detalhesTab = new String[6];
-    private String[] detalhesVid = new String[10];
-    
-    private void setLoja() {
-        javax.swing.JLabel[] listImgMv = {imgMv1, imgMv2, imgMv3, imgMv4, imgMv5, imgMv6, imgMv7, imgMv8, imgMv9, imgMv10};
-        javax.swing.JLabel[] listNomeMv = {nomeMv1, nomeMv2, nomeMv3, nomeMv4, nomeMv5, nomeMv6, nomeMv7, nomeMv8, nomeMv9, nomeMv10};
-        javax.swing.JLabel[] listDescMv = {descMv1, descMv2, descMv3, descMv4, descMv5, descMv6, descMv7, descMv8, descMv9, descMv10};
-        javax.swing.JLabel[] listPrecoMv = {precoMv1, precoMv2, precoMv3, precoMv4, precoMv5, precoMv6, precoMv7, precoMv8, precoMv9, precoMv10};
-        javax.swing.JRadioButton[] listAlugarMv = {btnAlugarMv1, btnAlugarMv2, btnAlugarMv3, btnAlugarMv4, btnAlugarMv5, btnAlugarMv6, btnAlugarMv7, btnAlugarMv8, btnAlugarMv9, btnAlugarMv10};
-        javax.swing.JButton[] btnDetalhesMv = {btnDetalhesMv1, btnDetalhesMv2, btnDetalhesMv3, btnDetalhesMv4, btnDetalhesMv5, btnDetalhesMv6, btnDetalhesMv7, btnDetalhesMv8, btnDetalhesMv9, btnDetalhesMv10};
-        
-        for(int i = 0; i < 10 && i < listaFilmes.size(); i++){
-            Filmes filme = listaFilmes.get(i);
-            
-            listNomeMv[i].setText(filme.getNomeProd());
-            listDescMv[i].setText(Integer.toString(filme.getAno()) + " - A" + filme.getFaixaEtaria());
-            listPrecoMv[i].setText("R$ " + Double.toString(filme.getPreco()) + "0");
-            listAlugarMv[i].setEnabled(!filme.isAlugado());
-            if(!filme.isAlugado()){
-                listAlugarMv[i].setText("Alugar");
-            } else {
-                listAlugarMv[i].setText("Esgotado");
-            }
-            btnDetalhesMv[i].setEnabled(true);
-            detalhesMv[i] = "Gênero: " + filme.getGenero() + "\nDiretor: " + filme.getDiretor() + "\nAno: " + Integer.toString(filme.getAno()) +  "\nFaixa etária: " + filme.getFaixaEtaria() + " anos";
-        }
-    }
     
     private void menuVoltarLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarLojaActionPerformed
         new TelaPrincipal().setVisible(true);
@@ -2806,7 +3227,7 @@ public class Loja extends javax.swing.JFrame {
     }//GEN-LAST:event_menuVoltarLojaActionPerformed
 
     private void menuFinalizarLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFinalizarLojaActionPerformed
-        new FinalizarPedido().setVisible(true);
+        new FinalizarPedido(finalPedido).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_menuFinalizarLojaActionPerformed
 
@@ -2844,7 +3265,7 @@ public class Loja extends javax.swing.JFrame {
     }//GEN-LAST:event_menuSairLojaActionPerformed
 
     private void btnFinalizarLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarLojaActionPerformed
-        new FinalizarPedido().setVisible(true);
+        new FinalizarPedido(finalPedido).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnFinalizarLojaActionPerformed
 
@@ -2865,43 +3286,43 @@ public class Loja extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDetalhesMv10ActionPerformed
 
     private void btnDetalhesTab1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesTab1ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesTab[0]);
     }//GEN-LAST:event_btnDetalhesTab1ActionPerformed
 
     private void btnDetalhesTab2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesTab2ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesTab[1]);
     }//GEN-LAST:event_btnDetalhesTab2ActionPerformed
 
     private void btnDetalhesTab3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesTab3ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesTab[2]);
     }//GEN-LAST:event_btnDetalhesTab3ActionPerformed
 
     private void btnDetalhesTab4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesTab4ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesTab[3]);
     }//GEN-LAST:event_btnDetalhesTab4ActionPerformed
 
     private void btnDetalhesTab5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesTab5ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesTab[4]);
     }//GEN-LAST:event_btnDetalhesTab5ActionPerformed
 
     private void btnDetalhesTab6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesTab6ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesTab[5]);
     }//GEN-LAST:event_btnDetalhesTab6ActionPerformed
 
     private void btnDetalhesMus1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesMus1ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesMus[0]);
     }//GEN-LAST:event_btnDetalhesMus1ActionPerformed
 
     private void btnDetalhesMus2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesMus2ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesMus[1]);
     }//GEN-LAST:event_btnDetalhesMus2ActionPerformed
 
     private void btnDetalhesMus3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesMus3ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesMus[2]);
     }//GEN-LAST:event_btnDetalhesMus3ActionPerformed
 
     private void btnDetalhesMus7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesMus7ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesMus[6]);
     }//GEN-LAST:event_btnDetalhesMus7ActionPerformed
 
     private void btnDetalhesMus20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesMus20ActionPerformed
@@ -2909,81 +3330,244 @@ public class Loja extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDetalhesMus20ActionPerformed
 
     private void btnDetalhesMus4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesMus4ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesMus[3]);
     }//GEN-LAST:event_btnDetalhesMus4ActionPerformed
 
     private void btnDetalhesMus5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesMus5ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesMus[4]);
     }//GEN-LAST:event_btnDetalhesMus5ActionPerformed
 
     private void btnDetalhesMus6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesMus6ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesMus[5]);
     }//GEN-LAST:event_btnDetalhesMus6ActionPerformed
 
     private void btnDetalhesMus8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesMus8ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesMus[7]);
     }//GEN-LAST:event_btnDetalhesMus8ActionPerformed
 
     private void btnDetalhesMus9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesMus9ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesMus[8]);
     }//GEN-LAST:event_btnDetalhesMus9ActionPerformed
 
     private void btnDetalhesMus10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesMus10ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesMus[9]);
     }//GEN-LAST:event_btnDetalhesMus10ActionPerformed
 
     private void btnDetalhesVid1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesVid1ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesVid[0]);
     }//GEN-LAST:event_btnDetalhesVid1ActionPerformed
 
     private void btnDetalhesVid2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesVid2ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesVid[1]);
     }//GEN-LAST:event_btnDetalhesVid2ActionPerformed
 
     private void btnDetalhesVid3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesVid3ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesVid[2]);
     }//GEN-LAST:event_btnDetalhesVid3ActionPerformed
 
     private void btnDetalhesVid4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesVid4ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesVid[3]);
     }//GEN-LAST:event_btnDetalhesVid4ActionPerformed
 
     private void btnDetalhesVid5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesVid5ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesVid[4]);
     }//GEN-LAST:event_btnDetalhesVid5ActionPerformed
 
     private void btnDetalhesVid6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesVid6ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesVid[5]);
     }//GEN-LAST:event_btnDetalhesVid6ActionPerformed
 
     private void btnDetalhesVid7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesVid7ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesVid[6]);
     }//GEN-LAST:event_btnDetalhesVid7ActionPerformed
 
     private void btnDetalhesVid8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesVid8ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesVid[7]);
     }//GEN-LAST:event_btnDetalhesVid8ActionPerformed
 
     private void btnDetalhesVid9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesVid9ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesVid[8]);
     }//GEN-LAST:event_btnDetalhesVid9ActionPerformed
 
     private void btnDetalhesVid10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesVid10ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, detalhesVid[9]);
     }//GEN-LAST:event_btnDetalhesVid10ActionPerformed
 
     private void btnAlugarTab4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarTab4ActionPerformed
-        // TODO add your handling code here:
+        addItem(btnAlugarTab4, "Tab", 4);
     }//GEN-LAST:event_btnAlugarTab4ActionPerformed
 
     private void btnAlugarTab5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarTab5ActionPerformed
-        // TODO add your handling code here:
+        addItem(btnAlugarTab5, "Tab", 5);
     }//GEN-LAST:event_btnAlugarTab5ActionPerformed
 
     private void btnAlugarVid2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid2ActionPerformed
-        // TODO add your handling code here:
+        addItem(btnAlugarVid2, "Vid", 2);
     }//GEN-LAST:event_btnAlugarVid2ActionPerformed
 
+    private void btnAlugarMv1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv1ActionPerformed
+        addItem(btnAlugarMv1, "Mv", 1);
+    }//GEN-LAST:event_btnAlugarMv1ActionPerformed
+
+    private void btnAlugarMv2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv2ActionPerformed
+        addItem(btnAlugarMv2, "Mv", 2);
+    }//GEN-LAST:event_btnAlugarMv2ActionPerformed
+
+    private void btnAlugarMv3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv3ActionPerformed
+        addItem(btnAlugarMv3, "Mv", 3);
+    }//GEN-LAST:event_btnAlugarMv3ActionPerformed
+
+    private void btnAlugarMv4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv4ActionPerformed
+        addItem(btnAlugarMv4, "Mv", 4);
+    }//GEN-LAST:event_btnAlugarMv4ActionPerformed
+
+    private void btnAlugarMv5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv5ActionPerformed
+        addItem(btnAlugarMv5, "Mv", 5);
+    }//GEN-LAST:event_btnAlugarMv5ActionPerformed
+
+    private void btnAlugarMv6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv6ActionPerformed
+        addItem(btnAlugarMv6, "Mv", 6);
+    }//GEN-LAST:event_btnAlugarMv6ActionPerformed
+
+    private void btnAlugarMv7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv7ActionPerformed
+        addItem(btnAlugarMv7, "Mv", 7);
+    }//GEN-LAST:event_btnAlugarMv7ActionPerformed
+
+    private void btnAlugarMv8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv8ActionPerformed
+        addItem(btnAlugarMv8, "Mv", 8);
+    }//GEN-LAST:event_btnAlugarMv8ActionPerformed
+
+    private void btnAlugarMv9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv9ActionPerformed
+        addItem(btnAlugarMv9, "Mv", 9);
+    }//GEN-LAST:event_btnAlugarMv9ActionPerformed
+
+    private void btnAlugarMv10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv10ActionPerformed
+        addItem(btnAlugarMv10, "Mv", 10);
+    }//GEN-LAST:event_btnAlugarMv10ActionPerformed
+
+    private void btnAlugarMus1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus1ActionPerformed
+        addItem(btnAlugarMus1, "Mus", 1);
+    }//GEN-LAST:event_btnAlugarMus1ActionPerformed
+
+    private void btnAlugarMus2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus2ActionPerformed
+        addItem(btnAlugarMus2, "Mus", 2);
+    }//GEN-LAST:event_btnAlugarMus2ActionPerformed
+
+    private void btnAlugarMus3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus3ActionPerformed
+        addItem(btnAlugarMus3, "Mus", 3);
+    }//GEN-LAST:event_btnAlugarMus3ActionPerformed
+
+    private void btnAlugarMus4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus4ActionPerformed
+        addItem(btnAlugarMus4, "Mus", 4);
+    }//GEN-LAST:event_btnAlugarMus4ActionPerformed
+
+    private void btnAlugarMus5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus5ActionPerformed
+        addItem(btnAlugarMus5, "Mus", 5);
+    }//GEN-LAST:event_btnAlugarMus5ActionPerformed
+
+    private void btnAlugarMus6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus6ActionPerformed
+        addItem(btnAlugarMus6, "Mus", 6);
+    }//GEN-LAST:event_btnAlugarMus6ActionPerformed
+
+    private void btnAlugarMus7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus7ActionPerformed
+        addItem(btnAlugarMus7, "Mus", 7);
+    }//GEN-LAST:event_btnAlugarMus7ActionPerformed
+
+    private void btnAlugarMus8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus8ActionPerformed
+        addItem(btnAlugarMus8, "Mus", 8);
+    }//GEN-LAST:event_btnAlugarMus8ActionPerformed
+
+    private void btnAlugarMus9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus9ActionPerformed
+        addItem(btnAlugarMus9, "Mus", 9);
+    }//GEN-LAST:event_btnAlugarMus9ActionPerformed
+
+    private void btnAlugarMus10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus10ActionPerformed
+        addItem(btnAlugarMus10, "Mus", 10);
+    }//GEN-LAST:event_btnAlugarMus10ActionPerformed
+
+    private void btnAlugarTab1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarTab1ActionPerformed
+        addItem(btnAlugarTab1, "Tab", 1);
+    }//GEN-LAST:event_btnAlugarTab1ActionPerformed
+
+    private void btnAlugarTab2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarTab2ActionPerformed
+        addItem(btnAlugarTab2, "Tab", 2);
+    }//GEN-LAST:event_btnAlugarTab2ActionPerformed
+
+    private void btnAlugarTab3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarTab3ActionPerformed
+        addItem(btnAlugarTab3, "Tab", 3);
+    }//GEN-LAST:event_btnAlugarTab3ActionPerformed
+
+    private void btnAlugarTab6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarTab6ActionPerformed
+        addItem(btnAlugarTab6, "Tab", 6);
+    }//GEN-LAST:event_btnAlugarTab6ActionPerformed
+
+    private void btnAlugarVid1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid1ActionPerformed
+        addItem(btnAlugarVid1, "Vid", 1);
+    }//GEN-LAST:event_btnAlugarVid1ActionPerformed
+
+    private void btnAlugarVid3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid3ActionPerformed
+        addItem(btnAlugarVid3, "Vid", 3);
+    }//GEN-LAST:event_btnAlugarVid3ActionPerformed
+
+    private void btnAlugarVid4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid4ActionPerformed
+        addItem(btnAlugarVid4, "Vid", 4);
+    }//GEN-LAST:event_btnAlugarVid4ActionPerformed
+
+    private void btnAlugarVid5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid5ActionPerformed
+        addItem(btnAlugarVid5, "Vid", 5);
+    }//GEN-LAST:event_btnAlugarVid5ActionPerformed
+
+    private void btnAlugarVid6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid6ActionPerformed
+        addItem(btnAlugarVid6, "Vid", 6);
+    }//GEN-LAST:event_btnAlugarVid6ActionPerformed
+
+    private void btnAlugarVid7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid7ActionPerformed
+        addItem(btnAlugarVid7, "Vid", 7);
+    }//GEN-LAST:event_btnAlugarVid7ActionPerformed
+
+    private void btnAlugarVid8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid8ActionPerformed
+        addItem(btnAlugarVid8, "Vid", 8);
+    }//GEN-LAST:event_btnAlugarVid8ActionPerformed
+
+    private void btnAlugarVid9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid9ActionPerformed
+        addItem(btnAlugarVid9, "Vid", 9);
+    }//GEN-LAST:event_btnAlugarVid9ActionPerformed
+
+    private void btnAlugarVid10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid10ActionPerformed
+        addItem(btnAlugarVid10, "Vid", 10);
+    }//GEN-LAST:event_btnAlugarVid10ActionPerformed
+
+    private void btnAddCartLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCartLojaActionPerformed
+        int quant = tempPedido.size();
+        
+        for(int i = 0; i < quant; i++){
+            Produtos item = tempPedido.get(i);
+            javax.swing.JRadioButton btn = tempBtnSelected.get(i);
+            
+            if(finalPedido.contains(item)){ // removeu do carrinho
+                btn.setText("Alugar");
+                
+                finalPedido.remove(item);
+                
+                valorTotal -= item.getPreco();
+                
+            } else { // adicionou ao carrinho
+                btn.setText("Remover do carrinho");
+                
+                finalPedido.add(item);
+                
+                valorTotal += item.getPreco();
+                
+            }
+            btn.setSelected(false);
+        }
+        
+        tempBtnSelected.clear();
+        tempPedido.clear();
+        
+        lblCartLoja.setText("Carrinho: " + finalPedido.size() + " itens - R$ " + valorTotal + "0");
+    }//GEN-LAST:event_btnAddCartLojaActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -3015,7 +3599,7 @@ public class Loja extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Loja().setVisible(true);
+                new Loja(finalPedido).setVisible(true);
             }
         });
     }

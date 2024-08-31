@@ -4,20 +4,57 @@
  */
 package telas;
 
+import boxbuster.Produtos;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Adm
  */
 public class FinalizarPedido extends javax.swing.JFrame {
 
+    static private ArrayList<Produtos> listaPedido;
+    
+    double valorTotal = 0;
+    
     /**
      * Creates new form CarrinhoScr
      */
-    public FinalizarPedido() {
+    public FinalizarPedido(ArrayList<Produtos> pedidoIn) {
+        listaPedido = pedidoIn;
+        
         setLocationRelativeTo(null);
         initComponents();
+        
+        updateProdList();
+        
+        lblValor.setText("Valor total: R$ " + valorTotal + "0");
     }
 
+    private void updateProdList() {        
+        
+        DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Nº", "Título", "Preço"}, 0);
+        valorTotal = 0;
+
+        for(int i = 0; i < listaPedido.size(); i++){
+            Object linha[] = new Object[]{
+            i+1,
+            listaPedido.get(i).getNomeProd(),
+            "R$ " + listaPedido.get(i).getPreco()+ "0"}; 
+
+            tabela.addRow(linha);
+            valorTotal += listaPedido.get(i).getPreco();
+        }
+        
+        tableCart.setModel(tabela);
+        
+        tableCart.getColumnModel().getColumn(0).setPreferredWidth(20);
+        tableCart.getColumnModel().getColumn(1).setPreferredWidth(200);
+        tableCart.getColumnModel().getColumn(2).setPreferredWidth(60);
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -159,8 +196,13 @@ public class FinalizarPedido extends javax.swing.JFrame {
             }
         });
 
-        btnPronto.setText("Pronto");
+        btnPronto.setText("Confirmar");
         btnPronto.setEnabled(false);
+        btnPronto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProntoActionPerformed(evt);
+            }
+        });
 
         lblFinalizacao.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblFinalizacao.setText("Finalização:");
@@ -188,7 +230,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         lblFilial.setText("Filial: -----");
 
         lblValor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblValor.setText("Valor total: R$ 00,00");
+        lblValor.setText("Valor total: R$ --.--");
 
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -407,7 +449,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuVoltarCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarCartActionPerformed
-        new Loja().setVisible(true);
+        new Loja(listaPedido).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_menuVoltarCartActionPerformed
 
@@ -432,7 +474,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_menuSairCartActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        new Loja().setVisible(true);
+        new Loja(listaPedido).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
@@ -440,6 +482,10 @@ public class FinalizarPedido extends javax.swing.JFrame {
         new CadastroCliente().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnFinalizarActionPerformed
+
+    private void btnProntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProntoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnProntoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -474,7 +520,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FinalizarPedido().setVisible(true);
+                new FinalizarPedido(listaPedido).setVisible(true);
             }
         });
     }

@@ -9,16 +9,16 @@ import boxbuster.Jogos;
 public class Videogames extends Jogos{
     private String genero;
     private String plataforma;
-    private String estudio;
+    private String desenvolvedor;
 
     public Videogames() {
     }
     
-    public Videogames(String nomeProd, double preco, int ano, int codigoProd, int faixaEtaria, boolean alugado, int numJogadores, String genero, String plataforma, String autor) {
+    public Videogames(String nomeProd, double preco, int ano, int codigoProd, String faixaEtaria, boolean alugado, int numJogadores, String genero, String plataforma, String desenvolvedor) {
         super(nomeProd, preco, ano, codigoProd, faixaEtaria, alugado, numJogadores);
         this.genero = genero;
         this.plataforma = plataforma;
-        this.estudio = autor;
+        this.desenvolvedor = desenvolvedor;
     }
     
     public String getGenero() {
@@ -37,17 +37,17 @@ public class Videogames extends Jogos{
         this.plataforma = console;
     }
 
-    public String getEstudio() {
-        return estudio;
+    public String getDesenvolvedor() {
+        return desenvolvedor;
     }
 
-    public void setEstudio(String autor) {
-        this.estudio = autor;
+    public void setDesenvolvedor(String autor) {
+        this.desenvolvedor = autor;
     }
     
     @Override
     public String toString() {
-        return "Videogame " + super.toString() + " " + genero + " " + plataforma + " " + estudio;
+        return "Videogame_" + super.toString() + "_" + genero + "_" + plataforma + "_" + desenvolvedor;
     }
     
 }

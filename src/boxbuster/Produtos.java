@@ -1,7 +1,7 @@
 package boxbuster;
 
 import java.util.ArrayList;
-import boxbuster.Musica;
+import boxbuster.Musicas;
 import boxbuster.Jogos;
 import boxbuster.Filmes;
 
@@ -14,13 +14,13 @@ public abstract class Produtos {
     private double preco;
     private int ano;
     private int codigoProd;
-    private int faixaEtaria;
+    private String faixaEtaria;
     private boolean alugado;
     
     public Produtos() {
     }
 
-    public Produtos(String nomeProd, double preco, int ano, int codigoProd, int faixaEtaria, boolean alugado) {
+    public Produtos(String nomeProd, double preco, int ano, int codigoProd, String faixaEtaria, boolean alugado) {
         this.nomeProd = nomeProd;
         this.preco = preco;
         this.ano = ano;
@@ -61,11 +61,11 @@ public abstract class Produtos {
         this.codigoProd = codigoProd;
     }
 
-    public int getFaixaEtaria() {
+    public String getFaixaEtaria() {
         return faixaEtaria;
     }
 
-    public void setFaixaEtaria(int faixaEtaria) {
+    public void setFaixaEtaria(String faixaEtaria) {
         this.faixaEtaria = faixaEtaria;
     }
     
@@ -79,7 +79,7 @@ public abstract class Produtos {
 
     @Override
     public String toString() {
-        return nomeProd + " " + preco + " " + ano + " " + codigoProd + " " + faixaEtaria + " " + nomeProd + " " + alugado;
+        return nomeProd + "_" + preco + "_" + ano + "_" + codigoProd + "_" + faixaEtaria + "_" + alugado;
     }
     
     
