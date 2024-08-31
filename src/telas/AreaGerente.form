@@ -174,7 +174,7 @@
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="txtfDataEq" min="-2" pref="100" max="-2" attributes="0"/>
-                                              <Component id="txtfCPF" min="-2" pref="111" max="-2" attributes="0"/>
+                                              <Component id="txtfCPFEq" min="-2" pref="111" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -188,7 +188,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="lblGerente" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="cmbGerente" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cmbGerenteEq" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
@@ -232,7 +232,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="txtfCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtfCPFEq" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblCPF" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -250,7 +250,7 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="lblGerente" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cmbGerente" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cmbGerenteEq" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -284,6 +284,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtfCodigoEq">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtfCodigoEqActionPerformed"/>
                   </Events>
@@ -293,9 +296,12 @@
                     <Property name="text" type="java.lang.String" value="CPF:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtfCPF">
+                <Component class="javax.swing.JTextField" name="txtfCPFEq">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtfCPFActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtfCPFEqActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblTipoEq">
@@ -312,6 +318,7 @@
                         <StringItem index="2" value="Gerente"/>
                       </StringArray>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -323,6 +330,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtfNomeEq">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtfNomeEqActionPerformed"/>
                   </Events>
@@ -333,6 +343,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtfDataEq">
+                  <Properties>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtfDataEqActionPerformed"/>
                   </Events>
@@ -342,13 +355,14 @@
                     <Property name="text" type="java.lang.String" value="Gerente:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="cmbGerente">
+                <Component class="javax.swing.JComboBox" name="cmbGerenteEq">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
                         <StringItem index="0" value="Selecione"/>
                       </StringArray>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -374,11 +388,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Editar"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarEqActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnPesquisarEq">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Pesquisar"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarEqActionPerformed"/>
+                  </Events>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="scrlEquipe">
                   <AuxValues>
@@ -437,6 +457,7 @@
                 <Component class="javax.swing.JButton" name="btnConfirmarEq">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Confirmar"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfirmarEqActionPerformed"/>
@@ -445,7 +466,11 @@
                 <Component class="javax.swing.JButton" name="btnCancelarEq">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Cancelar"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarEqActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

@@ -37,6 +37,7 @@ public class AreaGerente extends javax.swing.JFrame {
     
     BancoDeDadosFuncionarios bdFunc = new BancoDeDadosFuncionarios("funcionarios.txt");
     ArrayList<String> funcionarios = new ArrayList<>();
+    int totalFunc = 0;
 
     /**
      * Creates new form AreaGerente
@@ -50,6 +51,7 @@ public class AreaGerente extends javax.swing.JFrame {
         cont = Estoque.getCont()+1;
         
         updateProdList();
+        updateFuncionarios();
     }
 
     private void updateProdList() {
@@ -74,6 +76,9 @@ public class AreaGerente extends javax.swing.JFrame {
     }
     
     private void updateFuncionarios() {
+        
+        //atualiza tabela de funcionarios
+        tableEquipe.removeAll();
         funcionarios = bdFunc.lerPessoas();
         
         DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Nome", "CPF", "Data de Nascimento", "Código", "Cargo", "Gerente"}, 0);
@@ -96,9 +101,29 @@ public class AreaGerente extends javax.swing.JFrame {
             tabela.addRow(linha);
         }
         
-        tableEquipe.setModel(tabela);        
+        tableEquipe.setModel(tabela);
+        
+        //atualiza total de caixas e gerentes
+        int[] quant = bdFunc.quantidades();
+        lblTotalCaixas.setText("Total de caixas: "+ quant[0]);
+        lblTotalGerentes.setText("Total de gerentes: "+ quant[1]);
+        totalFunc = quant[0]+quant[1];
+        
+        //atualiza combo box de gerentes
+        cmbGerenteEq.removeAllItems();
+        cmbGerenteEq.addItem("Selecione");
+        
+        String[] linha;
+        String nomeGerente;
+        
+        for(int i=0;i<funcionarios.size();i++){
+            linha = funcionarios.get(i).split(" ");
+            if(linha[5].equals("Gerente")){
+                nomeGerente = linha[0];
+                cmbGerenteEq.addItem(nomeGerente);
+            }
+        }
     }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -116,7 +141,7 @@ public class AreaGerente extends javax.swing.JFrame {
         lblCodigoEq = new javax.swing.JLabel();
         txtfCodigoEq = new javax.swing.JTextField();
         lblCPF = new javax.swing.JLabel();
-        txtfCPF = new javax.swing.JTextField();
+        txtfCPFEq = new javax.swing.JTextField();
         lblTipoEq = new javax.swing.JLabel();
         cmbTipoEq = new javax.swing.JComboBox<>();
         lblNomeEq = new javax.swing.JLabel();
@@ -124,7 +149,7 @@ public class AreaGerente extends javax.swing.JFrame {
         lblDataEq = new javax.swing.JLabel();
         txtfDataEq = new javax.swing.JTextField();
         lblGerente = new javax.swing.JLabel();
-        cmbGerente = new javax.swing.JComboBox<>();
+        cmbGerenteEq = new javax.swing.JComboBox<>();
         btnVoltarEq = new javax.swing.JButton();
         btnNovoFunc = new javax.swing.JButton();
         btnEditarEq = new javax.swing.JButton();
@@ -185,6 +210,7 @@ public class AreaGerente extends javax.swing.JFrame {
 
         lblCodigoEq.setText("Código:");
 
+        txtfCodigoEq.setEnabled(false);
         txtfCodigoEq.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtfCodigoEqActionPerformed(evt);
@@ -193,18 +219,21 @@ public class AreaGerente extends javax.swing.JFrame {
 
         lblCPF.setText("CPF:");
 
-        txtfCPF.addActionListener(new java.awt.event.ActionListener() {
+        txtfCPFEq.setEnabled(false);
+        txtfCPFEq.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfCPFActionPerformed(evt);
+                txtfCPFEqActionPerformed(evt);
             }
         });
 
         lblTipoEq.setText("Tipo:");
 
         cmbTipoEq.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Caixa", "Gerente" }));
+        cmbTipoEq.setEnabled(false);
 
         lblNomeEq.setText("Nome:");
 
+        txtfNomeEq.setEnabled(false);
         txtfNomeEq.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtfNomeEqActionPerformed(evt);
@@ -213,6 +242,7 @@ public class AreaGerente extends javax.swing.JFrame {
 
         lblDataEq.setText("Data de nasc.:");
 
+        txtfDataEq.setEnabled(false);
         txtfDataEq.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtfDataEqActionPerformed(evt);
@@ -221,7 +251,8 @@ public class AreaGerente extends javax.swing.JFrame {
 
         lblGerente.setText("Gerente:");
 
-        cmbGerente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
+        cmbGerenteEq.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
+        cmbGerenteEq.setEnabled(false);
 
         btnVoltarEq.setText("Voltar");
         btnVoltarEq.addActionListener(new java.awt.event.ActionListener() {
@@ -238,8 +269,18 @@ public class AreaGerente extends javax.swing.JFrame {
         });
 
         btnEditarEq.setText("Editar");
+        btnEditarEq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarEqActionPerformed(evt);
+            }
+        });
 
         btnPesquisarEq.setText("Pesquisar");
+        btnPesquisarEq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarEqActionPerformed(evt);
+            }
+        });
 
         tableEquipe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -252,6 +293,7 @@ public class AreaGerente extends javax.swing.JFrame {
         scrlEquipe.setViewportView(tableEquipe);
 
         btnConfirmarEq.setText("Confirmar");
+        btnConfirmarEq.setEnabled(false);
         btnConfirmarEq.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarEqActionPerformed(evt);
@@ -259,6 +301,12 @@ public class AreaGerente extends javax.swing.JFrame {
         });
 
         btnCancelarEq.setText("Cancelar");
+        btnCancelarEq.setEnabled(false);
+        btnCancelarEq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarEqActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlEquipeLayout = new javax.swing.GroupLayout(pnlEquipe);
         pnlEquipe.setLayout(pnlEquipeLayout);
@@ -300,7 +348,7 @@ public class AreaGerente extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtfDataEq, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtfCPFEq, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEquipeLayout.createSequentialGroup()
@@ -310,7 +358,7 @@ public class AreaGerente extends javax.swing.JFrame {
                             .addGroup(pnlEquipeLayout.createSequentialGroup()
                                 .addComponent(lblGerente)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbGerente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cmbGerenteEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(77, 77, 77))))
             .addGroup(pnlEquipeLayout.createSequentialGroup()
                 .addGap(179, 179, 179)
@@ -343,7 +391,7 @@ public class AreaGerente extends javax.swing.JFrame {
                         .addComponent(lblNomeEq))
                     .addGroup(pnlEquipeLayout.createSequentialGroup()
                         .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfCPFEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblCPF))
                         .addGap(18, 18, 18)
                         .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -357,7 +405,7 @@ public class AreaGerente extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblGerente)
-                            .addComponent(cmbGerente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cmbGerenteEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(53, 53, 53)
                 .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVoltarEq)
@@ -774,9 +822,9 @@ public class AreaGerente extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_menuVoltarAreaGrActionPerformed
 
-    private void txtfCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfCPFActionPerformed
+    private void txtfCPFEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfCPFEqActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtfCPFActionPerformed
+    }//GEN-LAST:event_txtfCPFEqActionPerformed
 
     private void txtfDataEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfDataEqActionPerformed
         // TODO add your handling code here:
@@ -1108,12 +1156,92 @@ public class AreaGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarEqActionPerformed
 
     private void btnNovoFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoFuncActionPerformed
-        // TODO add your handling code here:
+        action = "new";
+        enableEquipe();
     }//GEN-LAST:event_btnNovoFuncActionPerformed
 
     private void btnConfirmarEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEqActionPerformed
-        // TODO add your handling code here:
+        if(action == "new"){
+            if(txtfCodigoEq.getText().equals("")|| txtfNomeEq.getText().equals("")|| txtfDataEq.getText().equals("")||
+                    txtfCPFEq.getText().equals("")||cmbTipoEq.getSelectedIndex()==0||(cmbTipoEq.getSelectedIndex()==1 && cmbGerenteEq.getSelectedIndex()==0)){
+                JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            }
+            else{
+                // lidar com objetos ou strings?
+                // setar senha
+            }
+            updateFuncionarios();
+        }
+        else if(action == "edit"){
+            int i = tableEquipe.getSelectedRow();
+        
+            if(i >= 0 && i < totalFunc) {
+                // mesma coisa
+            }
+            updateFuncionarios();
+        }
+        else if(action == "search"){
+            funcionarios = bdFunc.lerPessoas();
+            tableEquipe.removeAll();
+            DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Nome", "CPF", "Data de Nascimento", "Código", "Cargo", "Gerente"}, 0);
+
+            String nome = txtfNomeEq.getText(),
+                    cpf = txtfCPFEq.getText(),
+                    data = txtfDataEq.getText(),
+                    codigo = txtfCodigoEq.getText(),
+                    tipo = cmbTipoEq.getSelectedItem().toString(),
+                    gerente = cmbGerenteEq.getSelectedItem().toString();
+            if(tipo.equals("Selecione")){
+                tipo = "";
+            }
+            for(String func : funcionarios){
+                System.out.println("entrou funcionario");
+                
+                String[] f = func.split(" ");
+                if(f[0].contains(nome) &&
+                        f[1].contains(cpf) &&
+                        f[2].contains(data) &&
+                        f[4].contains(codigo) &&
+                        f[5].contains(tipo)){
+                    System.out.println("passou");
+                    if(!tipo.equals("Caixa") || f[8].equals(gerente)){
+                        System.out.println("passou real");
+                        String g = "--";
+                        if(f[5].equals("Caixa")){
+                            g = f[8];
+                        }
+                        Object linha[] = new Object[]{
+                        f[0],
+                        f[1],
+                        f[2],
+                        f[4],
+                        f[5],
+                        g};
+
+                        tabela.addRow(linha);
+                        System.out.println("colocou linha");
+                    }
+                }
+            }
+            tableEquipe.setModel(tabela);
+            System.out.println("setou tabela");
+        }
+        disableEquipe();
     }//GEN-LAST:event_btnConfirmarEqActionPerformed
+
+    private void btnEditarEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEqActionPerformed
+        action = "edit";        
+        enableEquipe();
+    }//GEN-LAST:event_btnEditarEqActionPerformed
+
+    private void btnPesquisarEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarEqActionPerformed
+        action = "search";        
+        enableEquipe();
+    }//GEN-LAST:event_btnPesquisarEqActionPerformed
+
+    private void btnCancelarEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEqActionPerformed
+        disableEquipe();
+    }//GEN-LAST:event_btnCancelarEqActionPerformed
 
     public void disableBaseFields(){
         cmbTipoProd.setEnabled(false);
@@ -1127,6 +1255,21 @@ public class AreaGerente extends javax.swing.JFrame {
         btnCancelarEst.setEnabled(false);
     }
     
+    public void disableEquipe(){
+        cmbTipoEq.setEnabled(false);
+        cmbGerenteEq.setEnabled(false);
+        txtfDataEq.setEnabled(false);
+        txtfCPFEq.setEnabled(false);
+        txtfNomeEq.setEnabled(false);
+        txtfCodigoEq.setEnabled(false);
+        txtfDataEq.setText("");
+        txtfCPFEq.setText("");
+        txtfNomeEq.setText("");
+        txtfCodigoEq.setText("");
+        btnConfirmarEq.setEnabled(false);
+        btnCancelarEq.setEnabled(false);
+    }
+    
     public void enableBaseFields(){
         cmbTipoProd.setEnabled(true);
         checkAlugado.setEnabled(true);
@@ -1137,6 +1280,17 @@ public class AreaGerente extends javax.swing.JFrame {
         txtfNome.setEnabled(true);
         txtfAno.setEnabled(true);
         btnCancelarEst.setEnabled(true);
+    }
+    
+    public void enableEquipe(){
+        cmbTipoEq.setEnabled(true);
+        cmbGerenteEq.setEnabled(true);
+        txtfDataEq.setEnabled(true);
+        txtfCPFEq.setEnabled(true);
+        txtfNomeEq.setEnabled(true);
+        txtfCodigoEq.setEnabled(true);
+        btnConfirmarEq.setEnabled(true);
+        btnCancelarEq.setEnabled(true);
     }
     
     public void clearFields(){
@@ -1202,7 +1356,7 @@ public class AreaGerente extends javax.swing.JFrame {
     private javax.swing.JButton btnVoltarEq;
     private javax.swing.JButton btnVoltarEst;
     private javax.swing.JCheckBox checkAlugado;
-    private javax.swing.JComboBox<String> cmbGerente;
+    private javax.swing.JComboBox<String> cmbGerenteEq;
     private javax.swing.JComboBox<String> cmbTipoEq;
     private javax.swing.JComboBox<String> cmbTipoProd;
     private javax.swing.JLabel lblAno;
@@ -1239,7 +1393,7 @@ public class AreaGerente extends javax.swing.JFrame {
     private javax.swing.JTable tableEquipe;
     private javax.swing.JTable tableProdutos;
     private javax.swing.JTextField txtfAno;
-    private javax.swing.JTextField txtfCPF;
+    private javax.swing.JTextField txtfCPFEq;
     private javax.swing.JTextField txtfCodigoEq;
     private javax.swing.JTextField txtfCodigoProd;
     private javax.swing.JTextField txtfDataEq;
