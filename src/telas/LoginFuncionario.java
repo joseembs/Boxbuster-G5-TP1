@@ -232,18 +232,18 @@ public class LoginFuncionario extends javax.swing.JFrame {
             if(pessoa.size() == 0){
                 JOptionPane.showMessageDialog(null, "Não existe funcionário com este código.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
             }
-            else if(!pessoa[5].equals(tipo)){
+            else if(!pessoa.get(5).equals(tipo)){
                 //JOptionPane.showMessageDialog(null, "O tipo está incorreto.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                 JOptionPane.showMessageDialog(null, pessoa, "Mensagem", JOptionPane.PLAIN_MESSAGE);
             }
-            else if(!pessoa[3].equals(senha)){
+            else if(!pessoa.get(3).equals(senha)){
                 JOptionPane.showMessageDialog(null, "A senha está incorreta.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
             }
             else{
                 if(tipo.equals("Caixa")){
                     AreaCaixa telaCaixa = new AreaCaixa();
                     
-                    String nome = pessoa[0], CPF = pessoa[1], dataString = pessoa[2], cod = pessoa[4];
+                    String nome = pessoa.get(0), CPF = pessoa.get(1), dataString = pessoa.get(2), cod = pessoa.get(4);
                     
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     Date data = null;
