@@ -285,6 +285,7 @@ public class AreaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLojaMainActionPerformed
 
     private void btnDeslogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeslogarActionPerformed
+        BancoDeDadosClientes.setCliente_atual(null);
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnDeslogarActionPerformed
