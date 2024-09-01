@@ -609,6 +609,8 @@ public class FinalizarPedido extends javax.swing.JFrame {
                 txtfCPF.setEnabled(false);
                 txtfDataNascimento.setEnabled(false);
                 txtfSenha.setEnabled(false);
+                txtfSenha.setVisible(false);
+                lblSenha.setVisible(false);
                 btnLogin.setEnabled(false);
 
             }
@@ -640,6 +642,8 @@ public class FinalizarPedido extends javax.swing.JFrame {
                     txtfCPF.setEnabled(false);
                     txtfDataNascimento.setEnabled(false);
                     txtfSenha.setEnabled(false);
+                    txtfSenha.setVisible(false);
+                    lblSenha.setVisible(false);
                     btnLogin.setEnabled(false);
 
                 }
@@ -668,6 +672,8 @@ public class FinalizarPedido extends javax.swing.JFrame {
                         txtfCPF.setEnabled(false);
                         txtfDataNascimento.setEnabled(false);
                         txtfSenha.setEnabled(false);
+                        txtfSenha.setVisible(false);
+                        lblSenha.setVisible(false);
                         btnLogin.setEnabled(false);
                     }
                 }
@@ -716,6 +722,8 @@ public class FinalizarPedido extends javax.swing.JFrame {
                             txtfCPF.setEnabled(false);
                             txtfDataNascimento.setEnabled(false);
                             txtfSenha.setEnabled(false);
+                            txtfSenha.setVisible(false);
+                            lblSenha.setVisible(false);
                             btnLogin.setEnabled(false);
                         }
                     }
