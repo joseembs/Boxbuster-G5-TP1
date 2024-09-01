@@ -11,7 +11,7 @@ public class Caixa extends Funcionario {
         super(senha, codigoFunc, nome, cpf, dataNascimento);
         this.gerente = gerente;
     }
-
+ 
     public Gerente getGerente() {
         return gerente;
     }
@@ -65,5 +65,4 @@ public class Caixa extends Funcionario {
     public String toString() {
         return super.toString() + " Caixa " + "Gerenciado por " + gerente.getNome();
     }
-
 }
