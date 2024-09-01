@@ -14,6 +14,18 @@ import java.util.ArrayList;
 
 public class BancoDeDadosClientes implements BancoDeDados{
     private String arquivo;
+    
+    private static Cliente cliente_atual;
+
+    public static Cliente getCliente_atual() {
+        return cliente_atual;
+    }
+
+    public static void setCliente_atual(Cliente cliente_atual) {
+        BancoDeDadosClientes.cliente_atual = cliente_atual;
+    }
+    
+    
 
     public BancoDeDadosClientes(String arquivo) {
         this.arquivo = arquivo;

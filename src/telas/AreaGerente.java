@@ -190,6 +190,7 @@ public class AreaGerente extends javax.swing.JFrame {
         btnCancelarEst = new javax.swing.JButton();
         scrlProdutos = new javax.swing.JScrollPane();
         tableProdutos = new javax.swing.JTable();
+        btnEditarProd1 = new javax.swing.JButton();
         menuBarAreaGr = new javax.swing.JMenuBar();
         menuAreaGr = new javax.swing.JMenu();
         menuVoltarAreaGr = new javax.swing.JMenuItem();
@@ -575,6 +576,13 @@ public class AreaGerente extends javax.swing.JFrame {
         });
         scrlProdutos.setViewportView(tableProdutos);
 
+        btnEditarProd1.setText("Excluir");
+        btnEditarProd1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarProd1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlEstoqueLayout = new javax.swing.GroupLayout(pnlEstoque);
         pnlEstoque.setLayout(pnlEstoqueLayout);
         pnlEstoqueLayout.setHorizontalGroup(
@@ -610,7 +618,9 @@ public class AreaGerente extends javax.swing.JFrame {
                                 .addGap(26, 26, 26)
                                 .addComponent(btnPesquisarProd)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnEditarProd)))
+                                .addComponent(btnEditarProd)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEditarProd1)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(pnlEstoqueLayout.createSequentialGroup()
@@ -631,7 +641,7 @@ public class AreaGerente extends javax.swing.JFrame {
                         .addComponent(lblTipoProd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbTipoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
                         .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblQuantTipo)
                             .addGroup(pnlEstoqueLayout.createSequentialGroup()
@@ -666,7 +676,8 @@ public class AreaGerente extends javax.swing.JFrame {
                     .addComponent(btnPesquisarProd)
                     .addComponent(btnNovoProd)
                     .addComponent(btnVoltarEst)
-                    .addComponent(btnEditarProd))
+                    .addComponent(btnEditarProd)
+                    .addComponent(btnEditarProd1))
                 .addGap(18, 18, 18)
                 .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlEstoqueLayout.createSequentialGroup()
@@ -716,7 +727,7 @@ public class AreaGerente extends javax.swing.JFrame {
                         .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblVar4)
                             .addComponent(txtfVar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCancelarEst, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnConfirmarEst, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -737,7 +748,7 @@ public class AreaGerente extends javax.swing.JFrame {
         );
         pnlGerenteLayout.setVerticalGroup(
             pnlGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 526, Short.MAX_VALUE)
+            .addGap(0, 530, Short.MAX_VALUE)
             .addGroup(pnlGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlGerenteLayout.createSequentialGroup()
                     .addComponent(tabbedPnlGerente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -902,7 +913,9 @@ public class AreaGerente extends javax.swing.JFrame {
             txtfVar3.setEnabled(false);
             txtfVar4.setEnabled(false);
 
-            btnConfirmarEst.setEnabled(false);
+            if(!action.equals("search")){
+                btnConfirmarEst.setEnabled(false);
+            }
         } 
     }//GEN-LAST:event_cmbTipoProdActionPerformed
 
@@ -925,12 +938,91 @@ public class AreaGerente extends javax.swing.JFrame {
     private void btnConfirmarEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEstActionPerformed
         rowClick = -1;
         
-        if(action.equals("new") || action.equals("edit")) {
+        if(action.equals("delete")){
+            String prodType = (String) cmbTipoProd.getSelectedItem();
+            
+            if (prodType.equals("Filme")){
+                Estoque.getListaFilmes().remove(selectedProdInd);
+            } else if (prodType.equals("Música")){
+                Estoque.getListaMusicas().remove(selectedProdInd);
+            } else if (prodType.equals("Tabuleiro")){
+                Estoque.getListaTabuleiros().remove(selectedProdInd);
+            } else if (prodType.equals("Videogame")){
+                Estoque.getListaVideogames().remove(selectedProdInd);
+            } 
+            
+            Estoque.reescreverEstoque();
+            updateProdList();
+            
+            clearFields();
+            
+        } else if(action == "search"){
+            tableProdutos.removeAll();
+            DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Código", "Tipo", "Nome", "Faixa", "Ano", "Preço", "Alugado"}, 0);
+
+            String tipo = (String) cmbTipoProd.getSelectedItem(),
+                    codigo = txtfCodigoProd.getText(),
+                    faixaEtaria = txtfFaixaEtaria.getText(),
+                    preco = txtfPreco.getText(),
+                    nome = txtfNome.getText(),
+                    ano = txtfAno.getText(),
+                    alugado = String.valueOf(checkAlugado.isSelected()),
+                    var1 = txtfVar1.getText(),
+                    var2 = txtfVar2.getText(),
+                    var3 = txtfVar3.getText(),
+                    var4 = txtfVar4.getText();
+            if(tipo.equals("Selecione")){
+                tipo = "";
+            }
+            for(Produtos prod : allProducts){
+                
+                String[] info = prod.toString().split("_");
+                
+                boolean ok3 = true;
+                boolean ok4 = true;
+                
+                if(info.length >= 10 && !info[9].contains(var3)){
+                    ok3 = false;
+                }
+                if(info.length >= 11 && !info[10].contains(var4)){
+                    ok4 = false;
+                }
+                
+                if(info[0].contains(tipo) &&
+                        info[1].contains(nome) &&
+                        info[2].contains(preco) &&
+                        info[3].contains(ano) &&
+                        info[4].contains(codigo) &&
+                        info[5].contains(faixaEtaria) &&
+                        info[6].contains(alugado) &&
+                        info[7].contains(var1) &&
+                        info[8].contains(var2) &&
+                        ok3 && ok4){
+                    System.out.println("achou");
+                    
+
+                    Object linha[] = new Object[]{
+                    info[4],
+                    info[0]+"s",
+                    info[1],
+                    info[5],
+                    info[3],
+                    info[2],
+                    info[6]};
+
+                    tabela.addRow(linha);
+                    System.out.println("colocou linha");
+                    
+                }
+            }
+            tableProdutos.setModel(tabela);
+    
+        } else if(action.equals("new") || action.equals("edit")) {
             int codigo = Integer.parseInt(txtfCodigoProd.getText());
-            String faixaEtaria = txtfFaixaEtaria.getText();
-            String preco = txtfPreco.getText();
-            String nome = txtfNome.getText();
-            String ano = txtfAno.getText();
+            String faixaEtaria = txtfFaixaEtaria.getText(),
+                    preco = txtfPreco.getText(),
+                    nome = txtfNome.getText(),
+                    ano = txtfAno.getText();
             boolean alugado = checkAlugado.isSelected();
 
             String prodType = (String) cmbTipoProd.getSelectedItem();
@@ -942,9 +1034,9 @@ public class AreaGerente extends javax.swing.JFrame {
                 ok = false;
             } else {
                 if (prodType.equals("Filme")){
-                    String genero = txtfVar1.getText();
-                    String estudio = txtfVar2.getText();
-                    String diretor = txtfVar3.getText();
+                    String genero = txtfVar1.getText(),
+                            estudio = txtfVar2.getText(),
+                            diretor = txtfVar3.getText();
 
                     if(genero.isEmpty() || estudio.isEmpty() || diretor.isEmpty()){
                         JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
@@ -960,8 +1052,8 @@ public class AreaGerente extends javax.swing.JFrame {
                         }
                     }
                 } else if (prodType.equals("Música")){
-                    String estilo = txtfVar1.getText();
-                    String autor = txtfVar2.getText();
+                    String estilo = txtfVar1.getText(),
+                            autor = txtfVar2.getText();
 
                     if(estilo.isEmpty() || autor.isEmpty()){
                         JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
@@ -977,9 +1069,9 @@ public class AreaGerente extends javax.swing.JFrame {
                         }
                     }
                 } else if (prodType.equals("Tabuleiro")){
-                    String tipo = txtfVar1.getText();
-                    String marca = txtfVar2.getText();
-                    String numJogadores = txtfVar3.getText();
+                    String tipo = txtfVar1.getText(),
+                            marca = txtfVar2.getText(),
+                            numJogadores = txtfVar3.getText();
 
                     if(tipo.isEmpty() || marca.isEmpty() || numJogadores.isEmpty()){
                         JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
@@ -993,13 +1085,12 @@ public class AreaGerente extends javax.swing.JFrame {
                             Estoque.addTabuleiro(newTabuleiro);
                             Estoque.salvarProduto(newTabuleiro);
                         }
-                        
                     }
                 } else if (prodType.equals("Videogame")){
-                    String genero = txtfVar1.getText();
-                    String estudio = txtfVar2.getText();
-                    String numJogadores = txtfVar3.getText();
-                    String plataforma = txtfVar4.getText();
+                    String genero = txtfVar1.getText(),
+                            estudio = txtfVar2.getText(),
+                            numJogadores = txtfVar3.getText(),
+                            plataforma = txtfVar4.getText();
 
                     if(genero.isEmpty() || estudio.isEmpty() || numJogadores.isEmpty() || plataforma.isEmpty()){
                         JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
@@ -1019,23 +1110,32 @@ public class AreaGerente extends javax.swing.JFrame {
                 if(ok){
                     cont++;
                     Estoque.setCont(cont);
+                    Estoque.reescreverEstoque();
 
                     updateProdList();
 
                     disableBaseFields();
                     clearFields();
 
-                    JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso.");
+                    switch(action){
+                        case "new":
+                            JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso.");
+                            break;
+                        case "edit":
+                            JOptionPane.showMessageDialog(null, "Produto editado com sucesso.");
+                            break;
+                        case "delete":
+                            JOptionPane.showMessageDialog(null, "Produto deletado com sucesso.");
+                            break;
+                    }
                 }
             }
-        } else if (action.equals("edit")){
-            
-            
-            Estoque.reescreverEstoque();
-            updateProdList();
         }
         
-        action = "confirm";
+        if(!action.equals("search")){
+            action = "confirm";
+        }
+        cont = Estoque.getCont()+1;
     }//GEN-LAST:event_btnConfirmarEstActionPerformed
 
     private void btnCancelarEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEstActionPerformed
@@ -1045,6 +1145,8 @@ public class AreaGerente extends javax.swing.JFrame {
         
         disableBaseFields();
         clearFields();
+        
+        updateProdList();
     }//GEN-LAST:event_btnCancelarEstActionPerformed
 
     private void btnPesquisarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarProdActionPerformed
@@ -1061,6 +1163,7 @@ public class AreaGerente extends javax.swing.JFrame {
         }
         
         enableBaseFields();
+        btnConfirmarEst.setEnabled(true);
     }//GEN-LAST:event_btnPesquisarProdActionPerformed
 
     private void tableProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProdutosMouseClicked
@@ -1114,7 +1217,7 @@ public class AreaGerente extends javax.swing.JFrame {
                 txtfVar3.setText(Integer.toString(((Videogames) selectedProd).getNumJogadores()));
                 txtfVar4.setText(((Videogames) selectedProd).getPlataforma());
             }
-            if(action.equals("confirm") || action.equals("cancel")){
+            if(action.equals("confirm") || action.equals("cancel") || action.equals("delete")){
                 disableBaseFields();
             
                 txtfVar1.setEnabled(false);
@@ -1122,7 +1225,9 @@ public class AreaGerente extends javax.swing.JFrame {
                 txtfVar3.setEnabled(false);
                 txtfVar4.setEnabled(false);
                 
-                btnConfirmarEst.setEnabled(false);
+                if(!action.equals("delete")){
+                    btnConfirmarEst.setEnabled(false);
+                }
             } else {
                 enableBaseFields();
             }
@@ -1161,7 +1266,7 @@ public class AreaGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoFuncActionPerformed
 
     private void btnConfirmarEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEqActionPerformed
-        if(action == "new"){
+        if("new".equals(action)){
             if(txtfCodigoEq.getText().equals("")|| txtfNomeEq.getText().equals("")|| txtfDataEq.getText().equals("")||
                     txtfCPFEq.getText().equals("")||cmbTipoEq.getSelectedIndex()==0||(cmbTipoEq.getSelectedIndex()==1 && cmbGerenteEq.getSelectedIndex()==0)){
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
@@ -1172,7 +1277,7 @@ public class AreaGerente extends javax.swing.JFrame {
             }
             updateFuncionarios();
         }
-        else if(action == "edit"){
+        else if("edit".equals(action)){
             int i = tableEquipe.getSelectedRow();
         
             if(i >= 0 && i < totalFunc) {
@@ -1180,7 +1285,7 @@ public class AreaGerente extends javax.swing.JFrame {
             }
             updateFuncionarios();
         }
-        else if(action == "search"){
+        else if("search".equals(action)){
             funcionarios = bdFunc.lerPessoas();
             tableEquipe.removeAll();
             DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Nome", "CPF", "Data de Nascimento", "Código", "Cargo", "Gerente"}, 0);
@@ -1220,6 +1325,67 @@ public class AreaGerente extends javax.swing.JFrame {
 
                         tabela.addRow(linha);
                         System.out.println("colocou linha");
+
+                        //TESTE DE PESQUISA POR OBJETO E NÃO POR STRING (NÃO FUNCIONA)
+                        
+                        /*
+                        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                        Date d = new Date();
+                        
+                        for(String func : funcionarios){
+                            System.out.println("entrou funcionario");
+                            
+                            String[] f = func.split(" ");
+                            
+                            try {
+                                System.out.println(f[2]);
+                                d = formato.parse(f[2]);
+                            } catch (ParseException ex) {
+                                Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            System.out.println(f[5]);
+                            if(f[5].equals("Gerente")){
+                                Gerente g = new Gerente(f[3], Integer.parseInt(f[4]), f[0], f[1], d);
+                                if(g.getNome().contains(nome) &&
+                                        g.getCpf().contains(cpf) &&
+                                        g.getDataNascimento().toString().contains(data) &&
+                                        String.valueOf(g.getCodigoFunc()).contains(codigo) &&
+                                        "Gerente".contains(tipo)){
+            
+                                    Object linha[] = new Object[]{
+                                        g.getNome(),
+                                        g.getCpf(),
+                                        g.getDataNascimento(),
+                                        g.getCodigoFunc(),
+                                        "Gerente",
+                                        "--"};
+            
+                                    tabela.addRow(linha);
+                                }
+                            }
+                            else if(f[5].equals("Caixa")){
+                                System.out.print(d);
+                                Caixa g = new Caixa(new Gerente(f[8]), f[3], Integer.parseInt(f[4]), f[0], f[1], d);
+                            
+                                if(g.getNome().contains(nome) &&
+                                        g.getCpf().contains(cpf) &&
+                                        g.getDataNascimento().toString().contains(data) &&
+                                        String.valueOf(g.getCodigoFunc()).contains(codigo) &&
+                                        "Caixa".contains(tipo) &&
+                                        g.getGerente().getNome().contains(gerente)){
+            
+                                    Object linha[] = new Object[]{
+                                        g.getNome(),
+                                        g.getCpf(),
+                                        g.getDataNascimento(),
+                                        g.getCodigoFunc(),
+                                        "Gerente",
+                                        g.getGerente()};
+            
+                                    tabela.addRow(linha);
+                                }
+                            }
+                        }*/
                     }
                 }
             }
@@ -1242,6 +1408,26 @@ public class AreaGerente extends javax.swing.JFrame {
     private void btnCancelarEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEqActionPerformed
         disableEquipe();
     }//GEN-LAST:event_btnCancelarEqActionPerformed
+
+    private void btnEditarProd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProd1ActionPerformed
+        action = "delete";
+        
+        if (rowClick >= 0 && rowClick < allProducts.size()){
+            //cmbTipoProd.setSelectedItem(cmbTipoProd.getSelectedItem()); //caso o usuário clique no botão após escolher um produto reseta a combo box para os campos específicos ativarem
+            
+            Produtos selectedProd = allProducts.get(rowClick);
+            
+            txtfCodigoProd.setText(Integer.toString(selectedProd.getCodigoProd()));
+            
+            //enableBaseFields();
+            
+            btnConfirmarEst.setEnabled(true);
+        } else {
+            txtfCodigoProd.setText("");
+            disableBaseFields();
+        }
+        btnCancelarEst.setEnabled(true);
+    }//GEN-LAST:event_btnEditarProd1ActionPerformed
 
     public void disableBaseFields(){
         cmbTipoProd.setEnabled(false);
@@ -1349,6 +1535,7 @@ public class AreaGerente extends javax.swing.JFrame {
     private javax.swing.JButton btnConfirmarEst;
     private javax.swing.JButton btnEditarEq;
     private javax.swing.JButton btnEditarProd;
+    private javax.swing.JButton btnEditarProd1;
     private javax.swing.JButton btnNovoFunc;
     private javax.swing.JButton btnNovoProd;
     private javax.swing.JButton btnPesquisarEq;
