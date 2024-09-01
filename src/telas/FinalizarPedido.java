@@ -80,7 +80,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
             btnLogin.setEnabled(false);
         }
         
-        
+        setDates();
         
         lblValor.setText("Valor total: R$ " + valorTotal + "0");
     }
