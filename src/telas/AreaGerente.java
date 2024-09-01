@@ -11,12 +11,19 @@ import boxbuster.Musicas;
 import boxbuster.Produtos;
 import boxbuster.Tabuleiros;
 import boxbuster.Videogames;
+import boxbuster.Gerente;
+import boxbuster.Caixa;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -38,6 +45,7 @@ public class AreaGerente extends javax.swing.JFrame {
     BancoDeDadosFuncionarios bdFunc = new BancoDeDadosFuncionarios("funcionarios.txt");
     ArrayList<String> funcionarios = new ArrayList<>();
     int totalFunc = 0;
+    ArrayList<String> funcAtual;
 
     /**
      * Creates new form AreaGerente
@@ -291,6 +299,11 @@ public class AreaGerente extends javax.swing.JFrame {
                 "Código", "Cargo", "Nome", "Data de nasc.", "Pedidos"
             }
         ));
+        tableEquipe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableEquipeMouseClicked(evt);
+            }
+        });
         scrlEquipe.setViewportView(tableEquipe);
 
         btnConfirmarEq.setText("Confirmar");
@@ -1272,8 +1285,37 @@ public class AreaGerente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
             }
             else{
-                // lidar com objetos ou strings?
-                // setar senha
+                String nome = txtfNomeEq.getText(),
+                    cpf = txtfCPFEq.getText(),
+                    dataString = txtfDataEq.getText(),
+                    codigoString = txtfCodigoEq.getText(),
+                    tipo = cmbTipoEq.getSelectedItem().toString(),
+                    gerenteString = cmbGerenteEq.getSelectedItem().toString(),
+                    senha;
+                
+                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                Date data = null;
+                try {
+                    data = formato.parse(dataString);
+                } catch (ParseException ex) {
+                    Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                int codigo = Integer.parseInt(codigoString);
+                
+                senha = JOptionPane.showInputDialog(null, "Determine uma senha para o novo funcionário", "Definição de senha", JOptionPane.PLAIN_MESSAGE);
+                
+                if(tipo.equals("Gerente")){
+                    Gerente funcionario = new Gerente(senha, codigo, nome, cpf, data);
+                    bdFunc.adicionarPessoa(funcionario);
+                }
+                else if(tipo.equals("Caixa")){
+                    Gerente gerente = bdFunc.buscarGerente(gerenteString);
+                    Caixa funcionario = new Caixa(gerente, senha, codigo, nome, cpf, data);
+                    bdFunc.adicionarPessoa(funcionario);
+                }
+                
+                // !!! editar gerente no bd quando criar um novo caixa?
             }
             updateFuncionarios();
         }
@@ -1281,12 +1323,47 @@ public class AreaGerente extends javax.swing.JFrame {
             int i = tableEquipe.getSelectedRow();
         
             if(i >= 0 && i < totalFunc) {
-                // mesma coisa
-            }
+                if(txtfCodigoEq.getText().equals("")|| txtfNomeEq.getText().equals("")|| txtfDataEq.getText().equals("")||
+                    txtfCPFEq.getText().equals("")||cmbTipoEq.getSelectedIndex()==0||(cmbTipoEq.getSelectedIndex()==1 && cmbGerenteEq.getSelectedIndex()==0)){
+                    JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                }
+                else{
+                    String nome = txtfNomeEq.getText(),
+                        cpf = txtfCPFEq.getText(),
+                        dataString = txtfDataEq.getText(),
+                        codigoString = txtfCodigoEq.getText(),
+                        tipo = cmbTipoEq.getSelectedItem().toString(),
+                        gerenteString = cmbGerenteEq.getSelectedItem().toString(),
+                        senha = funcAtual.get(3); // a senha não pode ser alterada
+
+                    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                    Date data = null;
+                    try {
+                        data = formato.parse(dataString);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    int codigo = Integer.parseInt(codigoString);
+                    
+                    // txt: Nome cpf data senha código tipo etc
+                    
+                    bdFunc.removerPessoa(funcAtual.get(1)); // remove funcionario pelo cpf
+                                    
+                    if(tipo.equals("Gerente")){
+                        Gerente funcionario = new Gerente(senha, codigo, nome, cpf, data);
+                        bdFunc.adicionarPessoa(funcionario);
+                    }
+                    else if(tipo.equals("Caixa")){
+                        Gerente gerente = bdFunc.buscarGerente(gerenteString);
+                        Caixa funcionario = new Caixa(gerente, senha, codigo, nome, cpf, data);
+                        bdFunc.adicionarPessoa(funcionario);
+                    }
+                }
+            }   
             updateFuncionarios();
         }
         else if("search".equals(action)){
-            funcionarios = bdFunc.lerPessoas();
             tableEquipe.removeAll();
             DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Nome", "CPF", "Data de Nascimento", "Código", "Cargo", "Gerente"}, 0);
 
@@ -1300,7 +1377,6 @@ public class AreaGerente extends javax.swing.JFrame {
                 tipo = "";
             }
             for(String func : funcionarios){
-                System.out.println("entrou funcionario");
                 
                 String[] f = func.split(" ");
                 if(f[0].contains(nome) &&
@@ -1308,9 +1384,7 @@ public class AreaGerente extends javax.swing.JFrame {
                         f[2].contains(data) &&
                         f[4].contains(codigo) &&
                         f[5].contains(tipo)){
-                    System.out.println("passou");
                     if(!tipo.equals("Caixa") || f[8].equals(gerente)){
-                        System.out.println("passou real");
                         String g = "--";
                         if(f[5].equals("Caixa")){
                             g = f[8];
@@ -1324,7 +1398,6 @@ public class AreaGerente extends javax.swing.JFrame {
                         g};
 
                         tabela.addRow(linha);
-                        System.out.println("colocou linha");
 
                         //TESTE DE PESQUISA POR OBJETO E NÃO POR STRING (NÃO FUNCIONA)
                         
@@ -1390,7 +1463,6 @@ public class AreaGerente extends javax.swing.JFrame {
                 }
             }
             tableEquipe.setModel(tabela);
-            System.out.println("setou tabela");
         }
         disableEquipe();
     }//GEN-LAST:event_btnConfirmarEqActionPerformed
@@ -1428,6 +1500,36 @@ public class AreaGerente extends javax.swing.JFrame {
         }
         btnCancelarEst.setEnabled(true);
     }//GEN-LAST:event_btnEditarProd1ActionPerformed
+
+    private void tableEquipeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableEquipeMouseClicked
+        int row = tableEquipe.getSelectedRow();
+        
+        if (row >= 0 && row < funcionarios.size()){
+            txtfNomeEq.setText(tableEquipe.getModel().getValueAt(row, 0).toString());
+            txtfCPFEq.setText(tableEquipe.getModel().getValueAt(row, 1).toString());
+            txtfDataEq.setText(tableEquipe.getModel().getValueAt(row, 2).toString());
+            txtfCodigoEq.setText(tableEquipe.getModel().getValueAt(row, 3).toString());
+            
+            if(tableEquipe.getModel().getValueAt(row, 4).toString().equals("Caixa")){
+                cmbTipoEq.setSelectedIndex(1);
+            }
+            else{
+                cmbTipoEq.setSelectedIndex(2);
+            }
+            
+            for(int i = 0; i < cmbGerenteEq.getItemCount(); i++){
+                if(cmbGerenteEq.getItemAt(i).equals(tableEquipe.getModel().getValueAt(row, 5).toString())){
+                    cmbGerenteEq.setSelectedIndex(i);
+                    break;
+                }
+            }
+            
+            funcAtual = bdFunc.buscarPessoa(txtfNomeEq.getText() + " " +
+                    txtfCPFEq.getText() + " " +
+                    txtfDataEq.getText() + " ");
+            //{"Nome", "CPF", "Data de Nascimento", "Código", "Cargo", "Gerente"}
+        }
+    }//GEN-LAST:event_tableEquipeMouseClicked
 
     public void disableBaseFields(){
         cmbTipoProd.setEnabled(false);
