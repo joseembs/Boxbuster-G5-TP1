@@ -731,7 +731,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
                 }
                 else{
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-                    String[] palavras = lista.get(0).split(" ");
+                    String[] palavras = lista.get(0).split("_");
                     if (palavras[0].equals("Visitante")){
                         JOptionPane.showMessageDialog(null, "Esse CPF está associado à um visitante.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                     }
