@@ -63,6 +63,6 @@ public class Caixa extends Funcionario {
     
     @Override
     public String toString() {
-        return super.toString() + " Caixa " + "Gerenciado por " + gerente.getNome();
+        return super.toString() + "_Caixa_" + "Gerenciado_por_" + gerente.getNome();
     }
 }
