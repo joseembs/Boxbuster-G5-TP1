@@ -93,7 +93,7 @@ public class AreaGerente extends javax.swing.JFrame {
         String[] palavras;
         
         for(int i = 0; i < funcionarios.size(); i++){
-            palavras = funcionarios.get(i).split(" ");
+            palavras = funcionarios.get(i).split("_");
             String gerente = "--";
             if(palavras[5].equals("Caixa")){
                 gerente = palavras[8];
@@ -125,7 +125,7 @@ public class AreaGerente extends javax.swing.JFrame {
         String nomeGerente;
         
         for(int i=0;i<funcionarios.size();i++){
-            linha = funcionarios.get(i).split(" ");
+            linha = funcionarios.get(i).split("_");
             if(linha[5].equals("Gerente")){
                 nomeGerente = linha[0];
                 cmbGerenteEq.addItem(nomeGerente);
@@ -1349,7 +1349,7 @@ public class AreaGerente extends javax.swing.JFrame {
                     // txt: Nome cpf data senha código tipo etc
                     
                     bdFunc.removerPessoa(funcAtual.get(1)); // remove funcionario pelo cpf
-                                    
+
                     if(tipo.equals("Gerente")){
                         Gerente funcionario = new Gerente(senha, codigo, nome, cpf, data);
                         bdFunc.adicionarPessoa(funcionario);
@@ -1378,7 +1378,7 @@ public class AreaGerente extends javax.swing.JFrame {
             }
             for(String func : funcionarios){
                 
-                String[] f = func.split(" ");
+                String[] f = func.split("_");
                 if(f[0].contains(nome) &&
                         f[1].contains(cpf) &&
                         f[2].contains(data) &&
