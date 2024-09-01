@@ -5,6 +5,7 @@
 package telas;
 
 import boxbuster.BancoDeDadosClientes;
+import boxbuster.BancoDeDadosFuncionarios;
 import boxbuster.Cadastrado;
 import boxbuster.Pedido;
 import boxbuster.Produtos;
@@ -42,6 +43,8 @@ public class FinalizarPedido extends javax.swing.JFrame {
         initComponents();
         
         updateProdTable();
+        updateCmbCaixa();
+        
         if(BancoDeDadosClientes.getCliente_atual() == null){
             txtfNome.setEnabled(false);
             lblNome.setVisible(false);
@@ -107,6 +110,26 @@ public class FinalizarPedido extends javax.swing.JFrame {
         tableCart.getColumnModel().getColumn(1).setPreferredWidth(200);
         tableCart.getColumnModel().getColumn(2).setPreferredWidth(60);
         
+    }
+    
+    private void updateCmbCaixa(){
+        //atualiza combo box de caixas
+        cmbCaixa.removeAllItems();
+        cmbCaixa.addItem("Selecione");
+        
+        String[] linha;
+        String nomeCaixa;
+        
+        BancoDeDadosFuncionarios bdFunc = new BancoDeDadosFuncionarios("funcionarios.txt");
+        ArrayList<String> funcionarios = bdFunc.lerPessoas();
+        
+        for(int i=0;i<funcionarios.size();i++){
+            linha = funcionarios.get(i).split("_");
+            if(linha[5].equals("Caixa")){
+                nomeCaixa = linha[0];
+                cmbCaixa.addItem(nomeCaixa);
+            }
+        }
     }
     
     
