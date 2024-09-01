@@ -156,7 +156,6 @@ public class Estoque {
              PrintWriter out = new PrintWriter(bw)) {
             for(int i = 0; i < listaTemp.size(); i++){
                 out.println(listaTemp.get(i).toString());
-                out.println("-------------------------------------------");
             }
         } catch (IOException e) {
             e.printStackTrace();

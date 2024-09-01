@@ -16,7 +16,7 @@ import java.util.Collections;
 public class BancoDeDadosClientes implements BancoDeDados{
     private String arquivo;
     
-    private static Cliente clienteAtual;
+    private static Cliente clienteAtual = null;
 
     public static Cliente getCliente_atual() {
         return clienteAtual;
