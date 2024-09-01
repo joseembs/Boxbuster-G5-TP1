@@ -163,6 +163,11 @@ public class CadastroCliente extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtfDataNascimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfDataNascimentoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlCadCliLayout = new javax.swing.GroupLayout(pnlCadCli);
         pnlCadCli.setLayout(pnlCadCliLayout);
@@ -585,6 +590,10 @@ public class CadastroCliente extends javax.swing.JFrame {
     private void menuSairCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairCadCliActionPerformed
         System.exit(0);
     }//GEN-LAST:event_menuSairCadCliActionPerformed
+
+    private void txtfDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfDataNascimentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfDataNascimentoActionPerformed
 
     /**
      * @param args the command line arguments
