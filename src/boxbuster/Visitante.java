@@ -75,7 +75,7 @@ public class Visitante extends Cliente {
         ArrayList<Alugar> alugados = getAlugados();
  
         for (int i = 0; i < alugados.size(); i++) {
-            totalDivida += alugados.get(i).getProduto().getPreco();
+            //totalDivida += alugados.get(i).getProduto().getPreco();
         }
 
         setDivida(totalDivida);

@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -15,15 +16,16 @@ import java.util.ArrayList;
 public class BancoDeDadosClientes implements BancoDeDados{
     private String arquivo;
     
-    private static Cliente cliente_atual;
+    private static Cliente clienteAtual;
 
     public static Cliente getCliente_atual() {
-        return cliente_atual;
+        return clienteAtual;
     }
 
     public static void setCliente_atual(Cliente cliente_atual) {
-        BancoDeDadosClientes.cliente_atual = cliente_atual;
+        BancoDeDadosClientes.clienteAtual = cliente_atual;
     }
+    
     
     
 
@@ -32,15 +34,28 @@ public class BancoDeDadosClientes implements BancoDeDados{
     }
 
     public void adicionarPessoa(Cliente cliente) {
-    try (FileWriter fw = new FileWriter(arquivo, true);
-         BufferedWriter bw = new BufferedWriter(fw);
-         PrintWriter out = new PrintWriter(bw)) {
-        out.println(cliente.toString());
-        out.println("-------------------------------------------"); 
-    } catch (IOException e) {
-        e.printStackTrace();
+        try (FileWriter fw = new FileWriter(arquivo, true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+            out.println(cliente.toString());
+            out.println("-------------------------------------------"); 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-}
+    
+    // chamada pela AreaCliente, usa o cliente logado para achar todos os aluguéis dele
+    public static ArrayList<Alugar> getHistoricoCliente(Cliente clienteAtual){
+        ArrayList<Alugar> historico = new ArrayList<>();
+        
+        for(Alugar tempAluguel : Pedido.getMapPedidos().values()){
+            if(clienteAtual.equals(tempAluguel.getClienteCPF())){
+                historico.add(tempAluguel);
+            }
+        }
+    
+        return historico;
+    }
 
     @Override
     public ArrayList<String> lerPessoas() {
@@ -83,8 +98,88 @@ public class BancoDeDadosClientes implements BancoDeDados{
         return lista;
     }
     
+    public void removerPessoa(String CPF) {
+        ArrayList<String> linhas = new ArrayList<>();
+
+
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
+            String linha;
+            boolean encontrouCPF = false;
+
+            while ((linha = br.readLine()) != null) {
+                if (linha.contains(CPF)) {
+                    encontrouCPF = true;
+                    while (!linha.equals("-------------------------------------------")) {
+                        linha = br.readLine(); 
+                    }
+                    linha = br.readLine();
+                    
+                } else {
+                    linhas.add(linha); 
+                }
+            }
+
+            if (!encontrouCPF) {
+                System.out.println("Cliente com CPF " + CPF + " não encontrado.");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo))) {
+            for (String linha : linhas) {
+                bw.write(linha);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    public void adicionarItem(String CPF, ArrayList<String> itens) {
+        ArrayList<String> linhas = new ArrayList<>();
+        Collections.reverse(itens);
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
+            String linha;
+           
+
+            while ((linha = br.readLine()) != null) {
+                if (linha.contains(CPF)) {
+                    linhas.add(linha); 
+                    for (String novaLinha : itens) {
+                        linhas.add(novaLinha); 
+                    }
+                    while (!linha.equals("-------------------------------------------")) {
+                        linha = br.readLine(); 
+                    }
+                } else {
+                    linhas.add(linha); 
+                }
+            }
+
+            
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo))) {
+            for (String linha : linhas) {
+                bw.write(linha);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
  
 }
+
+
 
 
 
