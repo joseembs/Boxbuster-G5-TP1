@@ -72,10 +72,10 @@ public class Gerente extends Funcionario {
 
     @Override
     public String toString() {
-        String aux = super.toString() + " Gerente gerencia";
+        String aux = super.toString() + "_Gerente_gerencia";
         if(!caixas.isEmpty()){
             for (Caixa caixa : caixas) {
-                aux += " " + caixa.getNome();
+                aux += "_" + caixa.getNome();
             }
         }
         return aux;
