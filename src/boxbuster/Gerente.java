@@ -11,11 +11,16 @@ import java.util.Date;
 public class Gerente extends Funcionario {
     protected ArrayList<Caixa> caixas;
 
-    public Gerente(/*Caixa[] caixas,*/ String senha, int codigoFunc, String nome, String cpf, Date dataNascimento) {
-        super(senha, codigoFunc, nome, cpf, dataNascimento);
+    public Gerente(String nome) {
+        super(nome);
         this.caixas = new ArrayList<Caixa>();
     }
 
+    public Gerente(String senha, int codigoFunc, String nome, String cpf, Date dataNascimento) {
+        super(senha, codigoFunc, nome, cpf, dataNascimento);
+        this.caixas = new ArrayList<Caixa>();
+    }
+    
     public ArrayList<Caixa> getCaixas() {
         return caixas;
     }
@@ -39,8 +44,6 @@ public class Gerente extends Funcionario {
     public Date getDataNascimento() {
         return dataNascimento;
     }
-
-    
 
     public void setCaixas(Caixa caixa) {
         this.caixas.add(caixa);
@@ -77,5 +80,4 @@ public class Gerente extends Funcionario {
         }
         return aux;
     }
-      
 }
