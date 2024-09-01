@@ -27,7 +27,6 @@ public class Alugar {
     public Alugar(String pagamentoIn, Caixa caixaIn) {
         this.codigoPedido = Pedido.getCodigoPedido();
         
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         this.dataPedido = new Date();
         
         Calendar endDate = Calendar.getInstance();

@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,6 +42,8 @@ public class FinalizarPedido extends javax.swing.JFrame {
         initComponents();
         
         updateProdTable();
+        
+        setDates();
         
         txtfNome.setEnabled(false);
         lblNome.setVisible(false);
@@ -84,6 +87,23 @@ public class FinalizarPedido extends javax.swing.JFrame {
         
     }
     
+    
+    private void setDates() {
+        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+        Date dataAtual = new Date();
+        
+        String dataAtualForm = formatador.format(dataAtual);
+        lblDataAtual.setText("Data atual: " + dataAtualForm);
+        
+        Calendar endDate = Calendar.getInstance();
+        endDate.setTime(dataAtual);
+        endDate.add(Calendar.DATE, 30);
+        
+        Date dataDevolucao = endDate.getTime();
+        
+        String dataFinalForm = formatador.format(dataDevolucao);
+        lblDataFinal.setText("Data máx. de devolução: " + dataFinalForm);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
