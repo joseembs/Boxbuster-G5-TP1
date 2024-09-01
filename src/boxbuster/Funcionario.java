@@ -28,6 +28,6 @@ public abstract class Funcionario extends Pessoa {
     
     @Override
     public String toString() {
-        return super.toString() + " " + senha + " " + codigoFunc;
+        return super.toString() + "_" + senha + "_" + codigoFunc;
     }
 }
