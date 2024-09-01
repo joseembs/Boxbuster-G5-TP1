@@ -1325,6 +1325,67 @@ public class AreaGerente extends javax.swing.JFrame {
 
                         tabela.addRow(linha);
                         System.out.println("colocou linha");
+
+                        //TESTE DE PESQUISA POR OBJETO E NÃO POR STRING (NÃO FUNCIONA)
+                        
+                        /*
+                        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                        Date d = new Date();
+                        
+                        for(String func : funcionarios){
+                            System.out.println("entrou funcionario");
+                            
+                            String[] f = func.split(" ");
+                            
+                            try {
+                                System.out.println(f[2]);
+                                d = formato.parse(f[2]);
+                            } catch (ParseException ex) {
+                                Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            System.out.println(f[5]);
+                            if(f[5].equals("Gerente")){
+                                Gerente g = new Gerente(f[3], Integer.parseInt(f[4]), f[0], f[1], d);
+                                if(g.getNome().contains(nome) &&
+                                        g.getCpf().contains(cpf) &&
+                                        g.getDataNascimento().toString().contains(data) &&
+                                        String.valueOf(g.getCodigoFunc()).contains(codigo) &&
+                                        "Gerente".contains(tipo)){
+            
+                                    Object linha[] = new Object[]{
+                                        g.getNome(),
+                                        g.getCpf(),
+                                        g.getDataNascimento(),
+                                        g.getCodigoFunc(),
+                                        "Gerente",
+                                        "--"};
+            
+                                    tabela.addRow(linha);
+                                }
+                            }
+                            else if(f[5].equals("Caixa")){
+                                System.out.print(d);
+                                Caixa g = new Caixa(new Gerente(f[8]), f[3], Integer.parseInt(f[4]), f[0], f[1], d);
+                            
+                                if(g.getNome().contains(nome) &&
+                                        g.getCpf().contains(cpf) &&
+                                        g.getDataNascimento().toString().contains(data) &&
+                                        String.valueOf(g.getCodigoFunc()).contains(codigo) &&
+                                        "Caixa".contains(tipo) &&
+                                        g.getGerente().getNome().contains(gerente)){
+            
+                                    Object linha[] = new Object[]{
+                                        g.getNome(),
+                                        g.getCpf(),
+                                        g.getDataNascimento(),
+                                        g.getCodigoFunc(),
+                                        "Gerente",
+                                        g.getGerente()};
+            
+                                    tabela.addRow(linha);
+                                }
+                            }
+                        }*/
                     }
                 }
             }
