@@ -37,20 +37,22 @@ public class Alugar {
         
         this.pagamento = pagamentoIn;
         
-        this.clienteCPF = BancoDeDadosClientes.getCliente_atual().getCpf();
+        this.clienteCPF = BancoDeDadosClientes.getCliente_atual().getCPF();
         
         //this.caixaCodigo = caixaIn.get;
         
         this.listaProdutos = Pedido.getPedidoAtual();
     }
 
-    public Alugar(String codigoPedido, String dataPedido, String dataDevolucao, String pagamento, String clienteCPF, String caixaCodigo, String[] listaCodigos) {
+    public Alugar(String codigoPedido, String dataPedido, String dataDevolucao, String pagamento, String clienteCPF, String caixaCodigo, String codigos) {
         this.codigoPedido = Integer.parseInt(codigoPedido);
         //this.dataPedido = dataPedido;
         //this.dataDevolucao = dataDevolucao;
         this.pagamento = pagamento;
         this.clienteCPF = clienteCPF;
         this.caixaCodigo = caixaCodigo;
+        
+        String[] listaCodigos = codigos.split(" ");
         
         ArrayList<Produtos> listaProdutos = new ArrayList<>();
         for(int i = 0; i < listaCodigos.length; i++){
@@ -115,6 +117,6 @@ public class Alugar {
             codigosProd = codigosProd + " " + Integer.toString(prod.getCodigoProd());
         }
         
-        return Integer.toString(codigoPedido) + " " + dataPedido + " " + dataDevolucao + codigosProd;
+        return Integer.toString(codigoPedido) + "_" + dataPedido + "_" + dataDevolucao + codigosProd;
     }
 }

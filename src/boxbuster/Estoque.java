@@ -104,6 +104,19 @@ public class Estoque {
         Estoque.cont = cont;
     }
     
+    // chamada para preencher as tabelas, usa o codigoProd salvo pelos Alugar para retornar o produto alugado 
+    static public Produtos getProdutoPorCodigo(int codigoProd){
+        Produtos produto = null;
+        
+        for(Produtos tempProduto : Estoque.getListaProdutos()){
+            if(codigoProd == tempProduto.getCodigoProd()){
+                produto = tempProduto;
+            }
+        }
+        
+        return produto;
+    }
+    
     static private String arquivo = "estoque.txt";
 
     static public void salvarProduto(Produtos item) {
@@ -133,19 +146,6 @@ public class Estoque {
         });
         
         return listaProdutos;
-    }
-    
-    // chamada para preencher as tabelas, usa o codigoProd salvo pelos Alugar para retornar o produto alugado 
-    static public Produtos getProdutoPorCodigo(int codigoProd){
-        Produtos produto = null;
-        
-        for(Produtos tempProduto : Estoque.getListaProdutos()){
-            if(codigoProd == tempProduto.getCodigoProd()){
-                produto = tempProduto;
-            }
-        }
-        
-        return produto;
     }
     
     static public void reescreverEstoque() {
@@ -179,7 +179,7 @@ public class Estoque {
         return produtos;
     }
     
-    static public void loadEstoque() {
+    static public ArrayList<Produtos> loadEstoque() {
         Estoque.setListaFilmes(new ArrayList<>());
         Estoque.setListaMusicas(new ArrayList<>());
         Estoque.setListaTabuleiros(new ArrayList<>());
@@ -213,6 +213,8 @@ public class Estoque {
         cont = temp;
         
         System.out.println(cont);
+        
+        return atualizarLista();
     }
     
     public String buscarProduto(int codigo) {
