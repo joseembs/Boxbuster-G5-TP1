@@ -133,7 +133,7 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;
             while ((linha = br.readLine()) != null) {
-                palavras = linha.split(" ");
+                palavras = linha.split("_");
                 if(palavras[0].equals(nome) && palavras[5].equals("Gerente")){
                     return new Gerente(nome);
                 }
@@ -166,7 +166,7 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
             String linha;
             while ((linha = br.readLine()) != null) {
                 if (linha.contains(busca)) {
-                    for(String i : linha.split(" ")){
+                    for(String i : linha.split("_")){
                         ans.add(i);
                     }
                     return ans;
