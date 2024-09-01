@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -24,6 +25,7 @@ public class BancoDeDadosClientes implements BancoDeDados{
     public static void setCliente_atual(Cliente cliente_atual) {
         BancoDeDadosClientes.cliente_atual = cliente_atual;
     }
+    
     
     
 
@@ -83,8 +85,88 @@ public class BancoDeDadosClientes implements BancoDeDados{
         return lista;
     }
     
+    public void removerPessoa(String CPF) {
+        ArrayList<String> linhas = new ArrayList<>();
+
+
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
+            String linha;
+            boolean encontrouCPF = false;
+
+            while ((linha = br.readLine()) != null) {
+                if (linha.contains(CPF)) {
+                    encontrouCPF = true;
+                    while (!linha.equals("-------------------------------------------")) {
+                        linha = br.readLine(); 
+                    }
+                    linha = br.readLine();
+                    
+                } else {
+                    linhas.add(linha); 
+                }
+            }
+
+            if (!encontrouCPF) {
+                System.out.println("Cliente com CPF " + CPF + " não encontrado.");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo))) {
+            for (String linha : linhas) {
+                bw.write(linha);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    public void adicionarItem(String CPF, ArrayList<String> itens) {
+        ArrayList<String> linhas = new ArrayList<>();
+        Collections.reverse(itens);
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
+            String linha;
+           
+
+            while ((linha = br.readLine()) != null) {
+                if (linha.contains(CPF)) {
+                    linhas.add(linha); 
+                    for (String novaLinha : itens) {
+                        linhas.add(novaLinha); 
+                    }
+                    while (!linha.equals("-------------------------------------------")) {
+                        linha = br.readLine(); 
+                    }
+                } else {
+                    linhas.add(linha); 
+                }
+            }
+
+            
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo))) {
+            for (String linha : linhas) {
+                bw.write(linha);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
  
 }
+
+
 
 
 
