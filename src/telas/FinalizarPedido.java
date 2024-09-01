@@ -42,23 +42,44 @@ public class FinalizarPedido extends javax.swing.JFrame {
         initComponents();
         
         updateProdTable();
+        if(BancoDeDadosClientes.getCliente_atual() == null){
+            txtfNome.setEnabled(false);
+            lblNome.setVisible(false);
+            txtfNome.setVisible(false);
+            lblCPF.setVisible(false);
+            txtfCPF.setEnabled(false);
+            txtfCPF.setVisible(false);
+            lblDataNascimento.setVisible(false);
+            txtfDataNascimento.setEnabled(false);
+            txtfDataNascimento.setVisible(false);
+            lblSenha.setVisible(false);
+            txtfSenha.setVisible(false);
+            txtfSenha.setEnabled(false);
+            btnLogin.setEnabled(false);
+            btnLogin.setVisible(false);
+        }
+        else{
+            cmbSituacao.setEnabled(false);
+            lblSenha.setVisible(false);
+            txtfSenha.setVisible(false);
+            txtfSenha.setEnabled(false);
+            txtfNome.setEnabled(false);
+            lblNome.setVisible(true);
+            txtfNome.setVisible(true);
+            txtfNome.setText(BancoDeDadosClientes.getCliente_atual().getNome());
+            lblDataNascimento.setVisible(true);
+            txtfDataNascimento.setVisible(true);
+            SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+            String dataFormatada = formatador.format(BancoDeDadosClientes.getCliente_atual().getDataNascimento());
+            txtfDataNascimento.setText(dataFormatada);
+            txtfDataNascimento.setEnabled(false);
+            txtfCPF.setEnabled(false);
+            lblCPF.setVisible(true);
+            txtfCPF.setVisible(true);
+            txtfCPF.setText(BancoDeDadosClientes.getCliente_atual().getCPF());
+            btnLogin.setEnabled(false);
+        }
         
-        setDates();
-        
-        txtfNome.setEnabled(false);
-        lblNome.setVisible(false);
-        txtfNome.setVisible(false);
-        lblCPF.setVisible(false);
-        txtfCPF.setEnabled(false);
-        txtfCPF.setVisible(false);
-        lblDataNascimento.setVisible(false);
-        txtfDataNascimento.setEnabled(false);
-        txtfDataNascimento.setVisible(false);
-        lblSenha.setVisible(false);
-        txtfSenha.setVisible(false);
-        txtfSenha.setEnabled(false);
-        btnLogin.setEnabled(false);
-        btnLogin.setVisible(false);
         
         
         lblValor.setText("Valor total: R$ " + valorTotal + "0");
