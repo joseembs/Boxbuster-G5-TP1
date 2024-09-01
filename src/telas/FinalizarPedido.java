@@ -67,6 +67,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
             lblNome.setVisible(true);
             txtfNome.setVisible(true);
             txtfNome.setText(BancoDeDadosClientes.getCliente_atual().getNome());
+            lblUsuario.setText("Usuário atual: " + BancoDeDadosClientes.getCliente_atual().getNome());
             lblDataNascimento.setVisible(true);
             txtfDataNascimento.setVisible(true);
             SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
@@ -298,7 +299,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         cmbCaixa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
 
         lblFilial.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblFilial.setText("Filial: -----");
+        lblFilial.setText("Filial: UnB - Darcy Ribeiro");
 
         lblValor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblValor.setText("Valor total: R$ --.--");
@@ -380,7 +381,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
                                 .addComponent(lblDataNascimento)
                                 .addGap(6, 6, 6)
                                 .addComponent(txtfDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(separator2Cart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCartLayout.createSequentialGroup()
@@ -404,32 +405,32 @@ public class FinalizarPedido extends javax.swing.JFrame {
                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlCartLayout.createSequentialGroup()
                         .addComponent(btnVoltar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 425, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnFinalizar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCartLayout.createSequentialGroup()
+                        .addComponent(lblUsuario)
+                        .addGap(163, 504, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCartLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblFinalizacao)
+                        .addGap(270, 270, 270))
                     .addGroup(pnlCartLayout.createSequentialGroup()
-                        .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDataFinal)
+                            .addComponent(lblDataAtual)
                             .addGroup(pnlCartLayout.createSequentialGroup()
-                                .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblDataFinal)
-                                    .addComponent(lblUsuario)
-                                    .addComponent(lblDataAtual)
-                                    .addGroup(pnlCartLayout.createSequentialGroup()
-                                        .addComponent(lblPagamento)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cmbPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblValor)
-                                    .addComponent(lblFilial)
-                                    .addGroup(pnlCartLayout.createSequentialGroup()
-                                        .addComponent(lblCaixa)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cmbCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(lblPagamento)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cmbPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblValor)
+                            .addComponent(lblFilial)
                             .addGroup(pnlCartLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lblFinalizacao)
-                                .addGap(126, 126, 126)))
-                        .addGap(144, 144, 144))))
+                                .addComponent(lblCaixa)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cmbCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(138, 138, 138))))
         );
         pnlCartLayout.setVerticalGroup(
             pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -547,6 +548,28 @@ public class FinalizarPedido extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_menuVoltarCartActionPerformed
 
+    private void menuSairCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairCartActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_menuSairCartActionPerformed
+
+    private void txtfDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfDataNascimentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfDataNascimentoActionPerformed
+
+    private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
+        new CadastroCliente().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnFinalizarActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        new Loja().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnProntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProntoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnProntoActionPerformed
+
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnExcluirActionPerformed
@@ -554,113 +577,6 @@ public class FinalizarPedido extends javax.swing.JFrame {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void txtfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfSenhaActionPerformed
-
-    private void menuSairCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairCartActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_menuSairCartActionPerformed
-
-    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        new Loja().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnVoltarActionPerformed
-
-    private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
-        new CadastroCliente().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnFinalizarActionPerformed
-
-    private void btnProntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProntoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnProntoActionPerformed
-
-    private void txtfDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfDataNascimentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfDataNascimentoActionPerformed
-
-    private void cmbSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSituacaoActionPerformed
-        int index = cmbSituacao.getSelectedIndex();
-        if(index == 1){
-            txtfNome.setEnabled(true);
-            lblNome.setVisible(true);
-            txtfNome.setVisible(true);
-            lblCPF.setVisible(true);
-            txtfCPF.setVisible(true);
-            txtfCPF.setEnabled(true);
-            txtfDataNascimento.setEnabled(true);
-            lblDataNascimento.setVisible(true);
-            txtfDataNascimento.setVisible(true);
-            lblSenha.setVisible(true);
-            txtfSenha.setVisible(true);
-            txtfSenha.setEnabled(true);
-            btnLogin.setEnabled(true);
-            btnLogin.setVisible(true);
-            btnLogin.setText("Cadastrar");
-            
-            
-        }
-        else if(index == 3){
-            txtfNome.setEnabled(false);
-            lblNome.setVisible(false);
-            txtfNome.setVisible(false);
-            lblCPF.setVisible(true);
-            txtfCPF.setVisible(true);
-            txtfCPF.setEnabled(true);
-            txtfDataNascimento.setEnabled(false);
-            lblDataNascimento.setVisible(false);
-            txtfDataNascimento.setVisible(false);
-            lblSenha.setVisible(true);
-            txtfSenha.setVisible(true);
-            txtfSenha.setEnabled(true);
-            btnLogin.setEnabled(true);
-            btnLogin.setVisible(true);
-            btnLogin.setText("Entrar");
-            
-            
-        }
-        else if(index == 2){
-            txtfNome.setEnabled(true);
-            lblNome.setVisible(true);
-            txtfNome.setVisible(true);
-            lblCPF.setVisible(true);
-            txtfCPF.setVisible(true);
-            txtfCPF.setEnabled(true);
-            txtfDataNascimento.setEnabled(true);
-            lblDataNascimento.setVisible(true);
-            txtfDataNascimento.setVisible(true);
-            lblSenha.setVisible(false);
-            txtfSenha.setVisible(false);
-            txtfSenha.setEnabled(false);
-            btnLogin.setEnabled(true);
-            btnLogin.setEnabled(true);
-            btnLogin.setVisible(true);
-            btnLogin.setText("Cadastrar-se");
-            
-            
-            
-        }
-        else{
-            txtfNome.setEnabled(false);
-            lblNome.setVisible(false);
-            txtfNome.setVisible(false);
-            lblCPF.setVisible(false);
-            txtfCPF.setEnabled(false);
-            txtfCPF.setVisible(false);
-            lblDataNascimento.setVisible(false);
-            txtfDataNascimento.setEnabled(false);
-            txtfDataNascimento.setVisible(false);
-            lblSenha.setVisible(false);
-            txtfSenha.setVisible(false);
-            txtfSenha.setEnabled(false);
-            btnLogin.setEnabled(false);
-            btnLogin.setVisible(false);
-            
-            
-        }
-    }//GEN-LAST:event_cmbSituacaoActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         int index = cmbSituacao.getSelectedIndex();
@@ -694,7 +610,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
                 txtfDataNascimento.setEnabled(false);
                 txtfSenha.setEnabled(false);
                 btnLogin.setEnabled(false);
-                
+
             }
         }
         else if(index == 2){
@@ -725,18 +641,17 @@ public class FinalizarPedido extends javax.swing.JFrame {
                     txtfDataNascimento.setEnabled(false);
                     txtfSenha.setEnabled(false);
                     btnLogin.setEnabled(false);
-                    
+
                 }
                 else{
                     Date dataNascimento = null;
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     String[] palavras = lista.get(0).split("_");
                     if (palavras[0].equals("Cadastrado")){
-                        JOptionPane.showMessageDialog(null, "Esse CPF está associado à um cadastrado.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Esse CPF está associado a um cadastrado.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                     }
                     else{
-                        
-                    
+
                         String nome = palavras[1];
                         String dataNascimentoString = palavras[3];
                         String divida = palavras[4];
@@ -747,7 +662,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
                         }
                         Visitante visitante = new Visitante(nome, CPF, dataNascimento, Double.parseDouble(divida));
                         BancoDeDadosClientes.setCliente_atual(visitante);
-                        JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Usuário entrou com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                         cmbSituacao.setEnabled(false);
                         txtfNome.setEnabled(false);
                         txtfCPF.setEnabled(false);
@@ -774,11 +689,10 @@ public class FinalizarPedido extends javax.swing.JFrame {
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     String[] palavras = lista.get(0).split("_");
                     if (palavras[0].equals("Visitante")){
-                        JOptionPane.showMessageDialog(null, "Esse CPF está associado à um visitante.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Esse CPF está associado a um visitante.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                     }
                     else{
-                        
-                    
+
                         String nome = palavras[1];
                         String dataNascimentoString = palavras[3];
                         String divida = palavras[4];
@@ -795,8 +709,8 @@ public class FinalizarPedido extends javax.swing.JFrame {
                         }
                         else{
                             Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, Double.parseDouble(divida), senha);
-                            BancoDeDadosClientes.setCliente_atual(cadastrado);                         
-                            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                            BancoDeDadosClientes.setCliente_atual(cadastrado);
+                            JOptionPane.showMessageDialog(null, "Usuário entrou com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                             cmbSituacao.setEnabled(false);
                             txtfNome.setEnabled(false);
                             txtfCPF.setEnabled(false);
@@ -806,11 +720,93 @@ public class FinalizarPedido extends javax.swing.JFrame {
                         }
                     }
                 }
-                
-                
+
             }
         }
+        if(BancoDeDadosClientes.getCliente_atual() != null){
+            lblUsuario.setText("Usuário atual: " + BancoDeDadosClientes.getCliente_atual().getNome());
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void txtfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfSenhaActionPerformed
+
+    private void cmbSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSituacaoActionPerformed
+        int index = cmbSituacao.getSelectedIndex();
+        if(index == 1){
+            txtfNome.setEnabled(true);
+            lblNome.setVisible(true);
+            txtfNome.setVisible(true);
+            lblCPF.setVisible(true);
+            txtfCPF.setVisible(true);
+            txtfCPF.setEnabled(true);
+            txtfDataNascimento.setEnabled(true);
+            lblDataNascimento.setVisible(true);
+            txtfDataNascimento.setVisible(true);
+            lblSenha.setVisible(true);
+            txtfSenha.setVisible(true);
+            txtfSenha.setEnabled(true);
+            btnLogin.setEnabled(true);
+            btnLogin.setVisible(true);
+            btnLogin.setText("Cadastrar");
+
+        }
+        else if(index == 3){
+            txtfNome.setEnabled(false);
+            lblNome.setVisible(false);
+            txtfNome.setVisible(false);
+            lblCPF.setVisible(true);
+            txtfCPF.setVisible(true);
+            txtfCPF.setEnabled(true);
+            txtfDataNascimento.setEnabled(false);
+            lblDataNascimento.setVisible(false);
+            txtfDataNascimento.setVisible(false);
+            lblSenha.setVisible(true);
+            txtfSenha.setVisible(true);
+            txtfSenha.setEnabled(true);
+            btnLogin.setEnabled(true);
+            btnLogin.setVisible(true);
+            btnLogin.setText("Entrar");
+
+        }
+        else if(index == 2){
+            txtfNome.setEnabled(true);
+            lblNome.setVisible(true);
+            txtfNome.setVisible(true);
+            lblCPF.setVisible(true);
+            txtfCPF.setVisible(true);
+            txtfCPF.setEnabled(true);
+            txtfDataNascimento.setEnabled(true);
+            lblDataNascimento.setVisible(true);
+            txtfDataNascimento.setVisible(true);
+            lblSenha.setVisible(false);
+            txtfSenha.setVisible(false);
+            txtfSenha.setEnabled(false);
+            btnLogin.setEnabled(true);
+            btnLogin.setEnabled(true);
+            btnLogin.setVisible(true);
+            btnLogin.setText("Cadastrar-se");
+
+        }
+        else{
+            txtfNome.setEnabled(false);
+            lblNome.setVisible(false);
+            txtfNome.setVisible(false);
+            lblCPF.setVisible(false);
+            txtfCPF.setEnabled(false);
+            txtfCPF.setVisible(false);
+            lblDataNascimento.setVisible(false);
+            txtfDataNascimento.setEnabled(false);
+            txtfDataNascimento.setVisible(false);
+            lblSenha.setVisible(false);
+            txtfSenha.setVisible(false);
+            txtfSenha.setEnabled(false);
+            btnLogin.setEnabled(false);
+            btnLogin.setVisible(false);
+
+        }
+    }//GEN-LAST:event_cmbSituacaoActionPerformed
 
     /**
      * @param args the command line arguments
