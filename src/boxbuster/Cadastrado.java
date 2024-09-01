@@ -112,12 +112,8 @@ public class Cadastrado extends Cliente {
 
     @Override
     public String toString() {
-        String aux = "Cadastrado " + super.toString() + " " + senha;
-        if(!alugados.isEmpty()){
-            for (Alugar alugar : alugados) {
-                aux += "\n" + alugar.toString();
-            }
-        }
+        String aux = "Cadastrado_" + super.toString() + "_" + senha;
+        
         
         return aux;
     }

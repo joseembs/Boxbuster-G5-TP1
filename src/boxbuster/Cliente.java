@@ -28,7 +28,7 @@ public abstract class Cliente extends Pessoa {
 
     @Override
     public String toString() {
-        return super.toString() + " " + divida;
+        return super.toString() + "_" + divida;
     }
 
     public double getDivida() {
