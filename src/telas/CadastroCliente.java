@@ -375,28 +375,30 @@ public class CadastroCliente extends javax.swing.JFrame {
                 else{
                     Date dataNascimento = null;
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-                    String[] palavras = lista.get(0).split(" ");
-                    String nome = "";
-                    int indice = 1;
-                    while(!palavras[indice].equals(CPF)){
-                        nome += palavras[indice];
-                        indice++;
+                    String[] palavras = lista.get(0).split("_");
+                    if (palavras[0].equals("Cadastrado")){
+                        JOptionPane.showMessageDialog(null, "Esse CPF está associado à um cadastrado.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                     }
-                    String dataNascimentoString = palavras[indice+1];
-                    String divida = palavras[indice+2];
-                    try {
-                        dataNascimento = formato.parse(dataNascimentoString);
-                    } catch (ParseException ex) {
-                        Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    Visitante visitante = new Visitante(nome, CPF, dataNascimento, Double.parseDouble(divida));
-                    BancoDeDadosClientes.setCliente_atual(visitante);
-                    AreaCliente telaCliente = new AreaCliente();
-
+                    else{
+                        
                     
-                    telaCliente.setVisible(true);
+                        String nome = palavras[1];
+                        String dataNascimentoString = palavras[3];
+                        String divida = palavras[4];
+                        try {
+                            dataNascimento = formato.parse(dataNascimentoString);
+                        } catch (ParseException ex) {
+                            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        Visitante visitante = new Visitante(nome, CPF, dataNascimento, Double.parseDouble(divida));
+                        BancoDeDadosClientes.setCliente_atual(visitante);
+                        AreaCliente telaCliente = new AreaCliente();
 
-                    this.setVisible(false);
+
+                        telaCliente.setVisible(true);
+
+                        this.setVisible(false);
+                    }
                 }
             }
         }
@@ -421,15 +423,10 @@ public class CadastroCliente extends javax.swing.JFrame {
                     else{
                         
                     
-                        String nome = "";
-                        int indice = 1;
-                        while(!palavras[indice].equals(CPF)){
-                            nome += palavras[indice];
-                            indice++;
-                        }
-                        String dataNascimentoString = palavras[indice+1];
-                        String divida = palavras[indice+2];
-                        String senhaChecar = palavras[indice+3];
+                        String nome = palavras[1];
+                        String dataNascimentoString = palavras[3];
+                        String divida = palavras[4];
+                        String senhaChecar = palavras[5];
                         try {
                             dataNascimento = formato.parse(dataNascimentoString);
                         } catch (ParseException ex) {
@@ -525,28 +522,30 @@ public class CadastroCliente extends javax.swing.JFrame {
                 else{
                     Date dataNascimento = null;
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-                    String[] palavras = lista.get(0).split(" ");
-                    String nome = "";
-                    int indice = 1;
-                    while(!palavras[indice].equals(CPF)){
-                        nome += palavras[indice];
-                        indice++;
+                    String[] palavras = lista.get(0).split("_");
+                    if (palavras[0].equals("Cadastrado")){
+                        JOptionPane.showMessageDialog(null, "Esse CPF está associado à um cadastrado.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                     }
-                    String dataNascimentoString = palavras[indice+1];
-                    String divida = palavras[indice+2];
-                    try {
-                        dataNascimento = formato.parse(dataNascimentoString);
-                    } catch (ParseException ex) {
-                        Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    Visitante visitante = new Visitante(nome, CPF, dataNascimento, Double.parseDouble(divida));
-                    BancoDeDadosClientes.setCliente_atual(visitante);
-                    Loja telaLoja = new Loja();
-
+                    else{
+                        
                     
-                    telaLoja.setVisible(true);
+                        String nome = palavras[1];
+                        String dataNascimentoString = palavras[3];
+                        String divida = palavras[4];
+                        try {
+                            dataNascimento = formato.parse(dataNascimentoString);
+                        } catch (ParseException ex) {
+                            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        Visitante visitante = new Visitante(nome, CPF, dataNascimento, Double.parseDouble(divida));
+                        BancoDeDadosClientes.setCliente_atual(visitante);
+                        Loja telaLoja = new Loja();
 
-                    this.setVisible(false);
+
+                        telaLoja.setVisible(true);
+
+                        this.setVisible(false);
+                    }
                 }
             }
         }
@@ -572,15 +571,10 @@ public class CadastroCliente extends javax.swing.JFrame {
                     else{
                         
                     
-                        String nome = "";
-                        int indice = 1;
-                        while(!palavras[indice].equals(CPF)){
-                            nome += palavras[indice];
-                            indice++;
-                        }
-                        String dataNascimentoString = palavras[indice+1];
-                        String divida = palavras[indice+2];
-                        String senhaChecar = palavras[indice+3];
+                        String nome = palavras[1];
+                        String dataNascimentoString = palavras[3];
+                        String divida = palavras[4];
+                        String senhaChecar = palavras[5];
                         try {
                             dataNascimento = formato.parse(dataNascimentoString);
                         } catch (ParseException ex) {
