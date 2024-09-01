@@ -228,7 +228,7 @@ public class LoginFuncionario extends javax.swing.JFrame {
                 tipo = "Gerente";
             }
 
-            ArrayList<String> pessoa = bdFunc.buscarPessoa(" " + codigo + " ");
+            ArrayList<String> pessoa = bdFunc.buscarPessoa("_" + codigo + "_");
             if(pessoa.size() == 0){
                 JOptionPane.showMessageDialog(null, "Não existe funcionário com este código.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
             }
