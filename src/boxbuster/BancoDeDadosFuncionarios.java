@@ -54,6 +54,31 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
         return ans;
     }
     
+    // chamada pela AreaCaixa, usa o caixa logado para achar todos os aluguéis dele
+    public static ArrayList<Alugar> getHistoricoCaixa(Caixa caixaAtual){
+        ArrayList<Alugar> historico = new ArrayList<>();
+        
+        for(Alugar tempAluguel : Pedido.getMapPedidos().values()){
+            if(caixaAtual.equals(tempAluguel.getCaixaCodigo())){
+                historico.add(tempAluguel);
+            }
+        }
+    
+        return historico;
+    }
+    
+    static public Cliente getClientePorCPF(String cpfCliente){
+        Cliente cliente = null;
+        
+        //for(Cliente tempCliente : BancoDeDadosClientes.getListaClientes()){
+        //    if(cpfCliente == tempCliente.getCpf()){
+        //        cliente = tempCliente;
+        //    }
+        //}
+        
+        return cliente;
+    }
+    
     @Override
     public ArrayList<String> lerPessoas() {
         ArrayList<String> pessoas = new ArrayList<>();

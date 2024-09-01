@@ -104,7 +104,7 @@ public class Cadastrado extends Cliente {
         ArrayList<Alugar> alugados = getAlugados();
 
         for (int i = 0; i < alugados.size(); i++) {
-            totalDivida += (alugados.get(i).getProduto().getPreco()) * 0.9;
+            //totalDivida += (alugados.get(i).getProduto().getPreco()) * 0.9;
         }
 
         setDivida(totalDivida);

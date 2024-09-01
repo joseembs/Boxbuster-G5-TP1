@@ -4,26 +4,31 @@
  */
 package boxbuster;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author hsaless
  */
 public class Pedido {
-    static private int codigoPedido;
-    static private Cliente cliente;
-    static private Caixa caixa;
+    static private int codigoPedido = 1;
     
     static private ArrayList<Produtos> pedidoAtual = new ArrayList<>(); 
+    
+    static private HashMap<Integer, Alugar> mapAlugueis = new HashMap<Integer, Alugar>();
+    
+    static private String arquivo = "pedidos.txt";
 
     public Pedido() {
     }
 
-    public Pedido(int codigoPedido, Cliente cliente, Caixa caixa) {
+    public Pedido(int codigoPedido) {
         Pedido.codigoPedido = codigoPedido;
-        Pedido.cliente = cliente;
-        Pedido.caixa = caixa;
     }
 
     public static int getCodigoPedido() {
@@ -32,22 +37,6 @@ public class Pedido {
 
     public static void setCodigoPedido(int codigoPedido) {
         Pedido.codigoPedido = codigoPedido;
-    }
-
-    public static Cliente getCliente() {
-        return cliente;
-    }
-
-    public static void setCliente(Cliente cliente) {
-        Pedido.cliente = cliente;
-    }
-
-    public static Caixa getCaixa() {
-        return caixa;
-    }
-
-    public static void setCaixa(Caixa caixa) {
-        Pedido.caixa = caixa;
     }
 
     public static ArrayList<Produtos> getPedidoAtual() {
@@ -61,4 +50,34 @@ public class Pedido {
     public static void addProduto(Produtos produto){
         Pedido.pedidoAtual.add(produto);
     }
+
+    public static HashMap<Integer, Alugar> getMapPedidos() {
+        return mapAlugueis;
+    }
+
+    public static void setMapPedidos(HashMap<Integer, Alugar> mapAlugueis) {
+        Pedido.mapAlugueis = mapAlugueis;
+    }
+    
+    public static void addPedido(String pagamento, Caixa caixa){
+        Alugar aluguelFeito = new Alugar(pagamento, caixa);
+        
+        Pedido.mapAlugueis.put(codigoPedido, aluguelFeito);
+        codigoPedido++;
+    }
+    
+    static public void salvarAluguel(Alugar aluguel) {
+        try (FileWriter fw = new FileWriter(arquivo, true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+            out.println(aluguel.toString());
+            out.println("-------------------------------------------");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    
+    
 }

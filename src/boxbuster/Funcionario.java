@@ -13,6 +13,14 @@ public abstract class Funcionario extends Pessoa {
         this.senha = senha;
         this.codigoFunc = codigoFunc;
     }
+
+    public int getCodigoFunc() {
+        return codigoFunc;
+    }
+
+    public void setCodigoFunc(int codigoFunc) {
+        this.codigoFunc = codigoFunc;
+    }
     
     @Override
     public String toString() {

@@ -15,32 +15,43 @@ import java.util.ArrayList;
 public class BancoDeDadosClientes implements BancoDeDados{
     private String arquivo;
     
-    private static Cliente cliente_atual;
+    private static Cliente clienteAtual;
 
     public static Cliente getCliente_atual() {
-        return cliente_atual;
+        return clienteAtual;
     }
 
     public static void setCliente_atual(Cliente cliente_atual) {
-        BancoDeDadosClientes.cliente_atual = cliente_atual;
+        BancoDeDadosClientes.clienteAtual = cliente_atual;
     }
-    
-    
 
     public BancoDeDadosClientes(String arquivo) {
         this.arquivo = arquivo;
     }
 
     public void adicionarPessoa(Cliente cliente) {
-    try (FileWriter fw = new FileWriter(arquivo, true);
-         BufferedWriter bw = new BufferedWriter(fw);
-         PrintWriter out = new PrintWriter(bw)) {
-        out.println(cliente.toString());
-        out.println("-------------------------------------------"); 
-    } catch (IOException e) {
-        e.printStackTrace();
+        try (FileWriter fw = new FileWriter(arquivo, true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+            out.println(cliente.toString());
+            out.println("-------------------------------------------"); 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-}
+    
+    // chamada pela AreaCliente, usa o cliente logado para achar todos os aluguéis dele
+    public static ArrayList<Alugar> getHistoricoCliente(Cliente clienteAtual){
+        ArrayList<Alugar> historico = new ArrayList<>();
+        
+        for(Alugar tempAluguel : Pedido.getMapPedidos().values()){
+            if(clienteAtual.equals(tempAluguel.getClienteCPF())){
+                historico.add(tempAluguel);
+            }
+        }
+    
+        return historico;
+    }
 
     @Override
     public ArrayList<String> lerPessoas() {
@@ -83,7 +94,7 @@ public class BancoDeDadosClientes implements BancoDeDados{
         return lista;
     }
     
- 
+    
 }
 
 

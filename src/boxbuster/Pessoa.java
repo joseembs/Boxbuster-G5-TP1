@@ -19,12 +19,19 @@ public abstract class Pessoa {
         this.dataNascimento = dataNascimento;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+    
     @Override
     public String toString() {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         String dataFormatada = formato.format(dataNascimento);
         return nome + " " + cpf + " " + dataFormatada;
     }
-    
-    
+        
 }

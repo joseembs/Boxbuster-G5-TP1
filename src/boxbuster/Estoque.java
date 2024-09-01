@@ -19,7 +19,7 @@ public class Estoque {
     static private ArrayList<Musicas> listaMusicas = new ArrayList<>();
     static private ArrayList<Tabuleiros> listaTabuleiros = new ArrayList<>();
     static private ArrayList<Videogames> listaVideogames = new ArrayList<>();
-    static private ArrayList<Produtos> listaProdutos = new ArrayList<>(); // listaProdutos é apenas atualizado pelo updateProdlist no AreaGerente
+    static private ArrayList<Produtos> listaProdutos = new ArrayList<>(); 
     
     static private int cont = 1;
 
@@ -135,6 +135,19 @@ public class Estoque {
         return listaProdutos;
     }
     
+    // chamada para preencher as tabelas, usa o codigoProd salvo pelos Alugar para retornar o produto alugado 
+    static public Produtos getProdutoPorCodigo(int codigoProd){
+        Produtos produto = null;
+        
+        for(Produtos tempProduto : Estoque.getListaProdutos()){
+            if(codigoProd == tempProduto.getCodigoProd()){
+                produto = tempProduto;
+            }
+        }
+        
+        return produto;
+    }
+    
     static public void reescreverEstoque() {
         ArrayList<Produtos> listaTemp = atualizarLista();
         
@@ -216,4 +229,6 @@ public class Estoque {
         
         return "Produto não encontrado"; 
     }
+    
+    
 }
