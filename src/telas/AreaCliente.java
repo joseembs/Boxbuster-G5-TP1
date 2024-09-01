@@ -4,6 +4,12 @@
  */
 package telas;
 
+import boxbuster.BancoDeDadosClientes;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+
 /**
  *
  * @author User
@@ -16,6 +22,19 @@ public class AreaCliente extends javax.swing.JFrame {
     public AreaCliente() {
         setLocationRelativeTo(null);
         initComponents();
+        lblNome.setText("Nome: " + BancoDeDadosClientes.getCliente_atual().getNome());
+        lblCPF.setText("CPF: " + BancoDeDadosClientes.getCliente_atual().getCPF());
+        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada = formatador.format(BancoDeDadosClientes.getCliente_atual().getDataNascimento());
+        lblDataNasc.setText("Data de nasc.: " + dataFormatada);
+        LocalDate dataAtual = LocalDate.now();
+        LocalDate dataNascimento = BancoDeDadosClientes.getCliente_atual().getDataNascimento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int idade = Period.between(dataNascimento, dataAtual).getYears();
+        lblIdade.setText("Idade: " + String.valueOf(idade));
+        lblDivida.setText("Divida: " + String.valueOf(BancoDeDadosClientes.getCliente_atual().getDivida()));
+        lblProdutosAlugados.setText("Produtos Alugados: " + String.valueOf(BancoDeDadosClientes.getCliente_atual().getAlugados().size()));
+        
+        
     }
 
     /**
@@ -42,6 +61,8 @@ public class AreaCliente extends javax.swing.JFrame {
         lblHistAluguel = new javax.swing.JLabel();
         scrlAluguel = new javax.swing.JScrollPane();
         tableAluguel = new javax.swing.JTable();
+        btnEditar = new javax.swing.JButton();
+        btnDevolver = new javax.swing.JButton();
         menuBarAreaCli = new javax.swing.JMenuBar();
         menuAreaCli = new javax.swing.JMenu();
         menuVoltarAreaCli = new javax.swing.JMenuItem();
@@ -103,11 +124,11 @@ public class AreaCliente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Tipo", "Data Inicial", "Devolução", "Status"
+                "Nome", "Tipo", "Data Inicial", "Devolução", "Valor", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -116,19 +137,32 @@ public class AreaCliente extends javax.swing.JFrame {
         });
         scrlAluguel.setViewportView(tableAluguel);
 
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnDevolver.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnDevolver.setText("Devolver");
+        btnDevolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDevolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlAreaClienteLayout = new javax.swing.GroupLayout(pnlAreaCliente);
         pnlAreaCliente.setLayout(pnlAreaClienteLayout);
         pnlAreaClienteLayout.setHorizontalGroup(
             pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(scrlAluguel)
             .addGroup(pnlAreaClienteLayout.createSequentialGroup()
-                .addGap(222, 222, 222)
-                .addComponent(lblHistAluguel)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAreaClienteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(separator2AreaCli, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAreaClienteLayout.createSequentialGroup()
+                .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(separator2AreaCli)
+                    .addGroup(pnlAreaClienteLayout.createSequentialGroup()
                         .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAreaClienteLayout.createSequentialGroup()
                                 .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,13 +182,18 @@ public class AreaCliente extends javax.swing.JFrame {
                                         .addComponent(lblInfo))
                                     .addGroup(pnlAreaClienteLayout.createSequentialGroup()
                                         .addComponent(btnDeslogar)
-                                        .addGap(92, 92, 92)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnEditar)
+                                        .addGap(18, 18, 18)
                                         .addComponent(btnLojaMain)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(logoBoxbuster)
-                        .addGap(35, 35, 35)))
+                        .addGap(35, 35, 35))
+                    .addGroup(pnlAreaClienteLayout.createSequentialGroup()
+                        .addComponent(lblHistAluguel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDevolver, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addComponent(scrlAluguel)
         );
         pnlAreaClienteLayout.setVerticalGroup(
             pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,11 +218,14 @@ public class AreaCliente extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnDeslogar)
-                            .addComponent(btnLojaMain))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnLojaMain)
+                            .addComponent(btnEditar))))
+                .addGap(6, 6, 6)
                 .addComponent(separator2AreaCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblHistAluguel)
+                .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblHistAluguel)
+                    .addComponent(btnDevolver))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrlAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99))
@@ -251,6 +293,15 @@ public class AreaCliente extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_menuSairAreaCliActionPerformed
 
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        new EditarCliente().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDevolverActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -311,6 +362,8 @@ public class AreaCliente extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeslogar;
+    private javax.swing.JButton btnDevolver;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnLojaMain;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblDataNasc;
