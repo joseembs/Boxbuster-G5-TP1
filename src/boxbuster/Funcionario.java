@@ -14,6 +14,10 @@ public abstract class Funcionario extends Pessoa {
         this.codigoFunc = codigoFunc;
     }
     
+    public Funcionario(String nome){
+        super(nome);
+    }
+    
     @Override
     public String toString() {
         return super.toString() + " " + senha + " " + codigoFunc;
