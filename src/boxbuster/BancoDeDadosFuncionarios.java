@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class BancoDeDadosFuncionarios implements BancoDeDados{
     private static String arquivo;
-    private static Funcionario funcAtual;
+    //private static Funcionario funcAtual;
     
     public BancoDeDadosFuncionarios(String arquivo) {
         this.arquivo = arquivo;
@@ -47,10 +47,10 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;
             while ((linha = br.readLine()) != null) {
-                if(linha.contains(" Caixa")){
+                if(linha.contains("_Caixa")){
                     caixas++;
                 }
-                else if(linha.contains(" Gerente")){
+                else if(linha.contains("_Gerente")){
                     gerentes++;
                 }
             }
