@@ -1079,119 +1079,114 @@ public class AreaGerente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos corretamente.");
                 ok = false;
             }
-
-            if(faixaEtaria.isEmpty() || preco.isEmpty() || nome.isEmpty() || ano.isEmpty() || quant.length != 2){
-                JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos corretamente.");
-                ok = false;
-            } else {
-                if (prodType.equals("Filme")){
-                    String genero = txtfVar1.getText(),
-                            estudio = txtfVar2.getText(),
-                            diretor = txtfVar3.getText();
-
-                    if(genero.isEmpty() || estudio.isEmpty() || diretor.isEmpty()){
-                        JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
-                        ok = false;
-                    } else {
-                        Filmes newFilme = new Filmes(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, Integer.parseInt(disponiveis), Integer.parseInt(alugados), genero, estudio, diretor);
-
-                        if(action.equals("edit")){
-                            Estoque.getListaFilmes().set(selectedProdInd, newFilme);
-                        } else if (action.equals("new")){
-                            Estoque.addFilme(newFilme);
-                            Estoque.salvarProduto(newFilme);
-                        }
-                    }
-                } else if (prodType.equals("Música")){
-                    String estilo = txtfVar1.getText(),
-                            autor = txtfVar2.getText();
-
-                    if(estilo.isEmpty() || autor.isEmpty()){
-                        JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
-                        ok = false;
-                    } else {
-                        Musicas newMusica = new Musicas(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, Integer.parseInt(disponiveis), Integer.parseInt(alugados), estilo, autor);
-
-                        if(action.equals("edit")){
-                            Estoque.getListaMusicas().set(selectedProdInd, newMusica);
-                        } else if (action.equals("new")){
-                            Estoque.addMusica(newMusica);
-                            Estoque.salvarProduto(newMusica);;
-                        }
-                    }
-                } else if (prodType.equals("Tabuleiro")){
-                    String tipo = txtfVar1.getText(),
-                            marca = txtfVar2.getText(),
-                            numJogadores = txtfVar3.getText();
-
-                    try {
-                        Integer.parseInt(numJogadores);
-                    } catch (NumberFormatException nfe) {
-                        JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos corretamente.");
-                        ok = false;
-                    }
-                    
-                    if(tipo.isEmpty() || marca.isEmpty() || numJogadores.isEmpty()){
-                        JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
-                        ok = false;
-                    } else {
-                        Tabuleiros newTabuleiro = new Tabuleiros(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, Integer.parseInt(disponiveis), Integer.parseInt(alugados), Integer.parseInt(numJogadores), tipo, marca);
-
-                        if(action.equals("edit")){
-                            Estoque.getListaTabuleiros().set(selectedProdInd, newTabuleiro);
-                        } else if (action.equals("new")){
-                            Estoque.addTabuleiro(newTabuleiro);
-                            Estoque.salvarProduto(newTabuleiro);
-                        }
-                    }
-                } else if (prodType.equals("Videogame")){
-                    String genero = txtfVar1.getText(),
-                            estudio = txtfVar2.getText(),
-                            numJogadores = txtfVar3.getText(),
-                            plataforma = txtfVar4.getText();
-
-                    try {
-                        Integer.parseInt(numJogadores);
-                    } catch (NumberFormatException nfe) {
-                        JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos corretamente.");
-                        ok = false;
-                    }
-                    
-                    if(genero.isEmpty() || estudio.isEmpty() || numJogadores.isEmpty() || plataforma.isEmpty()){
-                        JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
-                        ok = false;
-                    } else {
-                        Videogames newVideogame = new Videogames(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, Integer.parseInt(disponiveis), Integer.parseInt(alugados), Integer.parseInt(numJogadores), genero, plataforma, estudio);
-
-                        if(action.equals("edit")){
-                            Estoque.getListaVideogames().set(selectedProdInd, newVideogame);
-                        } else if (action.equals("new")){
-                            Estoque.addVideogame(newVideogame);
-                            Estoque.salvarProduto(newVideogame);
-                        }
-                    }
+            
+            for(Produtos prod : Estoque.getListaProdutos()){
+                if(prod.getNomeProd().equals(nome)){
+                    JOptionPane.showMessageDialog(null, "Já existe um produto com esse nome.");
+                    ok = false;
                 }
+            }
 
-                if(ok){
-                    cont++;
-                    Estoque.setCont(cont);
-                    Estoque.reescreverEstoque();
+            if(ok){
+                if(faixaEtaria.isEmpty() || preco.isEmpty() || nome.isEmpty() || ano.isEmpty() || quant.length != 2){
+                    JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos corretamente.");
+                    ok = false;
+                } else {
+                    if (prodType.equals("Filme")){
+                        String genero = txtfVar1.getText(),
+                                estudio = txtfVar2.getText(),
+                                diretor = txtfVar3.getText();
 
-                    updateProdList();
+                        if(genero.isEmpty() || estudio.isEmpty() || diretor.isEmpty()){
+                            JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
+                            ok = false;
+                        } else {
+                            Filmes newFilme = new Filmes(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, Integer.parseInt(disponiveis), Integer.parseInt(alugados), genero, estudio, diretor);
 
-                    disableBaseFields();
-                    clearFields();
+                            if(action.equals("edit")){
+                                Estoque.getListaFilmes().set(selectedProdInd, newFilme);
+                            } else if (action.equals("new")){
+                                Estoque.addFilme(newFilme);
+                                Estoque.salvarProduto(newFilme);
+                            }
+                        }
+                    } else if (prodType.equals("Música")){
+                        String estilo = txtfVar1.getText(),
+                                autor = txtfVar2.getText();
 
-                    switch(action){
-                        case "new":
-                            JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso.");
-                            break;
-                        case "edit":
-                            JOptionPane.showMessageDialog(null, "Produto editado com sucesso.");
-                            break;
-                        case "delete":
-                            JOptionPane.showMessageDialog(null, "Produto deletado com sucesso.");
-                            break;
+                        if(estilo.isEmpty() || autor.isEmpty()){
+                            JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
+                            ok = false;
+                        } else {
+                            Musicas newMusica = new Musicas(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, Integer.parseInt(disponiveis), Integer.parseInt(alugados), estilo, autor);
+
+                            if(action.equals("edit")){
+                                Estoque.getListaMusicas().set(selectedProdInd, newMusica);
+                            } else if (action.equals("new")){
+                                Estoque.addMusica(newMusica);
+                                Estoque.salvarProduto(newMusica);;
+                            }
+                        }
+                    } else if (prodType.equals("Tabuleiro")){
+                        String tipo = txtfVar1.getText(),
+                                marca = txtfVar2.getText(),
+                                numJogadores = txtfVar3.getText();
+
+                        if(tipo.isEmpty() || marca.isEmpty() || numJogadores.isEmpty()){
+                            JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
+                            ok = false;
+                        } else {
+                            Tabuleiros newTabuleiro = new Tabuleiros(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, Integer.parseInt(disponiveis), Integer.parseInt(alugados), numJogadores, tipo, marca);
+
+                            if(action.equals("edit")){
+                                Estoque.getListaTabuleiros().set(selectedProdInd, newTabuleiro);
+                            } else if (action.equals("new")){
+                                Estoque.addTabuleiro(newTabuleiro);
+                                Estoque.salvarProduto(newTabuleiro);
+                            }
+                        }
+                    } else if (prodType.equals("Videogame")){
+                        String genero = txtfVar1.getText(),
+                                estudio = txtfVar2.getText(),
+                                numJogadores = txtfVar3.getText(),
+                                plataforma = txtfVar4.getText();
+
+                        if(genero.isEmpty() || estudio.isEmpty() || numJogadores.isEmpty() || plataforma.isEmpty()){
+                            JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
+                            ok = false;
+                        } else {
+                            Videogames newVideogame = new Videogames(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, Integer.parseInt(disponiveis), Integer.parseInt(alugados), numJogadores, genero, plataforma, estudio);
+
+                            if(action.equals("edit")){
+                                Estoque.getListaVideogames().set(selectedProdInd, newVideogame);
+                            } else if (action.equals("new")){
+                                Estoque.addVideogame(newVideogame);
+                                Estoque.salvarProduto(newVideogame);
+                            }
+                        }
+                    }
+
+                    if(ok){
+                        cont++;
+                        Estoque.setCont(cont);
+                        Estoque.reescreverEstoque();
+
+                        updateProdList();
+
+                        disableBaseFields();
+                        clearFields();
+
+                        switch(action){
+                            case "new":
+                                JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso.");
+                                break;
+                            case "edit":
+                                JOptionPane.showMessageDialog(null, "Produto editado com sucesso.");
+                                break;
+                            case "delete":
+                                JOptionPane.showMessageDialog(null, "Produto deletado com sucesso.");
+                                break;
+                        }
                     }
                 }
             }
@@ -1270,7 +1265,7 @@ public class AreaGerente extends javax.swing.JFrame {
                 
                 txtfVar1.setText(((Tabuleiros) selectedProd).getTipo());
                 txtfVar2.setText(((Tabuleiros) selectedProd).getMarca());
-                txtfVar3.setText(Integer.toString(((Tabuleiros) selectedProd).getNumJogadores()));
+                txtfVar3.setText(((Tabuleiros) selectedProd).getNumJogadores());
             } else if(selectedProd.getClass().getSimpleName().equals("Videogames")){
                 selectedProdInd = Estoque.getListaVideogames().indexOf(selectedProd);
                 
@@ -1278,7 +1273,7 @@ public class AreaGerente extends javax.swing.JFrame {
                 
                 txtfVar1.setText(((Videogames) selectedProd).getGenero());
                 txtfVar2.setText(((Videogames) selectedProd).getDesenvolvedor());
-                txtfVar3.setText(Integer.toString(((Videogames) selectedProd).getNumJogadores()));
+                txtfVar3.setText(((Videogames) selectedProd).getNumJogadores());
                 txtfVar4.setText(((Videogames) selectedProd).getPlataforma());
             }
             if(action.equals("confirm") || action.equals("cancel") || action.equals("delete")){

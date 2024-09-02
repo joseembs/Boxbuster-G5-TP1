@@ -14,7 +14,7 @@ public class Videogames extends Jogos{
     public Videogames() {
     }
     
-    public Videogames(String nomeProd, double preco, int ano, int codigoProd, String faixaEtaria, int disponiveis, int alugados, int numJogadores, String genero, String plataforma, String desenvolvedor) {
+    public Videogames(String nomeProd, double preco, int ano, int codigoProd, String faixaEtaria, int disponiveis, int alugados, String numJogadores, String genero, String plataforma, String desenvolvedor) {
         super(nomeProd, preco, ano, codigoProd, faixaEtaria, disponiveis, alugados, numJogadores);
         this.genero = genero;
         this.plataforma = plataforma;

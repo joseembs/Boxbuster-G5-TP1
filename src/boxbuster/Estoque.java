@@ -197,10 +197,10 @@ public class Estoque {
                 Musicas musica = new Musicas(item[1], Double.parseDouble(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4]), item[5], Integer.parseInt(item[6]), Integer.parseInt(item[7]), item[8], item[9]);
                 Estoque.addMusica(musica);
             } else if("Tabuleiro".equals(item[0])){
-                Tabuleiros tabuleiro = new Tabuleiros(item[1], Double.parseDouble(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4]), item[5], Integer.parseInt(item[6]), Integer.parseInt(item[7]), Integer.parseInt(item[8]), item[9], item[10]);
+                Tabuleiros tabuleiro = new Tabuleiros(item[1], Double.parseDouble(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4]), item[5], Integer.parseInt(item[6]), Integer.parseInt(item[7]), item[8], item[9], item[10]);
                 Estoque.addTabuleiro(tabuleiro);
             } else if("Videogame".equals(item[0])){
-                Videogames videogame = new Videogames(item[1], Double.parseDouble(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4]), item[5], Integer.parseInt(item[6]), Integer.parseInt(item[7]), Integer.parseInt(item[8]), item[9], item[10], item[11]);
+                Videogames videogame = new Videogames(item[1], Double.parseDouble(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4]), item[5], Integer.parseInt(item[6]), Integer.parseInt(item[7]), item[8], item[9], item[10], item[11]);
                 Estoque.addVideogame(videogame);
             }
             if(item.length > 4){
