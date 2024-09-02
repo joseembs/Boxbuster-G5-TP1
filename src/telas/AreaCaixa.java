@@ -8,7 +8,12 @@ import boxbuster.Alugar;
 import boxbuster.Pedido;
 import boxbuster.Produtos;
 import boxbuster.Status;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,7 +29,8 @@ public class AreaCaixa extends javax.swing.JFrame {
 
     HashMap<Integer, Alugar> histAlugueis;
     String codigoAtual;
-    
+    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
     public AreaCaixa() {
         setLocationRelativeTo(null);
         initComponents();
@@ -50,8 +56,8 @@ public class AreaCaixa extends javax.swing.JFrame {
                     aluguel.getCodigoPedido(),
                     item.getNomeProd(),
                     item.getClass().getSimpleName(), 
-                    aluguel.getDataPedido(),
-                    aluguel.getDataDevolucao(),
+                    formato.format(aluguel.getDataPedido()),
+                    formato.format(aluguel.getDataDevolucao()),
                     item.getPreco(),
                     divida,
                     status};
@@ -319,12 +325,13 @@ public class AreaCaixa extends javax.swing.JFrame {
                     if(status == Status.ATRASADO){
                         divida = item.getPreco() / 2;
                     }
+                    
                     Object linha[] = new Object[]{
                     aluguel.getCodigoPedido(),
                     item.getNomeProd(),
                     item.getClass().getSimpleName(), 
-                    aluguel.getDataPedido(),
-                    aluguel.getDataDevolucao(),
+                    formato.format(aluguel.getDataPedido()),
+                    formato.format(aluguel.getDataDevolucao()),
                     item.getPreco(),
                     divida,
                     status};
