@@ -24,7 +24,7 @@ public class Pedido {
     
     static private ArrayList<Produtos> pedidoAtual = new ArrayList<>(); 
     
-    static private HashMap<Integer, Alugar> mapAlugueis = new HashMap<Integer, Alugar>();
+    static private HashMap<Integer, Alugar> mapAlugueis = new HashMap<>();
 
     public Pedido() {
     }

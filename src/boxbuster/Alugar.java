@@ -51,8 +51,16 @@ public class Alugar {
 
     public Alugar(String codigoPedido, String dataPedido, String dataDevolucao, String pagamento, String clienteCPF, String caixaCodigo, String codigos, String status) {
         this.codigoPedido = Integer.parseInt(codigoPedido);
-        //this.dataPedido = dataPedido;
-        //this.dataDevolucao = dataDevolucao;
+        
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        
+        try {
+            this.dataPedido = formato.parse(dataPedido);
+            this.dataDevolucao = formato.parse(dataDevolucao);
+        } catch (ParseException e) {
+            System.out.println("Erro convertendo data:" + e.getMessage());
+        }
+        
         this.pagamento = pagamento;
         this.clienteCPF = clienteCPF;
         this.caixaCodigo = caixaCodigo;
@@ -61,7 +69,9 @@ public class Alugar {
         ArrayList<Produtos> listaProdutosTemp = new ArrayList<>();
         
         for(int i = 0; i < codigosFile.length; i++){
-            listaProdutosTemp.add(Estoque.getProdutoPorCodigo(Integer.parseInt(codigosFile[i])));
+            Produtos tempProduto = Estoque.getProdutoPorCodigo(Integer.parseInt(codigosFile[i]));
+            System.out.println(tempProduto);
+            listaProdutosTemp.add(tempProduto);
         }
         this.listaProdutos = listaProdutosTemp;
         
@@ -124,15 +134,21 @@ public class Alugar {
         this.listaProdutos = listaProdutos;
     }
     
-    public void setProdutoStatus(String codigoProd, Status status){
-        int ind = listaProdutos.indexOf(codigoProd);
-        
+    public void setProdutoStatus(int codigoProd, Status status){
+        Produtos tempProd = Estoque.getProdutoPorCodigo(codigoPedido);
+        int ind = listaProdutos.indexOf(tempProd);
+
         listaStatus.set(ind, status);
     }
-    
-    public Status getProdutoStatus(String codigoProd){
-        int ind = listaProdutos.indexOf(codigoProd);
+
+    public Status getProdutoStatus(int codigoProd){
+        System.out.println(codigoProd);
+        System.out.println("a");
+        Produtos tempProd = Estoque.getProdutoPorCodigo(codigoProd);
+        System.out.println(tempProd);
         
+        int ind = listaProdutos.indexOf(tempProd);
+
         return listaStatus.get(ind);
     }
     

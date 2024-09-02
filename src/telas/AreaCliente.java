@@ -43,37 +43,37 @@ public class AreaCliente extends javax.swing.JFrame {
         lblIdade.setText("Idade: " + String.valueOf(idade));
         lblDivida.setText("Divida: " + String.valueOf(BancoDeDadosClientes.getClienteAtual().getDivida()));
         lblProdutosAlugados.setText("Produtos Alugados: " + String.valueOf(BancoDeDadosClientes.getClienteAtual().getAlugados().size()));
-        updateProdList();
+        updateHistList();
     }
 
-    private void updateProdList() {
+    private void updateHistList() {
         histAlugueis = BancoDeDadosClientes.getHistoricoCliente(clienteAtual.getCPF());
         
         DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Pedido", "Produto", "Tipo", "Data Inicial", "Devolução", "Preço", "Dívida", "Status"}, 0);
-        int cont = 1;
         for(int i = 0; i < histAlugueis.size(); i++){
+            Alugar aluguel = histAlugueis.get(i);
+            System.out.println(aluguel);
             for(int j = 0; j < histAlugueis.get(i).getListaProdutos().size(); j++){
                 
-                Produtos item = histAlugueis.get(i).getListaProdutos().get(j);
-                Status status = Status.ALUGADO;
-                status = histAlugueis.get(i).getProdutoStatus(String.valueOf(item.getCodigoProd()));
+                Produtos item = aluguel.getListaProdutos().get(j);
+                Status status = aluguel.getProdutoStatus(item.getCodigoProd());
+                
                 double divida = 0;
                 if(status == Status.ATRASADO){
                     divida = item.getPreco() / 2;
                 }
                 Object linha[] = new Object[]{
-                cont,
+                aluguel.getCodigoPedido(),
                 item.getNomeProd(),
                 item.getClass().getSimpleName(), 
-                histAlugueis.get(i).getDataPedido(),
-                histAlugueis.get(i).getDataDevolucao(),
+                aluguel.getDataPedido(),
+                aluguel.getDataDevolucao(),
                 item.getPreco(),
                 divida,
                 status};
 
                tabela.addRow(linha);
             }
-            cont++;
                     
                     
         

@@ -5,6 +5,7 @@
 package telas;
 
 import boxbuster.BancoDeDadosClientes;
+import boxbuster.Estoque;
 import boxbuster.Pedido;
 
 /**
@@ -17,6 +18,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
      * Creates new form MainScr
      */
     public TelaPrincipal() {
+        Estoque.loadEstoque();
         Pedido.lerAlugueis();
         
         setLocationRelativeTo(null);

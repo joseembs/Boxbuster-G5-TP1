@@ -24,10 +24,7 @@ public class BancoDeDadosClientes implements BancoDeDados{
 
     public static void setClienteAtual(Cliente cliente_atual) {
         BancoDeDadosClientes.clienteAtual = cliente_atual;
-    }
-    
-    
-    
+    }    
 
     public BancoDeDadosClientes(String arquivo) {
         this.arquivo = arquivo;
