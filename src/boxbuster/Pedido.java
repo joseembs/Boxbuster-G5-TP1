@@ -68,6 +68,12 @@ public class Pedido {
         codigoPedido++;
         
         salvarAluguel(aluguelFeito);
+        
+        for(Produtos prod : aluguelFeito.getListaProdutos()){
+            prod.alugaProduto();
+        }
+        
+        Pedido.pedidoAtual = new ArrayList<>();
     }
     
     // chamada para preencher as tabelas, usa o codigoProd salvo pelos Alugar para retornar o produto alugado 

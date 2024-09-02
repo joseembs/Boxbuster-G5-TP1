@@ -87,6 +87,16 @@ public abstract class Produtos {
         this.alugados = alugados;
     }
     
+    public void alugaProduto(){
+        this.disponiveis--;
+        this.alugados++;
+    }
+    
+    public void devolveProduto(){
+        this.disponiveis++;
+        this.alugados--;
+    }
+    
     @Override
     public String toString() {
         return nomeProd + "_" + preco + "_" + ano + "_" + codigoProd + "_" + faixaEtaria + "_" + disponiveis + "_" + alugados;
