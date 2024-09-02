@@ -31,7 +31,7 @@ public class AreaCliente extends javax.swing.JFrame {
     /**
      * Creates new form AreaCliente
      */
-    public AreaCliente() {
+    public AreaCliente() { //Inicia a tela e suas labels
         setLocationRelativeTo(null);
         initComponents();
         updateHistList();
@@ -52,7 +52,7 @@ public class AreaCliente extends javax.swing.JFrame {
         btnDevolver.setEnabled(false);
     }
 
-    private void updateHistList() {
+    private void updateHistList() { // cria a tabela de produtos
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         
         histAlugueis = BancoDeDadosClientes.getHistoricoCliente(clienteAtual.getCPF());
@@ -363,12 +363,13 @@ public class AreaCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //volta pra área do cliente
     private void menuVoltarAreaCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarAreaCliActionPerformed
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_menuVoltarAreaCliActionPerformed
-
+    
+    //vai pra loja se o cliente não tiver dívida
     private void btnLojaMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLojaMainActionPerformed
         if(BancoDeDadosClientes.getClienteAtual().getDivida() > 0){
             JOptionPane.showMessageDialog(null, "Primeiro pague a dívida antes de usar a loja", "Mensagem", JOptionPane.PLAIN_MESSAGE);
@@ -379,22 +380,27 @@ public class AreaCliente extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnLojaMainActionPerformed
-
+    
+    // desloga da conta do cliente
     private void btnDeslogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeslogarActionPerformed
         BancoDeDadosClientes.setClienteAtual(null);
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnDeslogarActionPerformed
-
+    
+   
     private void menuSairAreaCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairAreaCliActionPerformed
         System.exit(0);
     }//GEN-LAST:event_menuSairAreaCliActionPerformed
-
+    
+    
+    // vai pra tela de editar informações do cliente
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         new EditarCliente().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnEditarActionPerformed
-
+    
+    // usado para devolver item alugado ou atrasado e pagar a dívida
     private void btnDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverActionPerformed
         int index = tableAluguel.getSelectedRow();
         
@@ -443,7 +449,8 @@ public class AreaCliente extends javax.swing.JFrame {
     private void scrlAluguelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scrlAluguelMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_scrlAluguelMouseClicked
-
+    
+    // usado para definir o pagamento
     private void cmbPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPagamentoActionPerformed
         if(cmbPagamento.getSelectedIndex() == 0){
             btnDevolver.setEnabled(false);
@@ -487,29 +494,7 @@ public class AreaCliente extends javax.swing.JFrame {
         });
     }
     
-    public void alterarNome(String novoNome) {
-        lblNome.setText("Nome: " + novoNome);
-    }
-     
-    public void alterarCPF(String novoCPF) {
-        lblCPF.setText("CPF: " + novoCPF);
-    }
     
-    public void alterarDataNascimento(String novaDataNascimento) {
-        lblDataNasc.setText("Data de nasc: " + novaDataNascimento);
-    }
-    
-    public void alterarDivida(String novaDivida) {
-        lblDivida.setText("Dívida: R$ " + novaDivida);
-    }
-    
-    public void alterarAlugados(String novoAlugados){
-        lblProdutosAlugados.setText("Produtos Alugados: " + novoAlugados);
-    }
-    
-    public void alterarIdade(String novaIdade){
-        lblIdade.setText("Idade: " + novaIdade);
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeslogar;
     private javax.swing.JButton btnDevolver;
