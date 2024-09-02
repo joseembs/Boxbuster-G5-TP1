@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,7 +25,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AreaCliente extends javax.swing.JFrame {
 
-    // inicia o banco de dados dos clientes e algumas outras variáveis
     Cliente clienteAtual = BancoDeDadosClientes.getClienteAtual();
     BancoDeDadosClientes bdClientes = new BancoDeDadosClientes("clientes.txt");
     ArrayList<Alugar> histAlugueis = BancoDeDadosClientes.getHistoricoCliente(clienteAtual.getCPF());
@@ -65,10 +65,21 @@ public class AreaCliente extends javax.swing.JFrame {
             Alugar aluguel = histAlugueis.get(i);
             System.out.println(aluguel);
             for(int j = 0; j < histAlugueis.get(i).getListaProdutos().size(); j++){
-                
+                LocalDate dataAtual = LocalDate.now();
+                Date dataDevolucao = aluguel.getDataDevolucao();
+                LocalDate localDateDevolucao = dataDevolucao.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                int codigoAluguel = (Integer) aluguel.getCodigoPedido();
                 Produtos item = aluguel.getListaProdutos().get(j);
                 Status status = aluguel.getProdutoStatus(item.getCodigoProd());
-                
+                int codigoProduto = item.getCodigoProd();
+                if (localDateDevolucao.isBefore(dataAtual)){
+                    if(status == Status.ALUGADO){
+                        status = Status.ATRASADO;
+                        aluguel.setProdutoStatus(codigoProduto, Status.ATRASADO);
+                        Pedido.addStatus(codigoAluguel, aluguel);
+                        Pedido.reescreverAlugueis();
+                    }
+                } 
                 double divida = 0;
                 if(status == Status.ATRASADO){
                     if(BancoDeDadosClientes.getClienteAtual().getClass().getSimpleName().equals("Cadastrado")){
