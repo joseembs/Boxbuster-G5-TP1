@@ -18,21 +18,12 @@ import java.util.ArrayList;
  */
 public class BancoDeDadosFuncionarios implements BancoDeDados{
     private static String arquivo;
-    //private static Funcionario funcAtual;
     
     public BancoDeDadosFuncionarios(String arquivo) {
         this.arquivo = arquivo;
     }
-
-    /*public static Funcionario getFunc_atual() {
-        return funcAtual;
-    }
-
-    public static void setFunc_atual(Funcionario func_atual) {
-        BancoDeDadosFuncionarios.funcAtual = func_atual;
-    }*/
     
-    public void adicionarPessoa(Funcionario func) {
+    public void adicionarPessoa(Funcionario func) { // escreve uma linha nova no arquivo contendo os dados do funcionário
         try (FileWriter fw = new FileWriter(arquivo, true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
@@ -42,7 +33,7 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
         }
     }
     
-    public int[] quantidades() {
+    public int[] quantidades() { // calcula a quantidade de gerentes e caixas
         int caixas = 0, gerentes = 0;            
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;
@@ -62,22 +53,10 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
         return ans;
     }
     
-    // chamada pela AreaCaixa, usa o caixa logado para achar todos os aluguéis dele
-    public static ArrayList<Alugar> getHistoricoCaixa(Caixa caixaAtual){
-        ArrayList<Alugar> historico = new ArrayList<>();
+    public void removerPessoa(String CPF) { // busca um funcionário pelo CPF e o remove
+        //reescreve o arquivo com todas as linhas menos uma (a linha que contém o CPF buscado)
         
-        for(Alugar tempAluguel : Pedido.getMapPedidos().values()){
-            if(caixaAtual.equals(tempAluguel.getCaixaCodigo())){
-                historico.add(tempAluguel);
-            }
-        }
-    
-        return historico;
-    }
-    
-    public void removerPessoa(String CPF) {
         ArrayList<String> linhas = new ArrayList<>();
-
 
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;
@@ -86,11 +65,6 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
             while ((linha = br.readLine()) != null) {
                 if (linha.contains(CPF)) {
                     encontrou = true;
-                    /*while (!linha.equals("-------------------------------------------")) {
-                        linha = br.readLine(); 
-                    }
-                    linha = br.readLine();*/
-                    
                 } else {
                     linhas.add(linha); 
                 }
@@ -116,7 +90,7 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
 
     }
     
-    public Gerente buscarGerente(String nome) {
+    public Gerente buscarGerente(String nome) { // encontra o gerente a partir do nome do caixa correspondente
         String[] palavras;
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;
@@ -134,7 +108,7 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
     }
     
     @Override
-    public ArrayList<String> lerPessoas() {
+    public ArrayList<String> lerPessoas() { // retorna todos os funcionários
         ArrayList<String> pessoas = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;
@@ -148,7 +122,7 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
     }
     
     @Override
-    public ArrayList<String> buscarPessoa(String busca) {
+    public ArrayList<String> buscarPessoa(String busca) { // busca por uma substring na string de dados do funcionário
         ArrayList<String> ans = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;
