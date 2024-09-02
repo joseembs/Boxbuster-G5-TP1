@@ -25,7 +25,7 @@ public class Loja extends javax.swing.JFrame {
     private ArrayList<Tabuleiros> listaTabuleiros;
     private ArrayList<Videogames> listaVideogames;
     
-    static private double valorTotal = 0.0;
+    private double valorTotal = 0.0;
     
     private ArrayList<javax.swing.JRadioButton> tempBtnSelected = new ArrayList<>();
     private ArrayList<javax.swing.JRadioButton> finalBtnSelected = new ArrayList<>();
@@ -36,9 +36,10 @@ public class Loja extends javax.swing.JFrame {
      * Creates new form LojaScr
      */    
     public Loja() {
-        //finalPedido = Pedido.getPedidoAtual();
         setLocationRelativeTo(null);
         initComponents();
+        
+        valorTotal = 0.0;
         
         setLoja();
         lblCartLoja.setText("Carrinho: " + finalPedido.size() + " itens - R$ " + valorTotal + "0");
@@ -3244,6 +3245,7 @@ public class Loja extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void menuVoltarLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarLojaActionPerformed
+        
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_menuVoltarLojaActionPerformed
@@ -3258,6 +3260,10 @@ public class Loja extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDetalhesMv1ActionPerformed
 
     private void btnVoltarLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarLojaActionPerformed
+        tempPedido = new ArrayList<>();
+        finalPedido = new ArrayList<>();
+        valorTotal = 0;
+        
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarLojaActionPerformed
