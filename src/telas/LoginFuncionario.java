@@ -212,31 +212,24 @@ public class LoginFuncionario extends javax.swing.JFrame {
         else{
             String codigo = txtfCodigo.getText();
             String senha = txtfSenha.getText();
-            int t = cmbTipo.getSelectedIndex();
-            String tipo;
-            if(t==1){
-                tipo = "Caixa";
-            }
-            else{
-                tipo = "Gerente";
-            }
+            String tipo = cmbTipo.getSelectedItem().toString();
 
-            ArrayList<String> pessoa = bdFunc.buscarPessoa("_" + codigo + "_");
-            if(pessoa.size() == 0){
+            ArrayList<String> pessoa = bdFunc.buscarPessoa("_" + codigo + "_"); // busca o funcionário pelo código
+            if(pessoa.isEmpty()){
                 JOptionPane.showMessageDialog(null, "Não existe funcionário com este código.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
             }
             else if(!pessoa.get(5).equals(tipo)){
-                //JOptionPane.showMessageDialog(null, "O tipo está incorreto.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-                JOptionPane.showMessageDialog(null, pessoa, "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "O tipo está incorreto.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
             }
             else if(!pessoa.get(3).equals(senha)){
                 JOptionPane.showMessageDialog(null, "A senha está incorreta.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
             }
-            else{
+            else{ // faz login
                 if(tipo.equals("Caixa")){
+                    // transfere as informações do caixa que acabou de fazer login para serem exibidas na área do caixa
                     AreaCaixa telaCaixa = new AreaCaixa();
                     
-                    String nome = pessoa.get(0), CPF = pessoa.get(1), dataString = pessoa.get(2), cod = pessoa.get(4);
+                    String nome = pessoa.get(0), CPF = pessoa.get(1), dataString = pessoa.get(2);
                     
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     Date data = null;
@@ -259,7 +252,7 @@ public class LoginFuncionario extends javax.swing.JFrame {
                     telaCaixa.setVisible(true);
                 }
                 else{
-                    new AreaGerente().setVisible(true);
+                    new AreaGerente().setVisible(true); // caso seja gerente, redireciona para a área do gerente
                 }
                 this.setVisible(false);
             }
