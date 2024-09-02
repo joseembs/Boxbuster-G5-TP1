@@ -61,11 +61,13 @@ public class Pedido {
         Pedido.mapAlugueis = mapAlugueis;
     }
     
-    public static void addPedido(String pagamento, Caixa caixa){
-        Alugar aluguelFeito = new Alugar(pagamento, caixa);
+    public static void addPedido(String pagamento, String codigoCaixa){
+        Alugar aluguelFeito = new Alugar(pagamento, codigoCaixa);
         
         Pedido.mapAlugueis.put(codigoPedido, aluguelFeito);
         codigoPedido++;
+        
+        salvarAluguel(aluguelFeito);
     }
     
     // chamada para preencher as tabelas, usa o codigoProd salvo pelos Alugar para retornar o produto alugado 

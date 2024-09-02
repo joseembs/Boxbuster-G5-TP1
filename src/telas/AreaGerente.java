@@ -65,7 +65,7 @@ public class AreaGerente extends javax.swing.JFrame {
     private void updateProdList() {
         allProducts = Estoque.atualizarLista();
         
-        DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Código", "Tipo", "Nome", "Faixa", "Ano", "Preço", "Alugado"}, 0);
+        DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Código", "Tipo", "Nome", "Faixa", "Ano", "Preço", "Disp./Alugados"}, 0);
 
         for(int i = 0; i < allProducts.size(); i++){
             Object linha[] = new Object[]{
@@ -75,7 +75,7 @@ public class AreaGerente extends javax.swing.JFrame {
             allProducts.get(i).getFaixaEtaria(),
             allProducts.get(i).getAno(),
             allProducts.get(i).getPreco(),
-            allProducts.get(i).isAlugado()};
+            allProducts.get(i).getDisponiveis() + "/" + allProducts.get(i).getAlugados()};
 
             tabela.addRow(linha);
         }
@@ -185,7 +185,6 @@ public class AreaGerente extends javax.swing.JFrame {
         txtfNome = new javax.swing.JTextField();
         lblAno = new javax.swing.JLabel();
         txtfAno = new javax.swing.JTextField();
-        checkAlugado = new javax.swing.JCheckBox();
         lblVar1 = new javax.swing.JLabel();
         txtfVar1 = new javax.swing.JTextField();
         lblVar2 = new javax.swing.JLabel();
@@ -199,6 +198,8 @@ public class AreaGerente extends javax.swing.JFrame {
         scrlProdutos = new javax.swing.JScrollPane();
         tableProdutos = new javax.swing.JTable();
         btnEditarProd1 = new javax.swing.JButton();
+        lblQuantidade = new javax.swing.JLabel();
+        txtfQuantidade = new javax.swing.JTextField();
         menuBarAreaGr = new javax.swing.JMenuBar();
         menuAreaGr = new javax.swing.JMenu();
         menuVoltarAreaGr = new javax.swing.JMenuItem();
@@ -519,9 +520,6 @@ public class AreaGerente extends javax.swing.JFrame {
             }
         });
 
-        checkAlugado.setText("Alugado");
-        checkAlugado.setEnabled(false);
-
         lblVar1.setText("----------:");
 
         txtfVar1.setEnabled(false);
@@ -579,7 +577,7 @@ public class AreaGerente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Tipo", "Nome", "Faixa ", "Ano", "Preço", "Alugado"
+                "Código", "Tipo", "Nome", "Faixa ", "Ano", "Preço", "Disp./Alugados"
             }
         ));
         tableProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -593,6 +591,16 @@ public class AreaGerente extends javax.swing.JFrame {
         btnEditarProd1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarProd1ActionPerformed(evt);
+            }
+        });
+
+        lblQuantidade.setText("Disp./Alugados:");
+
+        txtfQuantidade.setText("/");
+        txtfQuantidade.setEnabled(false);
+        txtfQuantidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfQuantidadeActionPerformed(evt);
             }
         });
 
@@ -654,14 +662,18 @@ public class AreaGerente extends javax.swing.JFrame {
                         .addComponent(lblTipoProd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbTipoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
                         .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblQuantTipo)
-                            .addGroup(pnlEstoqueLayout.createSequentialGroup()
-                                .addComponent(lblPreco)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtfPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(checkAlugado))
+                            .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(pnlEstoqueLayout.createSequentialGroup()
+                                    .addComponent(lblQuantidade)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(pnlEstoqueLayout.createSequentialGroup()
+                                    .addComponent(lblPreco)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtfPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(59, 59, 59))
                     .addGroup(pnlEstoqueLayout.createSequentialGroup()
                         .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -710,7 +722,10 @@ public class AreaGerente extends javax.swing.JFrame {
                         .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtfAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblAno))
+                                .addComponent(lblAno)
+                                .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblQuantidade)))
                             .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(lblNome))))
@@ -719,9 +734,7 @@ public class AreaGerente extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtfPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPreco))
-                        .addGap(18, 18, 18)
-                        .addComponent(checkAlugado)))
+                            .addComponent(lblPreco))))
                 .addGap(48, 48, 48)
                 .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlEstoqueLayout.createSequentialGroup()
@@ -973,13 +986,23 @@ public class AreaGerente extends javax.swing.JFrame {
             tableProdutos.removeAll();
             DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Código", "Tipo", "Nome", "Faixa", "Ano", "Preço", "Alugado"}, 0);
 
+            String disponiveis = "", alugados = "";
+            
+            String[] quant = txtfQuantidade.getText().split("/");
+            
+            if(quant.length == 1){
+                disponiveis = quant[0];
+            } else if (quant.length == 2){
+                disponiveis = quant[0];
+                alugados = quant[1];
+            }
+            
             String tipo = (String) cmbTipoProd.getSelectedItem(),
                     codigo = txtfCodigoProd.getText(),
                     faixaEtaria = txtfFaixaEtaria.getText(),
                     preco = txtfPreco.getText(),
                     nome = txtfNome.getText(),
                     ano = txtfAno.getText(),
-                    alugado = String.valueOf(checkAlugado.isSelected()),
                     var1 = txtfVar1.getText(),
                     var2 = txtfVar2.getText(),
                     var3 = txtfVar3.getText(),
@@ -994,10 +1017,10 @@ public class AreaGerente extends javax.swing.JFrame {
                 boolean ok3 = true;
                 boolean ok4 = true;
                 
-                if(info.length >= 10 && !info[9].contains(var3)){
+                if(info.length >= 11 && !info[10].contains(var3)){
                     ok3 = false;
                 }
-                if(info.length >= 11 && !info[10].contains(var4)){
+                if(info.length >= 12 && !info[11].contains(var4)){
                     ok4 = false;
                 }
                 
@@ -1007,9 +1030,10 @@ public class AreaGerente extends javax.swing.JFrame {
                         info[3].contains(ano) &&
                         info[4].contains(codigo) &&
                         info[5].contains(faixaEtaria) &&
-                        info[6].contains(alugado) &&
-                        info[7].contains(var1) &&
-                        info[8].contains(var2) &&
+                        info[6].contains(disponiveis) &&
+                        info[7].contains(alugados) &&
+                        info[8].contains(var1) &&
+                        info[9].contains(var2) &&
                         ok3 && ok4){
                     System.out.println("achou");
                     
@@ -1021,7 +1045,7 @@ public class AreaGerente extends javax.swing.JFrame {
                     info[5],
                     info[3],
                     info[2],
-                    info[6]};
+                    info[6] + "/" + info[7]};
 
                     tabela.addRow(linha);
                     System.out.println("colocou linha");
@@ -1036,14 +1060,28 @@ public class AreaGerente extends javax.swing.JFrame {
                     preco = txtfPreco.getText(),
                     nome = txtfNome.getText(),
                     ano = txtfAno.getText();
-            boolean alugado = checkAlugado.isSelected();
+            
+            String[] quant = txtfQuantidade.getText().split("/");
+            
+            String disponiveis = quant[0];
+            String alugados = quant[1];
 
             String prodType = (String) cmbTipoProd.getSelectedItem();
 
             ok = true;
+            
+            try {
+                Double.parseDouble(preco);
+                Integer.parseInt(ano);
+                Integer.parseInt(disponiveis);
+                Integer.parseInt(alugados);
+            } catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos corretamente.");
+                ok = false;
+            }
 
-            if(faixaEtaria.isEmpty() || preco.isEmpty() || nome.isEmpty() || ano.isEmpty()){
-                JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
+            if(faixaEtaria.isEmpty() || preco.isEmpty() || nome.isEmpty() || ano.isEmpty() || quant.length != 2){
+                JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos corretamente.");
                 ok = false;
             } else {
                 if (prodType.equals("Filme")){
@@ -1055,7 +1093,7 @@ public class AreaGerente extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
                         ok = false;
                     } else {
-                        Filmes newFilme = new Filmes(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, alugado, genero, estudio, diretor);
+                        Filmes newFilme = new Filmes(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, Integer.parseInt(disponiveis), Integer.parseInt(alugados), genero, estudio, diretor);
 
                         if(action.equals("edit")){
                             Estoque.getListaFilmes().set(selectedProdInd, newFilme);
@@ -1072,7 +1110,7 @@ public class AreaGerente extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
                         ok = false;
                     } else {
-                        Musicas newMusica = new Musicas(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, alugado, estilo, autor);
+                        Musicas newMusica = new Musicas(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, Integer.parseInt(disponiveis), Integer.parseInt(alugados), estilo, autor);
 
                         if(action.equals("edit")){
                             Estoque.getListaMusicas().set(selectedProdInd, newMusica);
@@ -1086,11 +1124,18 @@ public class AreaGerente extends javax.swing.JFrame {
                             marca = txtfVar2.getText(),
                             numJogadores = txtfVar3.getText();
 
+                    try {
+                        Integer.parseInt(numJogadores);
+                    } catch (NumberFormatException nfe) {
+                        JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos corretamente.");
+                        ok = false;
+                    }
+                    
                     if(tipo.isEmpty() || marca.isEmpty() || numJogadores.isEmpty()){
                         JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
                         ok = false;
                     } else {
-                        Tabuleiros newTabuleiro = new Tabuleiros(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, alugado, Integer.parseInt(numJogadores), tipo, marca);
+                        Tabuleiros newTabuleiro = new Tabuleiros(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, Integer.parseInt(disponiveis), Integer.parseInt(alugados), Integer.parseInt(numJogadores), tipo, marca);
 
                         if(action.equals("edit")){
                             Estoque.getListaTabuleiros().set(selectedProdInd, newTabuleiro);
@@ -1105,11 +1150,18 @@ public class AreaGerente extends javax.swing.JFrame {
                             numJogadores = txtfVar3.getText(),
                             plataforma = txtfVar4.getText();
 
+                    try {
+                        Integer.parseInt(numJogadores);
+                    } catch (NumberFormatException nfe) {
+                        JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos corretamente.");
+                        ok = false;
+                    }
+                    
                     if(genero.isEmpty() || estudio.isEmpty() || numJogadores.isEmpty() || plataforma.isEmpty()){
                         JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
                         ok = false;
                     } else {
-                        Videogames newVideogame = new Videogames(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, alugado, Integer.parseInt(numJogadores), genero, plataforma, estudio);
+                        Videogames newVideogame = new Videogames(nome, Double.parseDouble(preco), Integer.parseInt(ano), codigo, faixaEtaria, Integer.parseInt(disponiveis), Integer.parseInt(alugados), Integer.parseInt(numJogadores), genero, plataforma, estudio);
 
                         if(action.equals("edit")){
                             Estoque.getListaVideogames().set(selectedProdInd, newVideogame);
@@ -1194,8 +1246,7 @@ public class AreaGerente extends javax.swing.JFrame {
             txtfFaixaEtaria.setText(selectedProd.getFaixaEtaria());
             txtfAno.setText(Integer.toString(selectedProd.getAno()));
             txtfPreco.setText(Double.toString(selectedProd.getPreco()));
-            
-            checkAlugado.setSelected(selectedProd.isAlugado());
+            txtfQuantidade.setText(selectedProd.getDisponiveis() + "/" + selectedProd.getAlugados());
             
             if(selectedProd.getClass().getSimpleName().equals("Filmes")){
                 selectedProdInd = Estoque.getListaFilmes().indexOf(selectedProd);
@@ -1470,9 +1521,13 @@ public class AreaGerente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tableEquipeMouseClicked
 
+    private void txtfQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfQuantidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfQuantidadeActionPerformed
+
     public void disableBaseFields(){
         cmbTipoProd.setEnabled(false);
-        checkAlugado.setEnabled(false);
+        txtfQuantidade.setEnabled(false);
         txtfCodigoProd.setEnabled(false);
         txtfFaixaEtaria.setEnabled(false);
         txtfPreco.setEnabled(false);
@@ -1501,7 +1556,7 @@ public class AreaGerente extends javax.swing.JFrame {
     
     public void enableBaseFields(){
         cmbTipoProd.setEnabled(true);
-        checkAlugado.setEnabled(true);
+        txtfQuantidade.setEnabled(true);
         txtfCodigoProd.setEnabled(true);
         //txtfCodigoProd.setText("");
         txtfFaixaEtaria.setEnabled(true);
@@ -1524,7 +1579,8 @@ public class AreaGerente extends javax.swing.JFrame {
     
     public void clearFields(){
         cmbTipoProd.setSelectedItem("Selecione");
-        checkAlugado.setSelected(false);
+        txtfQuantidade.setEnabled(false);
+        txtfQuantidade.setText("/");
         txtfCodigoProd.setText("");
         txtfFaixaEtaria.setText("");
         txtfPreco.setText("");
@@ -1585,7 +1641,6 @@ public class AreaGerente extends javax.swing.JFrame {
     private javax.swing.JButton btnPesquisarProd;
     private javax.swing.JButton btnVoltarEq;
     private javax.swing.JButton btnVoltarEst;
-    private javax.swing.JCheckBox checkAlugado;
     private javax.swing.JComboBox<String> cmbGerenteEq;
     private javax.swing.JComboBox<String> cmbTipoEq;
     private javax.swing.JComboBox<String> cmbTipoProd;
@@ -1600,6 +1655,7 @@ public class AreaGerente extends javax.swing.JFrame {
     private javax.swing.JLabel lblNomeEq;
     private javax.swing.JLabel lblPreco;
     private javax.swing.JLabel lblQuantTipo;
+    private javax.swing.JLabel lblQuantidade;
     private javax.swing.JLabel lblTipoEq;
     private javax.swing.JLabel lblTipoProd;
     private javax.swing.JLabel lblTotalCaixas;
@@ -1631,6 +1687,7 @@ public class AreaGerente extends javax.swing.JFrame {
     private javax.swing.JTextField txtfNome;
     private javax.swing.JTextField txtfNomeEq;
     private javax.swing.JTextField txtfPreco;
+    private javax.swing.JTextField txtfQuantidade;
     private javax.swing.JTextField txtfVar1;
     private javax.swing.JTextField txtfVar2;
     private javax.swing.JTextField txtfVar3;

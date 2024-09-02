@@ -191,16 +191,16 @@ public class Estoque {
         for(int i = 0; i < produtos.size(); i++){
             String[] item = produtos.get(i).split("_");
             if("Filme".equals(item[0])){
-                Filmes filme = new Filmes(item[1], Double.parseDouble(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4]), item[5], Boolean.parseBoolean(item[6]), item[7], item[8], item[9]);
+                Filmes filme = new Filmes(item[1], Double.parseDouble(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4]), item[5], Integer.parseInt(item[6]), Integer.parseInt(item[7]), item[8], item[9], item[10]);
                 Estoque.addFilme(filme);
             } else if("Musica".equals(item[0])){
-                Musicas musica = new Musicas(item[1], Double.parseDouble(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4]), item[5], Boolean.parseBoolean(item[6]), item[7], item[8]);
+                Musicas musica = new Musicas(item[1], Double.parseDouble(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4]), item[5], Integer.parseInt(item[6]), Integer.parseInt(item[7]), item[8], item[9]);
                 Estoque.addMusica(musica);
             } else if("Tabuleiro".equals(item[0])){
-                Tabuleiros tabuleiro = new Tabuleiros(item[1], Double.parseDouble(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4]), item[5], Boolean.parseBoolean(item[6]), Integer.parseInt(item[7]), item[8], item[9]);
+                Tabuleiros tabuleiro = new Tabuleiros(item[1], Double.parseDouble(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4]), item[5], Integer.parseInt(item[6]), Integer.parseInt(item[7]), Integer.parseInt(item[8]), item[9], item[10]);
                 Estoque.addTabuleiro(tabuleiro);
             } else if("Videogame".equals(item[0])){
-                Videogames videogame = new Videogames(item[1], Double.parseDouble(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4]), item[5], Boolean.parseBoolean(item[6]), Integer.parseInt(item[7]), item[8], item[9], item[10]);
+                Videogames videogame = new Videogames(item[1], Double.parseDouble(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4]), item[5], Integer.parseInt(item[6]), Integer.parseInt(item[7]), Integer.parseInt(item[8]), item[9], item[10], item[11]);
                 Estoque.addVideogame(videogame);
             }
             if(item.length > 4){

@@ -15,18 +15,20 @@ public abstract class Produtos {
     private int ano;
     private int codigoProd;
     private String faixaEtaria;
-    private boolean alugado;
+    private int disponiveis;
+    private int alugados;
     
     public Produtos() {
     }
 
-    public Produtos(String nomeProd, double preco, int ano, int codigoProd, String faixaEtaria, boolean alugado) {
+    public Produtos(String nomeProd, double preco, int ano, int codigoProd, String faixaEtaria, int disponiveis, int alugados) {
         this.nomeProd = nomeProd;
         this.preco = preco;
         this.ano = ano;
         this.codigoProd = codigoProd;
         this.faixaEtaria = faixaEtaria;
-        this.alugado = alugado;
+        this.disponiveis = disponiveis;
+        this.alugados = alugados;
     }
 
     public String getNomeProd() {
@@ -68,18 +70,26 @@ public abstract class Produtos {
     public void setFaixaEtaria(String faixaEtaria) {
         this.faixaEtaria = faixaEtaria;
     }
+
+    public int getDisponiveis() {
+        return disponiveis;
+    }
+
+    public void setDisponiveis(int disponiveis) {
+        this.disponiveis = disponiveis;
+    }
+
+    public int getAlugados() {
+        return alugados;
+    }
+
+    public void setAlugados(int alugados) {
+        this.alugados = alugados;
+    }
     
-    public boolean isAlugado() {
-        return alugado;
-    }
-
-    public void setAlugado(boolean alugado) {
-        this.alugado = alugado;
-    }
-
     @Override
     public String toString() {
-        return nomeProd + "_" + preco + "_" + ano + "_" + codigoProd + "_" + faixaEtaria + "_" + alugado;
+        return nomeProd + "_" + preco + "_" + ano + "_" + codigoProd + "_" + faixaEtaria + "_" + disponiveis + "_" + alugados;
     }
     
     @Override

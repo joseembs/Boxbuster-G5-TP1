@@ -100,13 +100,13 @@ public class Loja extends javax.swing.JFrame {
             }
             
             listNomeMv[i].setText(filme.getNomeProd());
-            listDescMv[i].setText(Integer.toString(filme.getAno()) + " - A" + filme.getFaixaEtaria());
+            listDescMv[i].setText(Integer.toString(filme.getAno()) + " - " + filme.getDisponiveis() + " em estoque");
             listPrecoMv[i].setText("R$ " + Double.toString(filme.getPreco()) + "0");
-            listAlugarMv[i].setEnabled(!filme.isAlugado());            
+            listAlugarMv[i].setEnabled(filme.getDisponiveis() > 0);            
             if(finalPedido.contains(filme)){
                 listAlugarMv[i].setText("Remover do carrinho");
                 valorTotal += filme.getPreco();
-            } else if(filme.isAlugado()){
+            } else if(filme.getDisponiveis() == 0){
                 listAlugarMv[i].setText("Esgotado");
             } else {
                 listAlugarMv[i].setText("Alugar");
@@ -160,11 +160,11 @@ public class Loja extends javax.swing.JFrame {
             listNomeMus[i].setText(musica.getNomeProd());
             listDescMus[i].setText(Integer.toString(musica.getAno()) + " - A" + musica.getFaixaEtaria());
             listPrecoMus[i].setText("R$ " + Double.toString(musica.getPreco()) + "0");
-            listAlugarMus[i].setEnabled(!musica.isAlugado());
+            listAlugarMus[i].setEnabled(musica.getDisponiveis() > 0);
             if(finalPedido.contains(musica)){
                 listAlugarMus[i].setText("Remover do carrinho");
                 valorTotal += musica.getPreco();
-            } else if(musica.isAlugado()){
+            } else if(musica.getDisponiveis() == 0){
                 listAlugarMus[i].setText("Esgotado");
             } else {
                 listAlugarMus[i].setText("Alugar");
@@ -218,11 +218,11 @@ public class Loja extends javax.swing.JFrame {
             listNomeTab[i].setText(tabuleiro.getNomeProd());
             listDescTab[i].setText(Integer.toString(tabuleiro.getAno()) + " - A" + tabuleiro.getFaixaEtaria());
             listPrecoTab[i].setText("R$ " + Double.toString(tabuleiro.getPreco()) + "0");
-            listAlugarTab[i].setEnabled(!tabuleiro.isAlugado());
+            listAlugarTab[i].setEnabled(tabuleiro.getDisponiveis() > 0);
             if(finalPedido.contains(tabuleiro)){
                 listAlugarTab[i].setText("Remover do carrinho");
                 valorTotal += tabuleiro.getPreco();
-            } else if(tabuleiro.isAlugado()){
+            } else if(tabuleiro.getDisponiveis() == 0){
                 listAlugarTab[i].setText("Esgotado");
             } else {
                 listAlugarTab[i].setText("Alugar");
@@ -276,11 +276,11 @@ public class Loja extends javax.swing.JFrame {
             listNomeVid[i].setText(videogame.getNomeProd());
             listDescVid[i].setText(Integer.toString(videogame.getAno()) + " - A" + videogame.getFaixaEtaria());
             listPrecoVid[i].setText("R$ " + Double.toString(videogame.getPreco()) + "0");
-            listAlugarVid[i].setEnabled(!videogame.isAlugado());
+            listAlugarVid[i].setEnabled(videogame.getDisponiveis() > 0);
             if(finalPedido.contains(videogame)){
                 listAlugarVid[i].setText("Remover do carrinho");
                 valorTotal += videogame.getPreco();
-            } else if(videogame.isAlugado()){
+            } else if(videogame.getDisponiveis() == 0){
                 listAlugarVid[i].setText("Esgotado");
             } else {
                 listAlugarVid[i].setText("Alugar");

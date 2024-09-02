@@ -24,7 +24,7 @@ public class Alugar {
     private String caixaCodigo;
     private ArrayList<Produtos> listaProdutos;
 
-    public Alugar(String pagamentoIn, Caixa caixaIn) {
+    public Alugar(String pagamentoIn, String codigoCaixa) {
         this.codigoPedido = Pedido.getCodigoPedido();
         
         this.dataPedido = new Date();
@@ -38,7 +38,7 @@ public class Alugar {
         
         this.clienteCPF = BancoDeDadosClientes.getCliente_atual().getCPF();
         
-        //this.caixaCodigo = caixaIn.get;
+        this.caixaCodigo = codigoCaixa;
         
         this.listaProdutos = Pedido.getPedidoAtual();
     }
@@ -113,9 +113,13 @@ public class Alugar {
         String codigosProd = "";
         
         for(Produtos prod : listaProdutos){
-            codigosProd = codigosProd + " " + Integer.toString(prod.getCodigoProd());
+            codigosProd = codigosProd + Integer.toString(prod.getCodigoProd()) + " ";
         }
         
-        return Integer.toString(codigoPedido) + "_" + dataPedido + "_" + dataDevolucao + codigosProd;
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        String data1 = formato.format(dataPedido);
+        String data2 = formato.format(dataDevolucao);
+        
+        return Integer.toString(codigoPedido) + "_" + data1 + "_" + data2 + "_" + pagamento + "_" + clienteCPF + "_" + caixaCodigo + "_" + codigosProd;
     }
 }

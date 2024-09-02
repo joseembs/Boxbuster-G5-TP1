@@ -12,8 +12,8 @@ public class Filmes extends Produtos{
     public Filmes() {
     }
 
-     public Filmes(String nomeProd, double preco, int ano, int codigoProd, String faixaEtaria, boolean alugado, String genero, String estudio, String diretor) {
-        super(nomeProd, preco, ano, codigoProd, faixaEtaria, alugado);
+     public Filmes(String nomeProd, double preco, int ano, int codigoProd, String faixaEtaria, int disponiveis, int alugados, String genero, String estudio, String diretor) {
+        super(nomeProd, preco, ano, codigoProd, faixaEtaria, disponiveis, alugados);
         this.genero = genero;
         this.estudio = estudio;
         this.diretor = diretor;

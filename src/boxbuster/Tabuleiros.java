@@ -13,8 +13,8 @@ public class Tabuleiros extends Jogos{
     public Tabuleiros() {
     }
 
-    public Tabuleiros(String nomeProd, double preco, int ano, int codigoProd, String faixaEtaria, boolean alugado, int numJogadores, String tipo, String marca) {
-        super(nomeProd, preco, ano, codigoProd, faixaEtaria, alugado, numJogadores);
+    public Tabuleiros(String nomeProd, double preco, int ano, int codigoProd, String faixaEtaria, int disponiveis, int alugados, int numJogadores, String tipo, String marca) {
+        super(nomeProd, preco, ano, codigoProd, faixaEtaria, disponiveis, alugados, numJogadores);
         this.tipo = tipo;
         this.marca = marca;
     }

@@ -32,6 +32,9 @@ public class FinalizarPedido extends javax.swing.JFrame {
     private ArrayList<Produtos> listaPedido = Pedido.getPedidoAtual();
     
     double valorTotal = 0;
+    
+    int rowClick = -1;
+    
     BancoDeDadosClientes bdClientes = new BancoDeDadosClientes("clientes.txt");
     /**
      * Creates new form CarrinhoScr
@@ -110,6 +113,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         tableCart.getColumnModel().getColumn(1).setPreferredWidth(200);
         tableCart.getColumnModel().getColumn(2).setPreferredWidth(60);
         
+        lblValor.setText("Valor total: R$ " + valorTotal + "0");
     }
     
     private void updateCmbCaixa(){
@@ -126,12 +130,11 @@ public class FinalizarPedido extends javax.swing.JFrame {
         for(int i=0;i<funcionarios.size();i++){
             linha = funcionarios.get(i).split("_");
             if(linha[5].equals("Caixa")){
-                nomeCaixa = linha[0];
+                nomeCaixa = linha[4] + "-" + linha[0];
                 cmbCaixa.addItem(nomeCaixa);
             }
         }
     }
-    
     
     private void setDates() {
         SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
@@ -148,6 +151,15 @@ public class FinalizarPedido extends javax.swing.JFrame {
         
         String dataFinalForm = formatador.format(dataDevolucao);
         lblDataFinal.setText("Data máx. de devolução: " + dataFinalForm);
+    }
+    
+    private void checkFim() {
+        if(BancoDeDadosClientes.getCliente_atual() != null && !Pedido.getPedidoAtual().isEmpty() && cmbPagamento.getSelectedIndex() > 0 && cmbCaixa.getSelectedIndex() >0){
+            btnFinalizar.setEnabled(true);
+        } else {
+            btnFinalizar.setEnabled(false);
+        }
+        System.out.println(BancoDeDadosClientes.getCliente_atual() + "/" + Pedido.getPedidoAtual() + "/" + cmbPagamento.getSelectedIndex()+ "/" + cmbCaixa.getSelectedIndex());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -172,9 +184,8 @@ public class FinalizarPedido extends javax.swing.JFrame {
         lblCart = new javax.swing.JLabel();
         scrlCart = new javax.swing.JScrollPane();
         tableCart = new javax.swing.JTable();
-        btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
-        btnPronto = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         separator3Cart = new javax.swing.JSeparator();
         lblFinalizacao = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
@@ -269,6 +280,11 @@ public class FinalizarPedido extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableCart.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableCartMouseClicked(evt);
+            }
+        });
         scrlCart.setViewportView(tableCart);
         if (tableCart.getColumnModel().getColumnCount() > 0) {
             tableCart.getColumnModel().getColumn(0).setPreferredWidth(20);
@@ -276,14 +292,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
             tableCart.getColumnModel().getColumn(2).setPreferredWidth(60);
         }
 
-        btnEditar.setText("Editar");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-
-        btnExcluir.setText("Excluir");
+        btnExcluir.setText("Remover produto");
         btnExcluir.setEnabled(false);
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -291,11 +300,11 @@ public class FinalizarPedido extends javax.swing.JFrame {
             }
         });
 
-        btnPronto.setText("Confirmar");
-        btnPronto.setEnabled(false);
-        btnPronto.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setEnabled(false);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProntoActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
@@ -309,6 +318,11 @@ public class FinalizarPedido extends javax.swing.JFrame {
         lblPagamento.setText("Forma de pagamento:");
 
         cmbPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Cartão", "Pix" }));
+        cmbPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbPagamentoActionPerformed(evt);
+            }
+        });
 
         lblDataAtual.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblDataAtual.setText("Data atual: XX/XX/XXXX");
@@ -320,6 +334,11 @@ public class FinalizarPedido extends javax.swing.JFrame {
         lblCaixa.setText("Caixa:");
 
         cmbCaixa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
+        cmbCaixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCaixaActionPerformed(evt);
+            }
+        });
 
         lblFilial.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblFilial.setText("Filial: UnB - Darcy Ribeiro");
@@ -335,6 +354,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         });
 
         btnFinalizar.setText("Finalizar compra");
+        btnFinalizar.setEnabled(false);
         btnFinalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFinalizarActionPerformed(evt);
@@ -415,14 +435,13 @@ public class FinalizarPedido extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlCartLayout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(btnEditar)
-                                .addGap(18, 18, 18)
+                                .addComponent(scrlCart, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCartLayout.createSequentialGroup()
                                 .addComponent(btnExcluir)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnPronto))
-                            .addComponent(scrlCart, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                                .addComponent(btnCancelar)
+                                .addGap(38, 38, 38))))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCartLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -491,9 +510,8 @@ public class FinalizarPedido extends javax.swing.JFrame {
                                 .addComponent(scrlCart, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnEditar)
                                     .addComponent(btnExcluir)
-                                    .addComponent(btnPronto))))
+                                    .addComponent(btnCancelar))))
                         .addGap(12, 12, 12))
                     .addGroup(pnlCartLayout.createSequentialGroup()
                         .addComponent(separator2Cart, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -580,7 +598,11 @@ public class FinalizarPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_txtfDataNascimentoActionPerformed
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
-        new CadastroCliente().setVisible(true);
+        String[] caixaInfo = cmbCaixa.getSelectedItem().toString().split("-");
+        
+        Pedido.addPedido(cmbPagamento.getSelectedItem().toString(), caixaInfo[0]);
+        
+        new AreaCliente().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
@@ -589,17 +611,21 @@ public class FinalizarPedido extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void btnProntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProntoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnProntoActionPerformed
-
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnExcluirActionPerformed
+        if (rowClick >= 0 && rowClick < Pedido.getPedidoAtual().size()){
+            Produtos selectedProd = Pedido.getPedidoAtual().get(rowClick);
+            Pedido.getPedidoAtual().remove(selectedProd);
+            
+            updateProdTable();
+        }
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarActionPerformed
+        checkFim();
+        
+        rowClick = -1;
+        
+        btnExcluir.setEnabled(false);
+        btnCancelar.setEnabled(false);
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         int index = cmbSituacao.getSelectedIndex();
@@ -756,6 +782,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         }
         if(BancoDeDadosClientes.getCliente_atual() != null){
             lblUsuario.setText("Usuário atual: " + BancoDeDadosClientes.getCliente_atual().getNome());
+            checkFim();
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -839,6 +866,30 @@ public class FinalizarPedido extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmbSituacaoActionPerformed
 
+    private void cmbPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPagamentoActionPerformed
+        checkFim();
+    }//GEN-LAST:event_cmbPagamentoActionPerformed
+
+    private void cmbCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCaixaActionPerformed
+        checkFim();
+    }//GEN-LAST:event_cmbCaixaActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        checkFim();
+        
+        rowClick = -1;
+        
+        btnExcluir.setEnabled(false);
+        btnCancelar.setEnabled(false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void tableCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCartMouseClicked
+        rowClick = tableCart.getSelectedRow();
+        
+        btnExcluir.setEnabled(true);
+        btnCancelar.setEnabled(true);
+    }//GEN-LAST:event_tableCartMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -878,11 +929,10 @@ public class FinalizarPedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton btnLogin;
-    private javax.swing.JButton btnPronto;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cmbCaixa;
     private javax.swing.JComboBox<String> cmbPagamento;

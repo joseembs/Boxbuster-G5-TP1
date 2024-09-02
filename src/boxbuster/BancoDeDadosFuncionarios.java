@@ -75,18 +75,6 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
         return historico;
     }
     
-    static public Cliente getClientePorCPF(String cpfCliente){
-        Cliente cliente = null;
-        
-        //for(Cliente tempCliente : BancoDeDadosClientes.getListaClientes()){
-        //    if(cpfCliente == tempCliente.getCpf()){
-        //        cliente = tempCliente;
-        //    }
-        //}
-        
-        return cliente;
-    }
-    
     public void removerPessoa(String CPF) {
         ArrayList<String> linhas = new ArrayList<>();
 

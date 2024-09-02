@@ -12,8 +12,8 @@ public abstract class Jogos extends Produtos{
     public Jogos() {
     }
 
-    public Jogos(String nomeProd, double preco, int ano, int codigoProd, String faixaEtaria, boolean alugado, int numJogadores) {
-        super(nomeProd, preco, ano, codigoProd, faixaEtaria, alugado);
+    public Jogos(String nomeProd, double preco, int ano, int codigoProd, String faixaEtaria, int disponiveis, int alugados, int numJogadores) {
+        super(nomeProd, preco, ano, codigoProd, faixaEtaria, disponiveis, alugados);
         this.numJogadores = numJogadores;
     }
 
