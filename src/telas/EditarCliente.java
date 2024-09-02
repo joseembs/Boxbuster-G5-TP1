@@ -28,11 +28,12 @@ import javax.swing.JOptionPane;
  * @author elisrb
  */
 public class EditarCliente extends javax.swing.JFrame {
+    //inicia o banco de dados
 
     BancoDeDadosClientes bdClientes = new BancoDeDadosClientes("clientes.txt");
 
     
-    public EditarCliente() {
+    public EditarCliente() { // inicia a tela com as informações do cliente e permitindo ele mudar
         setLocationRelativeTo(null);
         initComponents();
         if(BancoDeDadosClientes.getClienteAtual().getClass().getSimpleName().equals("Cadastrado")){
@@ -228,7 +229,9 @@ public class EditarCliente extends javax.swing.JFrame {
     private void txtfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtfSenhaActionPerformed
-
+    
+    // salva as novas informações após a edição
+    
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if(BancoDeDadosClientes.getClienteAtual().getClass().getSimpleName().equals("Cadastrado")){
             if(txtfNome.getText().equals("") || txtfDataNascimento.getText().equals("") || txtfSenha.getText().equals("")){
@@ -281,7 +284,8 @@ public class EditarCliente extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnSalvarActionPerformed
-
+    
+    //volta para a tela principal
     private void menuVoltarLoginFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarLoginFuncActionPerformed
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
@@ -291,6 +295,7 @@ public class EditarCliente extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_menuSairCartActionPerformed
 
+    //volta para a área do cliente
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         new AreaCliente().setVisible(true);
         this.setVisible(false);

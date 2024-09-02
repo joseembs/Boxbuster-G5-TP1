@@ -99,7 +99,7 @@ public class Cadastrado extends Cliente {
     
     
     @Override
-    public void calculaDivida() {
+    public void calculaDivida() { // pega a lista de alugueis e calcula a divida
         double totalDivida = 0.0;
         ArrayList<Alugar> alugados = getAlugados();
         for(int i = 0; i < alugados.size(); i++){

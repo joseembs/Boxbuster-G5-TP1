@@ -23,10 +23,11 @@ import javax.swing.JOptionPane;
  * @author Adm
  */
 public class CadastroCliente extends javax.swing.JFrame {
-
+    
+    // inicia o bancoi de dados dos clientes
     BancoDeDadosClientes bdClientes = new BancoDeDadosClientes("clientes.txt");
     
-    public CadastroCliente() {
+    public CadastroCliente() { // deixa todos os campos invisíveis até alguma opção ser escolhida na combo box
         setLocationRelativeTo(null);
         initComponents();
         txtfNome.setEnabled(false);
@@ -307,12 +308,14 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    // volta pra tela principal
     private void menuVoltarCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarCadCliActionPerformed
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_menuVoltarCadCliActionPerformed
-
+    
+    // realiza o cadastro/login do cliente, sendo ele cadastrado ou visitante, e leva para a área do cliente com suas informações
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         int index = cmbSituacao.getSelectedIndex();
         if(index == 1){
@@ -490,11 +493,13 @@ public class CadastroCliente extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    //volta para a tela principal
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
-
+    
+    // realiza o cadastro/login do cliente, sendo ele cadastrado ou visitante, e leva para a loja com suas informações
     private void btnLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLojaActionPerformed
         int index = cmbSituacao.getSelectedIndex();
         if(index == 1){
@@ -575,12 +580,20 @@ public class CadastroCliente extends javax.swing.JFrame {
                         }
                         Visitante visitante = new Visitante(nome, CPF, dataNascimento, Double.parseDouble(divida));
                         BancoDeDadosClientes.setClienteAtual(visitante);
-                        Loja telaLoja = new Loja();
+                        if(Double.parseDouble(divida) > 0){
+                            JOptionPane.showMessageDialog(null, "Primeiro pague a dívida antes de usar a loja", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                            new AreaCliente().setVisible(true);
+                            this.setVisible(false);
+                        }
+                        else{
+                            Loja telaLoja = new Loja();
 
 
-                        telaLoja.setVisible(true);
+                            telaLoja.setVisible(true);
 
-                        this.setVisible(false);
+                            this.setVisible(false);
+                        }
+                        
                     }
                 }
             }
@@ -623,11 +636,20 @@ public class CadastroCliente extends javax.swing.JFrame {
                         }
                         else{
                             Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, Double.parseDouble(divida), senha);
-                            BancoDeDadosClientes.setClienteAtual(cadastrado);                         
-                            Loja telaLoja = new Loja();
-                            telaLoja.setVisible(true);
+                            BancoDeDadosClientes.setClienteAtual(cadastrado);
+                            if(Double.parseDouble(divida) > 0){
+                                JOptionPane.showMessageDialog(null, "Primeiro pague a dívida antes de usar a loja", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                                new AreaCliente().setVisible(true);
+                                this.setVisible(false);
+                            }
+                            else{
+                                
+                            
+                                Loja telaLoja = new Loja();
+                                telaLoja.setVisible(true);
 
-                            this.setVisible(false);
+                                this.setVisible(false);
+                            }
                         }
                     }
                 }
@@ -643,7 +665,8 @@ public class CadastroCliente extends javax.swing.JFrame {
         new AreaCliente().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_txtfSenhaActionPerformed
-
+    
+    //deixa visível ou invisível os campos de acordo com o que foi selecionado na combo box
     private void cmbSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSituacaoActionPerformed
         int index = cmbSituacao.getSelectedIndex();
         if(index == 1){

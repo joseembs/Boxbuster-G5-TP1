@@ -13,7 +13,7 @@ import java.util.Collections;
  * @author hsaless
  */
 
-public class BancoDeDadosClientes implements BancoDeDados{
+public class BancoDeDadosClientes implements BancoDeDados{ // escreve uma linha nova no arquivo contendo os dados do cliente
     private String arquivo;
     
     private static Cliente clienteAtual = null;
@@ -30,7 +30,7 @@ public class BancoDeDadosClientes implements BancoDeDados{
         this.arquivo = arquivo;
     }
 
-    public void adicionarPessoa(Cliente cliente) {
+    public void adicionarPessoa(Cliente cliente) { // escreve uma linha nova no arquivo contendo os dados do cliente
         try (FileWriter fw = new FileWriter(arquivo, true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
@@ -40,8 +40,8 @@ public class BancoDeDadosClientes implements BancoDeDados{
         }
     }
     
-    // chamada pela AreaCliente, usa o cliente logado para achar todos os aluguéis dele
-    public static ArrayList<Alugar> getHistoricoCliente(String clienteCPF){
+    
+    public static ArrayList<Alugar> getHistoricoCliente(String clienteCPF){// chamada pela AreaCliente, usa o cliente logado para achar todos os aluguéis dele
         ArrayList<Alugar> historico = new ArrayList<>();
         
         for(Alugar tempAluguel : Pedido.getMapPedidos().values()){
@@ -54,7 +54,7 @@ public class BancoDeDadosClientes implements BancoDeDados{
     }
 
     @Override
-    public ArrayList<String> lerPessoas() {
+    public ArrayList<String> lerPessoas() {// retorna uma lista com todos os clientes armazenados no banco de dados
         ArrayList<String> pessoas = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;
@@ -68,7 +68,7 @@ public class BancoDeDadosClientes implements BancoDeDados{
     }
     
     
-    public ArrayList<String> buscarPessoa(String CPF) {
+    public ArrayList<String> buscarPessoa(String CPF) {// encontra o cliente a partir do seu CPF
         ArrayList<String> lista = new ArrayList<>(); 
 
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
@@ -89,7 +89,8 @@ public class BancoDeDadosClientes implements BancoDeDados{
         return lista;
     }
     
-    public void removerPessoa(String CPF) {
+    public void removerPessoa(String CPF) {// busca um cliente pelo CPF e o remove
+        //reescreve o arquivo com todas as linhas menos uma (a linha que contém o CPF buscado)
         ArrayList<String> linhas = new ArrayList<>();
 
 

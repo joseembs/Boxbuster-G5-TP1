@@ -24,7 +24,7 @@ public abstract class Cliente extends Pessoa {
         this.pedidos = new ArrayList<>();
     }
     
-    public abstract void calculaDivida();
+    public abstract void calculaDivida(); // pega a lista de alugueis e calcula a divida
 
     @Override
     public String toString() {
