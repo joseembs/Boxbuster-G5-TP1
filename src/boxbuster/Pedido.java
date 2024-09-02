@@ -69,9 +69,12 @@ public class Pedido {
         
         salvarAluguel(aluguelFeito);
         
-        for(Produtos prod : aluguelFeito.getListaProdutos()){
-            prod.alugaProduto();
+        for(Produtos prodTemp : aluguelFeito.getListaProdutos()){
+            Produtos trueProd = Estoque.getProdutoPorCodigo(prodTemp.getCodigoProd());
+            System.out.println("foi 1");
+            trueProd.alugaProduto();
         }
+        System.out.println("foi 2");
         
         Pedido.pedidoAtual = new ArrayList<>();
     }
@@ -103,16 +106,19 @@ public class Pedido {
             String linha;
             while ((linha = br.readLine()) != null) {
                 String[] item = linha.split("_");
-                Alugar aluguel = new Alugar(item[0], item[1], item[2], item[3], item[4], item[5], item[6]);
+                Alugar aluguel = new Alugar(item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7]);
                 
                 alugueis.put(Integer.valueOf(item[0]), aluguel);
+                
+                System.out.println(item[6]);
                 
                 temp = Math.max(temp, Integer.parseInt(item[0]));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(alugueis);
+        
+        Pedido.codigoPedido = temp+1;        
         Pedido.setMapPedidos(alugueis);
         return alugueis;
     }

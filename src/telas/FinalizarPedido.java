@@ -48,7 +48,23 @@ public class FinalizarPedido extends javax.swing.JFrame {
         updateProdTable();
         updateCmbCaixa();
         
-        if(BancoDeDadosClientes.getCliente_atual() == null){
+        startFields();
+        
+        setDates();
+        
+        lblValor.setText("Valor total: R$ " + valorTotal + "0");
+    }
+    
+    private void startFields() {
+        if(BancoDeDadosClientes.getClienteAtual() == null){
+            cmbSituacao.setEnabled(true);
+            cmbSituacao.setSelectedIndex(0);
+            
+            txtfCPF.setText("");
+            txtfSenha.setText("");
+            txtfNome.setText("");
+            txtfDataNascimento.setText("");
+            
             txtfNome.setEnabled(false);
             lblNome.setVisible(false);
             txtfNome.setVisible(false);
@@ -63,6 +79,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
             txtfSenha.setEnabled(false);
             btnLogin.setEnabled(false);
             btnLogin.setVisible(false);
+            btnLogout.setEnabled(false);
         }
         else{
             cmbSituacao.setEnabled(false);
@@ -72,24 +89,21 @@ public class FinalizarPedido extends javax.swing.JFrame {
             txtfNome.setEnabled(false);
             lblNome.setVisible(true);
             txtfNome.setVisible(true);
-            txtfNome.setText(BancoDeDadosClientes.getCliente_atual().getNome());
-            lblUsuario.setText("Usuário atual: " + BancoDeDadosClientes.getCliente_atual().getNome());
+            txtfNome.setText(BancoDeDadosClientes.getClienteAtual().getNome());
+            lblUsuario.setText("Usuário atual: " + BancoDeDadosClientes.getClienteAtual().getNome());
             lblDataNascimento.setVisible(true);
             txtfDataNascimento.setVisible(true);
             SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-            String dataFormatada = formatador.format(BancoDeDadosClientes.getCliente_atual().getDataNascimento());
+            String dataFormatada = formatador.format(BancoDeDadosClientes.getClienteAtual().getDataNascimento());
             txtfDataNascimento.setText(dataFormatada);
             txtfDataNascimento.setEnabled(false);
             txtfCPF.setEnabled(false);
             lblCPF.setVisible(true);
             txtfCPF.setVisible(true);
-            txtfCPF.setText(BancoDeDadosClientes.getCliente_atual().getCPF());
+            txtfCPF.setText(BancoDeDadosClientes.getClienteAtual().getCPF());
             btnLogin.setEnabled(false);
+            btnLogout.setEnabled(true);
         }
-        
-        setDates();
-        
-        lblValor.setText("Valor total: R$ " + valorTotal + "0");
     }
 
     private void updateProdTable() {        
@@ -154,12 +168,12 @@ public class FinalizarPedido extends javax.swing.JFrame {
     }
     
     private void checkFim() {
-        if(BancoDeDadosClientes.getCliente_atual() != null && !Pedido.getPedidoAtual().isEmpty() && cmbPagamento.getSelectedIndex() > 0 && cmbCaixa.getSelectedIndex() >0){
+        if(BancoDeDadosClientes.getClienteAtual() != null && !Pedido.getPedidoAtual().isEmpty() && cmbPagamento.getSelectedIndex() > 0 && cmbCaixa.getSelectedIndex() >0){
             btnFinalizar.setEnabled(true);
         } else {
             btnFinalizar.setEnabled(false);
         }
-        System.out.println(BancoDeDadosClientes.getCliente_atual() + "/" + Pedido.getPedidoAtual() + "/" + cmbPagamento.getSelectedIndex()+ "/" + cmbCaixa.getSelectedIndex());
+        System.out.println(BancoDeDadosClientes.getClienteAtual() + "/" + Pedido.getPedidoAtual() + "/" + cmbPagamento.getSelectedIndex()+ "/" + cmbCaixa.getSelectedIndex());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -189,6 +203,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         separator3Cart = new javax.swing.JSeparator();
         lblFinalizacao = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JButton();
         lblPagamento = new javax.swing.JLabel();
         cmbPagamento = new javax.swing.JComboBox<>();
         lblDataAtual = new javax.swing.JLabel();
@@ -314,6 +329,14 @@ public class FinalizarPedido extends javax.swing.JFrame {
         lblUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblUsuario.setText("Usuário atual: -----");
 
+        btnLogout.setText("Sair");
+        btnLogout.setEnabled(false);
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
         lblPagamento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblPagamento.setText("Forma de pagamento:");
 
@@ -366,6 +389,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtfCPF.setEnabled(false);
 
         lblDataNascimento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblDataNascimento.setText("Data de nasc.: ");
@@ -375,6 +399,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtfDataNascimento.setEnabled(false);
         txtfDataNascimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtfDataNascimentoActionPerformed(evt);
@@ -389,42 +414,43 @@ public class FinalizarPedido extends javax.swing.JFrame {
             .addGroup(pnlCartLayout.createSequentialGroup()
                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlCartLayout.createSequentialGroup()
-                        .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlCartLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlCartLayout.createSequentialGroup()
-                                        .addComponent(lblNome)
-                                        .addGap(6, 6, 6)
-                                        .addComponent(txtfNome))
-                                    .addGroup(pnlCartLayout.createSequentialGroup()
-                                        .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(pnlCartLayout.createSequentialGroup()
-                                                .addComponent(lblCPF)
-                                                .addGap(6, 6, 6)
-                                                .addComponent(txtfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                            .addGroup(pnlCartLayout.createSequentialGroup()
-                                                .addComponent(lblSenha)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtfSenha)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnLogin))))
-                            .addGroup(pnlCartLayout.createSequentialGroup()
-                                .addGap(95, 95, 95)
-                                .addComponent(lblIdentificacao)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(12, 12, 12))
-                    .addGroup(pnlCartLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSituacao)
+                            .addGroup(pnlCartLayout.createSequentialGroup()
+                                .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblSituacao))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE))
                             .addGroup(pnlCartLayout.createSequentialGroup()
                                 .addComponent(lblDataNascimento)
                                 .addGap(6, 6, 6)
-                                .addComponent(txtfDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(txtfDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(pnlCartLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlCartLayout.createSequentialGroup()
+                                .addComponent(lblNome)
+                                .addGap(6, 6, 6)
+                                .addComponent(txtfNome))
+                            .addGroup(pnlCartLayout.createSequentialGroup()
+                                .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(pnlCartLayout.createSequentialGroup()
+                                        .addComponent(lblCPF)
+                                        .addGap(6, 6, 6)
+                                        .addComponent(txtfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(pnlCartLayout.createSequentialGroup()
+                                        .addComponent(lblSenha)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtfSenha)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnLogin))))
+                    .addGroup(pnlCartLayout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(lblIdentificacao)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(12, 12, 12)
                 .addComponent(separator2Cart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCartLayout.createSequentialGroup()
@@ -450,9 +476,6 @@ public class FinalizarPedido extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnFinalizar))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCartLayout.createSequentialGroup()
-                        .addComponent(lblUsuario)
-                        .addGap(163, 504, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCartLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblFinalizacao)
                         .addGap(270, 270, 270))
@@ -461,9 +484,13 @@ public class FinalizarPedido extends javax.swing.JFrame {
                             .addComponent(lblDataFinal)
                             .addComponent(lblDataAtual)
                             .addGroup(pnlCartLayout.createSequentialGroup()
-                                .addComponent(lblPagamento)
+                                .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPagamento)
+                                    .addComponent(lblUsuario))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cmbPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cmbPagamento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblValor)
@@ -519,8 +546,10 @@ public class FinalizarPedido extends javax.swing.JFrame {
                 .addComponent(separator3Cart, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblFinalizacao)
-                .addGap(11, 11, 11)
-                .addComponent(lblUsuario)
+                .addGap(9, 9, 9)
+                .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUsuario)
+                    .addComponent(btnLogout))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPagamento)
@@ -599,9 +628,9 @@ public class FinalizarPedido extends javax.swing.JFrame {
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         String[] caixaInfo = cmbCaixa.getSelectedItem().toString().split("-");
-        
+
         Pedido.addPedido(cmbPagamento.getSelectedItem().toString(), caixaInfo[0]);
-        
+
         new AreaCliente().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnFinalizarActionPerformed
@@ -611,21 +640,45 @@ public class FinalizarPedido extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
+    private void cmbCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCaixaActionPerformed
+        checkFim();
+    }//GEN-LAST:event_cmbCaixaActionPerformed
+
+    private void cmbPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPagamentoActionPerformed
+        checkFim();
+    }//GEN-LAST:event_cmbPagamentoActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        checkFim();
+
+        rowClick = -1;
+
+        btnExcluir.setEnabled(false);
+        btnCancelar.setEnabled(false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         if (rowClick >= 0 && rowClick < Pedido.getPedidoAtual().size()){
             Produtos selectedProd = Pedido.getPedidoAtual().get(rowClick);
             Pedido.getPedidoAtual().remove(selectedProd);
-            
+
             updateProdTable();
         }
 
         checkFim();
-        
+
         rowClick = -1;
-        
+
         btnExcluir.setEnabled(false);
         btnCancelar.setEnabled(false);
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void tableCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCartMouseClicked
+        rowClick = tableCart.getSelectedRow();
+
+        btnExcluir.setEnabled(true);
+        btnCancelar.setEnabled(true);
+    }//GEN-LAST:event_tableCartMouseClicked
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         int index = cmbSituacao.getSelectedIndex();
@@ -650,7 +703,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
                 String idadeString = String.valueOf(idade);
                 String senha = txtfSenha.getText();
                 Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, 0, senha);
-                BancoDeDadosClientes.setCliente_atual(cadastrado);
+                BancoDeDadosClientes.setClienteAtual(cadastrado);
                 bdClientes.adicionarPessoa(cadastrado);
                 JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                 cmbSituacao.setEnabled(false);
@@ -684,7 +737,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
                     }
                     Visitante visitante = new Visitante(nome, CPF, dataNascimento, 0);
                     bdClientes.adicionarPessoa(visitante);
-                    BancoDeDadosClientes.setCliente_atual(visitante);
+                    BancoDeDadosClientes.setClienteAtual(visitante);
                     JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                     cmbSituacao.setEnabled(false);
                     txtfNome.setEnabled(false);
@@ -714,7 +767,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
                             Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         Visitante visitante = new Visitante(nome, CPF, dataNascimento, Double.parseDouble(divida));
-                        BancoDeDadosClientes.setCliente_atual(visitante);
+                        BancoDeDadosClientes.setClienteAtual(visitante);
                         JOptionPane.showMessageDialog(null, "Usuário entrou com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                         cmbSituacao.setEnabled(false);
                         txtfNome.setEnabled(false);
@@ -764,7 +817,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
                         }
                         else{
                             Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, Double.parseDouble(divida), senha);
-                            BancoDeDadosClientes.setCliente_atual(cadastrado);
+                            BancoDeDadosClientes.setClienteAtual(cadastrado);
                             JOptionPane.showMessageDialog(null, "Usuário entrou com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                             cmbSituacao.setEnabled(false);
                             txtfNome.setEnabled(false);
@@ -780,9 +833,10 @@ public class FinalizarPedido extends javax.swing.JFrame {
 
             }
         }
-        if(BancoDeDadosClientes.getCliente_atual() != null){
-            lblUsuario.setText("Usuário atual: " + BancoDeDadosClientes.getCliente_atual().getNome());
+        if(BancoDeDadosClientes.getClienteAtual() != null){
+            lblUsuario.setText("Usuário atual: " + BancoDeDadosClientes.getClienteAtual().getNome());
             checkFim();
+            btnLogout.setEnabled(true);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -866,29 +920,12 @@ public class FinalizarPedido extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmbSituacaoActionPerformed
 
-    private void cmbPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPagamentoActionPerformed
-        checkFim();
-    }//GEN-LAST:event_cmbPagamentoActionPerformed
-
-    private void cmbCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCaixaActionPerformed
-        checkFim();
-    }//GEN-LAST:event_cmbCaixaActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        checkFim();
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        btnLogout.setEnabled(false);
+        BancoDeDadosClientes.setClienteAtual(null);
         
-        rowClick = -1;
-        
-        btnExcluir.setEnabled(false);
-        btnCancelar.setEnabled(false);
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void tableCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCartMouseClicked
-        rowClick = tableCart.getSelectedRow();
-        
-        btnExcluir.setEnabled(true);
-        btnCancelar.setEnabled(true);
-    }//GEN-LAST:event_tableCartMouseClicked
+        startFields();
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -933,6 +970,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cmbCaixa;
     private javax.swing.JComboBox<String> cmbPagamento;

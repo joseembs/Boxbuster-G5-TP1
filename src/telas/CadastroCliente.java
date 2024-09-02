@@ -336,7 +336,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                 String idadeString = String.valueOf(idade);
                 String senha = txtfSenha.getText();
                 Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, 0, senha);
-                BancoDeDadosClientes.setCliente_atual(cadastrado);
+                BancoDeDadosClientes.setClienteAtual(cadastrado);
                 bdClientes.adicionarPessoa(cadastrado);
                 AreaCliente telaCliente = new AreaCliente();
                 telaCliente.setVisible(true);
@@ -365,7 +365,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                     }
                     Visitante visitante = new Visitante(nome, CPF, dataNascimento, 0);
                     bdClientes.adicionarPessoa(visitante);
-                    BancoDeDadosClientes.setCliente_atual(visitante);
+                    BancoDeDadosClientes.setClienteAtual(visitante);
                     AreaCliente telaCliente = new AreaCliente();
                     telaCliente.setVisible(true);
                 
@@ -391,7 +391,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                             Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         Visitante visitante = new Visitante(nome, CPF, dataNascimento, Double.parseDouble(divida));
-                        BancoDeDadosClientes.setCliente_atual(visitante);
+                        BancoDeDadosClientes.setClienteAtual(visitante);
                         AreaCliente telaCliente = new AreaCliente();
 
 
@@ -416,7 +416,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                 }
                 else{
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-                    String[] palavras = lista.get(0).split(" ");
+                    String[] palavras = lista.get(0).split("_");
                     if (palavras[0].equals("Visitante")){
                         JOptionPane.showMessageDialog(null, "Esse CPF está associado à um visitante.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                     }
@@ -439,7 +439,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                         }
                         else{
                             Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, Double.parseDouble(divida), senha);
-                            BancoDeDadosClientes.setCliente_atual(cadastrado);                         
+                            BancoDeDadosClientes.setClienteAtual(cadastrado);                         
                             AreaCliente telaCliente = new AreaCliente();
                             telaCliente.setVisible(true);
 
@@ -482,7 +482,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                 String idadeString = String.valueOf(idade);
                 String senha = txtfSenha.getText();
                 Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, 0, senha);
-                BancoDeDadosClientes.setCliente_atual(cadastrado);
+                BancoDeDadosClientes.setClienteAtual(cadastrado);
                 bdClientes.adicionarPessoa(cadastrado);
                 Loja telaLoja = new Loja();
                 telaLoja.setVisible(true);
@@ -512,7 +512,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                     }
                     Visitante visitante = new Visitante(nome, CPF, dataNascimento, 0);
                     bdClientes.adicionarPessoa(visitante);
-                    BancoDeDadosClientes.setCliente_atual(visitante);
+                    BancoDeDadosClientes.setClienteAtual(visitante);
                     Loja telaLoja = new Loja();
                     telaLoja.setVisible(true);
                 
@@ -538,7 +538,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                             Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         Visitante visitante = new Visitante(nome, CPF, dataNascimento, Double.parseDouble(divida));
-                        BancoDeDadosClientes.setCliente_atual(visitante);
+                        BancoDeDadosClientes.setClienteAtual(visitante);
                         Loja telaLoja = new Loja();
 
 
@@ -564,7 +564,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                 }
                 else{
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-                    String[] palavras = lista.get(0).split(" ");
+                    String[] palavras = lista.get(0).split("_");
                     if (palavras[0].equals("Visitante")){
                         JOptionPane.showMessageDialog(null, "Esse CPF está associado à um visitante.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                     }
@@ -587,7 +587,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                         }
                         else{
                             Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, Double.parseDouble(divida), senha);
-                            BancoDeDadosClientes.setCliente_atual(cadastrado);                         
+                            BancoDeDadosClientes.setClienteAtual(cadastrado);                         
                             Loja telaLoja = new Loja();
                             telaLoja.setVisible(true);
 

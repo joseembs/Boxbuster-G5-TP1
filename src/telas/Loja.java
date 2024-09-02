@@ -67,36 +67,28 @@ public class Loja extends javax.swing.JFrame {
         for(int i = 0; i < 10 && i < listaFilmes.size(); i++){
             Filmes filme = listaFilmes.get(i);
             
-            switch(filme.getNomeProd()){
-                case "De Volta Para o Futuro":
-                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/DeVoltaParaoFuturo.png")));
-                    break;
-                case "Matrix":
-                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/Matrix.png")));
-                    break;
-                case "O Enigma de Outro Mundo":
-                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/OEnigmadeOutroMundo.png")));
-                    break;
-                case "O Rei Leão":
-                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/OReiLeao.png")));
-                    break;
-                case "O Senhor dos Anéis":
-                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/OSenhordosAneis.png")));
-                    break;
-                case "Os Vingadores":
-                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/OsVingadores.png")));
-                    break;
-                case "Shrek":
-                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/Shrek.png")));
-                    break;
-                case "Titanic":
-                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/Titanic.png")));
-                    break;
-                case "Toy Story":
-                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/ToyStory.png")));
-                    break;
-                default:
-                    listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/MissingPoster.png")));
+            String titulo = filme.getNomeProd().toLowerCase();
+            
+            if(titulo.contains("de volta para o futuro")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/DeVoltaParaoFuturo.png")));
+            } else if(titulo.contains("matrix")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/Matrix.png")));
+            } else if(titulo.contains("o enigma de outro mundo")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/OEnigmadeOutroMundo.png")));
+            } else if(titulo.contains("o rei leão")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/OReiLeao.png")));
+            } else if(titulo.contains("o senhor dos anéis")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/OSenhordosAneis.png")));
+            } else if(titulo.contains("os vingadores")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/OsVingadores.png")));
+            } else if(titulo.contains("shrek")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/Shrek.png")));
+            } else if(titulo.contains("titanic")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/Titanic.png")));
+            } else if(titulo.contains("toy story")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/ToyStory.png")));
+            } else {
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/MissingPoster.png")));
             }
             
             listNomeMv[i].setText(filme.getNomeProd());
@@ -125,36 +117,28 @@ public class Loja extends javax.swing.JFrame {
         for(int i = 0; i < 10 && i < listaMusicas.size(); i++){
             Musicas musica = listaMusicas.get(i);
             
-            switch(musica.getNomeProd()){
-                case "De Volta Para o Futuro":
-                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/DeVoltaParaoFuturo.png")));
-                    break;
-                case "Matrix":
-                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/Matrix.png")));
-                    break;
-                case "O Enigma de Outro Mundo":
-                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/OEnigmadeOutroMundo.png")));
-                    break;
-                case "O Rei Leão":
-                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/OReiLeao.png")));
-                    break;
-                case "O Senhor dos Anéis":
-                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/OSenhordosAneis.png")));
-                    break;
-                case "Os Vingadores":
-                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/OsVingadores.png")));
-                    break;
-                case "Shrek":
-                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/Shrek.png")));
-                    break;
-                case "Titanic":
-                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/Titanic.png")));
-                    break;
-                case "Toy Story":
-                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/ToyStory.png")));
-                    break;
-                default:
-                    listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Musicas/MissingPoster.png")));
+            String titulo = musica.getNomeProd().toLowerCase();
+            
+            if(titulo.contains("De Volta Para o Futuro")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/DeVoltaParaoFuturo.png")));
+            } else if(titulo.contains("Matrix")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/Matrix.png")));
+            } else if(titulo.contains("O Enigma de Outro Mundo")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/OEnigmadeOutroMundo.png")));
+            } else if(titulo.contains("O Rei Leão")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/OReiLeao.png")));
+            } else if(titulo.contains("O Senhor dos Anéis")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/OSenhordosAneis.png")));
+            } else if(titulo.contains("Os Vingadores")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/OsVingadores.png")));
+            } else if(titulo.contains("Shrek")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/Shrek.png")));
+            } else if(titulo.contains("Titanic")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/Titanic.png")));
+            } else if(titulo.contains("Toy Story")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/ToyStory.png")));
+            } else {
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/MissingPoster.png")));
             }
             
             listNomeMus[i].setText(musica.getNomeProd());
@@ -183,36 +167,28 @@ public class Loja extends javax.swing.JFrame {
         for(int i = 0; i < 6 && i < listaTabuleiros.size(); i++){
             Tabuleiros tabuleiro = listaTabuleiros.get(i);
             
-            switch(tabuleiro.getNomeProd()){
-                case "De Volta Para o Futuro":
-                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/DeVoltaParaoFuturo.png")));
-                    break;
-                case "Matrix":
-                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/Matrix.png")));
-                    break;
-                case "O Enigma de Outro Mundo":
-                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/OEnigmadeOutroMundo.png")));
-                    break;
-                case "O Rei Leão":
-                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/OReiLeao.png")));
-                    break;
-                case "O Senhor dos Anéis":
-                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/OSenhordosAneis.png")));
-                    break;
-                case "Os Vingadores":
-                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/OsVingadores.png")));
-                    break;
-                case "Shrek":
-                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/Shrek.png")));
-                    break;
-                case "Titanic":
-                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/Titanic.png")));
-                    break;
-                case "Toy Story":
-                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/ToyStory.png")));
-                    break;
-                default:
-                    listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tabuleiros/MissingPoster.png")));
+            String titulo = tabuleiro.getNomeProd().toLowerCase();
+            
+            if(titulo.contains("De Volta Para o Futuro")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tabuleiros/DeVoltaParaoFuturo.png")));
+            } else if(titulo.contains("Matrix")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tabuleiros/Matrix.png")));
+            } else if(titulo.contains("O Enigma de Outro Mundo")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tabuleiros/OEnigmadeOutroMundo.png")));
+            } else if(titulo.contains("O Rei Leão")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tabuleiros/OReiLeao.png")));
+            } else if(titulo.contains("O Senhor dos Anéis")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tabuleiros/OSenhordosAneis.png")));
+            } else if(titulo.contains("Os Vingadores")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tabuleiros/OsVingadores.png")));
+            } else if(titulo.contains("Shrek")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tabuleiros/Shrek.png")));
+            } else if(titulo.contains("Titanic")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tabuleiros/Titanic.png")));
+            } else if(titulo.contains("Toy Story")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tabuleiros/ToyStory.png")));
+            } else {
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tabuleiros/MissingPoster.png")));
             }
             
             listNomeTab[i].setText(tabuleiro.getNomeProd());
@@ -241,36 +217,28 @@ public class Loja extends javax.swing.JFrame {
         for(int i = 0; i < 10 && i < listaVideogames.size(); i++){
             Videogames videogame = listaVideogames.get(i);
             
-            switch(videogame.getNomeProd()){
-                case "De Volta Para o Futuro":
-                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/DeVoltaParaoFuturo.png")));
-                    break;
-                case "Matrix":
-                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/Matrix.png")));
-                    break;
-                case "O Enigma de Outro Mundo":
-                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/OEnigmadeOutroMundo.png")));
-                    break;
-                case "O Rei Leão":
-                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/OReiLeao.png")));
-                    break;
-                case "O Senhor dos Anéis":
-                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/OSenhordosAneis.png")));
-                    break;
-                case "Os Vingadores":
-                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/OsVingadores.png")));
-                    break;
-                case "Shrek":
-                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/Shrek.png")));
-                    break;
-                case "Titanic":
-                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/Titanic.png")));
-                    break;
-                case "Toy Story":
-                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/ToyStory.png")));
-                    break;
-                default:
-                    listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Videogames/MissingPoster.png")));
+            String titulo = videogame.getNomeProd().toLowerCase();
+            
+            if(titulo.contains("De Volta Para o Futuro")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/videogames/DeVoltaParaoFuturo.png")));
+            } else if(titulo.contains("Matrix")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/videogames/Matrix.png")));
+            } else if(titulo.contains("O Enigma de Outro Mundo")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/videogames/OEnigmadeOutroMundo.png")));
+            } else if(titulo.contains("O Rei Leão")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/videogames/OReiLeao.png")));
+            } else if(titulo.contains("O Senhor dos Anéis")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/videogames/OSenhordosAneis.png")));
+            } else if(titulo.contains("Os Vingadores")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/videogames/OsVingadores.png")));
+            } else if(titulo.contains("Shrek")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/videogames/Shrek.png")));
+            } else if(titulo.contains("Titanic")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/videogames/Titanic.png")));
+            } else if(titulo.contains("Toy Story")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/videogames/ToyStory.png")));
+            } else {
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/videogames/MissingPoster.png")));
             }
             
             listNomeVid[i].setText(videogame.getNomeProd());
@@ -691,7 +659,7 @@ public class Loja extends javax.swing.JFrame {
         precoMv2.setText("R$ --.--");
 
         btnAlugarMv2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnAlugarMv2.setText("Alugar");
+        btnAlugarMv2.setText("-----");
         btnAlugarMv2.setEnabled(false);
         btnAlugarMv2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -814,7 +782,7 @@ public class Loja extends javax.swing.JFrame {
         descMv4.setText("-----");
 
         precoMv4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        precoMv4.setText("R$ --,--");
+        precoMv4.setText("R$ --.--");
 
         btnAlugarMv4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlugarMv4.setText("-----");

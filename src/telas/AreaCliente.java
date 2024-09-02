@@ -4,11 +4,15 @@
  */
 package telas;
 
+import boxbuster.Alugar;
 import boxbuster.BancoDeDadosClientes;
+import boxbuster.Cliente;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,27 +20,50 @@ import java.time.ZoneId;
  */
 public class AreaCliente extends javax.swing.JFrame {
 
+    Cliente clienteAtual = BancoDeDadosClientes.getClienteAtual();
+    
+    ArrayList<Alugar> histAlugueis = BancoDeDadosClientes.getHistoricoCliente(clienteAtual.getCPF());
+    
     /**
      * Creates new form AreaCliente
      */
     public AreaCliente() {
         setLocationRelativeTo(null);
         initComponents();
-        lblNome.setText("Nome: " + BancoDeDadosClientes.getCliente_atual().getNome());
-        lblCPF.setText("CPF: " + BancoDeDadosClientes.getCliente_atual().getCPF());
+        lblNome.setText("Nome: " + BancoDeDadosClientes.getClienteAtual().getNome());
+        lblCPF.setText("CPF: " + BancoDeDadosClientes.getClienteAtual().getCPF());
         SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-        String dataFormatada = formatador.format(BancoDeDadosClientes.getCliente_atual().getDataNascimento());
+        String dataFormatada = formatador.format(BancoDeDadosClientes.getClienteAtual().getDataNascimento());
         lblDataNasc.setText("Data de nasc.: " + dataFormatada);
         LocalDate dataAtual = LocalDate.now();
-        LocalDate dataNascimento = BancoDeDadosClientes.getCliente_atual().getDataNascimento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate dataNascimento = BancoDeDadosClientes.getClienteAtual().getDataNascimento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         int idade = Period.between(dataNascimento, dataAtual).getYears();
         lblIdade.setText("Idade: " + String.valueOf(idade));
-        lblDivida.setText("Divida: " + String.valueOf(BancoDeDadosClientes.getCliente_atual().getDivida()));
-        lblProdutosAlugados.setText("Produtos Alugados: " + String.valueOf(BancoDeDadosClientes.getCliente_atual().getAlugados().size()));
-        
-        
+        lblDivida.setText("Divida: " + String.valueOf(BancoDeDadosClientes.getClienteAtual().getDivida()));
+        lblProdutosAlugados.setText("Produtos Alugados: " + String.valueOf(BancoDeDadosClientes.getClienteAtual().getAlugados().size()));
     }
 
+    private void updateProdList() {
+        histAlugueis = BancoDeDadosClientes.getHistoricoCliente(clienteAtual.getCPF());
+        
+        //DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Código", "Tipo", "Nome", "Faixa", "Ano", "Preço", "Disp./Alugados"}, 0);
+
+        //for(int i = 0; i < allProducts.size(); i++){
+        //    Object linha[] = new Object[]{
+        //    allProducts.get(i).getCodigoProd(),
+        //    allProducts.get(i).getClass().getSimpleName(), 
+        //    allProducts.get(i).getNomeProd(),
+        //    allProducts.get(i).getFaixaEtaria(),
+        //    allProducts.get(i).getAno(),
+        //    allProducts.get(i).getPreco(),
+        //    allProducts.get(i).getDisponiveis() + "/" + allProducts.get(i).getAlugados()};
+
+        //    tabela.addRow(linha);
+        //}
+        
+        //tableProdutos.setModel(tabela);        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,11 +151,11 @@ public class AreaCliente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Tipo", "Data Inicial", "Devolução", "Valor", "Status"
+                "Pedido", "Produto", "Tipo", "Data Inicial", "Devolução", "Preço", "Dívida", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                true, false, false, false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -285,7 +312,7 @@ public class AreaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLojaMainActionPerformed
 
     private void btnDeslogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeslogarActionPerformed
-        BancoDeDadosClientes.setCliente_atual(null);
+        BancoDeDadosClientes.setClienteAtual(null);
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnDeslogarActionPerformed

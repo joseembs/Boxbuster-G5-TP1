@@ -4,12 +4,8 @@
  */
 package telas;
 
-import boxbuster.Filmes;
-import boxbuster.Musicas;
-import boxbuster.Produtos;
-import boxbuster.Tabuleiros;
-import boxbuster.Videogames;
-import java.util.ArrayList;
+import boxbuster.BancoDeDadosClientes;
+import boxbuster.Pedido;
 
 /**
  *
@@ -21,6 +17,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
      * Creates new form MainScr
      */
     public TelaPrincipal() {
+        Pedido.lerAlugueis();
+        
         setLocationRelativeTo(null);
         initComponents();
     }
@@ -192,7 +190,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCliMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCliMainActionPerformed
-        new CadastroCliente().setVisible(true);
+        if(BancoDeDadosClientes.getClienteAtual() == null){
+            new CadastroCliente().setVisible(true);
+        } else {
+            new AreaCliente().setVisible(true);
+        }
+        
         this.setVisible(false);
     }//GEN-LAST:event_btnCliMainActionPerformed
 
@@ -280,4 +283,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPopupMenu.Separator separatorMain;
     // End of variables declaration//GEN-END:variables
+
+    private Object BancoDeDadosClientes() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

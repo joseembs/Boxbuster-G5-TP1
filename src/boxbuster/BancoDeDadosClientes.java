@@ -18,11 +18,11 @@ public class BancoDeDadosClientes implements BancoDeDados{
     
     private static Cliente clienteAtual = null;
 
-    public static Cliente getCliente_atual() {
+    public static Cliente getClienteAtual() {
         return clienteAtual;
     }
 
-    public static void setCliente_atual(Cliente cliente_atual) {
+    public static void setClienteAtual(Cliente cliente_atual) {
         BancoDeDadosClientes.clienteAtual = cliente_atual;
     }
     
@@ -45,11 +45,11 @@ public class BancoDeDadosClientes implements BancoDeDados{
     }
     
     // chamada pela AreaCliente, usa o cliente logado para achar todos os aluguéis dele
-    public static ArrayList<Alugar> getHistoricoCliente(Cliente clienteAtual){
+    public static ArrayList<Alugar> getHistoricoCliente(String clienteCPF){
         ArrayList<Alugar> historico = new ArrayList<>();
         
         for(Alugar tempAluguel : Pedido.getMapPedidos().values()){
-            if(clienteAtual.equals(tempAluguel.getClienteCPF())){
+            if(clienteCPF.equals(tempAluguel.getClienteCPF())){
                 historico.add(tempAluguel);
             }
         }

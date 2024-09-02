@@ -23,6 +23,7 @@ public class Alugar {
     private String clienteCPF;
     private String caixaCodigo;
     private ArrayList<Produtos> listaProdutos;
+    private ArrayList<Status> listaStatus;
 
     public Alugar(String pagamentoIn, String codigoCaixa) {
         this.codigoPedido = Pedido.getCodigoPedido();
@@ -36,14 +37,19 @@ public class Alugar {
         
         this.pagamento = pagamentoIn;
         
-        this.clienteCPF = BancoDeDadosClientes.getCliente_atual().getCPF();
+        this.clienteCPF = BancoDeDadosClientes.getClienteAtual().getCPF();
         
         this.caixaCodigo = codigoCaixa;
         
         this.listaProdutos = Pedido.getPedidoAtual();
+        
+        this.listaStatus = new ArrayList<>();
+        for(Produtos prod : listaProdutos){
+            listaStatus.add(Status.ALUGADO);
+        }
     }
 
-    public Alugar(String codigoPedido, String dataPedido, String dataDevolucao, String pagamento, String clienteCPF, String caixaCodigo, String codigos) {
+    public Alugar(String codigoPedido, String dataPedido, String dataDevolucao, String pagamento, String clienteCPF, String caixaCodigo, String codigos, String status) {
         this.codigoPedido = Integer.parseInt(codigoPedido);
         //this.dataPedido = dataPedido;
         //this.dataDevolucao = dataDevolucao;
@@ -51,13 +57,23 @@ public class Alugar {
         this.clienteCPF = clienteCPF;
         this.caixaCodigo = caixaCodigo;
         
-        String[] listaCodigos = codigos.split(" ");
+        String[] codigosFile = codigos.split(" ");
+        ArrayList<Produtos> listaProdutosTemp = new ArrayList<>();
         
-        ArrayList<Produtos> listaProdutos = new ArrayList<>();
-        for(int i = 0; i < listaCodigos.length; i++){
-            listaProdutos.add(Estoque.getProdutoPorCodigo(Integer.parseInt(listaCodigos[i])));
+        for(int i = 0; i < codigosFile.length; i++){
+            listaProdutosTemp.add(Estoque.getProdutoPorCodigo(Integer.parseInt(codigosFile[i])));
         }
-        this.listaProdutos = listaProdutos;
+        this.listaProdutos = listaProdutosTemp;
+        
+        
+        String[] statusFile = status.split(" ");
+        ArrayList<Status> listaStatusTemp = new ArrayList<>();
+        
+        for(int i = 0; i < statusFile.length; i++){
+            listaStatusTemp.add(Status.valueOf(statusFile[i]));
+        } 
+        
+        this.listaStatus = listaStatusTemp;
     }
 
     public int getCodigoPedido() {
@@ -108,18 +124,38 @@ public class Alugar {
         this.listaProdutos = listaProdutos;
     }
     
+    public void setProdutoStatus(String codigoProd, Status status){
+        int ind = listaProdutos.indexOf(codigoProd);
+        
+        listaStatus.set(ind, status);
+    }
+    
+    public Status getProdutoStatus(String codigoProd){
+        int ind = listaProdutos.indexOf(codigoProd);
+        
+        return listaStatus.get(ind);
+    }
+    
     @Override
     public String toString() {
         String codigosProd = "";
+        String statusProd = "";
         
-        for(Produtos prod : listaProdutos){
+        for(int i = 0; i < listaProdutos.size(); i++){
+            Produtos prod = listaProdutos.get(i);
             codigosProd = codigosProd + Integer.toString(prod.getCodigoProd()) + " ";
+            
+            Status status = listaStatus.get(i);
+            statusProd = statusProd + status + " ";
         }
+        
+        codigosProd = codigosProd.substring(0, codigosProd.length() - 1);
+        statusProd = statusProd.substring(0, statusProd.length() - 1);
         
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         String data1 = formato.format(dataPedido);
         String data2 = formato.format(dataDevolucao);
         
-        return Integer.toString(codigoPedido) + "_" + data1 + "_" + data2 + "_" + pagamento + "_" + clienteCPF + "_" + caixaCodigo + "_" + codigosProd;
+        return Integer.toString(codigoPedido) + "_" + data1 + "_" + data2 + "_" + pagamento + "_" + clienteCPF + "_" + caixaCodigo + "_" + codigosProd + "_" + statusProd;
     }
 }

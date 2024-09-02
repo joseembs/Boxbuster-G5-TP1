@@ -96,11 +96,11 @@ public class Estoque {
         listaProdutos.add(produto);
     }
 
-    public static int getCont() {
+    static public int getCont() {
         return cont;
     }
 
-    public static void setCont(int cont) {
+    static public void setCont(int cont) {
         Estoque.cont = cont;
     }
     

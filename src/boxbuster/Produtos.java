@@ -90,11 +90,13 @@ public abstract class Produtos {
     public void alugaProduto(){
         this.disponiveis--;
         this.alugados++;
+        Estoque.reescreverEstoque();
     }
     
     public void devolveProduto(){
         this.disponiveis++;
         this.alugados--;
+        Estoque.reescreverEstoque();
     }
     
     @Override
