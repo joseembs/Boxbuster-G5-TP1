@@ -79,6 +79,11 @@ public class Pedido {
         Pedido.pedidoAtual = new ArrayList<>();
     }
     
+    public static void addStatus(int codigoPedido, Alugar aluguel){
+        Pedido.mapAlugueis.put(codigoPedido, aluguel);
+        
+    }
+    
     // chamada para preencher as tabelas, usa o codigoProd salvo pelos Alugar para retornar o produto alugado 
     static public Alugar getAluguelPorCodigo(int codigoPedido){
         Alugar aluguel = mapAlugueis.get(codigoPedido);
