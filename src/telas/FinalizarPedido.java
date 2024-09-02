@@ -173,7 +173,6 @@ public class FinalizarPedido extends javax.swing.JFrame {
         } else {
             btnFinalizar.setEnabled(false);
         }
-        System.out.println(BancoDeDadosClientes.getClienteAtual() + "/" + Pedido.getPedidoAtual() + "/" + cmbPagamento.getSelectedIndex()+ "/" + cmbCaixa.getSelectedIndex());
     }
     /**
      * This method is called from within the constructor to initialize the form.

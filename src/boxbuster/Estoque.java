@@ -109,8 +109,6 @@ public class Estoque {
         Produtos produto = null;
         
         for(Produtos tempProduto : Estoque.getListaProdutos()){
-            System.out.println(tempProduto);
-            System.out.println(codigoProd);
             if(codigoProd == tempProduto.getCodigoProd()){
                 produto = tempProduto;
                 break;
@@ -177,7 +175,6 @@ public class Estoque {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(produtos);
         return produtos;
     }
     
@@ -213,8 +210,6 @@ public class Estoque {
             // listaProdutos é apenas atualizado pelo updateProdlist no AreaGerente
         }
         cont = temp;
-        
-        System.out.println(cont);
         
         return atualizarLista();
     }

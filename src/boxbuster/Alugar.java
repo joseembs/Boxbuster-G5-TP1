@@ -70,7 +70,6 @@ public class Alugar {
         
         for(int i = 0; i < codigosFile.length; i++){
             Produtos tempProduto = Estoque.getProdutoPorCodigo(Integer.parseInt(codigosFile[i]));
-            System.out.println(tempProduto);
             listaProdutosTemp.add(tempProduto);
         }
         this.listaProdutos = listaProdutosTemp;
@@ -158,10 +157,7 @@ public class Alugar {
     }
 
     public Status getProdutoStatus(int codigoProd){
-        System.out.println(codigoProd);
-        System.out.println("a");
         Produtos tempProd = Estoque.getProdutoPorCodigo(codigoProd);
-        System.out.println(tempProd);
         
         int ind = listaProdutos.indexOf(tempProd);
 

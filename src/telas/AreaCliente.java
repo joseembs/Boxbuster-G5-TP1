@@ -389,49 +389,47 @@ public class AreaCliente extends javax.swing.JFrame {
 
     private void btnDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverActionPerformed
         int index = tableAluguel.getSelectedRow();
-        histAlugueis = BancoDeDadosClientes.getHistoricoCliente(clienteAtual.getCPF());
         
-        int codigoAluguel = (Integer) (tableAluguel.getModel().getValueAt(index, 0));
-            
-        String nomeProd = (String) (tableAluguel.getModel().getValueAt(index, 1));
-        
-        System.out.println(codigoAluguel);
-        System.out.println(nomeProd);
-        
-        int cont = 0;
-        for(int i = 0; i < histAlugueis.size(); i++){
-            Alugar aluguel = histAlugueis.get(i);
-            
-            if(codigoAluguel == aluguel.getCodigoPedido()){
-                for(Produtos prod : aluguel.getListaProdutos()){
-                    
-                    if(nomeProd.equals(prod.getNomeProd())){
-                        int index2 = aluguel.getListaProdutos().indexOf(prod);
-                        
-                        int codigoPedido = prod.getCodigoProd();
-                        
-                        Status oldStatus = aluguel.getListaStatus().get(index2);
-                        
-                        System.out.println(oldStatus);
-                        System.out.println(prod);
-                        
-                        if(oldStatus == Status.DEVOLVIDO){
-                            JOptionPane.showMessageDialog(null, "Esse produto já foi devolvido!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-                        }
-                        else {
-                            aluguel.setProdutoStatus(codigoPedido, Status.DEVOLVIDO);
-                            Pedido.addStatus(codigoPedido, aluguel);
-                            Pedido.reescreverAlugueis();
-                            break;
+        if(index >= 0){
+            histAlugueis = BancoDeDadosClientes.getHistoricoCliente(clienteAtual.getCPF());
+
+            int codigoAluguel = (Integer) (tableAluguel.getModel().getValueAt(index, 0));
+
+            String nomeProd = (String) (tableAluguel.getModel().getValueAt(index, 1));
+
+            for(int i = 0; i < histAlugueis.size(); i++){
+                Alugar aluguel = histAlugueis.get(i);
+
+                if(codigoAluguel == aluguel.getCodigoPedido()){
+                    for(Produtos prod : aluguel.getListaProdutos()){
+
+                        if(nomeProd.equals(prod.getNomeProd())){
+                            int index2 = aluguel.getListaProdutos().indexOf(prod);
+
+                            int codigoProduto = prod.getCodigoProd();
+
+                            Status oldStatus = aluguel.getListaStatus().get(index2);
+
+                            if(oldStatus == Status.DEVOLVIDO){
+                                JOptionPane.showMessageDialog(null, "Esse produto já foi devolvido!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                            }
+                            else {
+                                aluguel.setProdutoStatus(codigoProduto, Status.DEVOLVIDO);
+                                Pedido.addStatus(codigoAluguel, aluguel);
+                                Pedido.reescreverAlugueis();
+                                break;
+                            }
                         }
                     }
                 }
             }
+            BancoDeDadosClientes.getClienteAtual().setAlugados(histAlugueis);
+            BancoDeDadosClientes.getClienteAtual().calculaDivida();
+            lblDivida.setText("Divida: R$ " + String.valueOf(BancoDeDadosClientes.getClienteAtual().getDivida()) + "0");
+            updateHistList();
+
+            index = -1;
         }
-        BancoDeDadosClientes.getClienteAtual().setAlugados(histAlugueis);
-        BancoDeDadosClientes.getClienteAtual().calculaDivida();
-        lblDivida.setText("Divida: R$ " + String.valueOf(BancoDeDadosClientes.getClienteAtual().getDivida()) + "0");
-        updateHistList();
     }//GEN-LAST:event_btnDevolverActionPerformed
 
     private void scrlAluguelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scrlAluguelMouseClicked

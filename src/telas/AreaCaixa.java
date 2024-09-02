@@ -42,11 +42,10 @@ public class AreaCaixa extends javax.swing.JFrame {
         histAlugueis = Pedido.lerAlugueis(); // retorna um HashMap com todos os Alugueis da loja
         
         DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Pedido", "Produto", "Tipo", "Data Inicial", "Devolução", "Preço", "Dívida", "Status"}, 0);
-        for(int i = 0; i < histAlugueis.size(); i++){
-            Alugar aluguel = histAlugueis.get(i);
-            System.out.println(aluguel);
+        for(Alugar aluguel : histAlugueis.values()){
+            
             if(aluguel.getCaixaCodigo().equals(codigoAtual)){ // analisa cada pedido e coleta somente os que têm o código do caixa que está logado
-                for(int j = 0; j < histAlugueis.get(i).getListaProdutos().size(); j++){ // analisa cada produto de cada pedido separadamente
+                for(int j = 0; j < aluguel.getListaProdutos().size(); j++){ // analisa cada produto de cada pedido separadamente
                     Produtos item = aluguel.getListaProdutos().get(j);
                     Status status = aluguel.getProdutoStatus(item.getCodigoProd());
 
@@ -320,7 +319,6 @@ public class AreaCaixa extends javax.swing.JFrame {
         DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Pedido", "Produto", "Tipo", "Data Inicial", "Devolução", "Preço", "Dívida", "Status"}, 0);
         for(int i = 0; i < histAlugueis.size(); i++){
             Alugar aluguel = histAlugueis.get(i);
-            System.out.println(aluguel);
             if(aluguel.getCaixaCodigo().equals(codigoAtual) && String.valueOf(aluguel.getCodigoPedido()).contains(txtfCodigoPesquisa.getText())){
                 for(int j = 0; j < histAlugueis.get(i).getListaProdutos().size(); j++){
                     Produtos item = aluguel.getListaProdutos().get(j);

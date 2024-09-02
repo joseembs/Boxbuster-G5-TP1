@@ -1037,7 +1037,6 @@ public class AreaGerente extends javax.swing.JFrame {
                         info[8].contains(var1) &&
                         info[9].contains(var2) &&
                         ok3 && ok4){
-                    System.out.println("achou");
                     
 
                     Object linha[] = new Object[]{
@@ -1050,7 +1049,6 @@ public class AreaGerente extends javax.swing.JFrame {
                     info[6] + "/" + info[7]};
 
                     tabela.addRow(linha);
-                    System.out.println("colocou linha");
                     
                 }
             }

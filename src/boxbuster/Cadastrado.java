@@ -104,7 +104,6 @@ public class Cadastrado extends Cliente {
         ArrayList<Alugar> alugados = getAlugados();
         for(int i = 0; i < alugados.size(); i++){
             Alugar aluguel = alugados.get(i);
-            System.out.println(aluguel);
             for(int j = 0; j < alugados.get(i).getListaProdutos().size(); j++){
                 
                 Produtos item = aluguel.getListaProdutos().get(j);

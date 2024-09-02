@@ -337,7 +337,6 @@ public class Loja extends javax.swing.JFrame {
                     tempPedido.add(listaVideogames.get(ind-1));
                     break;
             }
-            System.out.println(tipo);
         } else {
             tempBtnSelected.remove(btn);
             switch(tipo){
@@ -354,7 +353,6 @@ public class Loja extends javax.swing.JFrame {
                     tempPedido.remove(listaVideogames.get(ind-1));
                     break;
             }
-            System.out.println(tipo);
         }
     }
     
