@@ -4,11 +4,14 @@
  */
 package telas;
 
+import boxbuster.BancoDeDadosClientes;
 import boxbuster.BancoDeDadosFuncionarios;
+import boxbuster.Cadastrado;
 import boxbuster.Filmes;
 import boxbuster.Musicas;
 import boxbuster.Tabuleiros;
 import boxbuster.Videogames;
+import boxbuster.Visitante;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -26,12 +29,28 @@ import javax.swing.JOptionPane;
  */
 public class EditarCliente extends javax.swing.JFrame {
 
-    
+    BancoDeDadosClientes bdClientes = new BancoDeDadosClientes("clientes.txt");
 
     
     public EditarCliente() {
         setLocationRelativeTo(null);
         initComponents();
+        if(BancoDeDadosClientes.getClienteAtual().getClass().getSimpleName().equals("Cadastrado")){
+            lblSenha.setVisible(true);
+            txtfSenha.setVisible(true);
+            txtfNome.setText(BancoDeDadosClientes.getClienteAtual().getNome());
+            SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+            String dataFormatada = formatador.format(BancoDeDadosClientes.getClienteAtual().getDataNascimento());
+            txtfDataNascimento.setText(dataFormatada);
+        }
+        else{
+            lblSenha.setVisible(false);
+            txtfSenha.setVisible(false);
+            txtfNome.setText(BancoDeDadosClientes.getClienteAtual().getNome());
+            SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+            String dataFormatada = formatador.format(BancoDeDadosClientes.getClienteAtual().getDataNascimento());
+            txtfDataNascimento.setText(dataFormatada); 
+        }
     }
 
     /**
@@ -46,14 +65,12 @@ public class EditarCliente extends javax.swing.JFrame {
         txtfSenha1 = new javax.swing.JTextField();
         pnlLoginFunc = new javax.swing.JPanel();
         lblTipo = new javax.swing.JLabel();
-        lblCodigo = new javax.swing.JLabel();
         lblSenha = new javax.swing.JLabel();
         txtfSenha = new javax.swing.JTextField();
         btnVoltar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
-        txtfCodigo1 = new javax.swing.JTextField();
+        txtfNome = new javax.swing.JTextField();
         lblTipo1 = new javax.swing.JLabel();
-        txtfCPF = new javax.swing.JFormattedTextField();
         txtfDataNascimento = new javax.swing.JFormattedTextField();
         menuBarLoginFunc = new javax.swing.JMenuBar();
         menuLoginFunc = new javax.swing.JMenu();
@@ -76,9 +93,6 @@ public class EditarCliente extends javax.swing.JFrame {
 
         lblTipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblTipo.setText("Nome:");
-
-        lblCodigo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblCodigo.setText("CPF:");
 
         lblSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblSenha.setText("Senha:");
@@ -103,20 +117,14 @@ public class EditarCliente extends javax.swing.JFrame {
             }
         });
 
-        txtfCodigo1.addActionListener(new java.awt.event.ActionListener() {
+        txtfNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfCodigo1ActionPerformed(evt);
+                txtfNomeActionPerformed(evt);
             }
         });
 
         lblTipo1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblTipo1.setText("Data de Nasc.:");
-
-        try {
-            txtfCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
 
         try {
             txtfDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -138,13 +146,9 @@ public class EditarCliente extends javax.swing.JFrame {
                     .addGroup(pnlLoginFuncLayout.createSequentialGroup()
                         .addGroup(pnlLoginFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(pnlLoginFuncLayout.createSequentialGroup()
-                                .addGroup(pnlLoginFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblTipo)
-                                    .addComponent(lblCodigo))
+                                .addComponent(lblTipo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(pnlLoginFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtfCodigo1)))
+                                .addComponent(txtfNome))
                             .addGroup(pnlLoginFuncLayout.createSequentialGroup()
                                 .addComponent(lblTipo1)
                                 .addGap(18, 18, 18)
@@ -162,16 +166,12 @@ public class EditarCliente extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(pnlLoginFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTipo)
-                    .addComponent(txtfCodigo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(pnlLoginFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodigo)
-                    .addComponent(txtfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                    .addComponent(txtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(pnlLoginFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTipo1)
                     .addComponent(txtfDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(31, 31, 31)
                 .addGroup(pnlLoginFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSenha)
                     .addComponent(txtfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -230,6 +230,51 @@ public class EditarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtfSenhaActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        if(BancoDeDadosClientes.getClienteAtual().getClass().getSimpleName().equals("Cadastrado")){
+            if(txtfNome.getText().equals("") || txtfDataNascimento.getText().equals("") || txtfSenha.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Dados mudados com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                bdClientes.removerPessoa(BancoDeDadosClientes.getClienteAtual().getCPF());
+                String nome = txtfNome.getText();
+                String senha = txtfSenha.getText();
+                String dataNascimentoString = txtfDataNascimento.getText();
+                Date dataNascimento = null;
+                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                double divida = BancoDeDadosClientes.getClienteAtual().getDivida();
+                try {
+                    dataNascimento = formato.parse(dataNascimentoString);
+                } catch (ParseException ex) {
+                    Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Cadastrado cadastrado = new Cadastrado(nome, BancoDeDadosClientes.getClienteAtual().getCPF(), dataNascimento, divida, senha);
+                BancoDeDadosClientes.setClienteAtual(cadastrado);
+                bdClientes.adicionarPessoa(cadastrado);
+            }
+        }
+        else{
+            if(txtfNome.getText().equals("") || txtfDataNascimento.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Dados mudados com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                bdClientes.removerPessoa(BancoDeDadosClientes.getClienteAtual().getCPF());
+                String nome = txtfNome.getText();
+                String dataNascimentoString = txtfDataNascimento.getText();
+                Date dataNascimento = null;
+                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                double divida = BancoDeDadosClientes.getClienteAtual().getDivida();
+                try {
+                    dataNascimento = formato.parse(dataNascimentoString);
+                } catch (ParseException ex) {
+                    Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Visitante visitante = new Visitante(nome, BancoDeDadosClientes.getClienteAtual().getCPF(), dataNascimento, divida);
+                BancoDeDadosClientes.setClienteAtual(visitante);
+                bdClientes.adicionarPessoa(visitante);
+            }
+        }
         
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -247,9 +292,9 @@ public class EditarCliente extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void txtfCodigo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfCodigo1ActionPerformed
+    private void txtfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtfCodigo1ActionPerformed
+    }//GEN-LAST:event_txtfNomeActionPerformed
 
     private void txtfSenha1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfSenha1ActionPerformed
         new AreaCliente().setVisible(true);
@@ -297,7 +342,6 @@ public class EditarCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JLabel lblTipo;
     private javax.swing.JLabel lblTipo1;
@@ -307,9 +351,8 @@ public class EditarCliente extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuVoltarLoginFunc;
     private javax.swing.JPanel pnlLoginFunc;
     private javax.swing.JPopupMenu.Separator separatorLoginFunc;
-    private javax.swing.JFormattedTextField txtfCPF;
-    private javax.swing.JTextField txtfCodigo1;
     private javax.swing.JFormattedTextField txtfDataNascimento;
+    private javax.swing.JTextField txtfNome;
     private javax.swing.JTextField txtfSenha;
     private javax.swing.JTextField txtfSenha1;
     // End of variables declaration//GEN-END:variables
