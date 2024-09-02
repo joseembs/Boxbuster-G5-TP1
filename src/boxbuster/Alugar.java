@@ -133,9 +133,25 @@ public class Alugar {
     public void setListaProdutos(ArrayList<Produtos> listaProdutos) {
         this.listaProdutos = listaProdutos;
     }
+
+    public String getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(String pagamento) {
+        this.pagamento = pagamento;
+    }
+
+    public ArrayList<Status> getListaStatus() {
+        return listaStatus;
+    }
+
+    public void setListaStatus(ArrayList<Status> listaStatus) {
+        this.listaStatus = listaStatus;
+    }
     
     public void setProdutoStatus(int codigoProd, Status status){
-        Produtos tempProd = Estoque.getProdutoPorCodigo(codigoPedido);
+        Produtos tempProd = Estoque.getProdutoPorCodigo(codigoProd);
         int ind = listaProdutos.indexOf(tempProd);
 
         listaStatus.set(ind, status);

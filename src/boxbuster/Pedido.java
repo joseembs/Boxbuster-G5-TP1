@@ -110,6 +110,8 @@ public class Pedido {
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;
             while ((linha = br.readLine()) != null) {
+                System.out.println(linha);
+                System.out.println("g");
                 String[] item = linha.split("_");
                 Alugar aluguel = new Alugar(item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7]);
                 
@@ -136,7 +138,6 @@ public class Pedido {
              PrintWriter out = new PrintWriter(bw)) {
             for(Alugar aluguel : alugueis.values()){
                 out.println(aluguel);
-                out.println("-------------------------------------------");
             }
         } catch (IOException e) {
             e.printStackTrace();

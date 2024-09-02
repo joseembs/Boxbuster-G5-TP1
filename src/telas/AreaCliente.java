@@ -45,12 +45,14 @@ public class AreaCliente extends javax.swing.JFrame {
         LocalDate dataNascimento = BancoDeDadosClientes.getClienteAtual().getDataNascimento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         int idade = Period.between(dataNascimento, dataAtual).getYears();
         lblIdade.setText("Idade: " + String.valueOf(idade));
-        lblDivida.setText("Divida: " + String.valueOf(BancoDeDadosClientes.getClienteAtual().getDivida()));
+        lblDivida.setText("Divida: R$ " + String.valueOf(BancoDeDadosClientes.getClienteAtual().getDivida()) + "0");
         
-        
+        btnDevolver.setEnabled(false);
     }
 
     private void updateHistList() {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        
         histAlugueis = BancoDeDadosClientes.getHistoricoCliente(clienteAtual.getCPF());
         BancoDeDadosClientes.getClienteAtual().setAlugados(histAlugueis);
         int contAlugados = 0;
@@ -75,15 +77,15 @@ public class AreaCliente extends javax.swing.JFrame {
                     }
                     
                 }
-                if(status == Status.ALUGADO){
+                if(status == Status.ALUGADO || status == Status.ATRASADO){
                     contAlugados++;
                 }
                 Object linha[] = new Object[]{
                 aluguel.getCodigoPedido(),
                 item.getNomeProd(),
                 item.getClass().getSimpleName(), 
-                aluguel.getDataPedido(),
-                aluguel.getDataDevolucao(),
+                formato.format(aluguel.getDataPedido()),
+                formato.format(aluguel.getDataDevolucao()),
                 item.getPreco(),
                 divida,
                 status};
@@ -125,6 +127,8 @@ public class AreaCliente extends javax.swing.JFrame {
         tableAluguel = new javax.swing.JTable();
         btnEditar = new javax.swing.JButton();
         btnDevolver = new javax.swing.JButton();
+        lblPagamento = new javax.swing.JLabel();
+        cmbPagamento = new javax.swing.JComboBox<>();
         menuBarAreaCli = new javax.swing.JMenuBar();
         menuAreaCli = new javax.swing.JMenu();
         menuVoltarAreaCli = new javax.swing.JMenuItem();
@@ -181,6 +185,12 @@ public class AreaCliente extends javax.swing.JFrame {
         lblHistAluguel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblHistAluguel.setText("Histórico de Aluguel:");
 
+        scrlAluguel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                scrlAluguelMouseClicked(evt);
+            }
+        });
+
         tableAluguel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -212,6 +222,16 @@ public class AreaCliente extends javax.swing.JFrame {
         btnDevolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDevolverActionPerformed(evt);
+            }
+        });
+
+        lblPagamento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblPagamento.setText("Forma de pagamento: ");
+
+        cmbPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Cartão", "Pix" }));
+        cmbPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbPagamentoActionPerformed(evt);
             }
         });
 
@@ -253,6 +273,10 @@ public class AreaCliente extends javax.swing.JFrame {
                         .addGap(35, 35, 35))
                     .addGroup(pnlAreaClienteLayout.createSequentialGroup()
                         .addComponent(lblHistAluguel)
+                        .addGap(53, 53, 53)
+                        .addComponent(lblPagamento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDevolver, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -287,7 +311,9 @@ public class AreaCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlAreaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblHistAluguel)
-                    .addComponent(btnDevolver))
+                    .addComponent(btnDevolver)
+                    .addComponent(lblPagamento)
+                    .addComponent(cmbPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrlAluguel, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99))
@@ -364,34 +390,61 @@ public class AreaCliente extends javax.swing.JFrame {
     private void btnDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverActionPerformed
         int index = tableAluguel.getSelectedRow();
         histAlugueis = BancoDeDadosClientes.getHistoricoCliente(clienteAtual.getCPF());
+        
+        int codigoAluguel = (Integer) (tableAluguel.getModel().getValueAt(index, 0));
+            
+        String nomeProd = (String) (tableAluguel.getModel().getValueAt(index, 1));
+        
+        System.out.println(codigoAluguel);
+        System.out.println(nomeProd);
+        
         int cont = 0;
         for(int i = 0; i < histAlugueis.size(); i++){
             Alugar aluguel = histAlugueis.get(i);
-            System.out.println(aluguel);
-            for(int j = 0; j < histAlugueis.get(i).getListaProdutos().size(); j++){
-                if(cont == index){
-                    if(aluguel.getProdutoStatus(aluguel.getListaProdutos().get(j).getCodigoProd()) == Status.DEVOLVIDO){
-                        JOptionPane.showMessageDialog(null, "Esse produto já foi devolvido!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-                    }
-                    else if(aluguel.getProdutoStatus(aluguel.getListaProdutos().get(j).getCodigoProd()) != Status.DEVOLVIDO){
-                        int codigoPedido = aluguel.getCodigoPedido();
-                        aluguel.setProdutoStatus(aluguel.getListaProdutos().get(j).getCodigoProd(), Status.DEVOLVIDO);
-                        Pedido.addStatus(codigoPedido, aluguel);
-                        Pedido.reescreverAlugueis();
-                        break;
-                    }
+            
+            if(codigoAluguel == aluguel.getCodigoPedido()){
+                for(Produtos prod : aluguel.getListaProdutos()){
                     
-                    
+                    if(nomeProd.equals(prod.getNomeProd())){
+                        int index2 = aluguel.getListaProdutos().indexOf(prod);
+                        
+                        int codigoPedido = prod.getCodigoProd();
+                        
+                        Status oldStatus = aluguel.getListaStatus().get(index2);
+                        
+                        System.out.println(oldStatus);
+                        System.out.println(prod);
+                        
+                        if(oldStatus == Status.DEVOLVIDO){
+                            JOptionPane.showMessageDialog(null, "Esse produto já foi devolvido!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                        }
+                        else {
+                            aluguel.setProdutoStatus(codigoPedido, Status.DEVOLVIDO);
+                            Pedido.addStatus(codigoPedido, aluguel);
+                            Pedido.reescreverAlugueis();
+                            break;
+                        }
+                    }
                 }
-                cont++;
-                
             }
         }
         BancoDeDadosClientes.getClienteAtual().setAlugados(histAlugueis);
         BancoDeDadosClientes.getClienteAtual().calculaDivida();
-        lblDivida.setText("Divida: " + String.valueOf(BancoDeDadosClientes.getClienteAtual().getDivida()));
+        lblDivida.setText("Divida: R$ " + String.valueOf(BancoDeDadosClientes.getClienteAtual().getDivida()) + "0");
         updateHistList();
     }//GEN-LAST:event_btnDevolverActionPerformed
+
+    private void scrlAluguelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scrlAluguelMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_scrlAluguelMouseClicked
+
+    private void cmbPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPagamentoActionPerformed
+        if(cmbPagamento.getSelectedIndex() == 0){
+            btnDevolver.setEnabled(false);
+        } else {
+            btnDevolver.setEnabled(true);
+        }
+    }//GEN-LAST:event_cmbPagamentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -456,6 +509,7 @@ public class AreaCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnDevolver;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnLojaMain;
+    private javax.swing.JComboBox<String> cmbPagamento;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblDataNasc;
     private javax.swing.JLabel lblDivida;
@@ -463,6 +517,7 @@ public class AreaCliente extends javax.swing.JFrame {
     private javax.swing.JLabel lblIdade;
     private javax.swing.JLabel lblInfo;
     private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblPagamento;
     private javax.swing.JLabel lblProdutosAlugados;
     private javax.swing.JLabel logoBoxbuster;
     private javax.swing.JMenu menuAreaCli;

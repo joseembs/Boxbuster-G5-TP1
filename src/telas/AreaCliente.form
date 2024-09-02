@@ -132,6 +132,10 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="lblHistAluguel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                          <Component id="lblPagamento" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="cmbPagamento" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="btnDevolver" min="-2" pref="117" max="-2" attributes="0"/>
                       </Group>
@@ -177,6 +181,8 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblHistAluguel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnDevolver" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblPagamento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbPagamento" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="scrlAluguel" min="-2" pref="169" max="-2" attributes="0"/>
@@ -284,6 +290,9 @@
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="scrlAluguel">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="scrlAluguelMouseClicked"/>
+          </Events>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
@@ -373,6 +382,31 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDevolverActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblPagamento">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Forma de pagamento: "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbPagamento">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value="Selecione"/>
+                <StringItem index="1" value="Cart&#xe3;o"/>
+                <StringItem index="2" value="Pix"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbPagamentoActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
