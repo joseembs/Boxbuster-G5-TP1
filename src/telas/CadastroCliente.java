@@ -320,28 +320,64 @@ public class CadastroCliente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
             }
             else{
+                
                 SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                 String nome = txtfNome.getText();
                 String CPF = txtfCPF.getText();
-                Date dataNascimento = null;
-                String dataNascimentoString = txtfDataNascimento.getText();
-                LocalDate dataAtual = LocalDate.now();
-                try {
-                    dataNascimento = formato.parse(dataNascimentoString);
-                } catch (ParseException ex) {
-                    Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                if(!bdClientes.buscarPessoa(CPF).isEmpty()){
+                    String[] palavras = bdClientes.buscarPessoa(CPF).get(0).split("_");
+                    if(palavras[0].equals("Cadastrado")){
+                        JOptionPane.showMessageDialog(null, "Esse CPF já está vinculado à outra conta", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                    }
+                    else{
+                        bdClientes.removerPessoa(CPF);
+                        Date dataNascimento = null;
+                        String dataNascimentoString = txtfDataNascimento.getText();
+                        LocalDate dataAtual = LocalDate.now();
+                        String divida = palavras[4];
+                        try {
+                            dataNascimento = formato.parse(dataNascimentoString);
+                        } catch (ParseException ex) {
+                            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        LocalDate dataNascimentoLocal = dataNascimento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                        int idade = Period.between(dataNascimentoLocal, dataAtual).getYears();
+                        String idadeString = String.valueOf(idade);
+                        String senha = txtfSenha.getText();
+                        Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, Double.parseDouble(divida), senha);
+                        BancoDeDadosClientes.setClienteAtual(cadastrado);
+                        bdClientes.adicionarPessoa(cadastrado);
+                        AreaCliente telaCliente = new AreaCliente();
+                        telaCliente.setVisible(true);
+
+                        this.setVisible(false);
+                    }
+                    
+                    
                 }
-                LocalDate dataNascimentoLocal = dataNascimento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                int idade = Period.between(dataNascimentoLocal, dataAtual).getYears();
-                String idadeString = String.valueOf(idade);
-                String senha = txtfSenha.getText();
-                Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, 0, senha);
-                BancoDeDadosClientes.setClienteAtual(cadastrado);
-                bdClientes.adicionarPessoa(cadastrado);
-                AreaCliente telaCliente = new AreaCliente();
-                telaCliente.setVisible(true);
+                else{
+                    
                 
-                this.setVisible(false);
+                    Date dataNascimento = null;
+                    String dataNascimentoString = txtfDataNascimento.getText();
+                    LocalDate dataAtual = LocalDate.now();
+                    try {
+                        dataNascimento = formato.parse(dataNascimentoString);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    LocalDate dataNascimentoLocal = dataNascimento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    int idade = Period.between(dataNascimentoLocal, dataAtual).getYears();
+                    String idadeString = String.valueOf(idade);
+                    String senha = txtfSenha.getText();
+                    Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, 0, senha);
+                    BancoDeDadosClientes.setClienteAtual(cadastrado);
+                    bdClientes.adicionarPessoa(cadastrado);
+                    AreaCliente telaCliente = new AreaCliente();
+                    telaCliente.setVisible(true);
+
+                    this.setVisible(false);
+                }
                 
             }
         }
