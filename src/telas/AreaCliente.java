@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
 public class AreaCliente extends javax.swing.JFrame {
 
     Cliente clienteAtual = BancoDeDadosClientes.getClienteAtual();
-    
+    BancoDeDadosClientes bdClientes = new BancoDeDadosClientes("clientes.txt");
     ArrayList<Alugar> histAlugueis = BancoDeDadosClientes.getHistoricoCliente(clienteAtual.getCPF());
     int alugados = 0;
     /**
@@ -36,6 +36,8 @@ public class AreaCliente extends javax.swing.JFrame {
         initComponents();
         updateHistList();
         BancoDeDadosClientes.getClienteAtual().calculaDivida();
+        bdClientes.removerPessoa(BancoDeDadosClientes.getClienteAtual().getCPF());
+        bdClientes.adicionarPessoa(BancoDeDadosClientes.getClienteAtual());
         lblNome.setText("Nome: " + BancoDeDadosClientes.getClienteAtual().getNome());
         lblCPF.setText("CPF: " + BancoDeDadosClientes.getClienteAtual().getCPF());
         SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
