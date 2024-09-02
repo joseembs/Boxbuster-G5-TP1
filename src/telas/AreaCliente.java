@@ -7,6 +7,8 @@ package telas;
 import boxbuster.Alugar;
 import boxbuster.BancoDeDadosClientes;
 import boxbuster.Cliente;
+import boxbuster.Produtos;
+import boxbuster.Status;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -41,27 +43,42 @@ public class AreaCliente extends javax.swing.JFrame {
         lblIdade.setText("Idade: " + String.valueOf(idade));
         lblDivida.setText("Divida: " + String.valueOf(BancoDeDadosClientes.getClienteAtual().getDivida()));
         lblProdutosAlugados.setText("Produtos Alugados: " + String.valueOf(BancoDeDadosClientes.getClienteAtual().getAlugados().size()));
+        updateProdList();
     }
 
     private void updateProdList() {
         histAlugueis = BancoDeDadosClientes.getHistoricoCliente(clienteAtual.getCPF());
         
-        //DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Código", "Tipo", "Nome", "Faixa", "Ano", "Preço", "Disp./Alugados"}, 0);
+        DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Pedido", "Produto", "Tipo", "Data Inicial", "Devolução", "Preço", "Dívida", "Status"}, 0);
+        int cont = 1;
+        for(int i = 0; i < histAlugueis.size(); i++){
+            for(int j = 0; j < histAlugueis.get(i).getListaProdutos().size(); j++){
+                
+                Produtos item = histAlugueis.get(i).getListaProdutos().get(j);
+                Status status = Status.ALUGADO;
+                status = histAlugueis.get(i).getProdutoStatus(String.valueOf(item.getCodigoProd()));
+                double divida = 0;
+                if(status == Status.ATRASADO){
+                    divida = item.getPreco() / 2;
+                }
+                Object linha[] = new Object[]{
+                cont,
+                item.getNomeProd(),
+                item.getClass().getSimpleName(), 
+                histAlugueis.get(i).getDataPedido(),
+                histAlugueis.get(i).getDataDevolucao(),
+                item.getPreco(),
+                divida,
+                status};
 
-        //for(int i = 0; i < allProducts.size(); i++){
-        //    Object linha[] = new Object[]{
-        //    allProducts.get(i).getCodigoProd(),
-        //    allProducts.get(i).getClass().getSimpleName(), 
-        //    allProducts.get(i).getNomeProd(),
-        //    allProducts.get(i).getFaixaEtaria(),
-        //    allProducts.get(i).getAno(),
-        //    allProducts.get(i).getPreco(),
-        //    allProducts.get(i).getDisponiveis() + "/" + allProducts.get(i).getAlugados()};
-
-        //    tabela.addRow(linha);
-        //}
+               tabela.addRow(linha);
+            }
+            cont++;
+                    
+                    
         
-        //tableProdutos.setModel(tabela);        
+        tableAluguel.setModel(tabela);  
+        }
     }
     
     /**
