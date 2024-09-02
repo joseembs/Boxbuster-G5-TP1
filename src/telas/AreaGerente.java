@@ -574,6 +574,12 @@ public class AreaGerente extends javax.swing.JFrame {
             }
         });
 
+        scrlProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                scrlProdutosMouseClicked(evt);
+            }
+        });
+
         tableProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -999,8 +1005,17 @@ public class AreaGerente extends javax.swing.JFrame {
                 alugados = quant[1];
             }
             
+            String codTemp = txtfCodigoProd.getText();
+            
+            String codigo;
+            
+            if(codTemp.isEmpty()){
+                codigo = "";
+            } else {
+                codigo = codTemp;
+            }
+            
             String tipo = (String) cmbTipoProd.getSelectedItem(),
-                    codigo = txtfCodigoProd.getText(),
                     faixaEtaria = txtfFaixaEtaria.getText(),
                     preco = txtfPreco.getText(),
                     nome = txtfNome.getText(),
@@ -1011,11 +1026,13 @@ public class AreaGerente extends javax.swing.JFrame {
                     var4 = txtfVar4.getText();
             if(tipo.equals("Selecione")){
                 tipo = "";
+            } else if (tipo.equals("Música")){
+                tipo = "Musica";
             }
             for(Produtos prod : allProducts){
                 
                 String[] info = prod.toString().split("_");
-                
+ 
                 boolean ok3 = true;
                 boolean ok4 = true;
                 
@@ -1040,7 +1057,7 @@ public class AreaGerente extends javax.swing.JFrame {
                     
 
                     Object linha[] = new Object[]{
-                    info[4],
+                    Integer.valueOf(info[4]),
                     info[0]+"s",
                     info[1],
                     info[5],
@@ -1215,7 +1232,12 @@ public class AreaGerente extends javax.swing.JFrame {
         cmbTipoProd.setSelectedItem(cmbTipoProd.getSelectedItem()); //caso o usuário clique no botão após escolher um produto reseta a combo box para os campos específicos ativarem
         
         if (rowClick >= 0 && rowClick < allProducts.size()){
-            Produtos selectedProd = allProducts.get(rowClick);
+            
+            System.out.println(rowClick);
+            int codigoProduto = (Integer) (tableProdutos.getModel().getValueAt(rowClick, 0));
+            System.out.println(codigoProduto);
+            
+            Produtos selectedProd = Estoque.getProdutoPorCodigo(codigoProduto);
             
             txtfCodigoProd.setText(Integer.toString(selectedProd.getCodigoProd()));
         } else {
@@ -1230,7 +1252,9 @@ public class AreaGerente extends javax.swing.JFrame {
         rowClick = tableProdutos.getSelectedRow();
         
         if (rowClick >= 0 && rowClick < allProducts.size()){
-            int codigoProduto = (Integer) (tableEquipe.getModel().getValueAt(rowClick, 0));
+            System.out.println(rowClick);
+            int codigoProduto = (Integer) (tableProdutos.getModel().getValueAt(rowClick, 0));
+            System.out.println(codigoProduto);
             
             Produtos selectedProd = Estoque.getProdutoPorCodigo(codigoProduto);
             
@@ -1253,14 +1277,14 @@ public class AreaGerente extends javax.swing.JFrame {
                 txtfVar1.setText(((Filmes) selectedProd).getGenero());
                 txtfVar2.setText(((Filmes) selectedProd).getEstudio());
                 txtfVar3.setText(((Filmes) selectedProd).getDiretor());
-            } else if(selectedProd.getClass().getSimpleName().equals("Musica")){
+            } else if(selectedProd.getClass().getSimpleName().equals("Musicas")){
                 selectedProdInd = Estoque.getListaMusicas().indexOf(selectedProd);
                 
                 cmbTipoProd.setSelectedItem("Música");
                 
                 txtfVar1.setText(((Musicas) selectedProd).getEstilo());
                 txtfVar2.setText(((Musicas) selectedProd).getAutor());
-            } else if(selectedProd.getClass().getSimpleName().equals("Tabuleiro")){
+            } else if(selectedProd.getClass().getSimpleName().equals("Tabuleiros")){
                 selectedProdInd = Estoque.getListaTabuleiros().indexOf(selectedProd);
                 
                 cmbTipoProd.setSelectedItem("Tabuleiro");
@@ -1300,19 +1324,23 @@ public class AreaGerente extends javax.swing.JFrame {
     private void btnEditarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProdActionPerformed
         action = "edit";
                 
+        enableBaseFields();
+        
+        
         if (rowClick >= 0 && rowClick < allProducts.size()){
             cmbTipoProd.setSelectedItem(cmbTipoProd.getSelectedItem()); //caso o usuário clique no botão após escolher um produto reseta a combo box para os campos específicos ativarem
             
-            Produtos selectedProd = allProducts.get(rowClick);
+            System.out.println(rowClick);
+            int codigoProduto = (Integer) (tableProdutos.getModel().getValueAt(rowClick, 0));
+            System.out.println(codigoProduto);
+            
+            Produtos selectedProd = Estoque.getProdutoPorCodigo(codigoProduto);
             
             txtfCodigoProd.setText(Integer.toString(selectedProd.getCodigoProd()));
-            
-            enableBaseFields();
-            
             btnConfirmarEst.setEnabled(true);
+            
         } else {
             txtfCodigoProd.setText("");
-            disableBaseFields();
         }
     }//GEN-LAST:event_btnEditarProdActionPerformed
 
@@ -1480,7 +1508,11 @@ public class AreaGerente extends javax.swing.JFrame {
         if (rowClick >= 0 && rowClick < allProducts.size()){
             //cmbTipoProd.setSelectedItem(cmbTipoProd.getSelectedItem()); //caso o usuário clique no botão após escolher um produto reseta a combo box para os campos específicos ativarem
             
-            Produtos selectedProd = allProducts.get(rowClick);
+            System.out.println(rowClick);
+            int codigoProduto = (Integer) (tableProdutos.getModel().getValueAt(rowClick, 0));
+            System.out.println(codigoProduto);
+            
+            Produtos selectedProd = Estoque.getProdutoPorCodigo(codigoProduto);
             
             txtfCodigoProd.setText(Integer.toString(selectedProd.getCodigoProd()));
             
@@ -1528,6 +1560,10 @@ public class AreaGerente extends javax.swing.JFrame {
     private void txtfQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfQuantidadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtfQuantidadeActionPerformed
+
+    private void scrlProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scrlProdutosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_scrlProdutosMouseClicked
 
     public void disableBaseFields(){
         cmbTipoProd.setEnabled(false);
