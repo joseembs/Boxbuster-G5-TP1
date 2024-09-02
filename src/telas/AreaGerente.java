@@ -1230,7 +1230,9 @@ public class AreaGerente extends javax.swing.JFrame {
         rowClick = tableProdutos.getSelectedRow();
         
         if (rowClick >= 0 && rowClick < allProducts.size()){
-            Produtos selectedProd = allProducts.get(rowClick);
+            int codigoProduto = (Integer) (tableEquipe.getModel().getValueAt(rowClick, 0));
+            
+            Produtos selectedProd = Estoque.getProdutoPorCodigo(codigoProduto);
             
             if(!action.equals("new")){
                 txtfCodigoProd.setText(Integer.toString(selectedProd.getCodigoProd()));
