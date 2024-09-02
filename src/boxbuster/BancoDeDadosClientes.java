@@ -37,8 +37,7 @@ public class BancoDeDadosClientes implements BancoDeDados{
         try (FileWriter fw = new FileWriter(arquivo, true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
-            out.println(cliente.toString());
-            out.println("-------------------------------------------"); 
+            out.println(cliente.toString());           
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -77,19 +76,14 @@ public class BancoDeDadosClientes implements BancoDeDados{
 
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;
-            boolean encontrouCPF = false;
+            
 
             while ((linha = br.readLine()) != null) {
                 if (linha.contains(CPF)) {
-                    encontrouCPF = true; 
-                }
-
-                if (encontrouCPF) {
-                    if (linha.equals("-------------------------------------------")) {
-                        break;
-                    }
                     lista.add(linha);
                 }
+
+                
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -104,24 +98,15 @@ public class BancoDeDadosClientes implements BancoDeDados{
 
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;
-            boolean encontrouCPF = false;
 
             while ((linha = br.readLine()) != null) {
-                if (linha.contains(CPF)) {
-                    encontrouCPF = true;
-                    while (!linha.equals("-------------------------------------------")) {
-                        linha = br.readLine(); 
-                    }
-                    linha = br.readLine();
+                if (!linha.contains(CPF)) {
+                    linhas.add(linha);
                     
-                } else {
-                    linhas.add(linha); 
-                }
+                } 
             }
 
-            if (!encontrouCPF) {
-                System.out.println("Cliente com CPF " + CPF + " não encontrado.");
-            }
+            
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -139,43 +124,8 @@ public class BancoDeDadosClientes implements BancoDeDados{
 
     }
     
-    public void adicionarItem(String CPF, ArrayList<String> itens) {
-        ArrayList<String> linhas = new ArrayList<>();
-        Collections.reverse(itens);
-        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
-            String linha;
-           
-
-            while ((linha = br.readLine()) != null) {
-                if (linha.contains(CPF)) {
-                    linhas.add(linha); 
-                    for (String novaLinha : itens) {
-                        linhas.add(novaLinha); 
-                    }
-                    while (!linha.equals("-------------------------------------------")) {
-                        linha = br.readLine(); 
-                    }
-                } else {
-                    linhas.add(linha); 
-                }
-            }
-
-            
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo))) {
-            for (String linha : linhas) {
-                bw.write(linha);
-                bw.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    
+    
  
 }
 
