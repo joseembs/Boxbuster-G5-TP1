@@ -37,6 +37,8 @@ public class AreaCaixa extends javax.swing.JFrame {
     }
     
     private void updateHistList() { // formata atualiza a tabela de pedidos
+        tableAluguel.removeAll();
+        
         histAlugueis = Pedido.lerAlugueis(); // retorna um HashMap com todos os Alugueis da loja
         
         DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Pedido", "Produto", "Tipo", "Data Inicial", "Devolução", "Preço", "Dívida", "Status"}, 0);
@@ -44,7 +46,7 @@ public class AreaCaixa extends javax.swing.JFrame {
             Alugar aluguel = histAlugueis.get(i);
             System.out.println(aluguel);
             if(aluguel.getCaixaCodigo().equals(codigoAtual)){ // analisa cada pedido e coleta somente os que têm o código do caixa que está logado
-                for(int j = 0; j < histAlugueis.get(i).getListaProdutos().size(); j++){
+                for(int j = 0; j < histAlugueis.get(i).getListaProdutos().size(); j++){ // analisa cada produto de cada pedido separadamente
                     Produtos item = aluguel.getListaProdutos().get(j);
                     Status status = aluguel.getProdutoStatus(item.getCodigoProd());
 
