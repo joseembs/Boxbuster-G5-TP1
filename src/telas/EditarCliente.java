@@ -251,6 +251,8 @@ public class EditarCliente extends javax.swing.JFrame {
                 Cadastrado cadastrado = new Cadastrado(nome, BancoDeDadosClientes.getClienteAtual().getCPF(), dataNascimento, divida, senha);
                 BancoDeDadosClientes.setClienteAtual(cadastrado);
                 bdClientes.adicionarPessoa(cadastrado);
+                new AreaCliente().setVisible(true);
+                this.setVisible(false);
             }
         }
         else{
@@ -273,6 +275,8 @@ public class EditarCliente extends javax.swing.JFrame {
                 Visitante visitante = new Visitante(nome, BancoDeDadosClientes.getClienteAtual().getCPF(), dataNascimento, divida);
                 BancoDeDadosClientes.setClienteAtual(visitante);
                 bdClientes.adicionarPessoa(visitante);
+                new AreaCliente().setVisible(true);
+                this.setVisible(false);
             }
         }
         
@@ -288,7 +292,7 @@ public class EditarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_menuSairCartActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        new TelaPrincipal().setVisible(true);
+        new AreaCliente().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
