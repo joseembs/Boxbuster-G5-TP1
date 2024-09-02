@@ -768,15 +768,25 @@ public class FinalizarPedido extends javax.swing.JFrame {
                         }
                         Visitante visitante = new Visitante(nome, CPF, dataNascimento, Double.parseDouble(divida));
                         BancoDeDadosClientes.setClienteAtual(visitante);
-                        JOptionPane.showMessageDialog(null, "Usuário entrou com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-                        cmbSituacao.setEnabled(false);
-                        txtfNome.setEnabled(false);
-                        txtfCPF.setEnabled(false);
-                        txtfDataNascimento.setEnabled(false);
-                        txtfSenha.setEnabled(false);
-                        txtfSenha.setVisible(false);
-                        lblSenha.setVisible(false);
-                        btnLogin.setEnabled(false);
+                        if(Double.parseDouble(divida) > 0){
+                            Pedido.setPedidoAtual(new ArrayList<>());
+                            JOptionPane.showMessageDialog(null, "Primeiro pague a dívida antes de usar a loja", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                            new AreaCliente().setVisible(true);
+                            this.setVisible(false);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Usuário entrou com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                            cmbSituacao.setEnabled(false);
+                            txtfNome.setEnabled(false);
+                            txtfCPF.setEnabled(false);
+                            txtfDataNascimento.setEnabled(false);
+                            txtfSenha.setEnabled(false);
+                            txtfSenha.setVisible(false);
+                            lblSenha.setVisible(false);
+                            btnLogin.setEnabled(false);
+                            
+                        }
+                        
                     }
                 }
             }
@@ -818,15 +828,25 @@ public class FinalizarPedido extends javax.swing.JFrame {
                         else{
                             Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, Double.parseDouble(divida), senha);
                             BancoDeDadosClientes.setClienteAtual(cadastrado);
-                            JOptionPane.showMessageDialog(null, "Usuário entrou com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-                            cmbSituacao.setEnabled(false);
-                            txtfNome.setEnabled(false);
-                            txtfCPF.setEnabled(false);
-                            txtfDataNascimento.setEnabled(false);
-                            txtfSenha.setEnabled(false);
-                            txtfSenha.setVisible(false);
-                            lblSenha.setVisible(false);
-                            btnLogin.setEnabled(false);
+                            if(Double.parseDouble(divida) > 0){
+                                Pedido.setPedidoAtual(new ArrayList<>());
+                                JOptionPane.showMessageDialog(null, "Primeiro pague a dívida antes de usar a loja", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                                new AreaCliente().setVisible(true);
+                                this.setVisible(false);
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null, "Usuário entrou com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                                cmbSituacao.setEnabled(false);
+                                txtfNome.setEnabled(false);
+                                txtfCPF.setEnabled(false);
+                                txtfDataNascimento.setEnabled(false);
+                                txtfSenha.setEnabled(false);
+                                txtfSenha.setVisible(false);
+                                lblSenha.setVisible(false);
+                                btnLogin.setEnabled(false);
+                                
+                            }
+                           
                         }
                     }
                 }

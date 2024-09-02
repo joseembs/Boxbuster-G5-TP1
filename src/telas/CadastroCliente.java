@@ -575,12 +575,20 @@ public class CadastroCliente extends javax.swing.JFrame {
                         }
                         Visitante visitante = new Visitante(nome, CPF, dataNascimento, Double.parseDouble(divida));
                         BancoDeDadosClientes.setClienteAtual(visitante);
-                        Loja telaLoja = new Loja();
+                        if(Double.parseDouble(divida) > 0){
+                            JOptionPane.showMessageDialog(null, "Primeiro pague a dívida antes de usar a loja", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                            new AreaCliente().setVisible(true);
+                            this.setVisible(false);
+                        }
+                        else{
+                            Loja telaLoja = new Loja();
 
 
-                        telaLoja.setVisible(true);
+                            telaLoja.setVisible(true);
 
-                        this.setVisible(false);
+                            this.setVisible(false);
+                        }
+                        
                     }
                 }
             }
@@ -623,11 +631,20 @@ public class CadastroCliente extends javax.swing.JFrame {
                         }
                         else{
                             Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, Double.parseDouble(divida), senha);
-                            BancoDeDadosClientes.setClienteAtual(cadastrado);                         
-                            Loja telaLoja = new Loja();
-                            telaLoja.setVisible(true);
+                            BancoDeDadosClientes.setClienteAtual(cadastrado);
+                            if(Double.parseDouble(divida) > 0){
+                                JOptionPane.showMessageDialog(null, "Primeiro pague a dívida antes de usar a loja", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                                new AreaCliente().setVisible(true);
+                                this.setVisible(false);
+                            }
+                            else{
+                                
+                            
+                                Loja telaLoja = new Loja();
+                                telaLoja.setVisible(true);
 
-                            this.setVisible(false);
+                                this.setVisible(false);
+                            }
                         }
                     }
                 }

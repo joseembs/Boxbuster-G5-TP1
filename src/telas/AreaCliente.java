@@ -368,8 +368,14 @@ public class AreaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_menuVoltarAreaCliActionPerformed
 
     private void btnLojaMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLojaMainActionPerformed
-        new Loja().setVisible(true);
-        this.setVisible(false);
+        if(BancoDeDadosClientes.getClienteAtual().getDivida() > 0){
+            JOptionPane.showMessageDialog(null, "Primeiro pague a dívida antes de usar a loja", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+        }
+        else{
+            new Loja().setVisible(true);
+            this.setVisible(false);
+        }
+        
     }//GEN-LAST:event_btnLojaMainActionPerformed
 
     private void btnDeslogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeslogarActionPerformed
