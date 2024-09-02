@@ -138,7 +138,7 @@ public class Loja extends javax.swing.JFrame {
             } else if(titulo.contains("Toy Story")){
                 listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/ToyStory.png")));
             } else {
-                listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/MissingPoster.png")));
+                listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/MissingImage2.png")));
             }
             
             listNomeMus[i].setText(musica.getNomeProd());

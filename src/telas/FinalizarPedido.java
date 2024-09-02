@@ -682,6 +682,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         int index = cmbSituacao.getSelectedIndex();
+        
         if(index == 1){
             if(txtfNome.getText().equals("") || txtfCPF.getText().equals("") || txtfDataNascimento.getText().equals("") || txtfSenha.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
@@ -837,6 +838,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
             lblUsuario.setText("Usuário atual: " + BancoDeDadosClientes.getClienteAtual().getNome());
             checkFim();
             btnLogout.setEnabled(true);
+            updateProdTable();
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -925,6 +927,8 @@ public class FinalizarPedido extends javax.swing.JFrame {
         BancoDeDadosClientes.setClienteAtual(null);
         
         startFields();
+        
+        updateProdTable();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**

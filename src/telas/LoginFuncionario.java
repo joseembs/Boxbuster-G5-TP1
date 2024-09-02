@@ -4,11 +4,8 @@
  */
 package telas;
 
+import boxbuster.BancoDeDadosClientes;
 import boxbuster.BancoDeDadosFuncionarios;
-import boxbuster.Filmes;
-import boxbuster.Musicas;
-import boxbuster.Tabuleiros;
-import boxbuster.Videogames;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -27,10 +24,6 @@ import javax.swing.JOptionPane;
 public class LoginFuncionario extends javax.swing.JFrame {
 
     BancoDeDadosFuncionarios bdFunc = new BancoDeDadosFuncionarios("funcionarios.txt");
-    private ArrayList<Filmes> listFilmes = new ArrayList();
-    private ArrayList<Musicas> listMusicas = new ArrayList();
-    private ArrayList<Tabuleiros> listTabuleiros = new ArrayList();
-    private ArrayList<Videogames> listVideogames = new ArrayList();
 
     /**
      * Creates new form CadastroFuncionario
@@ -270,6 +263,8 @@ public class LoginFuncionario extends javax.swing.JFrame {
                 }
                 this.setVisible(false);
             }
+            
+            BancoDeDadosClientes.setClienteAtual(null);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 

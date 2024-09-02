@@ -40,6 +40,12 @@ public abstract class Produtos {
     }
 
     public double getPreco() {
+        Cliente cliente = BancoDeDadosClientes.getClienteAtual();
+        if(cliente != null){
+            if(cliente instanceof Cadastrado){
+                return (preco - (preco*0.1));
+            }
+        }
         return preco;
     }
 
