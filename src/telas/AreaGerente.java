@@ -1519,9 +1519,9 @@ public class AreaGerente extends javax.swing.JFrame {
             }
             
             // seleciona o funcionário do banco de dados correspondente à seleção
-            funcAtual = bdFunc.buscarPessoa(txtfNomeEq.getText() + " " +
-                    txtfCPFEq.getText() + " " +
-                    txtfDataEq.getText() + " ");
+            funcAtual = bdFunc.buscarPessoa(txtfNomeEq.getText() + "_" +
+                    txtfCPFEq.getText() + "_" +
+                    txtfDataEq.getText() + "_");
         }
     }//GEN-LAST:event_tableEquipeMouseClicked
 
