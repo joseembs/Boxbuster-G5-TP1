@@ -30,7 +30,7 @@ import java.util.logging.Logger;
  * @author elisrb
  */
 public class AreaGerente extends javax.swing.JFrame {
-    
+    // variáveis da parte de estoque
     int cont = Estoque.getCont()+1;
     
     private ArrayList<Produtos> allProducts = new ArrayList();
@@ -42,6 +42,7 @@ public class AreaGerente extends javax.swing.JFrame {
     int rowClick = -1;
     int selectedProdInd;
     
+    // variáveis da parte de equipe
     BancoDeDadosFuncionarios bdFunc = new BancoDeDadosFuncionarios("funcionarios.txt");
     ArrayList<String> funcionarios = new ArrayList<>();
     int totalFunc = 0;
@@ -58,8 +59,9 @@ public class AreaGerente extends javax.swing.JFrame {
         Estoque.loadEstoque();
         cont = Estoque.getCont()+1;
         
+        // inicializa as tabelas
         updateProdList();
-        updateFuncionarios();
+        updateFuncionarios(); 
     }
 
     private void updateProdList() {
@@ -83,11 +85,11 @@ public class AreaGerente extends javax.swing.JFrame {
         tableProdutos.setModel(tabela);        
     }
     
-    private void updateFuncionarios() {
+    private void updateFuncionarios() { // atualiza tabela e quantidade de funcionários, e a combo box de gerentes 
         
-        //atualiza tabela de funcionarios
+        // atualiza tabela de funcionarios
         tableEquipe.removeAll();
-        funcionarios = bdFunc.lerPessoas();
+        funcionarios = bdFunc.lerPessoas(); // retorna uma ArrayList de todos os funcionários
         
         DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Nome", "CPF", "Data de Nascimento", "Código", "Cargo", "Gerente"}, 0);
         String[] palavras;
@@ -96,7 +98,7 @@ public class AreaGerente extends javax.swing.JFrame {
             palavras = funcionarios.get(i).split("_");
             String gerente = "--";
             if(palavras[5].equals("Caixa")){
-                gerente = palavras[8];
+                gerente = palavras[8]; // caso o funcionário seja gerente preenche o campo "Gerente" da tabela
             }
             Object linha[] = new Object[]{
             palavras[0],
@@ -111,13 +113,13 @@ public class AreaGerente extends javax.swing.JFrame {
         
         tableEquipe.setModel(tabela);
         
-        //atualiza total de caixas e gerentes
+        // atualiza total de caixas e gerentes
         int[] quant = bdFunc.quantidades();
         lblTotalCaixas.setText("Total de caixas: "+ quant[0]);
         lblTotalGerentes.setText("Total de gerentes: "+ quant[1]);
         totalFunc = quant[0]+quant[1];
         
-        //atualiza combo box de gerentes
+        // atualiza combo box de gerentes
         cmbGerenteEq.removeAllItems();
         cmbGerenteEq.addItem("Selecione");
         
@@ -1330,7 +1332,7 @@ public class AreaGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoFuncActionPerformed
 
     private void btnConfirmarEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEqActionPerformed
-        if("new".equals(action)){
+        if("new".equals(action)){ // cria um novo funcionário
             if(txtfCodigoEq.getText().equals("")|| txtfNomeEq.getText().equals("")|| txtfDataEq.getText().equals("")||
                     txtfCPFEq.getText().equals("")||cmbTipoEq.getSelectedIndex()==0||(cmbTipoEq.getSelectedIndex()==1 && cmbGerenteEq.getSelectedIndex()==0)){
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
@@ -1354,23 +1356,28 @@ public class AreaGerente extends javax.swing.JFrame {
                 
                 int codigo = Integer.parseInt(codigoString);
                 
+                // cria uma nova senha
                 senha = JOptionPane.showInputDialog(null, "Determine uma senha para o novo funcionário", "Definição de senha", JOptionPane.PLAIN_MESSAGE);
                 
+                // adiciona o novo funcionário ao banco de dados
                 if(tipo.equals("Gerente")){
                     Gerente funcionario = new Gerente(senha, codigo, nome, cpf, data);
                     bdFunc.adicionarPessoa(funcionario);
                 }
-                else if(tipo.equals("Caixa")){
+                else if(tipo.equals("Caixa")){ // caso seja um caixa, encontra o gerente correspondente
                     Gerente gerente = bdFunc.buscarGerente(gerenteString);
                     Caixa funcionario = new Caixa(gerente, senha, codigo, nome, cpf, data);
                     bdFunc.adicionarPessoa(funcionario);
                 }
                 
             }
-            updateFuncionarios();
+            updateFuncionarios(); 
         }
         else if("edit".equals(action)){
-            int i = tableEquipe.getSelectedRow();
+            int i = tableEquipe.getSelectedRow(); // edita o funcionário selecionado
+            
+            // ao selecionar um funcionário na tabela, o conteúdo dos campos de texto e das combo boxes é atualizado para os dados do funcionário selecionado
+            // logo, para confirmar a edição dos dados basta apenas coletar os dados dos campos assim como na criação de um novo funcioário
         
             if(i >= 0 && i < totalFunc) {
                 if(txtfCodigoEq.getText().equals("")|| txtfNomeEq.getText().equals("")|| txtfDataEq.getText().equals("")||
@@ -1395,11 +1402,10 @@ public class AreaGerente extends javax.swing.JFrame {
                     }
 
                     int codigo = Integer.parseInt(codigoString);
-                    
-                    // txt: Nome cpf data senha código tipo etc
-                    
-                    bdFunc.removerPessoa(funcAtual.get(1)); // remove funcionario pelo cpf
+                                        
+                    bdFunc.removerPessoa(funcAtual.get(1)); // remove funcionario do banco de dados pelo cpf
 
+                    // adiciona o "novo funcionário" ao banco de dados
                     if(tipo.equals("Gerente")){
                         Gerente funcionario = new Gerente(senha, codigo, nome, cpf, data);
                         bdFunc.adicionarPessoa(funcionario);
@@ -1423,12 +1429,13 @@ public class AreaGerente extends javax.swing.JFrame {
                     codigo = txtfCodigoEq.getText(),
                     tipo = cmbTipoEq.getSelectedItem().toString(),
                     gerente = cmbGerenteEq.getSelectedItem().toString();
+            
             if(tipo.equals("Selecione")){
-                tipo = "";
+                tipo = ""; // desconsidera o tipo "Selecione"
             }
             
-            for(String func : funcionarios){
-                
+            for(String func : funcionarios){ // busca em todos os funcionários
+                // caso o campo de busca esteja vazio, ele será desconsiderado na busca (uma vez que toda string contém a string vazia)
                 String[] f = func.split("_");
                 if(f[0].contains(nome) &&
                         f[1].contains(cpf) &&
@@ -1436,6 +1443,7 @@ public class AreaGerente extends javax.swing.JFrame {
                         f[4].contains(codigo) &&
                         f[5].contains(tipo)){
                     if(gerente.equals("Selecione")||(f[5].equals("Caixa") && f[8].equals(gerente))){
+                        // caso o funcionário se enquadre na busca, ele será mostrado na tabela
                         String g = "--";
                         if(f[5].equals("Caixa")){
                             g = f[8];
@@ -1495,6 +1503,7 @@ public class AreaGerente extends javax.swing.JFrame {
         int row = tableEquipe.getSelectedRow();
         
         if (row >= 0 && row < funcionarios.size()){
+            // muda os campos de texto e combo boxes para os dados do funcionário selecionado
             txtfNomeEq.setText(tableEquipe.getModel().getValueAt(row, 0).toString());
             txtfCPFEq.setText(tableEquipe.getModel().getValueAt(row, 1).toString());
             txtfDataEq.setText(tableEquipe.getModel().getValueAt(row, 2).toString());
@@ -1514,10 +1523,10 @@ public class AreaGerente extends javax.swing.JFrame {
                 }
             }
             
+            // seleciona o funcionário do banco de dados correspondente à seleção
             funcAtual = bdFunc.buscarPessoa(txtfNomeEq.getText() + " " +
                     txtfCPFEq.getText() + " " +
                     txtfDataEq.getText() + " ");
-            //{"Nome", "CPF", "Data de Nascimento", "Código", "Cargo", "Gerente"}
         }
     }//GEN-LAST:event_tableEquipeMouseClicked
 
