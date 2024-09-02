@@ -53,8 +53,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogo.png")).getImage());
 
         logoBoxbuster.setFont(new java.awt.Font("Biondi", 1, 36)); // NOI18N
-        logoBoxbuster.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogoBig.png"))); // NOI18N
-        logoBoxbuster.setText("BOXBUSTER");
+        logoBoxbuster.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/BoxbusterLogoFinal.png"))); // NOI18N
 
         btnLojaMain.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnLojaMain.setText("Loja");
@@ -103,9 +102,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(pnlMainLayout.createSequentialGroup()
                 .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlMainLayout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addComponent(logoBoxbuster))
-                    .addGroup(pnlMainLayout.createSequentialGroup()
                         .addGap(206, 206, 206)
                         .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnLojaMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -113,15 +109,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             .addComponent(btnCliMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(pnlMainLayout.createSequentialGroup()
                         .addGap(265, 265, 265)
-                        .addComponent(btnSairMain)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                        .addComponent(btnSairMain))
+                    .addGroup(pnlMainLayout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(logoBoxbuster)))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
         pnlMainLayout.setVerticalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMainLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(10, 10, 10)
                 .addComponent(logoBoxbuster)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnLojaMain)
                 .addGap(18, 18, 18)
                 .addComponent(btnCliMain)
