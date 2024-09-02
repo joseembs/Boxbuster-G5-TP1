@@ -4,6 +4,13 @@
  */
 package telas;
 
+import boxbuster.Alugar;
+import boxbuster.Pedido;
+import boxbuster.Produtos;
+import boxbuster.Status;
+import java.util.HashMap;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author elisrb
@@ -13,9 +20,47 @@ public class AreaCaixa extends javax.swing.JFrame {
     /**
      * Creates new form AreaFuncionario
      */
+    
+
+    HashMap<Integer, Alugar> histAlugueis;
+    String codigoAtual;
+    
     public AreaCaixa() {
         setLocationRelativeTo(null);
         initComponents();
+    }
+    
+    private void updateHistList() {
+        histAlugueis = Pedido.lerAlugueis();
+        
+        DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Pedido", "Produto", "Tipo", "Data Inicial", "Devolução", "Preço", "Dívida", "Status"}, 0);
+        for(int i = 0; i < histAlugueis.size(); i++){
+            Alugar aluguel = histAlugueis.get(i);
+            System.out.println(aluguel);
+            if(aluguel.getCaixaCodigo().equals(codigoAtual)){
+                for(int j = 0; j < histAlugueis.get(i).getListaProdutos().size(); j++){
+                    Produtos item = aluguel.getListaProdutos().get(j);
+                    Status status = aluguel.getProdutoStatus(item.getCodigoProd());
+
+                    double divida = 0;
+                    if(status == Status.ATRASADO){
+                        divida = item.getPreco() / 2;
+                    }
+                    Object linha[] = new Object[]{
+                    aluguel.getCodigoPedido(),
+                    item.getNomeProd(),
+                    item.getClass().getSimpleName(), 
+                    aluguel.getDataPedido(),
+                    aluguel.getDataDevolucao(),
+                    item.getPreco(),
+                    divida,
+                    status};
+
+                   tabela.addRow(linha);
+                }
+            }
+        }
+        tableAluguel.setModel(tabela);  
     }
 
     /**
@@ -43,7 +88,7 @@ public class AreaCaixa extends javax.swing.JFrame {
         txtfCodigoPesquisa = new javax.swing.JTextField();
         btnPesquisar = new javax.swing.JButton();
         scrlPedidos = new javax.swing.JScrollPane();
-        tablePedidos = new javax.swing.JTable();
+        tableAluguel = new javax.swing.JTable();
         menuBarAreaCx = new javax.swing.JMenuBar();
         menuAreaCx = new javax.swing.JMenu();
         menuVoltarAreaCx = new javax.swing.JMenuItem();
@@ -115,7 +160,7 @@ public class AreaCaixa extends javax.swing.JFrame {
             }
         });
 
-        tablePedidos.setModel(new javax.swing.table.DefaultTableModel(
+        tableAluguel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -131,7 +176,7 @@ public class AreaCaixa extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        scrlPedidos.setViewportView(tablePedidos);
+        scrlPedidos.setViewportView(tableAluguel);
 
         javax.swing.GroupLayout pnlAreaCxLayout = new javax.swing.GroupLayout(pnlAreaCx);
         pnlAreaCx.setLayout(pnlAreaCxLayout);
@@ -257,7 +302,38 @@ public class AreaCaixa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        tableAluguel.removeAll();
         
+        histAlugueis = Pedido.lerAlugueis();
+        
+        DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Pedido", "Produto", "Tipo", "Data Inicial", "Devolução", "Preço", "Dívida", "Status"}, 0);
+        for(int i = 0; i < histAlugueis.size(); i++){
+            Alugar aluguel = histAlugueis.get(i);
+            System.out.println(aluguel);
+            if(aluguel.getCaixaCodigo().equals(codigoAtual) && String.valueOf(aluguel.getCodigoPedido()).contains(txtfCodigoPesquisa.getText())){
+                for(int j = 0; j < histAlugueis.get(i).getListaProdutos().size(); j++){
+                    Produtos item = aluguel.getListaProdutos().get(j);
+                    Status status = aluguel.getProdutoStatus(item.getCodigoProd());
+
+                    double divida = 0;
+                    if(status == Status.ATRASADO){
+                        divida = item.getPreco() / 2;
+                    }
+                    Object linha[] = new Object[]{
+                    aluguel.getCodigoPedido(),
+                    item.getNomeProd(),
+                    item.getClass().getSimpleName(), 
+                    aluguel.getDataPedido(),
+                    aluguel.getDataDevolucao(),
+                    item.getPreco(),
+                    divida,
+                    status};
+
+                   tabela.addRow(linha);
+                }
+            }
+        }
+        tableAluguel.setModel(tabela);  
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     /**
@@ -314,6 +390,8 @@ public class AreaCaixa extends javax.swing.JFrame {
     
     public void alterarCodigo(String novoCodigo){
         lblCodigo.setText("Código: " + novoCodigo);
+        codigoAtual = novoCodigo;
+        updateHistList();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPesquisar;
@@ -335,7 +413,7 @@ public class AreaCaixa extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrlPedidos;
     private javax.swing.JPopupMenu.Separator separator1AreaCx;
     private javax.swing.JSeparator separator2AreaCx;
-    private javax.swing.JTable tablePedidos;
+    private javax.swing.JTable tableAluguel;
     private javax.swing.JLabel txtCodigoPesquisa;
     private javax.swing.JTextField txtfCodigoPesquisa;
     // End of variables declaration//GEN-END:variables
