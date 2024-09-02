@@ -102,14 +102,23 @@ public class Cadastrado extends Cliente {
     public void calculaDivida() {
         double totalDivida = 0.0;
         ArrayList<Alugar> alugados = getAlugados();
-
-        for (int i = 0; i < alugados.size(); i++) {
-            //totalDivida += (alugados.get(i).getProduto().getPreco()) * 0.9;
+        for(int i = 0; i < alugados.size(); i++){
+            Alugar aluguel = alugados.get(i);
+            System.out.println(aluguel);
+            for(int j = 0; j < alugados.get(i).getListaProdutos().size(); j++){
+                
+                Produtos item = aluguel.getListaProdutos().get(j);
+                Status status = aluguel.getProdutoStatus(item.getCodigoProd());
+                if(status == Status.ATRASADO){
+                    totalDivida += (item.getPreco() / 2) * 0.9;
+                }
+            }
         }
+
+        
 
         setDivida(totalDivida);
     }
-
     @Override
     public String toString() {
         String aux = "Cadastrado_" + super.toString() + "_" + senha;
