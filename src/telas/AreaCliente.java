@@ -7,6 +7,7 @@ package telas;
 import boxbuster.Alugar;
 import boxbuster.BancoDeDadosClientes;
 import boxbuster.Cliente;
+import boxbuster.Pedido;
 import boxbuster.Produtos;
 import boxbuster.Status;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,13 +27,15 @@ public class AreaCliente extends javax.swing.JFrame {
     Cliente clienteAtual = BancoDeDadosClientes.getClienteAtual();
     
     ArrayList<Alugar> histAlugueis = BancoDeDadosClientes.getHistoricoCliente(clienteAtual.getCPF());
-    
+    int alugados = 0;
     /**
      * Creates new form AreaCliente
      */
     public AreaCliente() {
         setLocationRelativeTo(null);
         initComponents();
+        updateHistList();
+        BancoDeDadosClientes.getClienteAtual().calculaDivida();
         lblNome.setText("Nome: " + BancoDeDadosClientes.getClienteAtual().getNome());
         lblCPF.setText("CPF: " + BancoDeDadosClientes.getClienteAtual().getCPF());
         SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
@@ -42,12 +46,14 @@ public class AreaCliente extends javax.swing.JFrame {
         int idade = Period.between(dataNascimento, dataAtual).getYears();
         lblIdade.setText("Idade: " + String.valueOf(idade));
         lblDivida.setText("Divida: " + String.valueOf(BancoDeDadosClientes.getClienteAtual().getDivida()));
-        lblProdutosAlugados.setText("Produtos Alugados: " + String.valueOf(BancoDeDadosClientes.getClienteAtual().getAlugados().size()));
-        updateHistList();
+        
+        
     }
 
     private void updateHistList() {
         histAlugueis = BancoDeDadosClientes.getHistoricoCliente(clienteAtual.getCPF());
+        BancoDeDadosClientes.getClienteAtual().setAlugados(histAlugueis);
+        int contAlugados = 0;
         
         DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Pedido", "Produto", "Tipo", "Data Inicial", "Devolução", "Preço", "Dívida", "Status"}, 0);
         for(int i = 0; i < histAlugueis.size(); i++){
@@ -60,7 +66,17 @@ public class AreaCliente extends javax.swing.JFrame {
                 
                 double divida = 0;
                 if(status == Status.ATRASADO){
-                    divida = item.getPreco() / 2;
+                    if(BancoDeDadosClientes.getClienteAtual().getClass().getSimpleName().equals("Cadastrado")){
+                        divida = (item.getPreco() / 2)* 0.9;
+                    }
+                    else{
+                        divida = item.getPreco() / 2;
+                        
+                    }
+                    
+                }
+                if(status == Status.ALUGADO){
+                    contAlugados++;
                 }
                 Object linha[] = new Object[]{
                 aluguel.getCodigoPedido(),
@@ -79,6 +95,8 @@ public class AreaCliente extends javax.swing.JFrame {
         
         tableAluguel.setModel(tabela);  
         }
+        lblProdutosAlugados.setText("Produtos Alugados: " + String.valueOf(contAlugados));
+        alugados = contAlugados;
     }
     
     /**
@@ -344,7 +362,35 @@ public class AreaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverActionPerformed
-        // TODO add your handling code here:
+        int index = tableAluguel.getSelectedRow();
+        histAlugueis = BancoDeDadosClientes.getHistoricoCliente(clienteAtual.getCPF());
+        int cont = 0;
+        for(int i = 0; i < histAlugueis.size(); i++){
+            Alugar aluguel = histAlugueis.get(i);
+            System.out.println(aluguel);
+            for(int j = 0; j < histAlugueis.get(i).getListaProdutos().size(); j++){
+                if(cont == index){
+                    if(aluguel.getProdutoStatus(aluguel.getListaProdutos().get(j).getCodigoProd()) == Status.DEVOLVIDO){
+                        JOptionPane.showMessageDialog(null, "Esse produto já foi devolvido!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                    }
+                    else if(aluguel.getProdutoStatus(aluguel.getListaProdutos().get(j).getCodigoProd()) != Status.DEVOLVIDO){
+                        int codigoPedido = aluguel.getCodigoPedido();
+                        aluguel.setProdutoStatus(aluguel.getListaProdutos().get(j).getCodigoProd(), Status.DEVOLVIDO);
+                        Pedido.addStatus(codigoPedido, aluguel);
+                        Pedido.reescreverAlugueis();
+                        break;
+                    }
+                    
+                    
+                }
+                cont++;
+                
+            }
+        }
+        BancoDeDadosClientes.getClienteAtual().setAlugados(histAlugueis);
+        BancoDeDadosClientes.getClienteAtual().calculaDivida();
+        lblDivida.setText("Divida: " + String.valueOf(BancoDeDadosClientes.getClienteAtual().getDivida()));
+        updateHistList();
     }//GEN-LAST:event_btnDevolverActionPerformed
 
     /**
