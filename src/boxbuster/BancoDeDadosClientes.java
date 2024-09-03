@@ -1,4 +1,5 @@
 package boxbuster;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -6,29 +7,25 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collections;
-
 /**
  *
  * @author hsaless
  */
-
 public class BancoDeDadosClientes implements BancoDeDados{ // escreve uma linha nova no arquivo contendo os dados do cliente
-    private String arquivo;
+    private static final String arquivo = "clientes.txt";
     
     private static Cliente clienteAtual = null;
 
+    public BancoDeDadosClientes() {
+    }
+    
     public static Cliente getClienteAtual() {
         return clienteAtual;
     }
 
-    public static void setClienteAtual(Cliente cliente_atual) {
-        BancoDeDadosClientes.clienteAtual = cliente_atual;
+    public static void setClienteAtual(Cliente clienteAtual) {
+        BancoDeDadosClientes.clienteAtual = clienteAtual;
     }    
-
-    public BancoDeDadosClientes(String arquivo) {
-        this.arquivo = arquivo;
-    }
 
     public void adicionarPessoa(Cliente cliente) { // escreve uma linha nova no arquivo contendo os dados do cliente
         try (FileWriter fw = new FileWriter(arquivo, true);
@@ -40,7 +37,6 @@ public class BancoDeDadosClientes implements BancoDeDados{ // escreve uma linha 
         }
     }
     
-    
     public static ArrayList<Alugar> getHistoricoCliente(String clienteCPF){// chamada pela AreaCliente, usa o cliente logado para achar todos os aluguéis dele
         ArrayList<Alugar> historico = new ArrayList<>();
         
@@ -51,6 +47,33 @@ public class BancoDeDadosClientes implements BancoDeDados{ // escreve uma linha 
         }
     
         return historico;
+    }
+    
+    public void removerPessoa(String CPF) {// busca um cliente pelo CPF e o remove
+        //reescreve o arquivo com todas as linhas menos uma (a linha que contém o CPF buscado)
+        ArrayList<String> linhas = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
+            String linha;
+
+            while ((linha = br.readLine()) != null) {
+                if (!linha.contains(CPF)) {
+                    linhas.add(linha);
+                } 
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo))) {
+            for (String linha : linhas) {
+                bw.write(linha);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -67,19 +90,17 @@ public class BancoDeDadosClientes implements BancoDeDados{ // escreve uma linha 
         return pessoas;
     }
     
-    
+    @Override
     public ArrayList<String> buscarPessoa(String CPF) {// encontra o cliente a partir do seu CPF
         ArrayList<String> lista = new ArrayList<>(); 
 
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;
-            
 
             while ((linha = br.readLine()) != null) {
                 if (linha.contains(CPF)) {
                     lista.add(linha);
                 }
-
                 
             }
         } catch (IOException e) {
@@ -88,46 +109,4 @@ public class BancoDeDadosClientes implements BancoDeDados{ // escreve uma linha 
 
         return lista;
     }
-    
-    public void removerPessoa(String CPF) {// busca um cliente pelo CPF e o remove
-        //reescreve o arquivo com todas as linhas menos uma (a linha que contém o CPF buscado)
-        ArrayList<String> linhas = new ArrayList<>();
-
-
-        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
-            String linha;
-
-            while ((linha = br.readLine()) != null) {
-                if (!linha.contains(CPF)) {
-                    linhas.add(linha);
-                    
-                } 
-            }
-
-            
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo))) {
-            for (String linha : linhas) {
-                bw.write(linha);
-                bw.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-    
-    
-    
- 
 }
-
-
-
-
-

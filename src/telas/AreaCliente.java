@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
 public class AreaCliente extends javax.swing.JFrame {
 
     Cliente clienteAtual = BancoDeDadosClientes.getClienteAtual();
-    BancoDeDadosClientes bdClientes = new BancoDeDadosClientes("clientes.txt");
+    BancoDeDadosClientes bdClientes = new BancoDeDadosClientes();
     ArrayList<Alugar> histAlugueis = BancoDeDadosClientes.getHistoricoCliente(clienteAtual.getCPF());
     int alugados = 0;
     /**

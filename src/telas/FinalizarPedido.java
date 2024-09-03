@@ -35,7 +35,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
     
     int rowClick = -1;
     
-    BancoDeDadosClientes bdClientes = new BancoDeDadosClientes("clientes.txt");
+    BancoDeDadosClientes bdClientes = new BancoDeDadosClientes();
     /**
      * Creates new form CarrinhoScr
      */
@@ -138,7 +138,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         String[] linha;
         String nomeCaixa;
         
-        BancoDeDadosFuncionarios bdFunc = new BancoDeDadosFuncionarios("funcionarios.txt");
+        BancoDeDadosFuncionarios bdFunc = new BancoDeDadosFuncionarios();
         ArrayList<String> funcionarios = bdFunc.lerPessoas();
         
         for(int i=0;i<funcionarios.size();i++){

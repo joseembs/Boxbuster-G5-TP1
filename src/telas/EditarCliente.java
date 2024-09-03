@@ -30,7 +30,7 @@ import javax.swing.JOptionPane;
 public class EditarCliente extends javax.swing.JFrame {
     //inicia o banco de dados
 
-    BancoDeDadosClientes bdClientes = new BancoDeDadosClientes("clientes.txt");
+    BancoDeDadosClientes bdClientes = new BancoDeDadosClientes();
 
     
     public EditarCliente() { // inicia a tela com as informações do cliente e permitindo ele mudar

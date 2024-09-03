@@ -22,19 +22,8 @@ public class Estoque {
     static private ArrayList<Produtos> listaProdutos = new ArrayList<>(); 
     
     static private int cont = 1;
-
-//    public Estoque() {
-//        listaFilmes = new ArrayList<>();
-//        listaMusicas = new ArrayList<>();
-//        listaTabuleiros = new ArrayList<>();
-//    }
-
-//    public Estoque(ArrayList<Filmes> listaFilmes, ArrayList<Musica> listaMusicas, ArrayList<Tabuleiro> listaTabuleiro, ArrayList<Videogames> listaVideogames) {
-//        listaFilmes = listaFilmes;
-//        listaMusicas = listaMusicas;
-//        listaTabuleiros = listaTabuleiro;
-//        listaVideogames = listaVideogames;
-//    }
+    
+    static private String arquivo = "estoque.txt";
 
     static public ArrayList<Filmes> getListaFilmes() {
         return listaFilmes;
@@ -117,15 +106,12 @@ public class Estoque {
         
         return produto;
     }
-    
-    static private String arquivo = "estoque.txt";
 
     static public void salvarProduto(Produtos item) {
         try (FileWriter fw = new FileWriter(arquivo, true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
             out.println(item.toString());
-            out.println("-------------------------------------------");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -212,22 +198,5 @@ public class Estoque {
         cont = temp;
         
         return atualizarLista();
-    }
-    
-    public String buscarProduto(int codigo) {
-        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
-            String linha;
-            while ((linha = br.readLine()) != null) {
-                if (linha.contains(Integer.toString(codigo))) {
-                    return linha;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        return "Produto não encontrado"; 
-    }
-    
-    
+    }    
 }

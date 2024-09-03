@@ -1,12 +1,13 @@
 package boxbuster;
+
 import java.util.Date;
 /**
  *
  * @author elisrb
  */
 public abstract class Funcionario extends Pessoa {
-    protected String senha;
-    protected int codigoFunc;
+    private String senha;
+    private int codigoFunc;
 
     public Funcionario(String senha, int codigoFunc, String nome, String cpf, Date dataNascimento) {
         super(nome, cpf, dataNascimento);
@@ -14,6 +15,14 @@ public abstract class Funcionario extends Pessoa {
         this.codigoFunc = codigoFunc;
     }
 
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+    
     public int getCodigoFunc() {
         return codigoFunc;
     }

@@ -43,7 +43,7 @@ public class AreaGerente extends javax.swing.JFrame {
     int selectedProdInd;
     
     // variáveis da parte de equipe
-    BancoDeDadosFuncionarios bdFunc = new BancoDeDadosFuncionarios("funcionarios.txt");
+    BancoDeDadosFuncionarios bdFunc = new BancoDeDadosFuncionarios();
     ArrayList<String> funcionarios = new ArrayList<>();
     int totalFunc = 0;
     ArrayList<String> funcAtual;
@@ -59,6 +59,7 @@ public class AreaGerente extends javax.swing.JFrame {
         Estoque.loadEstoque();
         cont = Estoque.getCont()+1;
         
+        updateEstoqueStats();
         // inicializa as tabelas
         updateProdList();
         updateFuncionarios(); 
@@ -83,6 +84,28 @@ public class AreaGerente extends javax.swing.JFrame {
         }
         
         tableProdutos.setModel(tabela);        
+    }
+    
+    private void updateEstoqueStats(){
+        allProducts = Estoque.atualizarLista();
+        
+        lblTotalProd.setText("Total de produtos: "+ allProducts.size());
+        
+        if(cmbTipoProd.getSelectedIndex() == 0){
+            lblQuantTipo.setText("Produtos desse tipo: --");
+        } else if(cmbTipoProd.getSelectedIndex() == 1){
+            ArrayList<Filmes> tempLista = Estoque.getListaFilmes();
+            lblQuantTipo.setText("Produtos desse tipo: "+ tempLista.size());
+        } else if(cmbTipoProd.getSelectedIndex() == 2){
+            ArrayList<Musicas> tempLista = Estoque.getListaMusicas();
+            lblQuantTipo.setText("Produtos desse tipo: "+ tempLista.size());
+        } else if(cmbTipoProd.getSelectedIndex() == 3){
+            ArrayList<Tabuleiros> tempLista = Estoque.getListaTabuleiros();
+            lblQuantTipo.setText("Produtos desse tipo: "+ tempLista.size());
+        } else if(cmbTipoProd.getSelectedIndex() == 4){
+            ArrayList<Videogames> tempLista = Estoque.getListaVideogames();
+            lblQuantTipo.setText("Produtos desse tipo: "+ tempLista.size());
+        }
     }
     
     private void updateFuncionarios() { // atualiza tabela e quantidade de funcionários, e a combo box de gerentes 
@@ -895,6 +918,8 @@ public class AreaGerente extends javax.swing.JFrame {
     private void cmbTipoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoProdActionPerformed
         String prodType = (String) cmbTipoProd.getSelectedItem();
 
+        updateEstoqueStats();
+        
         btnConfirmarEst.setEnabled(true);
 
         if (prodType.equals("Filme")){
@@ -1189,6 +1214,8 @@ public class AreaGerente extends javax.swing.JFrame {
                         Estoque.reescreverEstoque();
 
                         updateProdList();
+                        
+                        updateEstoqueStats();
 
                         disableBaseFields();
                         clearFields();

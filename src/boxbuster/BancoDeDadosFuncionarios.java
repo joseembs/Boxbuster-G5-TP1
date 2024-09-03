@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package boxbuster;
 
 import java.io.BufferedReader;
@@ -11,16 +7,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-
 /**
  *
  * @author elisrb
  */
 public class BancoDeDadosFuncionarios implements BancoDeDados{
-    private static String arquivo;
-    
-    public BancoDeDadosFuncionarios(String arquivo) {
-        this.arquivo = arquivo;
+    private static final String arquivo = "funcionarios.txt";
+
+    public BancoDeDadosFuncionarios() {
     }
     
     public void adicionarPessoa(Funcionario func) { // escreve uma linha nova no arquivo contendo os dados do funcionário
@@ -78,7 +72,6 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
             e.printStackTrace();
         }
 
-
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo))) {
             for (String linha : linhas) {
                 bw.write(linha);
@@ -87,7 +80,6 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
     
     public Gerente buscarGerente(String nome) { // encontra o gerente a partir do nome do caixa correspondente

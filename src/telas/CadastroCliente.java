@@ -24,8 +24,8 @@ import javax.swing.JOptionPane;
  */
 public class CadastroCliente extends javax.swing.JFrame {
     
-    // inicia o bancoi de dados dos clientes
-    BancoDeDadosClientes bdClientes = new BancoDeDadosClientes("clientes.txt");
+    // inicia o banco de dados dos clientes
+    BancoDeDadosClientes bdClientes = new BancoDeDadosClientes();
     
     public CadastroCliente() { // deixa todos os campos invisíveis até alguma opção ser escolhida na combo box
         setLocationRelativeTo(null);

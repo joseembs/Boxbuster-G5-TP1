@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class LoginFuncionario extends javax.swing.JFrame {
 
-    BancoDeDadosFuncionarios bdFunc = new BancoDeDadosFuncionarios("funcionarios.txt");
+    BancoDeDadosFuncionarios bdFunc = new BancoDeDadosFuncionarios();
 
     /**
      * Creates new form CadastroFuncionario
