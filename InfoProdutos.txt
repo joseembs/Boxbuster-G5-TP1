@@ -1,0 +1,279 @@
+- Filmes
+
+CD = 15 reais
+DVD = 20 reais
+Blu-ray = 25 reais
+Vinil = 30 reais
+
+-> Alien
+Base: 1979 - A14
+Extra: Terror, sci-fi - 20th Century-Fox - Ridley Scott
+
+-> De Volta Para o Futuro
+Base: 1985 - Livre
+Extra: Comédia, sci-fi - Amblin Entertainment - Robert Zemeckis
+
+-> O Enigma de Outro Mundo
+Base: 1982 - A14
+Extra: Terror, mistério, sci-fi - Universal Pictures - John Carpenter
+
+-> Esqueceram de mim
+Base: 1990 - Livre
+Extra: Comédia, família - Hughes Entertainment - Chris Columbus
+
+-> La La Land
+Base: 2016 - Livre
+Extra: Musical, drama, romance - Summit Entertainment - Damien Chazelle
+
+-> O Lorax, em Busca da Trúfula Perdida
+Base: 2012 - Livre
+Extra: Animação, aventura, comédia - Illumination Entertainment - Chris Renaud
+
+-> Matrix
+Base: 1999 - A14
+Extra: Ação, sci-fi - Warner Bros. - The Wachoskis
+
+-> Procurando Nemo
+Base: 2003 - Livre
+Extra: Animação, aventura, família - Pixar Animation Studios - Andrew Stanton
+
+-> O Rei Leão
+Base: 1994 - Livre
+Extra: Animação, aventura, musical - Walt Disney Pictures - Roger Allers
+
+-> O Senhor dos Anéis: A Sociedade do Anel
+Base: 2001 - A12
+Extra: Fantasia, ação, aventura - New Line Cinema - Peter Jackson
+
+-> Os Vingadores
+Base: 2012 - A12
+Extra: Ação, sci-fi - Marvel Studios - Joss Whedon
+
+-> Pânico
+Base: 1996 - A14
+Extra: Terror, mistério - Dimension Films - Wes Craven
+
+-> Shrek
+Base: 2001 - Livre
+Extra: Animação, comédia, fantasia - Dreamworks Pictures - Andrew Adamson
+
+-> Titanic
+Base: 1997 - A12
+Extra: Drama, Romance - Paramount Pictures - James Cameron
+
+-> Toy Story
+Base: 1995 - Livre
+Extra: Animação, comédia, família - Pixar Animation Studios - John Lasseter
+
+-----------------------------------
+- Músicas:
+
+-> 1000 gecs
+Base: 2019 - Livre
+Extra: Hyperpop, experimental pop - 100 gecs
+
+-> Abbey Road
+Base: 1969 - Livre
+Extra: Rock, pop, blues - The Beatles
+
+-> Bohemian Rhapsody: OST
+Base: 2018 - Livre
+Extra: Rock - Queen
+
+-> Brand New Eyes 
+Base: 2009 - Livre
+Extra: Pop punk, rock alternativo - Paramore
+
+-> Celebration
+Base: 2009 - Livre
+Extra: Pop - Madonna
+
+-> Construção
+Base: 1971 - Livre
+Extra: MPB, samba - Chico Buarque
+
+-> Discovery
+Base: 2001 - Livre
+Extra: French house, disco, nu-disco - Daft Punk
+
+-> Elis & Tom
+Base: 1974 - Livre
+Extra: Bossa nova, samba jazz - Antônio Carlo Jobim, Elis Regina 
+
+-> Folklore
+Base: 2020 - Livre
+Extra: Indie folk, rock alternativo - Taylor Swift
+
+-> Heroes 
+Base: 1977 - Livre
+Extra: Art rock, rock experimental - David Bowie
+
+-> Hit Me Hard and Soft
+Base: 2024 - Livre
+Extra: Pop alternativo, bedroom pop - Billie Eillish
+
+-> OK Computer
+Base: 1997 - Livre
+Extra: Rock alternativo, art rock - Radiohead
+
+-> Plastic Love
+Base: 1985 - Livre
+Extra: City pop - Mariya Takeuchi
+
+-> Rosas e Vinho Tinto
+Base: 2002 - Livre
+Extra: Punk rock - Capital Inicial
+
+-> Sayonara Wild Hearts 
+Base: 2019 - Livre
+Extra: Pop - Daniel Olsén
+
+-> Speaking in Tongues
+Base: 2016 - Livre
+Extra: New wave, synth-pop - Lemon Demon
+
+-> The Dark Side of the Moon
+Base: 1973 - Livre
+Extra: Art rock, rock progressivo - 
+
+-> Thriller
+Base: 1982 - Livre
+Extra: Pop, post-disco, R&B - Michael Jackson
+
+-> Worlds
+Base: 2014 - Livre
+Extra: Electropop - Porter Robsinson
+
+-> Xou da Xuxa
+Base: 1986 - Livre
+Extra: Infantil, pop - Xuxa
+
+-----------------------------------
+- Jogos de Mesa:
+
+-> Black Stories (Histórias Sinistras)
+Base: 2004 - 9+
+Extra: Cartas - Galápagos Jogos - 3+
+
+-> Cobras e Escadas
+Base: 1943 - Livre
+Extra: Tabuleiro - Milton Bradley - 2-5
+
+-> Coup 
+Base: 2012 - 9+
+Extra: Cartas - Mandala Jogos - 2-6
+
+-> Dungeons & Dragons
+Base: 2011 - 14+
+Extra: RPG - Wizards of the Coast - 1-5
+
+-> Jogo da Vida
+Base: 1986 - 8+
+Extra: Tabuleiro - Estrela - 2-8
+
+-> Monopoly
+Base: 1935 - 8+
+Extra: Tabuleiro - Hasbro - 2-8
+
+-----------------------
+- Videogames
+
+-> Ace Attorney
+Base: 2001 - A14
+Extra: Visual novel, aventura - Capcom - Singleplayer - Nintendo DS
+
+-> A Hat in Time
+Base: 2017 - A14
+Extra: Platform, collectathon, aventura - Gears for Breakfast - Singleplayer e multiplayer - PC
+
+-> Animal Crossing: New Leaf
+Base: 2012 - Livre
+Extra: Simulador de vida real, casual - Nintendo - Singleplayer e multiplayer - Nintendo 3DS
+
+-> Castle Crashers 
+Base: 2008 - A12
+Extra: RPG de ação, hack and slash, comédia - Behemoth - Singleplayer e multiplayer - Xbox 360 
+
+-> Celeste
+Base: 2018 - Livre
+Extra: Plataforma - Extremely OK Games - Singleplayer - PC
+
+-> Crash Bandicoot
+Base: 1996 - A6
+Extra: Plataforma - Naughty Dog - Singleplayer - PlayStation
+
+-> Doom 
+Base: 1993 - A17
+Extra: FPS - id Software - Singleplayer e multiplayer - Tudo (ou MS-DOS)
+
+-> Enigma do Medo
+Base: 2024 - A12
+Extra: Horror de sobrevivência, exploração - Dumativa - Singleplayer - PC
+
+-> GoldenEye 007
+Base: 1997 - A13
+Extra: FPS, stealth - Rare - Singleplayer e multiplayer - Nintendo 64
+
+-> Guitar Hero 3: Legends of Rock
+Base: 2007 - A8
+Extra: Musical, ritmo - Neversoft - Singleplayer e multiplayer - PlayStation 2 
+
+-> Hollow Knight
+Base: 2017 - Livre
+Extra: Metroidvania - Team Cherry - Singleplayer - PC 
+
+-> Luigi's Mansion
+Base: 2001 - Livre
+Extra: Ação-aventura, horror - Nintendo - Singleplayer - GameCube
+
+-> Omori
+Base: 2020 - A17
+Extra: RPG, terror psicológico - OMOCAT - Singleplayer - PC
+
+-> Outer Wilds
+Base: 2019 - Livre
+Extra: Exploração em mundo aberto - Mobius Digital - Singleplayer - PC
+
+-> Pokémon Red
+Base: 1996 - Livre
+Extra: RPG - Game Freak - Singleplayer e multiplayer - GameBoy
+
+-> Red Dead Redemption 2
+Base: 2018 - A17
+Extra: Ação-aventura, mundo aberto - Rockstar Studios - Singleplayer e multiplayer - PlayStation 4
+
+-> Resident Evil 4
+Base: 2005 - A17
+Extra: Survival horror, TPS - Capcom - Singleplayer - GameCube
+
+-> Shadow of the Colossus
+Base: 2005 - A13
+Extra: Ação-aventura - Team Ico - Singleplayer - PlayStation 2
+
+-> Silent Hill 2
+Base: 2001 - A17
+Extra: Survival horror - Konami - Singleplayer - PlayStation 2
+
+-> Hollow Knight: Silksong
+Base: 2042 - Livre
+Extra: Metroidvania - Team Cherry - Singleplayer - PC
+
+-> Sonic the Hedgehog 
+Base: 1991 - Livre
+Extra: Plataforma - Sonic Team - Singleplayer - Mega Drive
+
+-> Super Mario Bros.
+Base: 1985 - Livre
+Extra: Plataforma - Nintendo - Singleplayer e multiplayer - NES
+
+-> The Last of Us
+Base: 2013 - A17
+Extra: Sobrevivência, ação-aventura - Naughty Dog - Singleplayer e multiplayer - PlayStation 3 
+
+-> Wii Sports
+Base: 2006 - Livre
+Extra: Esporte - Nintendo - Singleplayer e multiplayer - Wii
+
+-> The Legend of Zelda: Breath of the Wild
+Base: 2017 - A10
+Extra: Mundo aberto, ação-aventura - Nintendo - Singleplayer - Nintendo Switch
