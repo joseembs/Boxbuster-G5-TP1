@@ -674,7 +674,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
                 try {
                     dataNascimento = formato.parse(dataNascimentoString);
                 } catch (ParseException ex) {
-                    Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(LoginCliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
                 String senha = txtfSenha.getText();
@@ -711,7 +711,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
                     try {
                         dataNascimento = formato.parse(dataNascimentoString);
                     } catch (ParseException ex) {
-                        Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(LoginCliente.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     
                     Visitante visitante = new Visitante(nome, CPF, dataNascimento, 0);
@@ -744,7 +744,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
                         try {
                             dataNascimento = formato.parse(dataNascimentoString);
                         } catch (ParseException ex) {
-                            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(LoginCliente.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         
                         Visitante visitante = new Visitante(nome, CPF, dataNascimento, Double.parseDouble(divida));
@@ -798,7 +798,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
                         try {
                             dataNascimento = formato.parse(dataNascimentoString);
                         } catch (ParseException ex) {
-                            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(LoginCliente.class.getName()).log(Level.SEVERE, null, ex);
                         }
 
                         if(!senha.equals(senhaChecar)){

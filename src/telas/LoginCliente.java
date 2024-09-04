@@ -14,12 +14,12 @@ import javax.swing.JOptionPane;
  *
  * @author josembs
  */
-public class CadastroCliente extends javax.swing.JFrame {
+public class LoginCliente extends javax.swing.JFrame {
     
     // inicia o banco de dados dos clientes
     BancoDeDadosClientes bdClientes = new BancoDeDadosClientes();
     
-    public CadastroCliente() { // deixa todos os campos invisíveis até alguma opção ser escolhida na combo box
+    public LoginCliente() { // deixa todos os campos invisíveis até alguma opção ser escolhida na combo box
         setLocationRelativeTo(null);
         initComponents();
         txtfNome.setEnabled(false);
@@ -308,7 +308,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                         try {
                             dataNascimento = formato.parse(dataNascimentoString);
                         } catch (ParseException ex) {
-                            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(LoginCliente.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         
                         String senha = txtfSenha.getText();
@@ -328,7 +328,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                     try {
                         dataNascimento = formato.parse(dataNascimentoString);
                     } catch (ParseException ex) {
-                        Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(LoginCliente.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     
                     String senha = txtfSenha.getText();
@@ -358,7 +358,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                     try {
                         dataNascimento = formato.parse(dataNascimentoString);
                     } catch (ParseException ex) {
-                        Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(LoginCliente.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     
                     Visitante visitante = new Visitante(nome, CPF, dataNascimento, 0);
@@ -385,7 +385,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                         try {
                             dataNascimento = formato.parse(dataNascimentoString);
                         } catch (ParseException ex) {
-                            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(LoginCliente.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         
                         Visitante visitante = new Visitante(nome, CPF, dataNascimento, Double.parseDouble(divida));
@@ -425,7 +425,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                         try {
                             dataNascimento = formato.parse(dataNascimentoString);
                         } catch (ParseException ex) {
-                            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(LoginCliente.class.getName()).log(Level.SEVERE, null, ex);
                         }
 
                         if(!senha.equals(senhaChecar)){
@@ -469,7 +469,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                 try {
                     dataNascimento = formato.parse(dataNascimentoString);
                 } catch (ParseException ex) {
-                    Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(LoginCliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
                 String senha = txtfSenha.getText();
@@ -499,7 +499,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                     try {
                         dataNascimento = formato.parse(dataNascimentoString);
                     } catch (ParseException ex) {
-                        Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(LoginCliente.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     
                     Visitante visitante = new Visitante(nome, CPF, dataNascimento, 0);
@@ -527,7 +527,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                         try {
                             dataNascimento = formato.parse(dataNascimentoString);
                         } catch (ParseException ex) {
-                            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(LoginCliente.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         
                         Visitante visitante = new Visitante(nome, CPF, dataNascimento, Double.parseDouble(divida));
@@ -573,7 +573,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                         try {
                             dataNascimento = formato.parse(dataNascimentoString);
                         } catch (ParseException ex) {
-                            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(LoginCliente.class.getName()).log(Level.SEVERE, null, ex);
                         }
 
                         if(!senha.equals(senhaChecar)){
@@ -699,20 +699,21 @@ public class CadastroCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroCliente().setVisible(true);
+                new LoginCliente().setVisible(true);
             }
         });
     }

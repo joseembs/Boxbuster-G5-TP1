@@ -187,7 +187,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnCliMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCliMainActionPerformed
         if(BancoDeDadosClientes.getClienteAtual() == null){
-            new CadastroCliente().setVisible(true);
+            new LoginCliente().setVisible(true);
         } else {
             new AreaCliente().setVisible(true);
         }
@@ -206,7 +206,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuLojaMainActionPerformed
 
     private void menuCliMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCliMainActionPerformed
-        new CadastroCliente().setVisible(true);
+        new LoginCliente().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_menuCliMainActionPerformed
 

@@ -1258,7 +1258,7 @@ public class AreaGerente extends javax.swing.JFrame {
                 try {
                     data = formato.parse(dataString);
                 } catch (ParseException ex) {
-                    Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(LoginCliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
                 int codigo = Integer.parseInt(codigoString);
@@ -1302,7 +1302,7 @@ public class AreaGerente extends javax.swing.JFrame {
                     try {
                         data = formato.parse(dataString);
                     } catch (ParseException ex) {
-                        Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(LoginCliente.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                     int codigo = Integer.parseInt(codigoString);

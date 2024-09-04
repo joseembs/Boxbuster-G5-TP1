@@ -218,7 +218,7 @@ public class EditarCliente extends javax.swing.JFrame {
                 try {
                     dataNascimento = formato.parse(dataNascimentoString);
                 } catch (ParseException ex) {
-                    Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(LoginCliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
                 Cadastrado cadastrado = new Cadastrado(nome, BancoDeDadosClientes.getClienteAtual().getCPF(), dataNascimento, divida, senha);
@@ -244,7 +244,7 @@ public class EditarCliente extends javax.swing.JFrame {
                 try {
                     dataNascimento = formato.parse(dataNascimentoString);
                 } catch (ParseException ex) {
-                    Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(LoginCliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
                 Visitante visitante = new Visitante(nome, BancoDeDadosClientes.getClienteAtual().getCPF(), dataNascimento, divida);

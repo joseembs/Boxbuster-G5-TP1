@@ -213,7 +213,7 @@ public class LoginFuncionario extends javax.swing.JFrame {
                     try {
                         data = formato.parse(dataString);
                     } catch (ParseException ex) {
-                        Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(LoginCliente.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     
                     LocalDate dataAtual = LocalDate.now();
