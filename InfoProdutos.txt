@@ -1,279 +1,350 @@
-- Filmes
-
 CD = 15 reais
 DVD = 20 reais
 Blu-ray = 25 reais
 Vinil = 30 reais
+Outros = 25 reais
 
--> Alien
+- Filmes
+
+1 - Alien
+2 - De Volta Para o Futuro
+3 - O Enigma de Outro Mundo
+4 - Esqueceram de mim
+5 - La La Land
+6 - O Lorax, em Busca da Trúfula Perdida
+7 - Matrix
+8 - Procurando Nemo
+9 - O Rei Leão
+10 - O Senhor dos Anéis: A Sociedade do Anel
+11 - Os Vingadores
+12 - Pânico
+13 - Shrek
+14 - Titanic
+15 - Toy Story
+
+1 -> Alien
 Base: 1979 - A14
 Extra: Terror, sci-fi - 20th Century-Fox - Ridley Scott
 
--> De Volta Para o Futuro
+2 -> De Volta Para o Futuro
 Base: 1985 - Livre
 Extra: Comédia, sci-fi - Amblin Entertainment - Robert Zemeckis
 
--> O Enigma de Outro Mundo
+3 -> O Enigma de Outro Mundo
 Base: 1982 - A14
 Extra: Terror, mistério, sci-fi - Universal Pictures - John Carpenter
 
--> Esqueceram de mim
+4 -> Esqueceram de mim
 Base: 1990 - Livre
 Extra: Comédia, família - Hughes Entertainment - Chris Columbus
 
--> La La Land
+5 -> La La Land
 Base: 2016 - Livre
 Extra: Musical, drama, romance - Summit Entertainment - Damien Chazelle
 
--> O Lorax, em Busca da Trúfula Perdida
+6 -> O Lorax, em Busca da Trúfula Perdida
 Base: 2012 - Livre
 Extra: Animação, aventura, comédia - Illumination Entertainment - Chris Renaud
 
--> Matrix
+7 -> Matrix
 Base: 1999 - A14
 Extra: Ação, sci-fi - Warner Bros. - The Wachoskis
 
--> Procurando Nemo
+8 -> Procurando Nemo
 Base: 2003 - Livre
 Extra: Animação, aventura, família - Pixar Animation Studios - Andrew Stanton
 
--> O Rei Leão
+9 -> O Rei Leão
 Base: 1994 - Livre
 Extra: Animação, aventura, musical - Walt Disney Pictures - Roger Allers
 
--> O Senhor dos Anéis: A Sociedade do Anel
+10 -> O Senhor dos Anéis: A Sociedade do Anel
 Base: 2001 - A12
 Extra: Fantasia, ação, aventura - New Line Cinema - Peter Jackson
 
--> Os Vingadores
+11 -> Os Vingadores
 Base: 2012 - A12
 Extra: Ação, sci-fi - Marvel Studios - Joss Whedon
 
--> Pânico
+12 -> Pânico
 Base: 1996 - A14
 Extra: Terror, mistério - Dimension Films - Wes Craven
 
--> Shrek
+13 -> Shrek
 Base: 2001 - Livre
 Extra: Animação, comédia, fantasia - Dreamworks Pictures - Andrew Adamson
 
--> Titanic
+14 -> Titanic
 Base: 1997 - A12
 Extra: Drama, Romance - Paramount Pictures - James Cameron
 
--> Toy Story
+15 -> Toy Story
 Base: 1995 - Livre
 Extra: Animação, comédia, família - Pixar Animation Studios - John Lasseter
 
 -----------------------------------
 - Músicas:
 
--> 1000 gecs
+1 - 1000 gecs
+2 - Abbey Road
+3 - Bohemian Rhapsody: OST
+4 - Brand New Eyes
+5 - Celebration
+6 - Construção
+7 - Discovery
+8 - Elis & Tom
+9 - Folklore
+10 - Heroes
+11 - Hit Me Hard and Soft
+12 - OK Computer
+13 - Plastic Love
+14 - Rosas e Vinho Tinto
+15 - Sayonara Wild Hearts
+16 - Speaking in Tongues
+17 - The Dark Side of the Moon
+18 - Thriller
+19 - Worlds
+20 - Xou da Xuxa
+
+1 -> 1000 gecs
 Base: 2019 - Livre
 Extra: Hyperpop, experimental pop - 100 gecs
 
--> Abbey Road
+2 -> Abbey Road
 Base: 1969 - Livre
 Extra: Rock, pop, blues - The Beatles
 
--> Bohemian Rhapsody: OST
+3 -> Bohemian Rhapsody: OST
 Base: 2018 - Livre
 Extra: Rock - Queen
 
--> Brand New Eyes 
+4 -> Brand New Eyes 
 Base: 2009 - Livre
 Extra: Pop punk, rock alternativo - Paramore
 
--> Celebration
+5 -> Celebration
 Base: 2009 - Livre
 Extra: Pop - Madonna
 
--> Construção
+6 -> Construção
 Base: 1971 - Livre
 Extra: MPB, samba - Chico Buarque
 
--> Discovery
+7 -> Discovery
 Base: 2001 - Livre
 Extra: French house, disco, nu-disco - Daft Punk
 
--> Elis & Tom
+8 -> Elis & Tom
 Base: 1974 - Livre
 Extra: Bossa nova, samba jazz - Antônio Carlo Jobim, Elis Regina 
 
--> Folklore
+9 -> Folklore
 Base: 2020 - Livre
 Extra: Indie folk, rock alternativo - Taylor Swift
 
--> Heroes 
+10 -> Heroes 
 Base: 1977 - Livre
 Extra: Art rock, rock experimental - David Bowie
 
--> Hit Me Hard and Soft
+11 -> Hit Me Hard and Soft
 Base: 2024 - Livre
 Extra: Pop alternativo, bedroom pop - Billie Eillish
 
--> OK Computer
+12 -> OK Computer
 Base: 1997 - Livre
 Extra: Rock alternativo, art rock - Radiohead
 
--> Plastic Love
+13 -> Plastic Love
 Base: 1985 - Livre
 Extra: City pop - Mariya Takeuchi
 
--> Rosas e Vinho Tinto
+14 -> Rosas e Vinho Tinto
 Base: 2002 - Livre
 Extra: Punk rock - Capital Inicial
 
--> Sayonara Wild Hearts 
+15 -> Sayonara Wild Hearts 
 Base: 2019 - Livre
 Extra: Pop - Daniel Olsén
 
--> Speaking in Tongues
+16 -> Speaking in Tongues
 Base: 2016 - Livre
 Extra: New wave, synth-pop - Lemon Demon
 
--> The Dark Side of the Moon
+17 -> The Dark Side of the Moon
 Base: 1973 - Livre
 Extra: Art rock, rock progressivo - 
 
--> Thriller
+18 -> Thriller
 Base: 1982 - Livre
 Extra: Pop, post-disco, R&B - Michael Jackson
 
--> Worlds
+19 -> Worlds
 Base: 2014 - Livre
 Extra: Electropop - Porter Robsinson
 
--> Xou da Xuxa
+20 -> Xou da Xuxa
 Base: 1986 - Livre
 Extra: Infantil, pop - Xuxa
 
 -----------------------------------
 - Jogos de Mesa:
 
--> Black Stories (Histórias Sinistras)
+1 - Black Stories (Histórias Sinistras)
+2 - Cobras e Escadas
+3 - Coup
+4 - Dungeons & Dragons
+5 - Jogo da Vida
+6 - Monopoly
+
+1 -> Black Stories (Histórias Sinistras)
 Base: 2004 - 9+
 Extra: Cartas - Galápagos Jogos - 3+
 
--> Cobras e Escadas
+2 -> Cobras e Escadas
 Base: 1943 - Livre
 Extra: Tabuleiro - Milton Bradley - 2-5
 
--> Coup 
+3 -> Coup 
 Base: 2012 - 9+
 Extra: Cartas - Mandala Jogos - 2-6
 
--> Dungeons & Dragons
+4 -> Dungeons & Dragons
 Base: 2011 - 14+
 Extra: RPG - Wizards of the Coast - 1-5
 
--> Jogo da Vida
+5 -> Jogo da Vida
 Base: 1986 - 8+
 Extra: Tabuleiro - Estrela - 2-8
 
--> Monopoly
+6 -> Monopoly
 Base: 1935 - 8+
 Extra: Tabuleiro - Hasbro - 2-8
 
 -----------------------
 - Videogames
 
--> Ace Attorney
+1 - Ace Attorney
+2 - A Hat in Time
+3 - Animal Crossing: New Leaf
+4 - Castle Crashers
+5 - Celeste
+6 - Crash Bandicoot
+7 - Doom
+8 - Enigma do Medo
+9 - GoldenEye 007
+10 - Guitar Hero 3: Legends of Rock
+11 - Hollow Knight
+12 - Luigi's Mansion
+13 - Omori
+14 - Outer Wilds
+15 - Pokémon Red
+16 - Red Dead Redemption 2
+17 - Resident Evil 4
+18 - Shadow of the Colossus
+19 - Silent Hill 2
+20 - Hollow Knight: Silksong
+21 - Sonic the Hedgehog
+22 - Super Mario Bros.
+23 - The Last of Us
+24 - Wii Sports
+25 - The Legend of Zelda: Breath of the Wild
+
+1 -> Ace Attorney
 Base: 2001 - A14
 Extra: Visual novel, aventura - Capcom - Singleplayer - Nintendo DS
 
--> A Hat in Time
+2 -> A Hat in Time
 Base: 2017 - A14
 Extra: Platform, collectathon, aventura - Gears for Breakfast - Singleplayer e multiplayer - PC
 
--> Animal Crossing: New Leaf
+3 -> Animal Crossing: New Leaf
 Base: 2012 - Livre
 Extra: Simulador de vida real, casual - Nintendo - Singleplayer e multiplayer - Nintendo 3DS
 
--> Castle Crashers 
+4 -> Castle Crashers 
 Base: 2008 - A12
 Extra: RPG de ação, hack and slash, comédia - Behemoth - Singleplayer e multiplayer - Xbox 360 
 
--> Celeste
+5 -> Celeste
 Base: 2018 - Livre
 Extra: Plataforma - Extremely OK Games - Singleplayer - PC
 
--> Crash Bandicoot
+6 -> Crash Bandicoot
 Base: 1996 - A6
 Extra: Plataforma - Naughty Dog - Singleplayer - PlayStation
 
--> Doom 
+7 -> Doom 
 Base: 1993 - A17
 Extra: FPS - id Software - Singleplayer e multiplayer - Tudo (ou MS-DOS)
 
--> Enigma do Medo
+8 -> Enigma do Medo
 Base: 2024 - A12
 Extra: Horror de sobrevivência, exploração - Dumativa - Singleplayer - PC
 
--> GoldenEye 007
+9 -> GoldenEye 007
 Base: 1997 - A13
 Extra: FPS, stealth - Rare - Singleplayer e multiplayer - Nintendo 64
 
--> Guitar Hero 3: Legends of Rock
+10 -> Guitar Hero 3: Legends of Rock
 Base: 2007 - A8
 Extra: Musical, ritmo - Neversoft - Singleplayer e multiplayer - PlayStation 2 
 
--> Hollow Knight
+11 -> Hollow Knight
 Base: 2017 - Livre
 Extra: Metroidvania - Team Cherry - Singleplayer - PC 
 
--> Luigi's Mansion
+12 -> Luigi's Mansion
 Base: 2001 - Livre
 Extra: Ação-aventura, horror - Nintendo - Singleplayer - GameCube
 
--> Omori
+13 -> Omori
 Base: 2020 - A17
 Extra: RPG, terror psicológico - OMOCAT - Singleplayer - PC
 
--> Outer Wilds
+14 -> Outer Wilds
 Base: 2019 - Livre
 Extra: Exploração em mundo aberto - Mobius Digital - Singleplayer - PC
 
--> Pokémon Red
+15 -> Pokémon Red
 Base: 1996 - Livre
 Extra: RPG - Game Freak - Singleplayer e multiplayer - GameBoy
 
--> Red Dead Redemption 2
+16 -> Red Dead Redemption 2
 Base: 2018 - A17
 Extra: Ação-aventura, mundo aberto - Rockstar Studios - Singleplayer e multiplayer - PlayStation 4
 
--> Resident Evil 4
+17 -> Resident Evil 4
 Base: 2005 - A17
 Extra: Survival horror, TPS - Capcom - Singleplayer - GameCube
 
--> Shadow of the Colossus
+18 -> Shadow of the Colossus
 Base: 2005 - A13
-Extra: Ação-aventura - Team Ico - Singleplayer - PlayStation 2
+Extra: Mundo aberto, ação-aventura - Team Ico - Singleplayer - PlayStation 2
 
--> Silent Hill 2
+19 -> Silent Hill 2
 Base: 2001 - A17
 Extra: Survival horror - Konami - Singleplayer - PlayStation 2
 
--> Hollow Knight: Silksong
+20 -> Hollow Knight: Silksong
 Base: 2042 - Livre
 Extra: Metroidvania - Team Cherry - Singleplayer - PC
 
--> Sonic the Hedgehog 
+21 -> Sonic the Hedgehog 
 Base: 1991 - Livre
 Extra: Plataforma - Sonic Team - Singleplayer - Mega Drive
 
--> Super Mario Bros.
+22 -> Super Mario Bros.
 Base: 1985 - Livre
 Extra: Plataforma - Nintendo - Singleplayer e multiplayer - NES
 
--> The Last of Us
+23 -> The Last of Us
 Base: 2013 - A17
 Extra: Sobrevivência, ação-aventura - Naughty Dog - Singleplayer e multiplayer - PlayStation 3 
 
--> Wii Sports
+24 -> Wii Sports
 Base: 2006 - Livre
 Extra: Esporte - Nintendo - Singleplayer e multiplayer - Wii
 
--> The Legend of Zelda: Breath of the Wild
+25 -> The Legend of Zelda: Breath of the Wild
 Base: 2017 - A10
 Extra: Mundo aberto, ação-aventura - Nintendo - Singleplayer - Nintendo Switch

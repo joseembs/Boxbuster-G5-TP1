@@ -15,13 +15,16 @@ import javax.swing.JOptionPane;
  */
 public class Loja extends javax.swing.JFrame {
 
+    // listas para facilitar a comunicação com o estoque
     private ArrayList<Filmes> listaFilmes;
     private ArrayList<Musicas> listaMusicas;
     private ArrayList<Tabuleiros> listaTabuleiros;
     private ArrayList<Videogames> listaVideogames;
     
+    // mantém e informa o valor total do aluguel sendo feito
     private double valorTotal = 0.0;
     
+    // listas para coordenar o pedido e manter a loja condizente com as decisões feitas pelo cliente
     private ArrayList<javax.swing.JRadioButton> tempBtnSelected = new ArrayList<>();
     private ArrayList<Produtos> tempPedido = new ArrayList<>();
     private ArrayList<Produtos> finalPedido = Pedido.getPedidoAtual();
@@ -39,11 +42,14 @@ public class Loja extends javax.swing.JFrame {
         lblCartLoja.setText("Carrinho: " + finalPedido.size() + " itens - R$ " + valorTotal + "0");
     }
 
+    // listas com base na quantidade de itens de cada aba da loj
     private String[] detalhesMv = new String[10];
     private String[] detalhesMus = new String[10];
     private String[] detalhesTab = new String[6];
     private String[] detalhesVid = new String[10];
     
+    // utiliza as informações do estoque para definir todos os itens da loja, cada tipo de produto por vez
+    // nessa função que são determinadas as imagens da loja com base no nome dos produtos
     private void setLoja() {
         Estoque.loadEstoque();
         
@@ -69,7 +75,7 @@ public class Loja extends javax.swing.JFrame {
             } else if(titulo.contains("de volta para o futuro")){
                 listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/DeVoltaParaoFuturo.png")));
             } else if(titulo.contains("enigma de outro mundo")){
-                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/OEnigmadeOutroMundo.png")));
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/EnigmaDeOutroMundo.png")));
             } else if(titulo.contains("esqueceram de mim")){
                 listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/EsqueceramDeMim.png")));
             } else if(titulo.contains("la la land")){
@@ -86,7 +92,7 @@ public class Loja extends javax.swing.JFrame {
                 listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/OSenhorDosAneis.png")));
             } else if(titulo.contains("vingadores")){
                 listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/OsVingadores.png")));
-            } else if(titulo.contains("panico")){
+            } else if(titulo.contains("pânico")){
                 listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/Panico.png")));
             } else if(titulo.contains("shrek")){
                 listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/Shrek.png")));
@@ -153,7 +159,7 @@ public class Loja extends javax.swing.JFrame {
             } else if(titulo.contains("ok computer")){
                 listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/OKComputer.jpeg")));
             } else if(titulo.contains("plastic love")){
-                listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/PlasticLove.jpeg")));
+                listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/PlasticLove.jpg")));
             } else if(titulo.contains("rosas e vinho tinto")){
                 listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/RosasEVinhoTinto.jpeg")));
             } else if(titulo.contains("sayonara")){
@@ -175,7 +181,7 @@ public class Loja extends javax.swing.JFrame {
             }
             
             listNomeMus[i].setText(musica.getNomeProd());
-            listDescMus[i].setText(Integer.toString(musica.getAno()) + " - A" + musica.getFaixaEtaria());
+            listDescMus[i].setText(Integer.toString(musica.getAno()) + " - " + musica.getDisponiveis() + " em estoque");
             listPrecoMus[i].setText("R$ " + Double.toString(musica.getPreco()) + "0");
             listAlugarMus[i].setEnabled(musica.getDisponiveis() > 0);
             
@@ -221,7 +227,7 @@ public class Loja extends javax.swing.JFrame {
             }
             
             listNomeTab[i].setText(tabuleiro.getNomeProd());
-            listDescTab[i].setText(Integer.toString(tabuleiro.getAno()) + " - A" + tabuleiro.getFaixaEtaria());
+            listDescTab[i].setText(Integer.toString(tabuleiro.getAno()) + " - " + tabuleiro.getDisponiveis() + " em estoque");
             listPrecoTab[i].setText("R$ " + Double.toString(tabuleiro.getPreco()) + "0");
             listAlugarTab[i].setEnabled(tabuleiro.getDisponiveis() > 0);
             
@@ -278,7 +284,7 @@ public class Loja extends javax.swing.JFrame {
                 listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/videogames/Omori.jpg")));
             } else if(titulo.contains("outer wilds")){
                 listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/videogames/OuterWilds.jpg")));
-            } else if(titulo.contains("pokemon red")){
+            } else if(titulo.contains("pokémon red")){
                 listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/videogames/PokemonRed.jpg")));
             } else if(titulo.contains("red dead redemption 2")){
                 listImgVid[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/videogames/RedDeadRedemption2.jpg")));
@@ -305,7 +311,7 @@ public class Loja extends javax.swing.JFrame {
             }
             
             listNomeVid[i].setText(videogame.getNomeProd());
-            listDescVid[i].setText(Integer.toString(videogame.getAno()) + " - A" + videogame.getFaixaEtaria());
+            listDescVid[i].setText(Integer.toString(videogame.getAno()) + " - " + videogame.getDisponiveis() + " em estoque");
             listPrecoVid[i].setText("R$ " + Double.toString(videogame.getPreco()) + "0");
             listAlugarVid[i].setEnabled(videogame.getDisponiveis() > 0);
             
@@ -323,7 +329,10 @@ public class Loja extends javax.swing.JFrame {
         }
     }
     
-    private void addItem(javax.swing.JRadioButton btn, String tipo, int ind){
+    
+    // analisa o estado de cada botão de alugar para salvar os itens que o usuário 
+    // selecionou para adicionar ou remover do carrinho
+    private void addItemToTemp(javax.swing.JRadioButton btn, String tipo, int ind){
         if(btn.isSelected()){
             tempBtnSelected.add(btn);
             switch(tipo){
@@ -3230,21 +3239,32 @@ public class Loja extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    // cada botão de Detalhes tem sua mensagem definida no SetLoja() //
+    // cada radio button chama a função addItemToTemp() com seus parâmetros ao ser modificado //
+    
     private void menuVoltarLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarLojaActionPerformed
+        tempPedido = new ArrayList<>();
+        finalPedido = new ArrayList<>();
+        valorTotal = 0;
         
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_menuVoltarLojaActionPerformed
 
     private void menuFinalizarLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFinalizarLojaActionPerformed
-        new FinalizarPedido().setVisible(true);
-        this.setVisible(false);
+        if(!tempBtnSelected.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Você ainda possui produtos selecionados!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+        } else {
+            new FinalizarPedido().setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_menuFinalizarLojaActionPerformed
 
     private void btnDetalhesMv1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesMv1ActionPerformed
         JOptionPane.showMessageDialog(null, detalhesMv[0]);
     }//GEN-LAST:event_btnDetalhesMv1ActionPerformed
 
+    // botão de finalizar avisa se o usuário não deicidiu a ação para algum produto
     private void btnVoltarLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarLojaActionPerformed
         tempPedido = new ArrayList<>();
         finalPedido = new ArrayList<>();
@@ -3253,7 +3273,7 @@ public class Loja extends javax.swing.JFrame {
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarLojaActionPerformed
-
+    
     private void btnDetalhesMv2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesMv2ActionPerformed
         JOptionPane.showMessageDialog(null, detalhesMv[1]);
     }//GEN-LAST:event_btnDetalhesMv2ActionPerformed
@@ -3278,6 +3298,7 @@ public class Loja extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_menuSairLojaActionPerformed
 
+    // botão de finalizar avisa se o usuário não deicidiu a ação para algum produto
     private void btnFinalizarLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarLojaActionPerformed
         if(!tempBtnSelected.isEmpty()){
             JOptionPane.showMessageDialog(null, "Você ainda possui produtos selecionados!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
@@ -3412,149 +3433,150 @@ public class Loja extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDetalhesVid10ActionPerformed
 
     private void btnAlugarTab4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarTab4ActionPerformed
-        addItem(btnAlugarTab4, "Tab", 4);
+        addItemToTemp(btnAlugarTab4, "Tab", 4);
     }//GEN-LAST:event_btnAlugarTab4ActionPerformed
 
     private void btnAlugarTab5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarTab5ActionPerformed
-        addItem(btnAlugarTab5, "Tab", 5);
+        addItemToTemp(btnAlugarTab5, "Tab", 5);
     }//GEN-LAST:event_btnAlugarTab5ActionPerformed
 
     private void btnAlugarVid2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid2ActionPerformed
-        addItem(btnAlugarVid2, "Vid", 2);
+        addItemToTemp(btnAlugarVid2, "Vid", 2);
     }//GEN-LAST:event_btnAlugarVid2ActionPerformed
 
     private void btnAlugarMv1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv1ActionPerformed
-        addItem(btnAlugarMv1, "Mv", 1);
+        addItemToTemp(btnAlugarMv1, "Mv", 1);
     }//GEN-LAST:event_btnAlugarMv1ActionPerformed
 
     private void btnAlugarMv2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv2ActionPerformed
-        addItem(btnAlugarMv2, "Mv", 2);
+        addItemToTemp(btnAlugarMv2, "Mv", 2);
     }//GEN-LAST:event_btnAlugarMv2ActionPerformed
 
     private void btnAlugarMv3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv3ActionPerformed
-        addItem(btnAlugarMv3, "Mv", 3);
+        addItemToTemp(btnAlugarMv3, "Mv", 3);
     }//GEN-LAST:event_btnAlugarMv3ActionPerformed
 
     private void btnAlugarMv4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv4ActionPerformed
-        addItem(btnAlugarMv4, "Mv", 4);
+        addItemToTemp(btnAlugarMv4, "Mv", 4);
     }//GEN-LAST:event_btnAlugarMv4ActionPerformed
 
     private void btnAlugarMv5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv5ActionPerformed
-        addItem(btnAlugarMv5, "Mv", 5);
+        addItemToTemp(btnAlugarMv5, "Mv", 5);
     }//GEN-LAST:event_btnAlugarMv5ActionPerformed
 
     private void btnAlugarMv6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv6ActionPerformed
-        addItem(btnAlugarMv6, "Mv", 6);
+        addItemToTemp(btnAlugarMv6, "Mv", 6);
     }//GEN-LAST:event_btnAlugarMv6ActionPerformed
 
     private void btnAlugarMv7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv7ActionPerformed
-        addItem(btnAlugarMv7, "Mv", 7);
+        addItemToTemp(btnAlugarMv7, "Mv", 7);
     }//GEN-LAST:event_btnAlugarMv7ActionPerformed
 
     private void btnAlugarMv8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv8ActionPerformed
-        addItem(btnAlugarMv8, "Mv", 8);
+        addItemToTemp(btnAlugarMv8, "Mv", 8);
     }//GEN-LAST:event_btnAlugarMv8ActionPerformed
 
     private void btnAlugarMv9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv9ActionPerformed
-        addItem(btnAlugarMv9, "Mv", 9);
+        addItemToTemp(btnAlugarMv9, "Mv", 9);
     }//GEN-LAST:event_btnAlugarMv9ActionPerformed
 
     private void btnAlugarMv10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMv10ActionPerformed
-        addItem(btnAlugarMv10, "Mv", 10);
+        addItemToTemp(btnAlugarMv10, "Mv", 10);
     }//GEN-LAST:event_btnAlugarMv10ActionPerformed
 
     private void btnAlugarMus1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus1ActionPerformed
-        addItem(btnAlugarMus1, "Mus", 1);
+        addItemToTemp(btnAlugarMus1, "Mus", 1);
     }//GEN-LAST:event_btnAlugarMus1ActionPerformed
 
     private void btnAlugarMus2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus2ActionPerformed
-        addItem(btnAlugarMus2, "Mus", 2);
+        addItemToTemp(btnAlugarMus2, "Mus", 2);
     }//GEN-LAST:event_btnAlugarMus2ActionPerformed
 
     private void btnAlugarMus3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus3ActionPerformed
-        addItem(btnAlugarMus3, "Mus", 3);
+        addItemToTemp(btnAlugarMus3, "Mus", 3);
     }//GEN-LAST:event_btnAlugarMus3ActionPerformed
 
     private void btnAlugarMus4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus4ActionPerformed
-        addItem(btnAlugarMus4, "Mus", 4);
+        addItemToTemp(btnAlugarMus4, "Mus", 4);
     }//GEN-LAST:event_btnAlugarMus4ActionPerformed
 
     private void btnAlugarMus5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus5ActionPerformed
-        addItem(btnAlugarMus5, "Mus", 5);
+        addItemToTemp(btnAlugarMus5, "Mus", 5);
     }//GEN-LAST:event_btnAlugarMus5ActionPerformed
 
     private void btnAlugarMus6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus6ActionPerformed
-        addItem(btnAlugarMus6, "Mus", 6);
+        addItemToTemp(btnAlugarMus6, "Mus", 6);
     }//GEN-LAST:event_btnAlugarMus6ActionPerformed
 
     private void btnAlugarMus7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus7ActionPerformed
-        addItem(btnAlugarMus7, "Mus", 7);
+        addItemToTemp(btnAlugarMus7, "Mus", 7);
     }//GEN-LAST:event_btnAlugarMus7ActionPerformed
 
     private void btnAlugarMus8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus8ActionPerformed
-        addItem(btnAlugarMus8, "Mus", 8);
+        addItemToTemp(btnAlugarMus8, "Mus", 8);
     }//GEN-LAST:event_btnAlugarMus8ActionPerformed
 
     private void btnAlugarMus9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus9ActionPerformed
-        addItem(btnAlugarMus9, "Mus", 9);
+        addItemToTemp(btnAlugarMus9, "Mus", 9);
     }//GEN-LAST:event_btnAlugarMus9ActionPerformed
 
     private void btnAlugarMus10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarMus10ActionPerformed
-        addItem(btnAlugarMus10, "Mus", 10);
+        addItemToTemp(btnAlugarMus10, "Mus", 10);
     }//GEN-LAST:event_btnAlugarMus10ActionPerformed
 
     private void btnAlugarTab1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarTab1ActionPerformed
-        addItem(btnAlugarTab1, "Tab", 1);
+        addItemToTemp(btnAlugarTab1, "Tab", 1);
     }//GEN-LAST:event_btnAlugarTab1ActionPerformed
 
     private void btnAlugarTab2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarTab2ActionPerformed
-        addItem(btnAlugarTab2, "Tab", 2);
+        addItemToTemp(btnAlugarTab2, "Tab", 2);
     }//GEN-LAST:event_btnAlugarTab2ActionPerformed
 
     private void btnAlugarTab3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarTab3ActionPerformed
-        addItem(btnAlugarTab3, "Tab", 3);
+        addItemToTemp(btnAlugarTab3, "Tab", 3);
     }//GEN-LAST:event_btnAlugarTab3ActionPerformed
 
     private void btnAlugarTab6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarTab6ActionPerformed
-        addItem(btnAlugarTab6, "Tab", 6);
+        addItemToTemp(btnAlugarTab6, "Tab", 6);
     }//GEN-LAST:event_btnAlugarTab6ActionPerformed
 
     private void btnAlugarVid1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid1ActionPerformed
-        addItem(btnAlugarVid1, "Vid", 1);
+        addItemToTemp(btnAlugarVid1, "Vid", 1);
     }//GEN-LAST:event_btnAlugarVid1ActionPerformed
 
     private void btnAlugarVid3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid3ActionPerformed
-        addItem(btnAlugarVid3, "Vid", 3);
+        addItemToTemp(btnAlugarVid3, "Vid", 3);
     }//GEN-LAST:event_btnAlugarVid3ActionPerformed
 
     private void btnAlugarVid4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid4ActionPerformed
-        addItem(btnAlugarVid4, "Vid", 4);
+        addItemToTemp(btnAlugarVid4, "Vid", 4);
     }//GEN-LAST:event_btnAlugarVid4ActionPerformed
 
     private void btnAlugarVid5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid5ActionPerformed
-        addItem(btnAlugarVid5, "Vid", 5);
+        addItemToTemp(btnAlugarVid5, "Vid", 5);
     }//GEN-LAST:event_btnAlugarVid5ActionPerformed
 
     private void btnAlugarVid6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid6ActionPerformed
-        addItem(btnAlugarVid6, "Vid", 6);
+        addItemToTemp(btnAlugarVid6, "Vid", 6);
     }//GEN-LAST:event_btnAlugarVid6ActionPerformed
 
     private void btnAlugarVid7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid7ActionPerformed
-        addItem(btnAlugarVid7, "Vid", 7);
+        addItemToTemp(btnAlugarVid7, "Vid", 7);
     }//GEN-LAST:event_btnAlugarVid7ActionPerformed
 
     private void btnAlugarVid8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid8ActionPerformed
-        addItem(btnAlugarVid8, "Vid", 8);
+        addItemToTemp(btnAlugarVid8, "Vid", 8);
     }//GEN-LAST:event_btnAlugarVid8ActionPerformed
 
     private void btnAlugarVid9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid9ActionPerformed
-        addItem(btnAlugarVid9, "Vid", 9);
+        addItemToTemp(btnAlugarVid9, "Vid", 9);
     }//GEN-LAST:event_btnAlugarVid9ActionPerformed
 
     private void btnAlugarVid10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlugarVid10ActionPerformed
-        addItem(btnAlugarVid10, "Vid", 10);
+        addItemToTemp(btnAlugarVid10, "Vid", 10);
     }//GEN-LAST:event_btnAlugarVid10ActionPerformed
 
+    // botão de atualizar loja realiza as ações escolhidas pelo usuário
     private void btnAddCartLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCartLojaActionPerformed
         int quant = tempPedido.size();
         

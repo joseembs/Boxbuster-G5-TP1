@@ -19,6 +19,8 @@ public class Alugar {
     private ArrayList<Produtos> listaProdutos;
     private ArrayList<Status> listaStatus;
 
+    // esse construtor é utilizado para criar um objeto Alugar quando um cliente
+    // finaliza um pedido, recebendo informações salvas no aplicativo e da tela de finalização
     public Alugar(String pagamentoIn, String codigoCaixa) {
         this.codigoPedido = Pedido.getCodigoPedido();
         
@@ -43,6 +45,8 @@ public class Alugar {
         }
     }
 
+    // esse construtor é usado para reconstruir os aluguéis salvos no "pedidos.txt",
+    // necessitando apenas de Strings com as informações do aluguel para criar o objeto Alugar
     public Alugar(String codigoPedido, String dataPedido, String dataDevolucao, String pagamento, String clienteCPF, String caixaCodigo, String codigos, String status) {
         this.codigoPedido = Integer.parseInt(codigoPedido);
         
@@ -143,6 +147,7 @@ public class Alugar {
         this.listaStatus = listaStatus;
     }    
 
+    // método que necessita apenas do código de um produto de um aluguel para recuperar seu Status
     public Status getProdutoStatus(int codigoProd){
         int ind = -1;
         
@@ -158,6 +163,7 @@ public class Alugar {
         return listaStatus.get(ind);
     }
     
+    // método que necessita apenas do código de um produto de um aluguel para definir seu Status
     public void setProdutoStatus(int codigoProd, Status status){
         int ind = -1;
         
@@ -173,6 +179,9 @@ public class Alugar {
         listaStatus.set(ind, status);
     }
     
+    // esse método toString trabalha com as informações do aluguel para simplificar 
+    // a maneira que ele é armazenado, necessitando apenas guardar o código dos 
+    // produtos para identificá-los e ligá-los a um Status
     @Override
     public String toString() {
         String codigosProd = "";

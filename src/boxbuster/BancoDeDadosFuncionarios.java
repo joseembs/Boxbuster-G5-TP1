@@ -17,7 +17,8 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
     public BancoDeDadosFuncionarios() {
     }
     
-    public void adicionarPessoa(Funcionario func) { // escreve uma linha nova no arquivo contendo os dados do funcionário
+    // escreve uma linha nova no arquivo contendo os dados do funcionário
+    public void adicionarPessoa(Funcionario func) { 
         try (FileWriter fw = new FileWriter(arquivo, true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
@@ -27,7 +28,8 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
         }
     }
     
-    public int[] quantidades() { // calcula a quantidade de gerentes e caixas
+    // calcula a quantidade de gerentes e caixas
+    public int[] quantidades() { 
         int caixas = 0, gerentes = 0;            
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;
@@ -47,9 +49,9 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
         return ans;
     }
     
-    public void removerPessoa(String CPF) { // busca um funcionário pelo CPF e o remove
-        //reescreve o arquivo com todas as linhas menos uma (a linha que contém o CPF buscado)
-        
+    // busca um funcionário pelo CPF e o remove
+    //reescreve o arquivo com todas as linhas menos uma (a linha que contém o CPF buscado)
+    public void removerPessoa(String CPF) { 
         ArrayList<String> linhas = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
@@ -82,7 +84,8 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
         }
     }
     
-    public Gerente buscarGerente(String nome) { // encontra o gerente a partir do nome do caixa correspondente
+    // encontra o gerente a partir do nome do caixa correspondente
+    public Gerente buscarGerente(String nome) { 
         String[] palavras;
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;
@@ -99,8 +102,9 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
         return new Gerente("--");
     }
     
+    // retorna todos os funcionários
     @Override
-    public ArrayList<String> lerPessoas() { // retorna todos os funcionários
+    public ArrayList<String> lerPessoas() { 
         ArrayList<String> pessoas = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;
@@ -113,8 +117,9 @@ public class BancoDeDadosFuncionarios implements BancoDeDados{
         return pessoas;
     }
     
+    // busca por uma substring na string de dados do funcionário
     @Override
-    public ArrayList<String> buscarPessoa(String busca) { // busca por uma substring na string de dados do funcionário
+    public ArrayList<String> buscarPessoa(String busca) { 
         ArrayList<String> ans = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;

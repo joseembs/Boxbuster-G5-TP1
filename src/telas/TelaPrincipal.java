@@ -186,6 +186,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // botão da área do cliente leva o usuário para a tela de login se não estiver logado ainda
     private void btnCliMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCliMainActionPerformed
         if(BancoDeDadosClientes.getClienteAtual() == null){
             new LoginCliente().setVisible(true);
@@ -196,6 +197,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnCliMainActionPerformed
 
+    // botão da loja não permite que o cliente a acesse se estiver logado e com dívida
     private void btnLojaMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLojaMainActionPerformed
         if(BancoDeDadosClientes.getClienteAtual() != null && BancoDeDadosClientes.getClienteAtual().getDivida() > 0){
             JOptionPane.showMessageDialog(null, "É necessário pagar sua dívida e devolver os\nprodutos atrasados para realizar novos pedidos.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
@@ -205,6 +207,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLojaMainActionPerformed
 
+    // botão da loja não permite que o cliente a acesse se estiver logado e com dívida
     private void menuLojaMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLojaMainActionPerformed
         if(BancoDeDadosClientes.getClienteAtual() != null && BancoDeDadosClientes.getClienteAtual().getDivida() > 0){
             JOptionPane.showMessageDialog(null, "É necessário pagar sua dívida e devolver os\nprodutos atrasados para realizar novos pedidos.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
@@ -214,8 +217,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuLojaMainActionPerformed
 
+    // botão da área do cliente leva o usuário para a tela de login se não estiver logado ainda
     private void menuCliMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCliMainActionPerformed
-        new LoginCliente().setVisible(true);
+        if(BancoDeDadosClientes.getClienteAtual() == null){
+            new LoginCliente().setVisible(true);
+        } else {
+            new AreaCliente().setVisible(true);
+        }
+        
         this.setVisible(false);
     }//GEN-LAST:event_menuCliMainActionPerformed
 
@@ -227,11 +236,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_menuSairMainActionPerformed
 
+    // botão da área do funcionário sempre leva para a tela de login
     private void btnFuncMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFuncMainActionPerformed
         new LoginFuncionario().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnFuncMainActionPerformed
 
+    // botão da área do funcionário sempre leva para a tela de login
     private void menuFuncMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFuncMainActionPerformed
         new LoginFuncionario().setVisible(true);
         this.setVisible(false);
@@ -288,5 +299,4 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPopupMenu.Separator separatorMain;
     // End of variables declaration//GEN-END:variables
-
 }

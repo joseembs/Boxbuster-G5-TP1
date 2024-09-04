@@ -7,6 +7,7 @@ package telas;
 import boxbuster.Alugar;
 import boxbuster.BancoDeDadosClientes;
 import boxbuster.Cliente;
+import boxbuster.Estoque;
 import boxbuster.Pedido;
 import boxbuster.Produtos;
 import boxbuster.Status;
@@ -32,18 +33,23 @@ public class AreaCliente extends javax.swing.JFrame {
     /**
      * Creates new form AreaCliente
      */
-    public AreaCliente() { //Inicia a tela e suas labels
+    //Inicia a tela e suas labels
+    public AreaCliente() { 
         setLocationRelativeTo(null);
         initComponents();
+        
         updateHistList();
+        
         BancoDeDadosClientes.getClienteAtual().calculaDivida();
         bdClientes.removerPessoa(BancoDeDadosClientes.getClienteAtual().getCPF());
         bdClientes.adicionarPessoa(BancoDeDadosClientes.getClienteAtual());
         lblNome.setText("Nome: " + BancoDeDadosClientes.getClienteAtual().getNome());
         lblCPF.setText("CPF: " + BancoDeDadosClientes.getClienteAtual().getCPF());
+        
         SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
         String dataFormatada = formatador.format(BancoDeDadosClientes.getClienteAtual().getDataNascimento());
         lblDataNasc.setText("Data de nasc.: " + dataFormatada);
+        
         LocalDate dataAtual = LocalDate.now();
         LocalDate dataNascimento = BancoDeDadosClientes.getClienteAtual().getDataNascimento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         int idade = Period.between(dataNascimento, dataAtual).getYears();
@@ -58,8 +64,9 @@ public class AreaCliente extends javax.swing.JFrame {
             cmbPagamento.setEnabled(false);
         }
     }
-
-    private void updateHistList() { // cria e atualiza a tabela de produtos
+    
+    // cria e atualiza a tabela de produtos
+    private void updateHistList() { 
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         
         histAlugueis = BancoDeDadosClientes.getHistoricoCliente(clienteAtual.getCPF());
@@ -116,8 +123,15 @@ public class AreaCliente extends javax.swing.JFrame {
 
                tabela.addRow(linha);
             }
-        
+            
             tableAluguel.setModel(tabela);
+            
+            if (tableAluguel.getColumnModel().getColumnCount() > 0) {
+                tableAluguel.getColumnModel().getColumn(0).setPreferredWidth(50);
+                tableAluguel.getColumnModel().getColumn(1).setPreferredWidth(100);
+                tableAluguel.getColumnModel().getColumn(5).setPreferredWidth(50);
+                tableAluguel.getColumnModel().getColumn(6).setPreferredWidth(50);
+            }
         }
         lblProdutosAlugados.setText("Produtos Alugados: " + String.valueOf(contAlugados));
     }
@@ -215,7 +229,7 @@ public class AreaCliente extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, true, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -223,6 +237,12 @@ public class AreaCliente extends javax.swing.JFrame {
             }
         });
         scrlAluguel.setViewportView(tableAluguel);
+        if (tableAluguel.getColumnModel().getColumnCount() > 0) {
+            tableAluguel.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tableAluguel.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tableAluguel.getColumnModel().getColumn(5).setPreferredWidth(50);
+            tableAluguel.getColumnModel().getColumn(6).setPreferredWidth(50);
+        }
 
         btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEditar.setText("Editar");
@@ -432,14 +452,19 @@ public class AreaCliente extends javax.swing.JFrame {
                             int index2 = aluguel.getListaProdutos().indexOf(prod);
 
                             int codigoProduto = prod.getCodigoProd();
+                            
+                            
 
                             Status oldStatus = aluguel.getListaStatus().get(index2);
 
                             if(oldStatus == Status.DEVOLVIDO){
                                 JOptionPane.showMessageDialog(null, "Esse produto já foi devolvido!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-                            }
-                            else {
+                            } else {
                                 aluguel.setProdutoStatus(codigoProduto, Status.DEVOLVIDO);
+                                
+                                Produtos trueProd = Estoque.getProdutoPorCodigo(codigoProduto);
+                                trueProd.devolveProduto();
+                                
                                 Pedido.replaceAluguel(codigoAluguel, aluguel);
                                 Pedido.reescreverAlugueis();
                                 break;

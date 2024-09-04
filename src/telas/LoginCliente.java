@@ -19,7 +19,8 @@ public class LoginCliente extends javax.swing.JFrame {
     // inicia o banco de dados dos clientes
     BancoDeDadosClientes bdClientes = new BancoDeDadosClientes();
     
-    public LoginCliente() { // deixa todos os campos invisíveis até alguma opção ser escolhida na combo box
+    // deixa todos os campos invisíveis até alguma opção ser escolhida na combo box
+    public LoginCliente() { 
         setLocationRelativeTo(null);
         initComponents();
         txtfNome.setEnabled(false);
@@ -73,7 +74,7 @@ public class LoginCliente extends javax.swing.JFrame {
         menuSairCadCli = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Tela de cadastro");
+        setTitle("Tela de login");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogo.png")).getImage());
 
         pnlCadCli.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Cliente"));

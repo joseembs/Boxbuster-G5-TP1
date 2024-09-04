@@ -8,9 +8,6 @@ import boxbuster.Produtos;
 import boxbuster.Visitante;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -24,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FinalizarPedido extends javax.swing.JFrame {
 
+    // recupera o carrinho atual do cliente
     private ArrayList<Produtos> listaPedido = Pedido.getPedidoAtual();
     
     double valorTotal = 0;
@@ -31,6 +29,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
     int rowClick = -1;
     
     BancoDeDadosClientes bdClientes = new BancoDeDadosClientes();
+    
     /**
      * Creates new form FinalizarPedido
      */
@@ -49,6 +48,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         lblValor.setText("Valor total: R$ " + valorTotal + "0");
     }
     
+    // inicia os campos relacionados à identificação e seus estados
     private void startFields() {
         if(BancoDeDadosClientes.getClienteAtual() == null){
             cmbSituacao.setEnabled(true);
@@ -99,6 +99,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         }
     }
 
+    // atualiza a lista do carrinho quando necessário
     private void updateProdTable() {   
         DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Nº", "Título", "Preço"}, 0);
         valorTotal = 0;
@@ -122,8 +123,9 @@ public class FinalizarPedido extends javax.swing.JFrame {
         lblValor.setText("Valor total: R$ " + valorTotal + "0");
     }
     
+    // atualiza combo box com os caixas
     private void updateCmbCaixa(){
-        //atualiza combo box de caixas
+        
         cmbCaixa.removeAllItems();
         cmbCaixa.addItem("Selecione");
         
@@ -142,6 +144,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         }
     }
     
+    // recupera a data atual e a data de devolução
     private void setDates() {
         SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
         Date dataAtual = new Date();
@@ -159,6 +162,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         lblDataFinal.setText("Data máx. de devolução: " + dataFinalForm);
     }
     
+    // confere se todas as informações necessárias para finalizar o pedido foram determinadas
     private void checkFim() {
         if(BancoDeDadosClientes.getClienteAtual() != null && !Pedido.getPedidoAtual().isEmpty() && cmbPagamento.getSelectedIndex() > 0 && cmbCaixa.getSelectedIndex() >0){
             btnFinalizar.setEnabled(true);
@@ -183,6 +187,9 @@ public class FinalizarPedido extends javax.swing.JFrame {
         lblNome = new javax.swing.JLabel();
         txtfNome = new javax.swing.JTextField();
         lblCPF = new javax.swing.JLabel();
+        txtfCPF = new javax.swing.JFormattedTextField();
+        lblDataNascimento = new javax.swing.JLabel();
+        txtfDataNascimento = new javax.swing.JFormattedTextField();
         lblSenha = new javax.swing.JLabel();
         txtfSenha = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
@@ -206,9 +213,6 @@ public class FinalizarPedido extends javax.swing.JFrame {
         lblValor = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
         btnFinalizar = new javax.swing.JButton();
-        txtfCPF = new javax.swing.JFormattedTextField();
-        lblDataNascimento = new javax.swing.JLabel();
-        txtfDataNascimento = new javax.swing.JFormattedTextField();
         menuBarCart = new javax.swing.JMenuBar();
         menuCart = new javax.swing.JMenu();
         menuVoltarCart = new javax.swing.JMenuItem();
@@ -240,6 +244,23 @@ public class FinalizarPedido extends javax.swing.JFrame {
 
         lblCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCPF.setText("CPF:");
+
+        try {
+            txtfCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtfCPF.setEnabled(false);
+
+        lblDataNascimento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblDataNascimento.setText("Data de nasc.: ");
+
+        try {
+            txtfDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtfDataNascimento.setEnabled(false);
 
         lblSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblSenha.setText("Senha:");
@@ -370,23 +391,6 @@ public class FinalizarPedido extends javax.swing.JFrame {
                 btnFinalizarActionPerformed(evt);
             }
         });
-
-        try {
-            txtfCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtfCPF.setEnabled(false);
-
-        lblDataNascimento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblDataNascimento.setText("Data de nasc.: ");
-
-        try {
-            txtfDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtfDataNascimento.setEnabled(false);
 
         javax.swing.GroupLayout pnlCartLayout = new javax.swing.GroupLayout(pnlCart);
         pnlCart.setLayout(pnlCartLayout);
@@ -604,6 +608,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_menuSairCartActionPerformed
 
+    // chama a função para processar os dados do pedido e abre a área do cliente
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         String[] caixaInfo = cmbCaixa.getSelectedItem().toString().split("-");
 
@@ -626,6 +631,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         checkFim();
     }//GEN-LAST:event_cmbPagamentoActionPerformed
 
+    // botão cancelar do carrinho
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         checkFim();
 
@@ -635,6 +641,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         btnCancelar.setEnabled(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    // botão para excluir produto do carrinho
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         if (rowClick >= 0 && rowClick < Pedido.getPedidoAtual().size()){
             Produtos selectedProd = Pedido.getPedidoAtual().get(rowClick);
@@ -651,6 +658,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         btnCancelar.setEnabled(false);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
+    // seleciona um produto do carrinho
     private void tableCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCartMouseClicked
         rowClick = tableCart.getSelectedRow();
 
@@ -658,6 +666,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         btnCancelar.setEnabled(true);
     }//GEN-LAST:event_tableCartMouseClicked
 
+    // analisa como o usuário deseja logar com base na situação dele
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         int index = cmbSituacao.getSelectedIndex();
         
@@ -839,6 +848,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    // mudanças realizadas pela combo box de situação
     private void cmbSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSituacaoActionPerformed
         int index = cmbSituacao.getSelectedIndex();
         
@@ -913,6 +923,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmbSituacaoActionPerformed
 
+    // botão de sair para deslogar o cliente
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         btnLogout.setEnabled(false);
         BancoDeDadosClientes.setClienteAtual(null);

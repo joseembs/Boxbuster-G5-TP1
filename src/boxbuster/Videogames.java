@@ -1,7 +1,4 @@
 package boxbuster;
-
-import boxbuster.Jogos;
-
 /**
  *
  * @author joseembs
@@ -49,5 +46,4 @@ public class Videogames extends Jogos{
     public String toString() {
         return "Videogame_" + super.toString() + "_" + genero + "_" + plataforma + "_" + desenvolvedor;
     }
-    
 }

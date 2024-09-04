@@ -33,6 +33,7 @@ public abstract class Produtos {
         this.nomeProd = nomeProd;
     }
 
+    // confere se o usuário está logado e se é cadastrado para aplicar o desconto
     public double getPreco() {
         Cliente cliente = BancoDeDadosClientes.getClienteAtual();
         if(cliente != null){
@@ -87,12 +88,14 @@ public abstract class Produtos {
         this.alugados = alugados;
     }
     
+    // atualiza a disponibilidade do produto em questão ao ser alugado
     public void alugaProduto(){
         this.disponiveis--;
         this.alugados++;
         Estoque.reescreverEstoque();
     }
     
+    // atualiza a disponibilidade do produto em questão ao ser devolvido
     public void devolveProduto(){
         this.disponiveis++;
         this.alugados--;

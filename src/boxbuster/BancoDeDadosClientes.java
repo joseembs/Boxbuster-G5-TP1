@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class BancoDeDadosClientes implements BancoDeDados{ // escreve uma linha nova no arquivo contendo os dados do cliente
     private static final String arquivo = "clientes.txt";
     
+    // armazena as informações do cliente logado, para serem acessadas em diversas telas
     private static Cliente clienteAtual = null;
 
     public BancoDeDadosClientes() {
@@ -27,7 +28,8 @@ public class BancoDeDadosClientes implements BancoDeDados{ // escreve uma linha 
         BancoDeDadosClientes.clienteAtual = clienteAtual;
     }    
 
-    public void adicionarPessoa(Cliente cliente) { // escreve uma linha nova no arquivo contendo os dados do cliente
+    // escreve uma linha nova no arquivo contendo os dados do cliente
+    public void adicionarPessoa(Cliente cliente) { 
         try (FileWriter fw = new FileWriter(arquivo, true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
@@ -37,7 +39,8 @@ public class BancoDeDadosClientes implements BancoDeDados{ // escreve uma linha 
         }
     }
     
-    public static ArrayList<Alugar> getHistoricoCliente(String clienteCPF){// chamada pela AreaCliente, usa o cliente logado para achar todos os aluguéis dele
+    // chamada pela AreaCliente, usa o cliente logado para achar todos os aluguéis dele
+    public static ArrayList<Alugar> getHistoricoCliente(String clienteCPF){
         ArrayList<Alugar> historico = new ArrayList<>();
         
         for(Alugar tempAluguel : Pedido.getMapPedidos().values()){
@@ -49,8 +52,9 @@ public class BancoDeDadosClientes implements BancoDeDados{ // escreve uma linha 
         return historico;
     }
     
-    public void removerPessoa(String CPF) {// busca um cliente pelo CPF e o remove
-        //reescreve o arquivo com todas as linhas menos uma (a linha que contém o CPF buscado)
+    // busca um cliente pelo CPF e o remove
+    //reescreve o arquivo com todas as linhas menos uma (a linha que contém o CPF buscado)
+    public void removerPessoa(String CPF) {
         ArrayList<String> linhas = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
@@ -76,8 +80,9 @@ public class BancoDeDadosClientes implements BancoDeDados{ // escreve uma linha 
         }
     }
 
+    // retorna uma lista com todos os clientes armazenados no banco de dados
     @Override
-    public ArrayList<String> lerPessoas() {// retorna uma lista com todos os clientes armazenados no banco de dados
+    public ArrayList<String> lerPessoas() {
         ArrayList<String> pessoas = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha;
@@ -90,8 +95,9 @@ public class BancoDeDadosClientes implements BancoDeDados{ // escreve uma linha 
         return pessoas;
     }
     
+    // encontra o cliente a partir do seu CPF
     @Override
-    public ArrayList<String> buscarPessoa(String CPF) {// encontra o cliente a partir do seu CPF
+    public ArrayList<String> buscarPessoa(String CPF) {
         ArrayList<String> lista = new ArrayList<>(); 
 
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
@@ -101,7 +107,6 @@ public class BancoDeDadosClientes implements BancoDeDados{ // escreve uma linha 
                 if (linha.contains(CPF)) {
                     lista.add(linha);
                 }
-                
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,3 +1,28 @@
-Filme_Matrix_20.0_1999_1_16_0_7_Sci-fi_Warner Bros._The Wachowskis
-Filme_Shrek_20.0_1999_2_16_0_11_Sci-fi_Warner Bros._The Wachowskis
-Musica_AAAAA_20.0_41_3_12_4_1_Legal_Ele
+Tabuleiro_Dungeons & Dragons_25.0_2011_1_14 anos_5_0_1-5_RPG_Wizards of the Coast
+Musica_Thriller - Vinil_30.0_1982_2_Livre_4_0_Pop, post-disco, R&B_Michael Jackson
+Filme_De Volta Para o Futuro - DVD_20.0_1985_3_Livre_7_0_Comédia, sci-fi_Amblin Entertainment_Robert Zemeckis
+Musica_Worlds - DVD_25.0_2014_4_Livre_5_0_Electropop_Porter Robsinson
+Musica_Elis & Tom - Vinil_30.0_1974_5_Livre_9_0_Bossa nova, samba jazz_Antônio Carlo Jobim, Elis Regina
+Tabuleiro_Coup_20.0_2012_6_9+_7_0_2-6_Cartas_Mandala Jogos
+Videogame_Celeste_25.0_2018_7_Livre_8_0_Singleplayer_Plataforma_PC_Extremely OK Games
+Videogame_Super Mario Bros._30.0_1985_8_Livre_9_0_Singleplayer e multiplayer_RPG_NES_Nintendo
+Videogame_Shadow of the Colossus_25.0_2005_9_A13_7_0_Singleplayer_Mundo aberto, ação-aventura, _PlayStation 2_Team Ico
+Videogame_The Legend of Zelda: Breath of the Wild_25.0_2017_10_A10_8_1_Singleplayer_Mundo aberto, ação-aventura_Nintendo Switch_Nintendo
+Filme_Alien - DVD_20.0_1979_11_A14_1_0_Terror, sci-fi_20th Century-Fox_Ridley Scott
+Tabuleiro_Black Stories (Histórias Sinistras)_20.0_2004_12_9+_5_0_3+_Cartas_Galápagos Jogos
+Filme_La La Land - Blu-ray_30.0_2016_13_Livre_7_0_Musical, drama, romance_Summit Entertainment_Damien Chazelle
+Filme_Shrek - Blu-ray_25.0_2001_14_Livre_12_0_Animação, comédia, fantasia_Dreamworks Pictures_Andrew Adamson
+Filme_Os Vingadores - Blu-ray_25.0_2012_15_A12_1_1_Ação, sci-fi_Marvel Studios_Joss Whedon
+Filme_Toy Story - DVD_20.0_1995_16_Livre_8_0_Animação, comédia, família_Pixar Animation Studios_John Lasseter
+Musica_Folklore - DVD_25.0_2020_17_Livre_9_0_Indie folk, rock alternativo_Taylor Swift
+Filme_Matrix - DVD_20.0_1999_18_A14_7_0_Ação, sci-fi_Warner Bros._The Wachoskis
+Videogame_Omori_25.0_2020_19_A17_1_0_Singleplayer_RPG, fofo, terror psicológico_PC_OMOCAT
+Filme_O Enigma de Outro Mundo - DVD_20.0_1982_20_A14_11_0_Terror, mistério, sci-fi_Universal Pictures_John Carpenter
+Videogame_Hollow Knight: Silksong_30.0_2042_21_Livre_0_0_Singleplayer_Metroidvania_PC_Team Cherry
+Musica_Sayonara Wild Hearts OST - Vinil_30.0_2019_22_Livre_9_0_Pop_Daniel Olsén
+Musica_Bohemian Rhapsody: OST - Vinil_30.0_2018_23_Livre_6_0_Rock_Queen
+Tabuleiro_Jogo da Vida_25.0_1986_24_8+_6_0_2-8_Tabuleiro_Estrela
+Videogame_Wii Sports_25.0_2006_25_Livre_4_0_Singleplayer e multiplayer_Esporte_Wii_Nintendo
+Musica_Plastic Love - Vinil_30.0_1985_26_Livre_2_0_City pop_Mariya Takeuchi
+Musica_Speaking in Tongues - Vinil_30.0_2016_27_Livre_3_0_New wave, synth-pop_Talking Heads
+Videogame_Enigma do Medo_30.0_2024_28_A12_0_0_Singleplayer_Horror de sobrevivência, exploração_PC_Dumativa

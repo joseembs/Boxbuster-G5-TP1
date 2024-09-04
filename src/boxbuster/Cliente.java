@@ -20,7 +20,8 @@ public abstract class Cliente extends Pessoa {
         this.alugados = new ArrayList<>();
     }
     
-    public abstract void calculaDivida(); // pega a lista de alugueis e calcula a divida
+    // pega a lista de alugueis e calcula a divida
+    public abstract void calculaDivida(); 
 
     public double getDivida() {
         return divida;

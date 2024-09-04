@@ -14,15 +14,19 @@ import java.util.Comparator;
  * @author joseembs
  */
 public class Estoque {
+    private static final String arquivo = "estoque.txt";
+    
+    // listas utilizadas para realizar a maioria das modificações do estoque
     static private ArrayList<Filmes> listaFilmes = new ArrayList<>();
     static private ArrayList<Musicas> listaMusicas = new ArrayList<>();
     static private ArrayList<Tabuleiros> listaTabuleiros = new ArrayList<>();
     static private ArrayList<Videogames> listaVideogames = new ArrayList<>();
+    
+    // lista utilizada em momentos que todos os produtos ser apresentados
     static private ArrayList<Produtos> listaProdutos = new ArrayList<>(); 
     
+    // contador de produtos, sempre se mantém atualizados pelo "estoque.txt"
     static private int cont = 1;
-    
-    static private String arquivo = "estoque.txt";
 
     static public ArrayList<Filmes> getListaFilmes() {
         return listaFilmes;
@@ -92,7 +96,7 @@ public class Estoque {
         Estoque.cont = cont;
     }
     
-    // chamada para preencher as tabelas, usa o codigoProd salvo pelos Alugar para retornar o produto alugado 
+    // retorna o objeto de um produto, apenas necessitando de seu código 
     static public Produtos getProdutoPorCodigo(int codigoProd){
         Produtos produto = null;
         
@@ -106,6 +110,7 @@ public class Estoque {
         return produto;
     }
 
+    // escreve uma linha nova no arquivo do estoque com o produto informado
     static public void salvarProduto(Produtos item) {
         try (FileWriter fw = new FileWriter(arquivo, true);
              BufferedWriter bw = new BufferedWriter(fw);
@@ -116,6 +121,7 @@ public class Estoque {
         }
     }
     
+    // atualiza a lista de produtos geral com base nas listas específicas
     static public ArrayList<Produtos> atualizarLista() {
         listaProdutos = new ArrayList();
         
@@ -134,6 +140,8 @@ public class Estoque {
         return listaProdutos;
     }
     
+    // reescreve por completo o arquivo dos produtos com base na lista geral atualizada
+    // geralmente usado para salvar mudanças
     static public void reescreverEstoque() {
         ArrayList<Produtos> listaTemp = atualizarLista();
         
@@ -150,6 +158,7 @@ public class Estoque {
         Estoque.loadEstoque(); // mantém tudo sincronizado
     }
 
+    // retorna uma lista com as Strings dos produtos escritos no arquivo
     static public ArrayList<String> lerEstoque() {
         ArrayList<String> produtos = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
@@ -163,6 +172,7 @@ public class Estoque {
         return produtos;
     }
     
+    // usa as Strings retornadas pela função lerEstoque() para reconstruir os objetos dos produtos, como também atualiza o cont
     static public ArrayList<Produtos> loadEstoque() {
         Estoque.setListaFilmes(new ArrayList<>());
         Estoque.setListaMusicas(new ArrayList<>());
@@ -191,8 +201,6 @@ public class Estoque {
             if(item.length > 4){
                 temp = Math.max(temp, Integer.parseInt(item[4]));
             }
-            
-            // listaProdutos é apenas atualizado pelo updateProdlist no AreaGerente
         }
         cont = temp;
         

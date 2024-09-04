@@ -63,11 +63,6 @@ public class LoginFuncionario extends javax.swing.JFrame {
         lblTipo.setText("Tipo:");
 
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Caixa", "Gerente" }));
-        cmbTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbTipoActionPerformed(evt);
-            }
-        });
 
         lblCodigo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCodigo.setText("Código:");
@@ -180,6 +175,7 @@ public class LoginFuncionario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // analisa se o login está certo e se o funcionário é um caixa ou gerente
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         
         if(txtfCodigo.getText().equals("")|| txtfSenha.getText().equals("")||cmbTipo.getSelectedIndex()==0){
@@ -189,7 +185,8 @@ public class LoginFuncionario extends javax.swing.JFrame {
             String senha = txtfSenha.getText();
             String tipo = cmbTipo.getSelectedItem().toString();
 
-            ArrayList<String> pessoa = bdFunc.buscarPessoa("_" + codigo + "_"); // busca o funcionário pelo código
+            // busca o funcionário pelo código
+            ArrayList<String> pessoa = bdFunc.buscarPessoa("_" + codigo + "_"); 
             
             if(pessoa.isEmpty()){
                 JOptionPane.showMessageDialog(null, "Não existe funcionário com este código.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
@@ -227,9 +224,10 @@ public class LoginFuncionario extends javax.swing.JFrame {
                     telaCaixa.alterarIdade(idadeString);
                     telaCaixa.alterarCodigo(codigo);
                     telaCaixa.setVisible(true);
-                }
-                else{
-                    new AreaGerente().setVisible(true); // caso seja gerente, redireciona para a área do gerente
+                    
+                } else {
+                    // caso seja gerente, redireciona para a área do gerente
+                    new AreaGerente().setVisible(true); 
                 }
                 this.setVisible(false);
             }
@@ -251,10 +249,6 @@ public class LoginFuncionario extends javax.swing.JFrame {
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
-
-    private void cmbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbTipoActionPerformed
 
     /**
      * @param args the command line arguments

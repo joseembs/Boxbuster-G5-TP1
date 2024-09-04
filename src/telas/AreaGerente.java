@@ -46,6 +46,7 @@ public class AreaGerente extends javax.swing.JFrame {
         
         initComponents();
         
+        // confirma que o estoque está carregado e atualizado
         Estoque.loadEstoque();
         cont = Estoque.getCont()+1;
         
@@ -56,6 +57,7 @@ public class AreaGerente extends javax.swing.JFrame {
         updateFuncionarios(); 
     }
 
+    // atualiza a tabela de produtos
     private void updateProdList() {
         allProducts = Estoque.atualizarLista();
         
@@ -77,6 +79,7 @@ public class AreaGerente extends javax.swing.JFrame {
         tableProdutos.setModel(tabela);        
     }
     
+    // atualiza os valores de estatísticas do estoque
     private void updateEstoqueStats(){
         allProducts = Estoque.atualizarLista();
         
@@ -99,7 +102,8 @@ public class AreaGerente extends javax.swing.JFrame {
         }
     }
     
-    private void updateFuncionarios() { // atualiza tabela e quantidade de funcionários, e a combo box de gerentes 
+    // atualiza tabela e quantidade de funcionários, e a combo box de gerentes 
+    private void updateFuncionarios() { 
         
         // atualiza tabela de funcionarios
         tableEquipe.removeAll();
@@ -150,6 +154,7 @@ public class AreaGerente extends javax.swing.JFrame {
         }
     }
     
+    // esvazia todos os campos do estoque
     public void clearFieldsEstoque(){
         cmbTipoProd.setSelectedItem("Selecione");
         txtfQuantidade.setEnabled(false);
@@ -165,6 +170,7 @@ public class AreaGerente extends javax.swing.JFrame {
         txtfVar4.setText("");
     }
     
+    // ativa os campos comuns para todos produtos no estoque
     public void enableBaseFieldsEst(){
         cmbTipoProd.setEnabled(true);
         txtfQuantidade.setEnabled(true);
@@ -176,6 +182,7 @@ public class AreaGerente extends javax.swing.JFrame {
         btnCancelarEst.setEnabled(true);
     }
     
+    // desativa os campos comuns para todos produtos no estoque
     public void disableBaseFieldsEst(){
         cmbTipoProd.setEnabled(false);
         txtfQuantidade.setEnabled(false);
@@ -188,6 +195,7 @@ public class AreaGerente extends javax.swing.JFrame {
         btnCancelarEst.setEnabled(false);
     }
     
+    // ativa os campos da equipe
     public void enableEquipe(){
         cmbTipoEq.setEnabled(true);
         cmbGerenteEq.setEnabled(true);
@@ -199,6 +207,7 @@ public class AreaGerente extends javax.swing.JFrame {
         btnCancelarEq.setEnabled(true);
     }
     
+    // ativa os campos da equipe
     public void disableEquipe(){
         cmbTipoEq.setEnabled(false);
         cmbGerenteEq.setEnabled(false);
@@ -423,11 +432,9 @@ public class AreaGerente extends javax.swing.JFrame {
                                     .addGroup(pnlEquipeLayout.createSequentialGroup()
                                         .addComponent(lblCPF)
                                         .addGap(18, 18, 18)
-                                        .addComponent(txtfCPFEq, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(89, 89, 89))
-                                    .addGroup(pnlEquipeLayout.createSequentialGroup()
-                                        .addComponent(lblTotalGerentes)
-                                        .addGap(136, 136, 136)))))
+                                        .addComponent(txtfCPFEq, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblTotalGerentes))
+                                .addGap(89, 89, 89)))
                         .addComponent(lblTipoEq)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbTipoEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -485,9 +492,8 @@ public class AreaGerente extends javax.swing.JFrame {
                         .addComponent(cmbGerenteEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnConfirmarEq)
-                        .addComponent(btnCancelarEq))
+                    .addComponent(btnConfirmarEq)
+                    .addComponent(btnCancelarEq)
                     .addComponent(btnVoltarEq))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(scrlEquipe, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -720,12 +726,12 @@ public class AreaGerente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlEstoqueLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtfCodigoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(lblCodigoProd))
                             .addGroup(pnlEstoqueLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
                                 .addComponent(lblQuantTipo)
                                 .addGap(22, 22, 22)
                                 .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -863,6 +869,7 @@ public class AreaGerente extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarEstActionPerformed
 
+    // ativa e desativa os campos específicos para cada tipo de produto com base no tipo escolhido
     private void cmbTipoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoProdActionPerformed
         String prodType = (String) cmbTipoProd.getSelectedItem();
 
@@ -926,6 +933,7 @@ public class AreaGerente extends javax.swing.JFrame {
         } 
     }//GEN-LAST:event_cmbTipoProdActionPerformed
 
+    // realiza as funções da área do estoque
     private void btnConfirmarEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEstActionPerformed
         rowClick = -1;
         
@@ -1000,6 +1008,7 @@ public class AreaGerente extends javax.swing.JFrame {
                     ok4 = false;
                 }
                 
+                // busca por cada campo em conjunto
                 if(info[0].contains(tipo) &&
                         info[1].contains(nome) &&
                         info[2].contains(preco) &&
@@ -1028,6 +1037,10 @@ public class AreaGerente extends javax.swing.JFrame {
             tableProdutos.setModel(tabela);
     
         } else if(action.equals("new") || action.equals("edit")) {
+            // já que ambas funções de adicionar e editar um produto precisam 
+            // recriar os objetos dos produtos, ambas compartilham vários métodos,
+            // apenas apresentando mudanças na hora de aplicar as funções
+            
             int codigo = Integer.parseInt(txtfCodigoProd.getText());
             String faixaEtaria = txtfFaixaEtaria.getText(),
                     preco = txtfPreco.getText(),
@@ -1035,13 +1048,21 @@ public class AreaGerente extends javax.swing.JFrame {
                     ano = txtfAno.getText();
             
             String[] quant = txtfQuantidade.getText().split("/");
-            
-            String disponiveis = quant[0];
-            String alugados = quant[1];
 
             String prodType = (String) cmbTipoProd.getSelectedItem();
 
             ok = true;
+            
+            String disponiveis = "";
+            String alugados = "";
+            
+            if(quant.length == 2){
+                disponiveis = quant[0];
+                alugados = quant[1];
+            } else {
+                JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos corretamente.");
+                ok = false;
+            }
             
             try {
                 Double.parseDouble(preco);
@@ -1175,6 +1196,7 @@ public class AreaGerente extends javax.swing.JFrame {
         cont = Estoque.getCont()+1;
     }//GEN-LAST:event_btnConfirmarEstActionPerformed
 
+    // limpa a tela do estoque
     private void btnCancelarEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEstActionPerformed
         action = "cancel";
         
@@ -1186,6 +1208,7 @@ public class AreaGerente extends javax.swing.JFrame {
         updateProdList();
     }//GEN-LAST:event_btnCancelarEstActionPerformed
 
+    // realiza as mudanças necessárias para o botão pesquisar do estoque
     private void btnPesquisarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarProdActionPerformed
         action = "search";
         
@@ -1206,6 +1229,7 @@ public class AreaGerente extends javax.swing.JFrame {
         btnConfirmarEst.setEnabled(true);
     }//GEN-LAST:event_btnPesquisarProdActionPerformed
 
+    // realiza as mudanças necessárias para o botão editar do estoque
     private void btnEditarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProdActionPerformed
         action = "edit";
                 
@@ -1229,18 +1253,22 @@ public class AreaGerente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarProdActionPerformed
 
+    // retorna à tela principal
     private void btnVoltarEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarEqActionPerformed
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarEqActionPerformed
 
+    // botão de novo funcionário da equipe
     private void btnNovoFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoFuncActionPerformed
         action = "new";
         enableEquipe();
     }//GEN-LAST:event_btnNovoFuncActionPerformed
 
+    // realiza as funções da área do estoque
     private void btnConfirmarEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEqActionPerformed
-        if("new".equals(action)){ // cria um novo funcionário
+        // cria um novo funcionário
+        if("new".equals(action)){ 
             if(txtfCodigoEq.getText().equals("")|| txtfNomeEq.getText().equals("")|| txtfDataEq.getText().equals("")||
                     txtfCPFEq.getText().equals("")||cmbTipoEq.getSelectedIndex()==0||(cmbTipoEq.getSelectedIndex()==1 && cmbGerenteEq.getSelectedIndex()==0)){
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
@@ -1279,6 +1307,7 @@ public class AreaGerente extends javax.swing.JFrame {
                 
             }
             updateFuncionarios(); 
+            
         } else if("edit".equals(action)){
             int i = tableEquipe.getSelectedRow(); // edita o funcionário selecionado
             
@@ -1320,11 +1349,13 @@ public class AreaGerente extends javax.swing.JFrame {
                         Caixa funcionario = new Caixa(gerente, senha, codigo, nome, cpf, data);
                         bdFunc.adicionarPessoa(funcionario);
                     }
+                    
+                    disableEquipe();
                 }
             }   
             updateFuncionarios();
-        }
-        else if("search".equals(action)){
+            
+        } else if("search".equals(action)){
             tableEquipe.removeAll();
             DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Nome", "CPF", "Data de Nascimento", "Código", "Cargo", "Gerente"}, 0);
 
@@ -1366,37 +1397,37 @@ public class AreaGerente extends javax.swing.JFrame {
                 }
             }
             tableEquipe.setModel(tabela);
+            disableEquipe();
         }
-        disableEquipe();
     }//GEN-LAST:event_btnConfirmarEqActionPerformed
 
+    // botão editar da equipe
     private void btnEditarEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEqActionPerformed
         action = "edit";        
         enableEquipe();
     }//GEN-LAST:event_btnEditarEqActionPerformed
 
+    // botão pesquisar da equipe
     private void btnPesquisarEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarEqActionPerformed
         action = "search";        
         enableEquipe();
     }//GEN-LAST:event_btnPesquisarEqActionPerformed
 
+    // botão cancelar da equipe
     private void btnCancelarEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEqActionPerformed
         disableEquipe();
     }//GEN-LAST:event_btnCancelarEqActionPerformed
 
+    // realiza as mudanças necessárias para o botão de editar do estoque
     private void btnEditarProd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProd1ActionPerformed
         action = "delete";
         
         if (rowClick >= 0 && rowClick < allProducts.size()){
-            //cmbTipoProd.setSelectedItem(cmbTipoProd.getSelectedItem()); //caso o usuário clique no botão após escolher um produto reseta a combo box para os campos específicos ativarem
-            
             int codigoProduto = (Integer) (tableProdutos.getModel().getValueAt(rowClick, 0));
             
             Produtos selectedProd = Estoque.getProdutoPorCodigo(codigoProduto);
             
             txtfCodigoProd.setText(Integer.toString(selectedProd.getCodigoProd()));
-            
-            //enableBaseFields();
             
             btnConfirmarEst.setEnabled(true);
         } else {
@@ -1406,6 +1437,7 @@ public class AreaGerente extends javax.swing.JFrame {
         btnCancelarEst.setEnabled(true);
     }//GEN-LAST:event_btnEditarProd1ActionPerformed
 
+    // ações realizadas ao clicar em um funcionário da lista da equipe
     private void tableEquipeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableEquipeMouseClicked
         int row = tableEquipe.getSelectedRow();
         
@@ -1437,6 +1469,7 @@ public class AreaGerente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tableEquipeMouseClicked
 
+    // ações realizadas ao clicar em um produto da lista do estoque
     private void tableProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProdutosMouseClicked
         rowClick = tableProdutos.getSelectedRow();
         
@@ -1464,6 +1497,7 @@ public class AreaGerente extends javax.swing.JFrame {
                 txtfVar1.setText(((Filmes) selectedProd).getGenero());
                 txtfVar2.setText(((Filmes) selectedProd).getEstudio());
                 txtfVar3.setText(((Filmes) selectedProd).getDiretor());
+                
             } else if(selectedProd.getClass().getSimpleName().equals("Musicas")){
                 selectedProdInd = Estoque.getListaMusicas().indexOf(selectedProd);
                 
@@ -1471,6 +1505,7 @@ public class AreaGerente extends javax.swing.JFrame {
                 
                 txtfVar1.setText(((Musicas) selectedProd).getEstilo());
                 txtfVar2.setText(((Musicas) selectedProd).getAutor());
+                
             } else if(selectedProd.getClass().getSimpleName().equals("Tabuleiros")){
                 selectedProdInd = Estoque.getListaTabuleiros().indexOf(selectedProd);
                 
@@ -1479,6 +1514,7 @@ public class AreaGerente extends javax.swing.JFrame {
                 txtfVar1.setText(((Tabuleiros) selectedProd).getTipo());
                 txtfVar2.setText(((Tabuleiros) selectedProd).getMarca());
                 txtfVar3.setText(((Tabuleiros) selectedProd).getNumJogadores());
+                
             } else if(selectedProd.getClass().getSimpleName().equals("Videogames")){
                 selectedProdInd = Estoque.getListaVideogames().indexOf(selectedProd);
                 

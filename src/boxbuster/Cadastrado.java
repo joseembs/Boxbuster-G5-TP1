@@ -25,10 +25,12 @@ public class Cadastrado extends Cliente {
         this.senha = senha;
     }
     
+    // usa a lista de alugueis para calcular a divida
     @Override
-    public void calculaDivida() { // pega a lista de alugueis e calcula a divida
+    public void calculaDivida() { 
         double totalDivida = 0.0;
         ArrayList<Alugar> alugados = getAlugados();
+        
         for(int i = 0; i < alugados.size(); i++){
             Alugar aluguel = alugados.get(i);
             for(int j = 0; j < alugados.get(i).getListaProdutos().size(); j++){

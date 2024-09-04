@@ -48,34 +48,27 @@ public class EditarCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtfSenha1 = new javax.swing.JTextField();
-        pnlLoginFunc = new javax.swing.JPanel();
+        pnlEditCli = new javax.swing.JPanel();
         lblTipo = new javax.swing.JLabel();
         lblSenha = new javax.swing.JLabel();
         txtfSenha = new javax.swing.JTextField();
         btnVoltar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         txtfNome = new javax.swing.JTextField();
-        lblTipo1 = new javax.swing.JLabel();
+        lblDataNascimento = new javax.swing.JLabel();
         txtfDataNascimento = new javax.swing.JFormattedTextField();
-        menuBarLoginFunc = new javax.swing.JMenuBar();
-        menuLoginFunc = new javax.swing.JMenu();
-        menuVoltarLoginFunc = new javax.swing.JMenuItem();
-        separatorLoginFunc = new javax.swing.JPopupMenu.Separator();
-        menuSairCart = new javax.swing.JMenuItem();
-
-        txtfSenha1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfSenha1ActionPerformed(evt);
-            }
-        });
+        menuBarEditCli = new javax.swing.JMenuBar();
+        menuEditCli = new javax.swing.JMenu();
+        menuVoltarEditCli = new javax.swing.JMenuItem();
+        separatorEditCli = new javax.swing.JPopupMenu.Separator();
+        menuSairEditCli = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Tela de login");
+        setTitle("Editar perfil");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogo.png")).getImage());
 
-        pnlLoginFunc.setBorder(javax.swing.BorderFactory.createTitledBorder("Editar Informações"));
-        pnlLoginFunc.setToolTipText("");
+        pnlEditCli.setBorder(javax.swing.BorderFactory.createTitledBorder("Editar Informações"));
+        pnlEditCli.setToolTipText("");
 
         lblTipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblTipo.setText("Nome:");
@@ -97,8 +90,8 @@ public class EditarCliente extends javax.swing.JFrame {
             }
         });
 
-        lblTipo1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblTipo1.setText("Data de Nasc.:");
+        lblDataNascimento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblDataNascimento.setText("Data de Nasc.:");
 
         try {
             txtfDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -106,78 +99,78 @@ public class EditarCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        javax.swing.GroupLayout pnlLoginFuncLayout = new javax.swing.GroupLayout(pnlLoginFunc);
-        pnlLoginFunc.setLayout(pnlLoginFuncLayout);
-        pnlLoginFuncLayout.setHorizontalGroup(
-            pnlLoginFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlLoginFuncLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlEditCliLayout = new javax.swing.GroupLayout(pnlEditCli);
+        pnlEditCli.setLayout(pnlEditCliLayout);
+        pnlEditCliLayout.setHorizontalGroup(
+            pnlEditCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEditCliLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlLoginFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginFuncLayout.createSequentialGroup()
+                .addGroup(pnlEditCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEditCliLayout.createSequentialGroup()
                         .addComponent(btnVoltar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSalvar))
-                    .addGroup(pnlLoginFuncLayout.createSequentialGroup()
-                        .addGroup(pnlLoginFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(pnlLoginFuncLayout.createSequentialGroup()
+                    .addGroup(pnlEditCliLayout.createSequentialGroup()
+                        .addGroup(pnlEditCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnlEditCliLayout.createSequentialGroup()
                                 .addComponent(lblTipo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtfNome))
-                            .addGroup(pnlLoginFuncLayout.createSequentialGroup()
-                                .addComponent(lblTipo1)
+                            .addGroup(pnlEditCliLayout.createSequentialGroup()
+                                .addComponent(lblDataNascimento)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtfDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlLoginFuncLayout.createSequentialGroup()
+                            .addGroup(pnlEditCliLayout.createSequentialGroup()
                                 .addComponent(lblSenha)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 9, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        pnlLoginFuncLayout.setVerticalGroup(
-            pnlLoginFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlLoginFuncLayout.createSequentialGroup()
+        pnlEditCliLayout.setVerticalGroup(
+            pnlEditCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEditCliLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(pnlLoginFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlEditCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTipo)
                     .addComponent(txtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addGroup(pnlLoginFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTipo1)
+                .addGroup(pnlEditCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDataNascimento)
                     .addComponent(txtfDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
-                .addGroup(pnlLoginFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlEditCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSenha)
                     .addComponent(txtfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(pnlLoginFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlEditCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnVoltar))
                 .addContainerGap())
         );
 
-        menuLoginFunc.setText("Menu");
+        menuEditCli.setText("Menu");
 
-        menuVoltarLoginFunc.setText("Voltar");
-        menuVoltarLoginFunc.addActionListener(new java.awt.event.ActionListener() {
+        menuVoltarEditCli.setText("Voltar");
+        menuVoltarEditCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuVoltarLoginFuncActionPerformed(evt);
+                menuVoltarEditCliActionPerformed(evt);
             }
         });
-        menuLoginFunc.add(menuVoltarLoginFunc);
-        menuLoginFunc.add(separatorLoginFunc);
+        menuEditCli.add(menuVoltarEditCli);
+        menuEditCli.add(separatorEditCli);
 
-        menuSairCart.setText("Sair");
-        menuSairCart.addActionListener(new java.awt.event.ActionListener() {
+        menuSairEditCli.setText("Sair");
+        menuSairEditCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuSairCartActionPerformed(evt);
+                menuSairEditCliActionPerformed(evt);
             }
         });
-        menuLoginFunc.add(menuSairCart);
+        menuEditCli.add(menuSairEditCli);
 
-        menuBarLoginFunc.add(menuLoginFunc);
+        menuBarEditCli.add(menuEditCli);
 
-        setJMenuBar(menuBarLoginFunc);
+        setJMenuBar(menuBarEditCli);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,14 +178,14 @@ public class EditarCliente extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlLoginFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlEditCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlLoginFunc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlEditCli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -200,7 +193,6 @@ public class EditarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     // salva as novas informações após a edição
-    
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if(BancoDeDadosClientes.getClienteAtual().getClass().getSimpleName().equals("Cadastrado")){
             if(txtfNome.getText().equals("") || txtfDataNascimento.getText().equals("") || txtfSenha.getText().equals("")){
@@ -260,25 +252,20 @@ public class EditarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
     
     //volta para a tela principal
-    private void menuVoltarLoginFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarLoginFuncActionPerformed
+    private void menuVoltarEditCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarEditCliActionPerformed
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_menuVoltarLoginFuncActionPerformed
+    }//GEN-LAST:event_menuVoltarEditCliActionPerformed
 
-    private void menuSairCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairCartActionPerformed
+    private void menuSairEditCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairEditCliActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_menuSairCartActionPerformed
+    }//GEN-LAST:event_menuSairEditCliActionPerformed
 
     //volta para a área do cliente
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         new AreaCliente().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
-
-    private void txtfSenha1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfSenha1ActionPerformed
-        new AreaCliente().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_txtfSenha1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,18 +308,17 @@ public class EditarCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JLabel lblDataNascimento;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JLabel lblTipo;
-    private javax.swing.JLabel lblTipo1;
-    private javax.swing.JMenuBar menuBarLoginFunc;
-    private javax.swing.JMenu menuLoginFunc;
-    private javax.swing.JMenuItem menuSairCart;
-    private javax.swing.JMenuItem menuVoltarLoginFunc;
-    private javax.swing.JPanel pnlLoginFunc;
-    private javax.swing.JPopupMenu.Separator separatorLoginFunc;
+    private javax.swing.JMenuBar menuBarEditCli;
+    private javax.swing.JMenu menuEditCli;
+    private javax.swing.JMenuItem menuSairEditCli;
+    private javax.swing.JMenuItem menuVoltarEditCli;
+    private javax.swing.JPanel pnlEditCli;
+    private javax.swing.JPopupMenu.Separator separatorEditCli;
     private javax.swing.JFormattedTextField txtfDataNascimento;
     private javax.swing.JTextField txtfNome;
     private javax.swing.JTextField txtfSenha;
-    private javax.swing.JTextField txtfSenha1;
     // End of variables declaration//GEN-END:variables
 }

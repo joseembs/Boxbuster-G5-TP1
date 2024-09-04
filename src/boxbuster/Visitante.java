@@ -2,7 +2,6 @@ package boxbuster;
 
 import java.util.ArrayList;
 import java.util.Date;
-
 /**
  *
  * @author hsaless

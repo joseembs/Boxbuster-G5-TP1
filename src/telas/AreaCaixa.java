@@ -25,16 +25,21 @@ public class AreaCaixa extends javax.swing.JFrame {
         initComponents();
     }
     
-    private void updateHistList() { // formata atualiza a tabela de pedidos
+    // formata atualiza a tabela de pedidos
+    private void updateHistList() { 
         tableAluguel.removeAll();
         
-        histAlugueis = Pedido.loadAlugueis(); // retorna um HashMap com todos os Alugueis da loja
+        // retorna um HashMap com todos os Alugueis da loja
+        histAlugueis = Pedido.loadAlugueis(); 
         
         DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Pedido", "Produto", "Tipo", "Data Inicial", "Devolução", "Preço", "Dívida", "Status"}, 0);
         for(Alugar aluguel : histAlugueis.values()){
             
-            if(aluguel.getCaixaCodigo().equals(codigoAtual)){ // analisa cada pedido e coleta somente os que têm o código do caixa que está logado
-                for(int j = 0; j < aluguel.getListaProdutos().size(); j++){ // analisa cada produto de cada pedido separadamente
+            // analisa cada pedido e coleta somente os que têm o código do caixa que está logado
+            if(aluguel.getCaixaCodigo().equals(codigoAtual)){ 
+                
+                // analisa cada produto de cada pedido separadamente
+                for(int j = 0; j < aluguel.getListaProdutos().size(); j++){ 
                     Produtos item = aluguel.getListaProdutos().get(j);
                     Status status = aluguel.getProdutoStatus(item.getCodigoProd());
 
@@ -57,6 +62,13 @@ public class AreaCaixa extends javax.swing.JFrame {
             }
         }
         tableAluguel.setModel(tabela);  
+        
+        if (tableAluguel.getColumnModel().getColumnCount() > 0) {
+            tableAluguel.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tableAluguel.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tableAluguel.getColumnModel().getColumn(5).setPreferredWidth(50);
+            tableAluguel.getColumnModel().getColumn(6).setPreferredWidth(50);
+        }
     }
     
     public void alterarNome(String novoNome) {
@@ -178,11 +190,11 @@ public class AreaCaixa extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Quantidade", "Produtos", "Cliente", "Preço", "Status"
+                "Pedido", "Produto", "Tipo", "Data inicial", "Devolução", "Preço", "Dívida", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -190,6 +202,12 @@ public class AreaCaixa extends javax.swing.JFrame {
             }
         });
         scrlPedidos.setViewportView(tableAluguel);
+        if (tableAluguel.getColumnModel().getColumnCount() > 0) {
+            tableAluguel.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tableAluguel.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tableAluguel.getColumnModel().getColumn(5).setPreferredWidth(50);
+            tableAluguel.getColumnModel().getColumn(6).setPreferredWidth(50);
+        }
 
         javax.swing.GroupLayout pnlAreaCxLayout = new javax.swing.GroupLayout(pnlAreaCx);
         pnlAreaCx.setLayout(pnlAreaCxLayout);
@@ -311,7 +329,7 @@ public class AreaCaixa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        // o algoritmo é o mesmo do updateHistList, mas tem uma condição a mais que checa se o código do pedido contém o conteúdo do campo de busca
+        // o algoritmo é o mesmo do updateHistList, mas tem uma condição a mais que confere se o código do pedido contém o conteúdo do campo de busca
         // para visualizar todos os pedidos, basta pesquisar por um código vazio
         
         tableAluguel.removeAll();
