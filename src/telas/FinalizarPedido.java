@@ -440,16 +440,16 @@ public class FinalizarPedido extends javax.swing.JFrame {
                         .addComponent(lblCart)
                         .addGap(125, 125, 125))
                     .addGroup(pnlCartLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlCartLayout.createSequentialGroup()
-                                .addComponent(scrlCart, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCartLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(scrlCart, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlCartLayout.createSequentialGroup()
+                                .addGap(47, 47, 47)
                                 .addComponent(btnExcluir)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnCancelar)
-                                .addGap(38, 38, 38))))))
+                                .addComponent(btnCancelar)))
+                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCartLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -753,7 +753,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
                         
                         if(Double.parseDouble(divida) > 0){
                             Pedido.setPedidoAtual(new ArrayList<>());
-                            JOptionPane.showMessageDialog(null, "Primeiro pague a dívida antes de usar a loja", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "É necessário pagar sua dívida e devolver os\nprodutos atrasados para realizar novos pedidos.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                             
                             new AreaCliente().setVisible(true);
                             this.setVisible(false);
@@ -809,7 +809,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
                             
                             if(Double.parseDouble(divida) > 0){
                                 Pedido.setPedidoAtual(new ArrayList<>());
-                                JOptionPane.showMessageDialog(null, "Primeiro pague a dívida antes de usar a loja", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "É necessário pagar sua dívida e devolver os\nprodutos atrasados para realizar novos pedidos.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                                 
                                 new AreaCliente().setVisible(true);
                                 this.setVisible(false);

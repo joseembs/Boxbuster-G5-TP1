@@ -50,7 +50,13 @@ public class AreaCliente extends javax.swing.JFrame {
         lblIdade.setText("Idade: " + String.valueOf(idade));
         lblDivida.setText("Divida: R$ " + String.valueOf(BancoDeDadosClientes.getClienteAtual().getDivida()) + "0");
         
-        btnDevolver.setEnabled(false);
+        if(cmbPagamento.getSelectedIndex() == 0 && BancoDeDadosClientes.getClienteAtual().getDivida() > 0){
+            btnDevolver.setEnabled(false);
+            cmbPagamento.setEnabled(true);
+        } else {
+            btnDevolver.setEnabled(true);
+            cmbPagamento.setEnabled(false);
+        }
     }
 
     private void updateHistList() { // cria e atualiza a tabela de produtos
@@ -378,14 +384,12 @@ public class AreaCliente extends javax.swing.JFrame {
     
     //vai pra loja se o cliente não tiver dívida
     private void btnLojaMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLojaMainActionPerformed
-        if(BancoDeDadosClientes.getClienteAtual().getDivida() > 0){
-            JOptionPane.showMessageDialog(null, "Primeiro pague a dívida antes de usar a loja", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-        }
-        else{
+        if(BancoDeDadosClientes.getClienteAtual() != null && BancoDeDadosClientes.getClienteAtual().getDivida() > 0){
+            JOptionPane.showMessageDialog(null, "É necessário pagar sua dívida e devolver os\nprodutos atrasados para realizar novos pedidos.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+        } else {
             new Loja().setVisible(true);
             this.setVisible(false);
         }
-        
     }//GEN-LAST:event_btnLojaMainActionPerformed
     
     // desloga da conta do cliente
@@ -451,11 +455,19 @@ public class AreaCliente extends javax.swing.JFrame {
 
             index = -1;
         }
+        if(BancoDeDadosClientes.getClienteAtual().getDivida() > 0){
+            btnDevolver.setEnabled(false);
+            cmbPagamento.setEnabled(true);
+        } else {
+            btnDevolver.setEnabled(true);
+            cmbPagamento.setEnabled(false);
+        }
+        
     }//GEN-LAST:event_btnDevolverActionPerformed
     
     // usado para definir o pagamento
     private void cmbPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPagamentoActionPerformed
-        if(cmbPagamento.getSelectedIndex() == 0){
+        if(cmbPagamento.getSelectedIndex() == 0 && BancoDeDadosClientes.getClienteAtual().getDivida() > 0){
             btnDevolver.setEnabled(false);
         } else {
             btnDevolver.setEnabled(true);

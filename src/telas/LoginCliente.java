@@ -507,8 +507,12 @@ public class LoginCliente extends javax.swing.JFrame {
                     bdClientes.adicionarPessoa(visitante);
                     BancoDeDadosClientes.setClienteAtual(visitante);
                     
-                    Loja telaLoja = new Loja();
-                    telaLoja.setVisible(true);
+                    if(BancoDeDadosClientes.getClienteAtual() != null && BancoDeDadosClientes.getClienteAtual().getDivida() > 0){
+                        JOptionPane.showMessageDialog(null, "É necessário pagar sua dívida e devolver os\nprodutos atrasados para realizar novos pedidos.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                    } else {
+                        new Loja().setVisible(true);
+                        this.setVisible(false);
+                    }
                 
                     this.setVisible(false);
                     
@@ -535,7 +539,7 @@ public class LoginCliente extends javax.swing.JFrame {
                         BancoDeDadosClientes.setClienteAtual(visitante);
                         
                         if(Double.parseDouble(divida) > 0){
-                            JOptionPane.showMessageDialog(null, "Primeiro pague a dívida antes de usar a loja", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "É necessário pagar sua dívida e devolver os\nprodutos atrasados para realizar novos pedidos.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                             new AreaCliente().setVisible(true);
                             this.setVisible(false);
                         } else {
@@ -584,7 +588,7 @@ public class LoginCliente extends javax.swing.JFrame {
                             BancoDeDadosClientes.setClienteAtual(cadastrado);
                             
                             if(Double.parseDouble(divida) > 0){
-                                JOptionPane.showMessageDialog(null, "Primeiro pague a dívida antes de usar a loja", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "É necessário pagar sua dívida e devolver\n os produtos atrasados para realizar novos pedidos.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                                 new AreaCliente().setVisible(true);
                                 this.setVisible(false);
                             } else {
@@ -655,7 +659,7 @@ public class LoginCliente extends javax.swing.JFrame {
             btnLogin.setEnabled(true);
             btnLogin.setEnabled(true);
             btnLogin.setVisible(true);
-            btnLogin.setText("Cadastrar-se");
+            btnLogin.setText("Ver Perfil");
             btnLoja.setVisible(true);
             btnLoja.setEnabled(true);
         } else{

@@ -1223,6 +1223,7 @@ public class AreaGerente extends javax.swing.JFrame {
             btnConfirmarEst.setEnabled(true);
             
             enableBaseFieldsEst();
+            txtfCodigoProd.setEnabled(false);
         } else {
             txtfCodigoProd.setText("");
         }
@@ -1488,6 +1489,7 @@ public class AreaGerente extends javax.swing.JFrame {
                 txtfVar3.setText(((Videogames) selectedProd).getNumJogadores());
                 txtfVar4.setText(((Videogames) selectedProd).getPlataforma());
             }
+            
             if(action.equals("confirm") || action.equals("cancel") || action.equals("delete")){
                 disableBaseFieldsEst();
             
@@ -1504,6 +1506,10 @@ public class AreaGerente extends javax.swing.JFrame {
             }
                         
             btnCancelarEst.setEnabled(true);
+            
+            if(action.equals("edit")){
+                txtfCodigoProd.setEnabled(false);
+            }
         }
     }//GEN-LAST:event_tableProdutosMouseClicked
     

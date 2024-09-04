@@ -3279,8 +3279,12 @@ public class Loja extends javax.swing.JFrame {
     }//GEN-LAST:event_menuSairLojaActionPerformed
 
     private void btnFinalizarLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarLojaActionPerformed
-        new FinalizarPedido().setVisible(true);
-        this.setVisible(false);
+        if(!tempBtnSelected.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Você ainda possui produtos selecionados!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+        } else {
+            new FinalizarPedido().setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btnFinalizarLojaActionPerformed
 
     private void btnDetalhesMv7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesMv7ActionPerformed

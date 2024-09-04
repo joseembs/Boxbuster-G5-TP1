@@ -3,6 +3,7 @@ package telas;
 import boxbuster.BancoDeDadosClientes;
 import boxbuster.Estoque;
 import boxbuster.Pedido;
+import javax.swing.JOptionPane;
 /**
  *
  * @author josembs
@@ -196,13 +197,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCliMainActionPerformed
 
     private void btnLojaMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLojaMainActionPerformed
-        new Loja().setVisible(true);
-        this.setVisible(false);
+        if(BancoDeDadosClientes.getClienteAtual() != null && BancoDeDadosClientes.getClienteAtual().getDivida() > 0){
+            JOptionPane.showMessageDialog(null, "É necessário pagar sua dívida e devolver os\nprodutos atrasados para realizar novos pedidos.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+        } else {
+            new Loja().setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btnLojaMainActionPerformed
 
     private void menuLojaMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLojaMainActionPerformed
-        new Loja().setVisible(true);
-        this.setVisible(false);
+        if(BancoDeDadosClientes.getClienteAtual() != null && BancoDeDadosClientes.getClienteAtual().getDivida() > 0){
+            JOptionPane.showMessageDialog(null, "É necessário pagar sua dívida e devolver os\nprodutos atrasados para realizar novos pedidos.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+        } else {
+            new Loja().setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_menuLojaMainActionPerformed
 
     private void menuCliMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCliMainActionPerformed
