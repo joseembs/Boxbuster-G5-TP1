@@ -28,7 +28,7 @@ public class AreaCliente extends javax.swing.JFrame {
     Cliente clienteAtual = BancoDeDadosClientes.getClienteAtual();
     BancoDeDadosClientes bdClientes = new BancoDeDadosClientes();
     ArrayList<Alugar> histAlugueis = BancoDeDadosClientes.getHistoricoCliente(clienteAtual.getCPF());
-    int alugados = 0;
+    
     /**
      * Creates new form AreaCliente
      */
@@ -53,7 +53,7 @@ public class AreaCliente extends javax.swing.JFrame {
         btnDevolver.setEnabled(false);
     }
 
-    private void updateHistList() { // cria a tabela de produtos
+    private void updateHistList() { // cria e atualiza a tabela de produtos
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         
         histAlugueis = BancoDeDadosClientes.getHistoricoCliente(clienteAtual.getCPF());
@@ -61,9 +61,10 @@ public class AreaCliente extends javax.swing.JFrame {
         int contAlugados = 0;
         
         DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Pedido", "Produto", "Tipo", "Data Inicial", "Devolução", "Preço", "Dívida", "Status"}, 0);
+        
         for(int i = 0; i < histAlugueis.size(); i++){
             Alugar aluguel = histAlugueis.get(i);
-            System.out.println(aluguel);
+            
             for(int j = 0; j < histAlugueis.get(i).getListaProdutos().size(); j++){
                 LocalDate dataAtual = LocalDate.now();
                 Date dataDevolucao = aluguel.getDataDevolucao();
@@ -72,28 +73,31 @@ public class AreaCliente extends javax.swing.JFrame {
                 Produtos item = aluguel.getListaProdutos().get(j);
                 Status status = aluguel.getProdutoStatus(item.getCodigoProd());
                 int codigoProduto = item.getCodigoProd();
+                
                 if (localDateDevolucao.isBefore(dataAtual)){
                     if(status == Status.ALUGADO){
                         status = Status.ATRASADO;
                         aluguel.setProdutoStatus(codigoProduto, Status.ATRASADO);
-                        Pedido.addStatus(codigoAluguel, aluguel);
+                        Pedido.replaceAluguel(codigoAluguel, aluguel);
                         Pedido.reescreverAlugueis();
                     }
                 } 
+                
                 double divida = 0;
+                
                 if(status == Status.ATRASADO){
                     if(BancoDeDadosClientes.getClienteAtual().getClass().getSimpleName().equals("Cadastrado")){
                         divida = (item.getPreco() / 2)* 0.9;
                     }
                     else{
                         divida = item.getPreco() / 2;
-                        
                     }
-                    
                 }
+                
                 if(status == Status.ALUGADO || status == Status.ATRASADO){
                     contAlugados++;
                 }
+                
                 Object linha[] = new Object[]{
                 aluguel.getCodigoPedido(),
                 item.getNomeProd(),
@@ -106,13 +110,10 @@ public class AreaCliente extends javax.swing.JFrame {
 
                tabela.addRow(linha);
             }
-                    
-                    
         
-        tableAluguel.setModel(tabela);  
+            tableAluguel.setModel(tabela);
         }
         lblProdutosAlugados.setText("Produtos Alugados: " + String.valueOf(contAlugados));
-        alugados = contAlugados;
     }
     
     /**
@@ -198,12 +199,6 @@ public class AreaCliente extends javax.swing.JFrame {
 
         lblHistAluguel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblHistAluguel.setText("Histórico de Aluguel:");
-
-        scrlAluguel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                scrlAluguelMouseClicked(evt);
-            }
-        });
 
         tableAluguel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -441,7 +436,7 @@ public class AreaCliente extends javax.swing.JFrame {
                             }
                             else {
                                 aluguel.setProdutoStatus(codigoProduto, Status.DEVOLVIDO);
-                                Pedido.addStatus(codigoAluguel, aluguel);
+                                Pedido.replaceAluguel(codigoAluguel, aluguel);
                                 Pedido.reescreverAlugueis();
                                 break;
                             }
@@ -457,10 +452,6 @@ public class AreaCliente extends javax.swing.JFrame {
             index = -1;
         }
     }//GEN-LAST:event_btnDevolverActionPerformed
-
-    private void scrlAluguelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scrlAluguelMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_scrlAluguelMouseClicked
     
     // usado para definir o pagamento
     private void cmbPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPagamentoActionPerformed
@@ -505,7 +496,6 @@ public class AreaCliente extends javax.swing.JFrame {
             }
         });
     }
-    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeslogar;

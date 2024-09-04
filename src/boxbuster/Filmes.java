@@ -1,5 +1,4 @@
 package boxbuster;
-
 /**
  *
  * @author joseembs
@@ -35,7 +34,6 @@ public class Filmes extends Produtos{
         this.estudio = estudio;
     }
 
-
     public String getDiretor() {
         return diretor;
     }
@@ -48,5 +46,4 @@ public class Filmes extends Produtos{
     public String toString() {
         return "Filme_" + super.toString() + "_" + genero + "_" + estudio + "_" + diretor;
     }
-    
 }

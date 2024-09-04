@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package telas;
 
 import boxbuster.Estoque;
@@ -14,9 +10,6 @@ import boxbuster.Videogames;
 import boxbuster.Gerente;
 import boxbuster.Caixa;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.text.ParseException;
@@ -24,22 +17,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 /**
  *
  * @author elisrb
  */
 public class AreaGerente extends javax.swing.JFrame {
-    // variáveis da parte de estoque
-    int cont = Estoque.getCont()+1;
-    
-    private ArrayList<Produtos> allProducts = new ArrayList();
-                
     boolean ok = false;
-    
     String action = "cancel";
     
     int rowClick = -1;
+
+    // variáveis da parte de estoque
+    int cont = Estoque.getCont()+1;
+    private ArrayList<Produtos> allProducts = new ArrayList();
     int selectedProdInd;
     
     // variáveis da parte de equipe
@@ -60,6 +50,7 @@ public class AreaGerente extends javax.swing.JFrame {
         cont = Estoque.getCont()+1;
         
         updateEstoqueStats();
+        
         // inicializa as tabelas
         updateProdList();
         updateFuncionarios(); 
@@ -151,12 +142,80 @@ public class AreaGerente extends javax.swing.JFrame {
         
         for(int i=0;i<funcionarios.size();i++){
             linha = funcionarios.get(i).split("_");
+            
             if(linha[5].equals("Gerente")){
                 nomeGerente = linha[0];
                 cmbGerenteEq.addItem(nomeGerente);
             }
         }
     }
+    
+    public void clearFieldsEstoque(){
+        cmbTipoProd.setSelectedItem("Selecione");
+        txtfQuantidade.setEnabled(false);
+        txtfQuantidade.setText("/");
+        txtfCodigoProd.setText("");
+        txtfFaixaEtaria.setText("");
+        txtfPreco.setText("");
+        txtfNome.setText("");
+        txtfAno.setText("");
+        txtfVar1.setText("");
+        txtfVar2.setText("");
+        txtfVar3.setText("");
+        txtfVar4.setText("");
+    }
+    
+    public void enableBaseFieldsEst(){
+        cmbTipoProd.setEnabled(true);
+        txtfQuantidade.setEnabled(true);
+        txtfCodigoProd.setEnabled(true);
+        txtfFaixaEtaria.setEnabled(true);
+        txtfPreco.setEnabled(true);
+        txtfNome.setEnabled(true);
+        txtfAno.setEnabled(true);
+        btnCancelarEst.setEnabled(true);
+    }
+    
+    public void disableBaseFieldsEst(){
+        cmbTipoProd.setEnabled(false);
+        txtfQuantidade.setEnabled(false);
+        txtfCodigoProd.setEnabled(false);
+        txtfFaixaEtaria.setEnabled(false);
+        txtfPreco.setEnabled(false);
+        txtfNome.setEnabled(false);
+        txtfAno.setEnabled(false);
+        btnConfirmarEst.setEnabled(false);
+        btnCancelarEst.setEnabled(false);
+    }
+    
+    public void enableEquipe(){
+        cmbTipoEq.setEnabled(true);
+        cmbGerenteEq.setEnabled(true);
+        txtfDataEq.setEnabled(true);
+        txtfCPFEq.setEnabled(true);
+        txtfNomeEq.setEnabled(true);
+        txtfCodigoEq.setEnabled(true);
+        btnConfirmarEq.setEnabled(true);
+        btnCancelarEq.setEnabled(true);
+    }
+    
+    public void disableEquipe(){
+        cmbTipoEq.setEnabled(false);
+        cmbGerenteEq.setEnabled(false);
+        cmbTipoEq.setSelectedIndex(0);
+        cmbGerenteEq.setSelectedIndex(0);
+        txtfDataEq.setEnabled(false);
+        txtfCPFEq.setEnabled(false);
+        txtfNomeEq.setEnabled(false);
+        txtfCodigoEq.setEnabled(false);
+        txtfDataEq.setText("");
+        txtfCPFEq.setText("");
+        txtfNomeEq.setText("");
+        txtfCodigoEq.setText("");
+        btnConfirmarEq.setEnabled(false);
+        btnCancelarEq.setEnabled(false);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -246,20 +305,10 @@ public class AreaGerente extends javax.swing.JFrame {
         lblCodigoEq.setText("Código:");
 
         txtfCodigoEq.setEnabled(false);
-        txtfCodigoEq.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfCodigoEqActionPerformed(evt);
-            }
-        });
 
         lblCPF.setText("CPF:");
 
         txtfCPFEq.setEnabled(false);
-        txtfCPFEq.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfCPFEqActionPerformed(evt);
-            }
-        });
 
         lblTipoEq.setText("Tipo:");
 
@@ -269,20 +318,10 @@ public class AreaGerente extends javax.swing.JFrame {
         lblNomeEq.setText("Nome:");
 
         txtfNomeEq.setEnabled(false);
-        txtfNomeEq.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfNomeEqActionPerformed(evt);
-            }
-        });
 
         lblDataEq.setText("Data de nasc.:");
 
         txtfDataEq.setEnabled(false);
-        txtfDataEq.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfDataEqActionPerformed(evt);
-            }
-        });
 
         lblGerente.setText("Gerente:");
 
@@ -353,107 +392,105 @@ public class AreaGerente extends javax.swing.JFrame {
         pnlEquipeLayout.setHorizontalGroup(
             pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlEquipeLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrlEquipe)
-                    .addGroup(pnlEquipeLayout.createSequentialGroup()
-                        .addComponent(btnVoltarEq)
-                        .addGap(173, 173, 173)
-                        .addComponent(btnConfirmarEq)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(pnlEquipeLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlEquipeLayout.createSequentialGroup()
-                        .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblCodigoEq)
-                            .addComponent(lblNomeEq, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtfCodigoEq, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtfNomeEq, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(lblTotalCaixas))
-                .addGap(18, 18, 18)
-                .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlEquipeLayout.createSequentialGroup()
-                        .addComponent(lblTotalGerentes)
-                        .addContainerGap(398, Short.MAX_VALUE))
-                    .addGroup(pnlEquipeLayout.createSequentialGroup()
-                        .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnCancelarEq)
-                            .addGroup(pnlEquipeLayout.createSequentialGroup()
-                                .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblDataEq)
-                                    .addComponent(lblCPF))
-                                .addGap(18, 18, 18)
-                                .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtfDataEq, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtfCPFEq, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEquipeLayout.createSequentialGroup()
-                                .addComponent(lblTipoEq)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbTipoEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlEquipeLayout.createSequentialGroup()
-                                .addComponent(lblGerente)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbGerenteEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(77, 77, 77))))
-            .addGroup(pnlEquipeLayout.createSequentialGroup()
-                .addGap(179, 179, 179)
+                .addGap(136, 136, 136)
                 .addComponent(btnNovoFunc)
                 .addGap(18, 18, 18)
-                .addComponent(btnEditarEq)
-                .addGap(18, 18, 18)
                 .addComponent(btnPesquisarEq)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnEditarEq)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlEquipeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlEquipeLayout.createSequentialGroup()
+                        .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pnlEquipeLayout.createSequentialGroup()
+                                .addComponent(btnVoltarEq)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnConfirmarEq)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCancelarEq)
+                                .addGap(78, 78, 78))
+                            .addGroup(pnlEquipeLayout.createSequentialGroup()
+                                .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlEquipeLayout.createSequentialGroup()
+                                        .addComponent(lblCodigoEq)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtfCodigoEq, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblTotalCaixas))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlEquipeLayout.createSequentialGroup()
+                                        .addComponent(lblCPF)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtfCPFEq, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(89, 89, 89))
+                                    .addGroup(pnlEquipeLayout.createSequentialGroup()
+                                        .addComponent(lblTotalGerentes)
+                                        .addGap(136, 136, 136)))))
+                        .addComponent(lblTipoEq)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbTipoEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(pnlEquipeLayout.createSequentialGroup()
+                        .addComponent(lblNomeEq, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtfNomeEq, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                        .addComponent(lblDataEq)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtfDataEq, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)
+                        .addComponent(lblGerente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbGerenteEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addComponent(scrlEquipe)
         );
         pnlEquipeLayout.setVerticalGroup(
             pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlEquipeLayout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
                 .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNovoFunc)
                     .addComponent(btnPesquisarEq)
                     .addComponent(btnEditarEq))
-                .addGap(31, 31, 31)
-                .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTotalCaixas)
-                    .addComponent(lblTotalGerentes))
                 .addGap(18, 18, 18)
                 .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlEquipeLayout.createSequentialGroup()
+                        .addComponent(lblTotalCaixas)
+                        .addGap(18, 18, 18)
                         .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtfCodigoEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCodigoEq))
-                        .addGap(18, 18, 18)
-                        .addComponent(lblNomeEq))
+                            .addComponent(lblCodigoEq)))
                     .addGroup(pnlEquipeLayout.createSequentialGroup()
-                        .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtfCPFEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCPF))
+                        .addComponent(lblTotalGerentes)
                         .addGap(18, 18, 18)
-                        .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtfDataEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDataEq)
-                            .addComponent(txtfNomeEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlEquipeLayout.createSequentialGroup()
-                        .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTipoEq)
-                            .addComponent(cmbTipoEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblGerente)
-                            .addComponent(cmbGerenteEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(53, 53, 53)
-                .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnVoltarEq)
-                    .addComponent(btnConfirmarEq)
-                    .addComponent(btnCancelarEq))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scrlEquipe, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtfCPFEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblCPF))
+                            .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblTipoEq)
+                                .addComponent(cmbTipoEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(18, 18, 18)
+                .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNomeEq)
+                    .addComponent(txtfNomeEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtfDataEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblDataEq))
+                    .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblGerente)
+                        .addComponent(cmbGerenteEq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnConfirmarEq)
+                        .addComponent(btnCancelarEq))
+                    .addComponent(btnVoltarEq))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(scrlEquipe, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         tabbedPnlGerente.addTab("Equipe", pnlEquipe);
@@ -503,83 +540,38 @@ public class AreaGerente extends javax.swing.JFrame {
         lblCodigoProd.setText("Código:");
 
         txtfCodigoProd.setEnabled(false);
-        txtfCodigoProd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfCodigoProdActionPerformed(evt);
-            }
-        });
 
         lblFaixaEtaria.setText("Faixa etária:");
 
         txtfFaixaEtaria.setEnabled(false);
-        txtfFaixaEtaria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfFaixaEtariaActionPerformed(evt);
-            }
-        });
 
         lblPreco.setText("Preço:");
 
         txtfPreco.setEnabled(false);
-        txtfPreco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfPrecoActionPerformed(evt);
-            }
-        });
 
         lblNome.setText("Nome:");
 
         txtfNome.setEnabled(false);
-        txtfNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfNomeActionPerformed(evt);
-            }
-        });
 
         lblAno.setText("Ano:");
 
         txtfAno.setEnabled(false);
-        txtfAno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfAnoActionPerformed(evt);
-            }
-        });
 
         lblVar1.setText("----------:");
 
         txtfVar1.setEnabled(false);
-        txtfVar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfVar1ActionPerformed(evt);
-            }
-        });
 
         lblVar2.setText("----------:");
 
         txtfVar2.setEnabled(false);
-        txtfVar2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfVar2ActionPerformed(evt);
-            }
-        });
 
         lblVar3.setText("----------:");
 
         txtfVar3.setEnabled(false);
-        txtfVar3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfVar3ActionPerformed(evt);
-            }
-        });
 
         lblVar4.setText("----------:");
 
         txtfVar4.setEnabled(false);
-        txtfVar4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfVar4ActionPerformed(evt);
-            }
-        });
 
         btnConfirmarEst.setText("Confirmar");
         btnConfirmarEst.setEnabled(false);
@@ -594,12 +586,6 @@ public class AreaGerente extends javax.swing.JFrame {
         btnCancelarEst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarEstActionPerformed(evt);
-            }
-        });
-
-        scrlProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                scrlProdutosMouseClicked(evt);
             }
         });
 
@@ -629,100 +615,98 @@ public class AreaGerente extends javax.swing.JFrame {
 
         txtfQuantidade.setText("/");
         txtfQuantidade.setEnabled(false);
-        txtfQuantidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfQuantidadeActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlEstoqueLayout = new javax.swing.GroupLayout(pnlEstoque);
         pnlEstoque.setLayout(pnlEstoqueLayout);
         pnlEstoqueLayout.setHorizontalGroup(
             pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlEstoqueLayout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblVar1)
-                    .addComponent(lblVar2))
-                .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlEstoqueLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(txtfVar1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEstoqueLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(txtfVar2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(scrlProdutos)
             .addGroup(pnlEstoqueLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrlProdutos)
-                    .addGroup(pnlEstoqueLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEstoqueLayout.createSequentialGroup()
+                        .addGap(0, 69, Short.MAX_VALUE)
                         .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlEstoqueLayout.createSequentialGroup()
-                                .addGap(172, 172, 172)
-                                .addComponent(btnConfirmarEst)
-                                .addGap(87, 87, 87)
-                                .addComponent(btnCancelarEst))
-                            .addGroup(pnlEstoqueLayout.createSequentialGroup()
-                                .addComponent(btnVoltarEst)
-                                .addGap(100, 100, 100)
-                                .addComponent(btnNovoProd)
-                                .addGap(26, 26, 26)
-                                .addComponent(btnPesquisarProd)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEditarProd)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEditarProd1)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(pnlEstoqueLayout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlEstoqueLayout.createSequentialGroup()
-                        .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblCodigoProd)
-                            .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtfCodigoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(lblTotalProd))
-                .addGap(18, 18, 18)
-                .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlEstoqueLayout.createSequentialGroup()
-                        .addComponent(lblTipoProd)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbTipoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
-                        .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblQuantTipo)
-                            .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(pnlEstoqueLayout.createSequentialGroup()
-                                    .addComponent(lblQuantidade)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(pnlEstoqueLayout.createSequentialGroup()
-                                    .addComponent(lblPreco)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtfPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(59, 59, 59))
-                    .addGroup(pnlEstoqueLayout.createSequentialGroup()
-                        .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblFaixaEtaria)
-                            .addComponent(lblAno))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtfAno, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtfFaixaEtaria, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnlEstoqueLayout.createSequentialGroup()
+                                .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblVar1)
+                                    .addComponent(lblVar2))
+                                .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlEstoqueLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtfVar1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEstoqueLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtfVar2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(244, 244, 244))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEstoqueLayout.createSequentialGroup()
+                                .addGap(244, 244, 244)
                                 .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblVar3)
                                     .addComponent(lblVar4))
                                 .addGap(18, 18, 18)
                                 .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtfVar4, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                                    .addComponent(txtfVar3))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(txtfVar4)
+                                    .addComponent(txtfVar3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(82, 82, 82))
+                    .addGroup(pnlEstoqueLayout.createSequentialGroup()
+                        .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(pnlEstoqueLayout.createSequentialGroup()
+                                    .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(99, 99, 99))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlEstoqueLayout.createSequentialGroup()
+                                    .addComponent(lblCodigoProd)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtfCodigoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(135, 135, 135)))
+                            .addGroup(pnlEstoqueLayout.createSequentialGroup()
+                                .addComponent(btnVoltarEst)
+                                .addGap(133, 133, 133)
+                                .addComponent(btnConfirmarEst)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCancelarEst)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEstoqueLayout.createSequentialGroup()
+                        .addComponent(lblTotalProd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblQuantTipo)
+                            .addGroup(pnlEstoqueLayout.createSequentialGroup()
+                                .addComponent(lblQuantidade)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlEstoqueLayout.createSequentialGroup()
+                                .addComponent(lblPreco)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtfPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
+            .addGroup(pnlEstoqueLayout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addComponent(btnNovoProd)
+                .addGap(18, 18, 18)
+                .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlEstoqueLayout.createSequentialGroup()
+                        .addComponent(lblTipoProd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbTipoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlEstoqueLayout.createSequentialGroup()
+                        .addComponent(lblFaixaEtaria)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtfFaixaEtaria, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlEstoqueLayout.createSequentialGroup()
+                        .addComponent(lblAno)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtfAno, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlEstoqueLayout.createSequentialGroup()
+                        .addComponent(btnPesquisarProd)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEditarProd)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEditarProd1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlEstoqueLayout.setVerticalGroup(
             pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -731,42 +715,44 @@ public class AreaGerente extends javax.swing.JFrame {
                 .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPesquisarProd)
                     .addComponent(btnNovoProd)
-                    .addComponent(btnVoltarEst)
                     .addComponent(btnEditarProd)
                     .addComponent(btnEditarProd1))
                 .addGap(18, 18, 18)
                 .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlEstoqueLayout.createSequentialGroup()
-                        .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTipoProd)
-                            .addComponent(cmbTipoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTotalProd))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtfCodigoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(lblCodigoProd))
-                            .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtfFaixaEtaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblFaixaEtaria)))
+                            .addGroup(pnlEstoqueLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(lblQuantTipo)
+                                .addGap(22, 22, 22)
+                                .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtfPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblPreco))))
                         .addGap(18, 18, 18)
                         .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(lblQuantidade))
                             .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtfAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblAno))
-                            .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(lblNome))))
                     .addGroup(pnlEstoqueLayout.createSequentialGroup()
-                        .addComponent(lblQuantTipo)
+                        .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTipoProd)
+                            .addComponent(cmbTipoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTotalProd))
                         .addGap(18, 18, 18)
                         .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtfPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPreco))))
-                .addGap(48, 48, 48)
+                            .addComponent(txtfFaixaEtaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFaixaEtaria))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtfAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAno))))
+                .addGap(24, 24, 24)
                 .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlEstoqueLayout.createSequentialGroup()
                         .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -784,13 +770,13 @@ public class AreaGerente extends javax.swing.JFrame {
                         .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblVar4)
                             .addComponent(txtfVar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCancelarEst, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnConfirmarEst, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(pnlEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelarEst)
+                    .addComponent(btnConfirmarEst)
+                    .addComponent(btnVoltarEst))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scrlProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(scrlProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
         );
 
         tabbedPnlGerente.addTab("Estoque", pnlEstoque);
@@ -799,17 +785,15 @@ public class AreaGerente extends javax.swing.JFrame {
         pnlGerente.setLayout(pnlGerenteLayout);
         pnlGerenteLayout.setHorizontalGroup(
             pnlGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGap(0, 618, Short.MAX_VALUE)
             .addGroup(pnlGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(tabbedPnlGerente, javax.swing.GroupLayout.Alignment.TRAILING))
         );
         pnlGerenteLayout.setVerticalGroup(
             pnlGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 530, Short.MAX_VALUE)
+            .addGap(0, 507, Short.MAX_VALUE)
             .addGroup(pnlGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlGerenteLayout.createSequentialGroup()
-                    .addComponent(tabbedPnlGerente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 1, Short.MAX_VALUE)))
+                .addComponent(tabbedPnlGerente, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE))
         );
 
         menuAreaGr.setText("Menu");
@@ -849,62 +833,26 @@ public class AreaGerente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlGerente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(1, 1, 1))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfNomeActionPerformed
-
-    private void txtfCodigoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfCodigoProdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfCodigoProdActionPerformed
-
-    private void txtfFaixaEtariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfFaixaEtariaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfFaixaEtariaActionPerformed
-
-    private void txtfPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfPrecoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfPrecoActionPerformed
 
     private void btnNovoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoProdActionPerformed
         action = "new";
         
         cmbTipoProd.setSelectedItem(cmbTipoProd.getSelectedItem()); //caso o usuário clique no botão após escolher um produto reseta a combo box para os campos específicos ativarem
         
-        enableBaseFields();
+        enableBaseFieldsEst();
         txtfCodigoProd.setEnabled(false);
         txtfCodigoProd.setText(Integer.toString(cont));
     }//GEN-LAST:event_btnNovoProdActionPerformed
-
-    private void txtfAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfAnoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfAnoActionPerformed
 
     private void menuVoltarAreaGrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarAreaGrActionPerformed
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_menuVoltarAreaGrActionPerformed
-
-    private void txtfCPFEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfCPFEqActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfCPFEqActionPerformed
-
-    private void txtfDataEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfDataEqActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfDataEqActionPerformed
-
-    private void txtfNomeEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfNomeEqActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfNomeEqActionPerformed
-
-    private void txtfCodigoEqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfCodigoEqActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfCodigoEqActionPerformed
 
     private void menuSairAreaGrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairAreaGrActionPerformed
         System.exit(0);
@@ -978,22 +926,6 @@ public class AreaGerente extends javax.swing.JFrame {
         } 
     }//GEN-LAST:event_cmbTipoProdActionPerformed
 
-    private void txtfVar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfVar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfVar1ActionPerformed
-
-    private void txtfVar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfVar2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfVar2ActionPerformed
-
-    private void txtfVar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfVar3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfVar3ActionPerformed
-
-    private void txtfVar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfVar4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfVar4ActionPerformed
-
     private void btnConfirmarEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarEstActionPerformed
         rowClick = -1;
         
@@ -1013,9 +945,9 @@ public class AreaGerente extends javax.swing.JFrame {
             Estoque.reescreverEstoque();
             updateProdList();
             
-            clearFields();
+            clearFieldsEstoque();
             
-        } else if(action == "search"){
+        } else if(action.equals("search")){
             tableProdutos.removeAll();
             DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Código", "Tipo", "Nome", "Faixa", "Ano", "Preço", "Alugado"}, 0);
 
@@ -1091,7 +1023,6 @@ public class AreaGerente extends javax.swing.JFrame {
                     info[6] + "/" + info[7]};
 
                     tabela.addRow(linha);
-                    
                 }
             }
             tableProdutos.setModel(tabela);
@@ -1122,10 +1053,12 @@ public class AreaGerente extends javax.swing.JFrame {
                 ok = false;
             }
             
-            for(Produtos prod : Estoque.getListaProdutos()){
-                if(prod.getNomeProd().equals(nome)){
-                    JOptionPane.showMessageDialog(null, "Já existe um produto com esse nome.");
-                    ok = false;
+            if(action.equals("new")){
+                for(Produtos prod : Estoque.getListaProdutos()){
+                    if(prod.getNomeProd().equals(nome)){
+                        JOptionPane.showMessageDialog(null, "Já existe um produto com esse nome.");
+                        ok = false;
+                    }
                 }
             }
 
@@ -1217,8 +1150,8 @@ public class AreaGerente extends javax.swing.JFrame {
                         
                         updateEstoqueStats();
 
-                        disableBaseFields();
-                        clearFields();
+                        disableBaseFieldsEst();
+                        clearFieldsEstoque();
 
                         switch(action){
                             case "new":
@@ -1247,8 +1180,8 @@ public class AreaGerente extends javax.swing.JFrame {
         
         rowClick = -1;
         
-        disableBaseFields();
-        clearFields();
+        disableBaseFieldsEst();
+        clearFieldsEstoque();
         
         updateProdList();
     }//GEN-LAST:event_btnCancelarEstActionPerformed
@@ -1260,9 +1193,7 @@ public class AreaGerente extends javax.swing.JFrame {
         
         if (rowClick >= 0 && rowClick < allProducts.size()){
             
-            System.out.println(rowClick);
             int codigoProduto = (Integer) (tableProdutos.getModel().getValueAt(rowClick, 0));
-            System.out.println(codigoProduto);
             
             Produtos selectedProd = Estoque.getProdutoPorCodigo(codigoProduto);
             
@@ -1271,101 +1202,27 @@ public class AreaGerente extends javax.swing.JFrame {
             txtfCodigoProd.setText("");
         }
         
-        enableBaseFields();
+        enableBaseFieldsEst();
         btnConfirmarEst.setEnabled(true);
     }//GEN-LAST:event_btnPesquisarProdActionPerformed
-
-    private void tableProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProdutosMouseClicked
-        rowClick = tableProdutos.getSelectedRow();
-        
-        if (rowClick >= 0 && rowClick < allProducts.size()){
-            System.out.println(rowClick);
-            int codigoProduto = (Integer) (tableProdutos.getModel().getValueAt(rowClick, 0));
-            System.out.println(codigoProduto);
-            
-            Produtos selectedProd = Estoque.getProdutoPorCodigo(codigoProduto);
-            
-            if(!action.equals("new")){
-                txtfCodigoProd.setText(Integer.toString(selectedProd.getCodigoProd()));
-            } else {
-                txtfCodigoProd.setEnabled(false);
-            }
-            txtfNome.setText(selectedProd.getNomeProd());
-            txtfFaixaEtaria.setText(selectedProd.getFaixaEtaria());
-            txtfAno.setText(Integer.toString(selectedProd.getAno()));
-            txtfPreco.setText(Double.toString(selectedProd.getPreco()));
-            txtfQuantidade.setText(selectedProd.getDisponiveis() + "/" + selectedProd.getAlugados());
-            
-            if(selectedProd.getClass().getSimpleName().equals("Filmes")){
-                selectedProdInd = Estoque.getListaFilmes().indexOf(selectedProd);
-                
-                cmbTipoProd.setSelectedItem("Filme");
-                
-                txtfVar1.setText(((Filmes) selectedProd).getGenero());
-                txtfVar2.setText(((Filmes) selectedProd).getEstudio());
-                txtfVar3.setText(((Filmes) selectedProd).getDiretor());
-            } else if(selectedProd.getClass().getSimpleName().equals("Musicas")){
-                selectedProdInd = Estoque.getListaMusicas().indexOf(selectedProd);
-                
-                cmbTipoProd.setSelectedItem("Música");
-                
-                txtfVar1.setText(((Musicas) selectedProd).getEstilo());
-                txtfVar2.setText(((Musicas) selectedProd).getAutor());
-            } else if(selectedProd.getClass().getSimpleName().equals("Tabuleiros")){
-                selectedProdInd = Estoque.getListaTabuleiros().indexOf(selectedProd);
-                
-                cmbTipoProd.setSelectedItem("Tabuleiro");
-                
-                txtfVar1.setText(((Tabuleiros) selectedProd).getTipo());
-                txtfVar2.setText(((Tabuleiros) selectedProd).getMarca());
-                txtfVar3.setText(((Tabuleiros) selectedProd).getNumJogadores());
-            } else if(selectedProd.getClass().getSimpleName().equals("Videogames")){
-                selectedProdInd = Estoque.getListaVideogames().indexOf(selectedProd);
-                
-                cmbTipoProd.setSelectedItem("Videogame");
-                
-                txtfVar1.setText(((Videogames) selectedProd).getGenero());
-                txtfVar2.setText(((Videogames) selectedProd).getDesenvolvedor());
-                txtfVar3.setText(((Videogames) selectedProd).getNumJogadores());
-                txtfVar4.setText(((Videogames) selectedProd).getPlataforma());
-            }
-            if(action.equals("confirm") || action.equals("cancel") || action.equals("delete")){
-                disableBaseFields();
-            
-                txtfVar1.setEnabled(false);
-                txtfVar2.setEnabled(false);
-                txtfVar3.setEnabled(false);
-                txtfVar4.setEnabled(false);
-                
-                if(!action.equals("delete")){
-                    btnConfirmarEst.setEnabled(false);
-                }
-            } else {
-                enableBaseFields();
-            }
-                        
-            btnCancelarEst.setEnabled(true);
-        }
-    }//GEN-LAST:event_tableProdutosMouseClicked
 
     private void btnEditarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProdActionPerformed
         action = "edit";
                 
-        enableBaseFields();
-        
+        disableBaseFieldsEst();
+        btnCancelarEst.setEnabled(true);
         
         if (rowClick >= 0 && rowClick < allProducts.size()){
             cmbTipoProd.setSelectedItem(cmbTipoProd.getSelectedItem()); //caso o usuário clique no botão após escolher um produto reseta a combo box para os campos específicos ativarem
             
-            System.out.println(rowClick);
             int codigoProduto = (Integer) (tableProdutos.getModel().getValueAt(rowClick, 0));
-            System.out.println(codigoProduto);
             
             Produtos selectedProd = Estoque.getProdutoPorCodigo(codigoProduto);
             
             txtfCodigoProd.setText(Integer.toString(selectedProd.getCodigoProd()));
             btnConfirmarEst.setEnabled(true);
             
+            enableBaseFieldsEst();
         } else {
             txtfCodigoProd.setText("");
         }
@@ -1386,8 +1243,7 @@ public class AreaGerente extends javax.swing.JFrame {
             if(txtfCodigoEq.getText().equals("")|| txtfNomeEq.getText().equals("")|| txtfDataEq.getText().equals("")||
                     txtfCPFEq.getText().equals("")||cmbTipoEq.getSelectedIndex()==0||(cmbTipoEq.getSelectedIndex()==1 && cmbGerenteEq.getSelectedIndex()==0)){
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-            }
-            else{
+            } else {
                 String nome = txtfNomeEq.getText(),
                     cpf = txtfCPFEq.getText(),
                     dataString = txtfDataEq.getText(),
@@ -1398,6 +1254,7 @@ public class AreaGerente extends javax.swing.JFrame {
                 
                 SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                 Date data = null;
+                
                 try {
                     data = formato.parse(dataString);
                 } catch (ParseException ex) {
@@ -1413,8 +1270,7 @@ public class AreaGerente extends javax.swing.JFrame {
                 if(tipo.equals("Gerente")){
                     Gerente funcionario = new Gerente(senha, codigo, nome, cpf, data);
                     bdFunc.adicionarPessoa(funcionario);
-                }
-                else if(tipo.equals("Caixa")){ // caso seja um caixa, encontra o gerente correspondente
+                } else if(tipo.equals("Caixa")){ // caso seja um caixa, encontra o gerente correspondente
                     Gerente gerente = bdFunc.buscarGerente(gerenteString);
                     Caixa funcionario = new Caixa(gerente, senha, codigo, nome, cpf, data);
                     bdFunc.adicionarPessoa(funcionario);
@@ -1422,8 +1278,7 @@ public class AreaGerente extends javax.swing.JFrame {
                 
             }
             updateFuncionarios(); 
-        }
-        else if("edit".equals(action)){
+        } else if("edit".equals(action)){
             int i = tableEquipe.getSelectedRow(); // edita o funcionário selecionado
             
             // ao selecionar um funcionário na tabela, o conteúdo dos campos de texto e das combo boxes é atualizado para os dados do funcionário selecionado
@@ -1433,8 +1288,7 @@ public class AreaGerente extends javax.swing.JFrame {
                 if(txtfCodigoEq.getText().equals("")|| txtfNomeEq.getText().equals("")|| txtfDataEq.getText().equals("")||
                     txtfCPFEq.getText().equals("")||cmbTipoEq.getSelectedIndex()==0||(cmbTipoEq.getSelectedIndex()==1 && cmbGerenteEq.getSelectedIndex()==0)){
                     JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-                }
-                else{
+                } else {
                     String nome = txtfNomeEq.getText(),
                         cpf = txtfCPFEq.getText(),
                         dataString = txtfDataEq.getText(),
@@ -1535,9 +1389,7 @@ public class AreaGerente extends javax.swing.JFrame {
         if (rowClick >= 0 && rowClick < allProducts.size()){
             //cmbTipoProd.setSelectedItem(cmbTipoProd.getSelectedItem()); //caso o usuário clique no botão após escolher um produto reseta a combo box para os campos específicos ativarem
             
-            System.out.println(rowClick);
             int codigoProduto = (Integer) (tableProdutos.getModel().getValueAt(rowClick, 0));
-            System.out.println(codigoProduto);
             
             Produtos selectedProd = Estoque.getProdutoPorCodigo(codigoProduto);
             
@@ -1548,7 +1400,7 @@ public class AreaGerente extends javax.swing.JFrame {
             btnConfirmarEst.setEnabled(true);
         } else {
             txtfCodigoProd.setText("");
-            disableBaseFields();
+            disableBaseFieldsEst();
         }
         btnCancelarEst.setEnabled(true);
     }//GEN-LAST:event_btnEditarProd1ActionPerformed
@@ -1584,80 +1436,76 @@ public class AreaGerente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tableEquipeMouseClicked
 
-    private void txtfQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfQuantidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfQuantidadeActionPerformed
-
-    private void scrlProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scrlProdutosMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_scrlProdutosMouseClicked
-
-    public void disableBaseFields(){
-        cmbTipoProd.setEnabled(false);
-        txtfQuantidade.setEnabled(false);
-        txtfCodigoProd.setEnabled(false);
-        txtfFaixaEtaria.setEnabled(false);
-        txtfPreco.setEnabled(false);
-        txtfNome.setEnabled(false);
-        txtfAno.setEnabled(false);
-        btnConfirmarEst.setEnabled(false);
-        btnCancelarEst.setEnabled(false);
-    }
-    
-    public void disableEquipe(){
-        cmbTipoEq.setEnabled(false);
-        cmbGerenteEq.setEnabled(false);
-        cmbTipoEq.setSelectedIndex(0);
-        cmbGerenteEq.setSelectedIndex(0);
-        txtfDataEq.setEnabled(false);
-        txtfCPFEq.setEnabled(false);
-        txtfNomeEq.setEnabled(false);
-        txtfCodigoEq.setEnabled(false);
-        txtfDataEq.setText("");
-        txtfCPFEq.setText("");
-        txtfNomeEq.setText("");
-        txtfCodigoEq.setText("");
-        btnConfirmarEq.setEnabled(false);
-        btnCancelarEq.setEnabled(false);
-    }
-    
-    public void enableBaseFields(){
-        cmbTipoProd.setEnabled(true);
-        txtfQuantidade.setEnabled(true);
-        txtfCodigoProd.setEnabled(true);
-        //txtfCodigoProd.setText("");
-        txtfFaixaEtaria.setEnabled(true);
-        txtfPreco.setEnabled(true);
-        txtfNome.setEnabled(true);
-        txtfAno.setEnabled(true);
-        btnCancelarEst.setEnabled(true);
-    }
-    
-    public void enableEquipe(){
-        cmbTipoEq.setEnabled(true);
-        cmbGerenteEq.setEnabled(true);
-        txtfDataEq.setEnabled(true);
-        txtfCPFEq.setEnabled(true);
-        txtfNomeEq.setEnabled(true);
-        txtfCodigoEq.setEnabled(true);
-        btnConfirmarEq.setEnabled(true);
-        btnCancelarEq.setEnabled(true);
-    }
-    
-    public void clearFields(){
-        cmbTipoProd.setSelectedItem("Selecione");
-        txtfQuantidade.setEnabled(false);
-        txtfQuantidade.setText("/");
-        txtfCodigoProd.setText("");
-        txtfFaixaEtaria.setText("");
-        txtfPreco.setText("");
-        txtfNome.setText("");
-        txtfAno.setText("");
-        txtfVar1.setText("");
-        txtfVar2.setText("");
-        txtfVar3.setText("");
-        txtfVar4.setText("");
-    }
+    private void tableProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProdutosMouseClicked
+        rowClick = tableProdutos.getSelectedRow();
+        
+        if (rowClick >= 0 && rowClick < allProducts.size()){
+            int codigoProduto = (Integer) (tableProdutos.getModel().getValueAt(rowClick, 0));
+            
+            Produtos selectedProd = Estoque.getProdutoPorCodigo(codigoProduto);
+            
+            if(!action.equals("new")){
+                txtfCodigoProd.setText(Integer.toString(selectedProd.getCodigoProd()));
+            } else {
+                txtfCodigoProd.setEnabled(false);
+            }
+            txtfNome.setText(selectedProd.getNomeProd());
+            txtfFaixaEtaria.setText(selectedProd.getFaixaEtaria());
+            txtfAno.setText(Integer.toString(selectedProd.getAno()));
+            txtfPreco.setText(Double.toString(selectedProd.getPreco()));
+            txtfQuantidade.setText(selectedProd.getDisponiveis() + "/" + selectedProd.getAlugados());
+            
+            if(selectedProd.getClass().getSimpleName().equals("Filmes")){
+                selectedProdInd = Estoque.getListaFilmes().indexOf(selectedProd);
+                
+                cmbTipoProd.setSelectedItem("Filme");
+                
+                txtfVar1.setText(((Filmes) selectedProd).getGenero());
+                txtfVar2.setText(((Filmes) selectedProd).getEstudio());
+                txtfVar3.setText(((Filmes) selectedProd).getDiretor());
+            } else if(selectedProd.getClass().getSimpleName().equals("Musicas")){
+                selectedProdInd = Estoque.getListaMusicas().indexOf(selectedProd);
+                
+                cmbTipoProd.setSelectedItem("Música");
+                
+                txtfVar1.setText(((Musicas) selectedProd).getEstilo());
+                txtfVar2.setText(((Musicas) selectedProd).getAutor());
+            } else if(selectedProd.getClass().getSimpleName().equals("Tabuleiros")){
+                selectedProdInd = Estoque.getListaTabuleiros().indexOf(selectedProd);
+                
+                cmbTipoProd.setSelectedItem("Tabuleiro");
+                
+                txtfVar1.setText(((Tabuleiros) selectedProd).getTipo());
+                txtfVar2.setText(((Tabuleiros) selectedProd).getMarca());
+                txtfVar3.setText(((Tabuleiros) selectedProd).getNumJogadores());
+            } else if(selectedProd.getClass().getSimpleName().equals("Videogames")){
+                selectedProdInd = Estoque.getListaVideogames().indexOf(selectedProd);
+                
+                cmbTipoProd.setSelectedItem("Videogame");
+                
+                txtfVar1.setText(((Videogames) selectedProd).getGenero());
+                txtfVar2.setText(((Videogames) selectedProd).getDesenvolvedor());
+                txtfVar3.setText(((Videogames) selectedProd).getNumJogadores());
+                txtfVar4.setText(((Videogames) selectedProd).getPlataforma());
+            }
+            if(action.equals("confirm") || action.equals("cancel") || action.equals("delete")){
+                disableBaseFieldsEst();
+            
+                txtfVar1.setEnabled(false);
+                txtfVar2.setEnabled(false);
+                txtfVar3.setEnabled(false);
+                txtfVar4.setEnabled(false);
+                
+                if(!action.equals("delete")){
+                    btnConfirmarEst.setEnabled(false);
+                }
+            } else {
+                enableBaseFieldsEst();
+            }
+                        
+            btnCancelarEst.setEnabled(true);
+        }
+    }//GEN-LAST:event_tableProdutosMouseClicked
     
     /**
      * @param args the command line arguments

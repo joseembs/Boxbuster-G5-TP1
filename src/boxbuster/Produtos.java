@@ -1,10 +1,4 @@
 package boxbuster;
-
-import java.util.ArrayList;
-import boxbuster.Musicas;
-import boxbuster.Jogos;
-import boxbuster.Filmes;
-
 /**
  *
  * @author joseembs

@@ -1,7 +1,4 @@
 package boxbuster;
-
-import boxbuster.Jogos;
-
 /**
  *
  * @author joseembs
@@ -39,5 +36,4 @@ public class Tabuleiros extends Jogos{
     public String toString() {
         return "Tabuleiro_" + super.toString() + "_" + tipo + "_" + marca;
     }
-    
 }

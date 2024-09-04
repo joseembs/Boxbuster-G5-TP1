@@ -1,7 +1,4 @@
 package boxbuster;
-
-import java.util.ArrayList;
-
 /**
  *
  * @author joseembs
@@ -29,6 +26,4 @@ public abstract class Jogos extends Produtos{
     public String toString() {
         return super.toString() + "_" + numJogadores;
     }
-    
-    
 }

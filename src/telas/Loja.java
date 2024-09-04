@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package telas;
 
 import boxbuster.Estoque;
@@ -13,10 +9,9 @@ import boxbuster.Tabuleiros;
 import boxbuster.Videogames;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-
 /**
  *
- * @author Adm
+ * @author josembs
  */
 public class Loja extends javax.swing.JFrame {
 
@@ -28,7 +23,6 @@ public class Loja extends javax.swing.JFrame {
     private double valorTotal = 0.0;
     
     private ArrayList<javax.swing.JRadioButton> tempBtnSelected = new ArrayList<>();
-    private ArrayList<javax.swing.JRadioButton> finalBtnSelected = new ArrayList<>();
     private ArrayList<Produtos> tempPedido = new ArrayList<>();
     private ArrayList<Produtos> finalPedido = Pedido.getPedidoAtual();
     
@@ -78,8 +72,8 @@ public class Loja extends javax.swing.JFrame {
                 listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/OEnigmadeOutroMundo.png")));
             } else if(titulo.contains("esqueceram de mim")){
                 listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/EsqueceramDeMim.png")));
-            } else if(titulo.contains("exterminador")){
-                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/Exterminador.png")));
+            } else if(titulo.contains("la la land")){
+                listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/LaLaLand.png")));
             } else if(titulo.contains("lorax")){
                 listImgMv[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/filmes/Lorax.png")));
             } else if(titulo.contains("matrix")){
@@ -107,7 +101,8 @@ public class Loja extends javax.swing.JFrame {
             listNomeMv[i].setText(filme.getNomeProd());
             listDescMv[i].setText(Integer.toString(filme.getAno()) + " - " + filme.getDisponiveis() + " em estoque");
             listPrecoMv[i].setText("R$ " + Double.toString(filme.getPreco()) + "0");
-            listAlugarMv[i].setEnabled(filme.getDisponiveis() > 0);            
+            listAlugarMv[i].setEnabled(filme.getDisponiveis() > 0);
+            
             if(finalPedido.contains(filme)){
                 listAlugarMv[i].setText("Remover do carrinho");
                 valorTotal += filme.getPreco();
@@ -116,8 +111,9 @@ public class Loja extends javax.swing.JFrame {
             } else {
                 listAlugarMv[i].setText("Alugar");
             }
+            
             btnDetalhesMv[i].setEnabled(true);
-            detalhesMv[i] = filme.getNomeProd() + "\nValor do aluguel: R$ " + Double.toString(filme.getPreco()) + "0" + "\nGênero: " + filme.getGenero() + "\nEstudio: " + filme.getEstudio()  + "\nDiretor: " + filme.getDiretor() + "\nAno: " + Integer.toString(filme.getAno()) +  "\nFaixa etária: " + filme.getFaixaEtaria();
+            detalhesMv[i] = filme.getNomeProd() + "\nValor do aluguel: R$ " + Double.toString(filme.getPreco()) + "0" + "\nGênero: " + filme.getGenero() + "\nEstúdio: " + filme.getEstudio()  + "\nDiretor: " + filme.getDiretor() + "\nAno: " + Integer.toString(filme.getAno()) +  "\nFaixa etária: " + filme.getFaixaEtaria();
         }
         
         javax.swing.JLabel[] listImgMus = {imgMus1, imgMus2, imgMus3, imgMus4, imgMus5, imgMus6, imgMus7, imgMus8, imgMus9, imgMus10};
@@ -142,11 +138,11 @@ public class Loja extends javax.swing.JFrame {
                 listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/BrandNewEyes.jpeg")));
             } else if(titulo.contains("celebration")){
                 listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/Celebration")));
-            } else if(titulo.contains("construcao")){
+            } else if(titulo.contains("construção")){
                 listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/Construcao.jpeg")));
             } else if(titulo.contains("discovery")){
                 listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/Discovery.jpeg")));
-            } else if(titulo.contains("elis e tom")){
+            } else if(titulo.contains("elis & tom")){
                 listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/ElisETom.jpeg")));
             } else if(titulo.contains("folklore")){
                 listImgMus[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/musicas/Folklore.jpeg")));
@@ -182,6 +178,7 @@ public class Loja extends javax.swing.JFrame {
             listDescMus[i].setText(Integer.toString(musica.getAno()) + " - A" + musica.getFaixaEtaria());
             listPrecoMus[i].setText("R$ " + Double.toString(musica.getPreco()) + "0");
             listAlugarMus[i].setEnabled(musica.getDisponiveis() > 0);
+            
             if(finalPedido.contains(musica)){
                 listAlugarMus[i].setText("Remover do carrinho");
                 valorTotal += musica.getPreco();
@@ -190,6 +187,7 @@ public class Loja extends javax.swing.JFrame {
             } else {
                 listAlugarMus[i].setText("Alugar");
             }
+            
             btnDetalhesMus[i].setEnabled(true);
             detalhesMus[i] = musica.getNomeProd() + "\nValor do aluguel: R$ " + Double.toString(musica.getPreco()) + "0" + "\nEstilo: " + musica.getEstilo() + "\nAutor: " + musica.getAutor() + "\nAno: " + Integer.toString(musica.getAno()) +  "\nFaixa etária: " + musica.getFaixaEtaria();
         }
@@ -212,7 +210,7 @@ public class Loja extends javax.swing.JFrame {
                 listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tabuleiros/Cobras.png")));
             } else if(titulo.contains("coup")){
                 listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tabuleiros/Coup.png")));
-            } else if(titulo.contains("dungeons and dragons")){
+            } else if(titulo.contains("dungeons & dragons")){
                 listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tabuleiros/Dungeons.png")));
             } else if(titulo.contains("jogo da vida")){
                 listImgTab[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tabuleiros/JogoDaVida.png")));
@@ -226,6 +224,7 @@ public class Loja extends javax.swing.JFrame {
             listDescTab[i].setText(Integer.toString(tabuleiro.getAno()) + " - A" + tabuleiro.getFaixaEtaria());
             listPrecoTab[i].setText("R$ " + Double.toString(tabuleiro.getPreco()) + "0");
             listAlugarTab[i].setEnabled(tabuleiro.getDisponiveis() > 0);
+            
             if(finalPedido.contains(tabuleiro)){
                 listAlugarTab[i].setText("Remover do carrinho");
                 valorTotal += tabuleiro.getPreco();
@@ -234,6 +233,7 @@ public class Loja extends javax.swing.JFrame {
             } else {
                 listAlugarTab[i].setText("Alugar");
             }
+            
             btnDetalhesTab[i].setEnabled(true);
             detalhesTab[i] = tabuleiro.getNomeProd() + "\nValor do aluguel: R$ " + Double.toString(tabuleiro.getPreco()) + "0" + "\nTipo: " + tabuleiro.getTipo() + "\nNúmero de jogadores: " + tabuleiro.getNumJogadores() + "\nMarca: " + tabuleiro.getMarca() + "\nAno: " + Integer.toString(tabuleiro.getAno()) +  "\nFaixa etária: " + tabuleiro.getFaixaEtaria();
         }
@@ -308,6 +308,7 @@ public class Loja extends javax.swing.JFrame {
             listDescVid[i].setText(Integer.toString(videogame.getAno()) + " - A" + videogame.getFaixaEtaria());
             listPrecoVid[i].setText("R$ " + Double.toString(videogame.getPreco()) + "0");
             listAlugarVid[i].setEnabled(videogame.getDisponiveis() > 0);
+            
             if(finalPedido.contains(videogame)){
                 listAlugarVid[i].setText("Remover do carrinho");
                 valorTotal += videogame.getPreco();
@@ -316,6 +317,7 @@ public class Loja extends javax.swing.JFrame {
             } else {
                 listAlugarVid[i].setText("Alugar");
             }
+            
             btnDetalhesVid[i].setEnabled(true);
             detalhesVid[i] = videogame.getNomeProd() + "\nValor do aluguel: R$ " + Double.toString(videogame.getPreco()) + "0" + "\nPlataforma: " + videogame.getPlataforma() + "\nGênero: " + videogame.getGenero() + "\nDesenvolvedor: " + videogame.getDesenvolvedor() + "\nNúmero de jogadores: " + videogame.getNumJogadores() + "\nAno: " + Integer.toString(videogame.getAno()) +  "\nFaixa etária: " + videogame.getFaixaEtaria();
         }
@@ -325,34 +327,18 @@ public class Loja extends javax.swing.JFrame {
         if(btn.isSelected()){
             tempBtnSelected.add(btn);
             switch(tipo){
-                case "Mv":
-                    tempPedido.add(listaFilmes.get(ind-1));
-                    break;
-                case "Mus":
-                    tempPedido.add(listaMusicas.get(ind-1));
-                    break;
-                case "Tab":
-                    tempPedido.add(listaTabuleiros.get(ind-1));
-                    break;
-                case "Vid":
-                    tempPedido.add(listaVideogames.get(ind-1));
-                    break;
+                case "Mv" -> tempPedido.add(listaFilmes.get(ind-1));
+                case "Mus" -> tempPedido.add(listaMusicas.get(ind-1));
+                case "Tab" -> tempPedido.add(listaTabuleiros.get(ind-1));
+                case "Vid" -> tempPedido.add(listaVideogames.get(ind-1));
             }
         } else {
             tempBtnSelected.remove(btn);
             switch(tipo){
-                case "Mv":
-                    tempPedido.remove(listaFilmes.get(ind-1));
-                    break;
-                case "Mus":
-                    tempPedido.remove(listaMusicas.get(ind-1));
-                    break;
-                case "Tab":
-                    tempPedido.remove(listaTabuleiros.get(ind-1));
-                    break;
-                case "Vid":
-                    tempPedido.remove(listaVideogames.get(ind-1));
-                    break;
+                case "Mv" -> tempPedido.remove(listaFilmes.get(ind-1));
+                case "Mus" -> tempPedido.remove(listaMusicas.get(ind-1));
+                case "Tab" -> tempPedido.remove(listaTabuleiros.get(ind-1));
+                case "Vid" -> tempPedido.remove(listaVideogames.get(ind-1));
             }
         }
     }
@@ -3585,8 +3571,8 @@ public class Loja extends javax.swing.JFrame {
                 finalPedido.add(item);
                 
                 valorTotal += item.getPreco();
-                
             }
+            
             btn.setSelected(false);
         }
         

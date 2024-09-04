@@ -183,9 +183,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtfCodigo">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtfCodigoActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblSenha">
           <Properties>
@@ -196,9 +193,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtfSenha">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtfSenhaActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnVoltar">
           <Properties>

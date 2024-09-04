@@ -174,9 +174,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtfSenha">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtfSenhaActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnVoltar">
           <Properties>
@@ -195,9 +192,6 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtfNome">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtfNomeActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblTipo1">
           <Properties>

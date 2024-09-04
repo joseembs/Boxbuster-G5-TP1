@@ -1,36 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package telas;
 
 import boxbuster.Alugar;
 import boxbuster.Pedido;
 import boxbuster.Produtos;
 import boxbuster.Status;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author elisrb
  */
 public class AreaCaixa extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AreaFuncionario
-     */
-    
-
     HashMap<Integer, Alugar> histAlugueis;
     String codigoAtual;
     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-
+    
+    /**
+     * Creates new form AreaCaixa
+     */
     public AreaCaixa() {
         setLocationRelativeTo(null);
         initComponents();
@@ -39,7 +28,7 @@ public class AreaCaixa extends javax.swing.JFrame {
     private void updateHistList() { // formata atualiza a tabela de pedidos
         tableAluguel.removeAll();
         
-        histAlugueis = Pedido.lerAlugueis(); // retorna um HashMap com todos os Alugueis da loja
+        histAlugueis = Pedido.loadAlugueis(); // retorna um HashMap com todos os Alugueis da loja
         
         DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Pedido", "Produto", "Tipo", "Data Inicial", "Devolução", "Preço", "Dívida", "Status"}, 0);
         for(Alugar aluguel : histAlugueis.values()){
@@ -68,6 +57,28 @@ public class AreaCaixa extends javax.swing.JFrame {
             }
         }
         tableAluguel.setModel(tabela);  
+    }
+    
+    public void alterarNome(String novoNome) {
+        lblNome.setText("Nome: " + novoNome);
+    }
+     
+    public void alterarCPF(String novoCPF) {
+        lblCPF.setText("CPF: " + novoCPF);
+    }
+    
+    public void alterarDataNascimento(String novaDataNascimento) {
+        lblDataNasc.setText("Data de nasc: " + novaDataNascimento);
+    }
+    
+    public void alterarIdade(String novaIdade){
+        lblIdade.setText("Idade: " + novaIdade);
+    }
+    
+    public void alterarCodigo(String novoCodigo){
+        lblCodigo.setText("Código: " + novoCodigo);
+        codigoAtual = novoCodigo;
+        updateHistList();
     }
 
     /**
@@ -154,11 +165,6 @@ public class AreaCaixa extends javax.swing.JFrame {
         txtCodigoPesquisa.setText("Código do Pedido:");
 
         txtfCodigoPesquisa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtfCodigoPesquisa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfCodigoPesquisaActionPerformed(evt);
-            }
-        });
 
         btnPesquisar.setText("Pesquisar Pedido");
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -294,10 +300,6 @@ public class AreaCaixa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtfCodigoPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfCodigoPesquisaActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_txtfCodigoPesquisaActionPerformed
-
     private void menuVoltarAreaCxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVoltarAreaCxActionPerformed
         new TelaPrincipal().setVisible(true);
         this.setVisible(false);
@@ -314,7 +316,7 @@ public class AreaCaixa extends javax.swing.JFrame {
         
         tableAluguel.removeAll();
         
-        histAlugueis = Pedido.lerAlugueis();
+        histAlugueis = Pedido.loadAlugueis();
         
         DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Pedido", "Produto", "Tipo", "Data Inicial", "Devolução", "Preço", "Dívida", "Status"}, 0);
         for(int i = 0; i < histAlugueis.size(); i++){
@@ -381,28 +383,7 @@ public class AreaCaixa extends javax.swing.JFrame {
             }
         });
     }
-
-    public void alterarNome(String novoNome) {
-        lblNome.setText("Nome: " + novoNome);
-    }
-     
-    public void alterarCPF(String novoCPF) {
-        lblCPF.setText("CPF: " + novoCPF);
-    }
     
-    public void alterarDataNascimento(String novaDataNascimento) {
-        lblDataNasc.setText("Data de nasc: " + novaDataNascimento);
-    }
-    
-    public void alterarIdade(String novaIdade){
-        lblIdade.setText("Idade: " + novaIdade);
-    }
-    
-    public void alterarCodigo(String novoCodigo){
-        lblCodigo.setText("Código: " + novoCodigo);
-        codigoAtual = novoCodigo;
-        updateHistList();
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnVoltar;

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package boxbuster;
 
 import java.io.BufferedReader;
@@ -11,20 +7,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-
 /**
  *
  * @author hsaless
  */
 public class Pedido {
-    static private int codigoPedido = 1;
+    private static final String arquivo = "pedidos.txt";
     
-    static private ArrayList<Produtos> pedidoAtual = new ArrayList<>(); 
+    private static int codigoPedido = 1;
     
-    static private HashMap<Integer, Alugar> mapAlugueis = new HashMap<>();
+    private static ArrayList<Produtos> pedidoAtual = new ArrayList<>(); 
+    
+    private static HashMap<Integer, Alugar> mapAlugueis = new HashMap<>();
 
     public Pedido() {
     }
@@ -77,21 +72,18 @@ public class Pedido {
         Pedido.pedidoAtual = new ArrayList<>();
     }
     
-    public static void addStatus(int codigoPedido, Alugar aluguel){
+    public static void replaceAluguel(int codigoPedido, Alugar aluguel){
         Pedido.mapAlugueis.put(codigoPedido, aluguel);
-        
     }
     
     // chamada para preencher as tabelas, usa o codigoProd salvo pelos Alugar para retornar o produto alugado 
-    static public Alugar getAluguelPorCodigo(int codigoPedido){
+    public static Alugar getAluguelPorCodigo(int codigoPedido){
         Alugar aluguel = mapAlugueis.get(codigoPedido);
         
         return aluguel;
     }
     
-    static private String arquivo = "pedidos.txt";
-    
-    static public void salvarAluguel(Alugar aluguel) {
+    public static void salvarAluguel(Alugar aluguel) {
         try (FileWriter fw = new FileWriter(arquivo, true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
@@ -101,7 +93,7 @@ public class Pedido {
         }
     }
     
-    static public HashMap<Integer, Alugar> lerAlugueis() {
+    static public HashMap<Integer, Alugar> loadAlugueis() {
         HashMap<Integer, Alugar> alugueis = new HashMap<>();
         int temp = 0;
         
@@ -137,6 +129,6 @@ public class Pedido {
             e.printStackTrace();
         }
         
-        Pedido.lerAlugueis(); // mantém tudo sincronizado
+        Pedido.loadAlugueis(); // mantém tudo sincronizado
     }
 }

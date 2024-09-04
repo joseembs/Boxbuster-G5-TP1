@@ -141,21 +141,36 @@ public class Alugar {
 
     public void setListaStatus(ArrayList<Status> listaStatus) {
         this.listaStatus = listaStatus;
+    }    
+
+    public Status getProdutoStatus(int codigoProd){
+        int ind = -1;
+        
+        for(int i = 0; i < this.listaProdutos.size(); i++){
+            Produtos tempProd = this.listaProdutos.get(i);
+            
+            if(codigoProd == tempProd.getCodigoProd()){
+                ind = i;
+                break;
+            }
+        }
+
+        return listaStatus.get(ind);
     }
     
     public void setProdutoStatus(int codigoProd, Status status){
-        Produtos tempProd = Estoque.getProdutoPorCodigo(codigoProd);
-        int ind = listaProdutos.indexOf(tempProd);
+        int ind = -1;
+        
+        for(int i = 0; i < this.listaProdutos.size(); i++){
+            Produtos tempProd = this.listaProdutos.get(i);
+            
+            if(codigoProd == tempProd.getCodigoProd()){
+                ind = i;
+                break;
+            }
+        }
 
         listaStatus.set(ind, status);
-    }
-
-    public Status getProdutoStatus(int codigoProd){
-        Produtos tempProd = Estoque.getProdutoPorCodigo(codigoProd);
-        
-        int ind = listaProdutos.indexOf(tempProd);
-
-        return listaStatus.get(ind);
     }
     
     @Override

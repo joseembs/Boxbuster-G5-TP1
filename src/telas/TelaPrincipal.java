@@ -1,16 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package telas;
 
 import boxbuster.BancoDeDadosClientes;
 import boxbuster.Estoque;
 import boxbuster.Pedido;
-
 /**
  *
- * @author Adm
+ * @author josembs
  */
 public class TelaPrincipal extends javax.swing.JFrame {
     
@@ -19,7 +14,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         Estoque.loadEstoque();
-        Pedido.lerAlugueis();
+        Pedido.loadAlugueis();
         
         setLocationRelativeTo(null);
         initComponents();
@@ -285,7 +280,4 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator separatorMain;
     // End of variables declaration//GEN-END:variables
 
-    private Object BancoDeDadosClientes() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

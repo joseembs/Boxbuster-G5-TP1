@@ -1,41 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package telas;
 
 import boxbuster.BancoDeDadosClientes;
-import boxbuster.BancoDeDadosFuncionarios;
 import boxbuster.Cadastrado;
-import boxbuster.Filmes;
-import boxbuster.Musicas;
-import boxbuster.Tabuleiros;
-import boxbuster.Videogames;
 import boxbuster.Visitante;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author elisrb
  */
 public class EditarCliente extends javax.swing.JFrame {
-    //inicia o banco de dados
-
-    BancoDeDadosClientes bdClientes = new BancoDeDadosClientes();
-
     
-    public EditarCliente() { // inicia a tela com as informações do cliente e permitindo ele mudar
+    //inicia o banco de dados
+    BancoDeDadosClientes bdClientes = new BancoDeDadosClientes();
+    
+    public EditarCliente() { // inicia a tela com as informações do cliente e permitindo ele editá-las
         setLocationRelativeTo(null);
         initComponents();
+        
         if(BancoDeDadosClientes.getClienteAtual().getClass().getSimpleName().equals("Cadastrado")){
             lblSenha.setVisible(true);
             txtfSenha.setVisible(true);
@@ -43,8 +29,7 @@ public class EditarCliente extends javax.swing.JFrame {
             SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
             String dataFormatada = formatador.format(BancoDeDadosClientes.getClienteAtual().getDataNascimento());
             txtfDataNascimento.setText(dataFormatada);
-        }
-        else{
+        } else {
             lblSenha.setVisible(false);
             txtfSenha.setVisible(false);
             txtfNome.setText(BancoDeDadosClientes.getClienteAtual().getNome());
@@ -98,12 +83,6 @@ public class EditarCliente extends javax.swing.JFrame {
         lblSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblSenha.setText("Senha:");
 
-        txtfSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfSenhaActionPerformed(evt);
-            }
-        });
-
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,12 +94,6 @@ public class EditarCliente extends javax.swing.JFrame {
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
-            }
-        });
-
-        txtfNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfNomeActionPerformed(evt);
             }
         });
 
@@ -225,10 +198,6 @@ public class EditarCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfSenhaActionPerformed
     
     // salva as novas informações após a edição
     
@@ -236,8 +205,7 @@ public class EditarCliente extends javax.swing.JFrame {
         if(BancoDeDadosClientes.getClienteAtual().getClass().getSimpleName().equals("Cadastrado")){
             if(txtfNome.getText().equals("") || txtfDataNascimento.getText().equals("") || txtfSenha.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-            }
-            else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Dados mudados com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                 bdClientes.removerPessoa(BancoDeDadosClientes.getClienteAtual().getCPF());
                 String nome = txtfNome.getText();
@@ -246,23 +214,25 @@ public class EditarCliente extends javax.swing.JFrame {
                 Date dataNascimento = null;
                 SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                 double divida = BancoDeDadosClientes.getClienteAtual().getDivida();
+                
                 try {
                     dataNascimento = formato.parse(dataNascimentoString);
                 } catch (ParseException ex) {
                     Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
                 Cadastrado cadastrado = new Cadastrado(nome, BancoDeDadosClientes.getClienteAtual().getCPF(), dataNascimento, divida, senha);
                 BancoDeDadosClientes.setClienteAtual(cadastrado);
+                
                 bdClientes.adicionarPessoa(cadastrado);
+                
                 new AreaCliente().setVisible(true);
                 this.setVisible(false);
             }
-        }
-        else{
+        } else {
             if(txtfNome.getText().equals("") || txtfDataNascimento.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-            }
-            else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Dados mudados com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                 bdClientes.removerPessoa(BancoDeDadosClientes.getClienteAtual().getCPF());
                 String nome = txtfNome.getText();
@@ -270,14 +240,18 @@ public class EditarCliente extends javax.swing.JFrame {
                 Date dataNascimento = null;
                 SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                 double divida = BancoDeDadosClientes.getClienteAtual().getDivida();
+                
                 try {
                     dataNascimento = formato.parse(dataNascimentoString);
                 } catch (ParseException ex) {
                     Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
                 Visitante visitante = new Visitante(nome, BancoDeDadosClientes.getClienteAtual().getCPF(), dataNascimento, divida);
+                
                 BancoDeDadosClientes.setClienteAtual(visitante);
                 bdClientes.adicionarPessoa(visitante);
+                
                 new AreaCliente().setVisible(true);
                 this.setVisible(false);
             }
@@ -300,10 +274,6 @@ public class EditarCliente extends javax.swing.JFrame {
         new AreaCliente().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
-
-    private void txtfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfNomeActionPerformed
 
     private void txtfSenha1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfSenha1ActionPerformed
         new AreaCliente().setVisible(true);

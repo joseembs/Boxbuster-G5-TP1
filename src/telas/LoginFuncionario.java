@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package telas;
 
 import boxbuster.BancoDeDadosClientes;
@@ -16,7 +12,6 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author elisrb
@@ -77,20 +72,8 @@ public class LoginFuncionario extends javax.swing.JFrame {
         lblCodigo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCodigo.setText("Código:");
 
-        txtfCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfCodigoActionPerformed(evt);
-            }
-        });
-
         lblSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblSenha.setText("Senha:");
-
-        txtfSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfSenhaActionPerformed(evt);
-            }
-        });
 
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -197,34 +180,27 @@ public class LoginFuncionario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtfCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfCodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfCodigoActionPerformed
-
-    private void txtfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfSenhaActionPerformed
-
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        
         if(txtfCodigo.getText().equals("")|| txtfSenha.getText().equals("")||cmbTipo.getSelectedIndex()==0){
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-            }
-        else{
+        } else {
             String codigo = txtfCodigo.getText();
             String senha = txtfSenha.getText();
             String tipo = cmbTipo.getSelectedItem().toString();
 
             ArrayList<String> pessoa = bdFunc.buscarPessoa("_" + codigo + "_"); // busca o funcionário pelo código
+            
             if(pessoa.isEmpty()){
                 JOptionPane.showMessageDialog(null, "Não existe funcionário com este código.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-            }
-            else if(!pessoa.get(5).equals(tipo)){
+                
+            } else if(!pessoa.get(5).equals(tipo)){
                 JOptionPane.showMessageDialog(null, "O tipo está incorreto.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-            }
-            else if(!pessoa.get(3).equals(senha)){
+                
+            } else if(!pessoa.get(3).equals(senha)){
                 JOptionPane.showMessageDialog(null, "A senha está incorreta.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-            }
-            else{ // faz login
+                
+            } else { // faz login
                 if(tipo.equals("Caixa")){
                     // transfere as informações do caixa que acabou de fazer login para serem exibidas na área do caixa
                     AreaCaixa telaCaixa = new AreaCaixa();
@@ -233,6 +209,7 @@ public class LoginFuncionario extends javax.swing.JFrame {
                     
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     Date data = null;
+                    
                     try {
                         data = formato.parse(dataString);
                     } catch (ParseException ex) {

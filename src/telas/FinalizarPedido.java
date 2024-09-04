@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package telas;
 
 import boxbuster.BancoDeDadosClientes;
@@ -22,10 +18,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
- * @author Adm
+ * @author josembs
  */
 public class FinalizarPedido extends javax.swing.JFrame {
 
@@ -37,10 +32,9 @@ public class FinalizarPedido extends javax.swing.JFrame {
     
     BancoDeDadosClientes bdClientes = new BancoDeDadosClientes();
     /**
-     * Creates new form CarrinhoScr
+     * Creates new form FinalizarPedido
      */
     public FinalizarPedido() {
-        //listaPedido = pedidoIn;
         
         setLocationRelativeTo(null);
         initComponents();
@@ -80,8 +74,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
             btnLogin.setEnabled(false);
             btnLogin.setVisible(false);
             btnLogout.setEnabled(false);
-        }
-        else{
+        } else {
             cmbSituacao.setEnabled(false);
             lblSenha.setVisible(false);
             txtfSenha.setVisible(false);
@@ -106,8 +99,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
         }
     }
 
-    private void updateProdTable() {        
-        
+    private void updateProdTable() {   
         DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Nº", "Título", "Preço"}, 0);
         valorTotal = 0;
 
@@ -174,6 +166,7 @@ public class FinalizarPedido extends javax.swing.JFrame {
             btnFinalizar.setEnabled(false);
         }
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -252,11 +245,6 @@ public class FinalizarPedido extends javax.swing.JFrame {
         lblSenha.setText("Senha:");
 
         txtfSenha.setEnabled(false);
-        txtfSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfSenhaActionPerformed(evt);
-            }
-        });
 
         btnLogin.setText("Entrar");
         btnLogin.setEnabled(false);
@@ -399,11 +387,6 @@ public class FinalizarPedido extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtfDataNascimento.setEnabled(false);
-        txtfDataNascimento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfDataNascimentoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlCartLayout = new javax.swing.GroupLayout(pnlCart);
         pnlCart.setLayout(pnlCartLayout);
@@ -621,10 +604,6 @@ public class FinalizarPedido extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_menuSairCartActionPerformed
 
-    private void txtfDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfDataNascimentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfDataNascimentoActionPerformed
-
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         String[] caixaInfo = cmbCaixa.getSelectedItem().toString().split("-");
 
@@ -685,27 +664,27 @@ public class FinalizarPedido extends javax.swing.JFrame {
         if(index == 1){
             if(txtfNome.getText().equals("") || txtfCPF.getText().equals("") || txtfDataNascimento.getText().equals("") || txtfSenha.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-            }
-            else{
+            } else {
                 SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                 String nome = txtfNome.getText();
                 String CPF = txtfCPF.getText();
                 Date dataNascimento = null;
                 String dataNascimentoString = txtfDataNascimento.getText();
-                LocalDate dataAtual = LocalDate.now();
+                
                 try {
                     dataNascimento = formato.parse(dataNascimentoString);
                 } catch (ParseException ex) {
                     Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                LocalDate dataNascimentoLocal = dataNascimento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                int idade = Period.between(dataNascimentoLocal, dataAtual).getYears();
-                String idadeString = String.valueOf(idade);
+                
                 String senha = txtfSenha.getText();
                 Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, 0, senha);
+                
                 BancoDeDadosClientes.setClienteAtual(cadastrado);
                 bdClientes.adicionarPessoa(cadastrado);
+                
                 JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                
                 cmbSituacao.setEnabled(false);
                 txtfNome.setEnabled(false);
                 txtfCPF.setEnabled(false);
@@ -714,31 +693,34 @@ public class FinalizarPedido extends javax.swing.JFrame {
                 txtfSenha.setVisible(false);
                 lblSenha.setVisible(false);
                 btnLogin.setEnabled(false);
-
             }
-        }
-        else if(index == 2){
+        } else if(index == 2){
             if(txtfNome.getText().equals("") || txtfCPF.getText().equals("") || txtfDataNascimento.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-            }
-            else{
+            } else {
                 String CPF = txtfCPF.getText();
+                
                 ArrayList<String> lista = bdClientes.buscarPessoa(CPF);
+                
                 if(lista.isEmpty()){
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     String nome = txtfNome.getText();
                     Date dataNascimento = null;
                     String dataNascimentoString = txtfDataNascimento.getText();
-                    LocalDate dataAtual = LocalDate.now();
+                    
                     try {
                         dataNascimento = formato.parse(dataNascimentoString);
                     } catch (ParseException ex) {
                         Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    
                     Visitante visitante = new Visitante(nome, CPF, dataNascimento, 0);
+                    
                     bdClientes.adicionarPessoa(visitante);
                     BancoDeDadosClientes.setClienteAtual(visitante);
+                    
                     JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                    
                     cmbSituacao.setEnabled(false);
                     txtfNome.setEnabled(false);
                     txtfCPF.setEnabled(false);
@@ -747,35 +729,37 @@ public class FinalizarPedido extends javax.swing.JFrame {
                     txtfSenha.setVisible(false);
                     lblSenha.setVisible(false);
                     btnLogin.setEnabled(false);
-
-                }
-                else{
+                } else {
                     Date dataNascimento = null;
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     String[] palavras = lista.get(0).split("_");
+                    
                     if (palavras[0].equals("Cadastrado")){
                         JOptionPane.showMessageDialog(null, "Esse CPF está associado a um cadastrado.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-                    }
-                    else{
-
+                    } else {
                         String nome = palavras[1];
                         String dataNascimentoString = palavras[3];
                         String divida = palavras[4];
+                        
                         try {
                             dataNascimento = formato.parse(dataNascimentoString);
                         } catch (ParseException ex) {
                             Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                        
                         Visitante visitante = new Visitante(nome, CPF, dataNascimento, Double.parseDouble(divida));
+                        
                         BancoDeDadosClientes.setClienteAtual(visitante);
+                        
                         if(Double.parseDouble(divida) > 0){
                             Pedido.setPedidoAtual(new ArrayList<>());
                             JOptionPane.showMessageDialog(null, "Primeiro pague a dívida antes de usar a loja", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                            
                             new AreaCliente().setVisible(true);
                             this.setVisible(false);
-                        }
-                        else{
+                        } else {
                             JOptionPane.showMessageDialog(null, "Usuário entrou com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                            
                             cmbSituacao.setEnabled(false);
                             txtfNome.setEnabled(false);
                             txtfCPF.setEnabled(false);
@@ -784,37 +768,33 @@ public class FinalizarPedido extends javax.swing.JFrame {
                             txtfSenha.setVisible(false);
                             lblSenha.setVisible(false);
                             btnLogin.setEnabled(false);
-                            
                         }
-                        
                     }
                 }
             }
-        }
-        else if(index == 3){
+        } else if(index == 3){
             if(txtfCPF.getText().equals("")|| txtfSenha.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-            }
-            else{
+            } else {
                 String CPF = txtfCPF.getText();
                 Date dataNascimento = null;
                 String senha = txtfSenha.getText();
                 ArrayList<String> lista = bdClientes.buscarPessoa(CPF);
+                
                 if(lista.isEmpty()){
                     JOptionPane.showMessageDialog(null, "Não existe nenhuma pessoa já cadastrada com esse CPF.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-                }
-                else{
+                } else{
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     String[] palavras = lista.get(0).split("_");
+                    
                     if (palavras[0].equals("Visitante")){
                         JOptionPane.showMessageDialog(null, "Esse CPF está associado a um visitante.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-                    }
-                    else{
-
+                    } else {
                         String nome = palavras[1];
                         String dataNascimentoString = palavras[3];
                         String divida = palavras[4];
                         String senhaChecar = palavras[5];
+                        
                         try {
                             dataNascimento = formato.parse(dataNascimentoString);
                         } catch (ParseException ex) {
@@ -823,19 +803,19 @@ public class FinalizarPedido extends javax.swing.JFrame {
 
                         if(!senha.equals(senhaChecar)){
                             JOptionPane.showMessageDialog(null, "A senha está incorreta.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-
-                        }
-                        else{
+                        } else {
                             Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, Double.parseDouble(divida), senha);
                             BancoDeDadosClientes.setClienteAtual(cadastrado);
+                            
                             if(Double.parseDouble(divida) > 0){
                                 Pedido.setPedidoAtual(new ArrayList<>());
                                 JOptionPane.showMessageDialog(null, "Primeiro pague a dívida antes de usar a loja", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                                
                                 new AreaCliente().setVisible(true);
                                 this.setVisible(false);
-                            }
-                            else{
+                            } else {
                                 JOptionPane.showMessageDialog(null, "Usuário entrou com sucesso!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                                
                                 cmbSituacao.setEnabled(false);
                                 txtfNome.setEnabled(false);
                                 txtfCPF.setEnabled(false);
@@ -844,15 +824,13 @@ public class FinalizarPedido extends javax.swing.JFrame {
                                 txtfSenha.setVisible(false);
                                 lblSenha.setVisible(false);
                                 btnLogin.setEnabled(false);
-                                
                             }
-                           
                         }
                     }
                 }
-
             }
         }
+        
         if(BancoDeDadosClientes.getClienteAtual() != null){
             lblUsuario.setText("Usuário atual: " + BancoDeDadosClientes.getClienteAtual().getNome());
             checkFim();
@@ -861,12 +839,9 @@ public class FinalizarPedido extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void txtfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfSenhaActionPerformed
-
     private void cmbSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSituacaoActionPerformed
         int index = cmbSituacao.getSelectedIndex();
+        
         if(index == 1){
             txtfNome.setEnabled(true);
             lblNome.setVisible(true);
@@ -883,9 +858,8 @@ public class FinalizarPedido extends javax.swing.JFrame {
             btnLogin.setEnabled(true);
             btnLogin.setVisible(true);
             btnLogin.setText("Cadastrar");
-
-        }
-        else if(index == 3){
+            
+        } else if(index == 3){
             txtfNome.setEnabled(false);
             lblNome.setVisible(false);
             txtfNome.setVisible(false);
@@ -901,9 +875,8 @@ public class FinalizarPedido extends javax.swing.JFrame {
             btnLogin.setEnabled(true);
             btnLogin.setVisible(true);
             btnLogin.setText("Entrar");
-
-        }
-        else if(index == 2){
+            
+        } else if(index == 2){
             txtfNome.setEnabled(true);
             lblNome.setVisible(true);
             txtfNome.setVisible(true);
@@ -920,9 +893,8 @@ public class FinalizarPedido extends javax.swing.JFrame {
             btnLogin.setEnabled(true);
             btnLogin.setVisible(true);
             btnLogin.setText("Cadastrar-se");
-
-        }
-        else{
+            
+        } else {
             txtfNome.setEnabled(false);
             lblNome.setVisible(false);
             txtfNome.setVisible(false);

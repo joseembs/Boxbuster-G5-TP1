@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package telas;
 
 import boxbuster.BancoDeDadosClientes;
@@ -9,18 +5,14 @@ import boxbuster.Cadastrado;
 import boxbuster.Visitante;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
 /**
  *
- * @author Adm
+ * @author josembs
  */
 public class CadastroCliente extends javax.swing.JFrame {
     
@@ -46,9 +38,6 @@ public class CadastroCliente extends javax.swing.JFrame {
         btnLogin.setEnabled(false);
         btnLoja.setVisible(false);
         btnLoja.setEnabled(false);
-        
-        
-        
     }
 
     /**
@@ -120,12 +109,6 @@ public class CadastroCliente extends javax.swing.JFrame {
         lblSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblSenha.setText("Senha:");
 
-        txtfSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfSenhaActionPerformed(evt);
-            }
-        });
-
         logoBoxbuster.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/boxLogoBig.png"))); // NOI18N
 
         btnLogin.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -164,84 +147,66 @@ public class CadastroCliente extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        txtfDataNascimento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfDataNascimentoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlCadCliLayout = new javax.swing.GroupLayout(pnlCadCli);
         pnlCadCli.setLayout(pnlCadCliLayout);
         pnlCadCliLayout.setHorizontalGroup(
             pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCadCliLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(24, 24, 24)
                 .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSituacao)
                     .addGroup(pnlCadCliLayout.createSequentialGroup()
-                        .addComponent(btnVoltar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLoja)
-                        .addContainerGap())
+                        .addComponent(lblDataNascimento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtfDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlCadCliLayout.createSequentialGroup()
-                        .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlCadCliLayout.createSequentialGroup()
-                                .addComponent(lblNome)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtfNome)
-                                .addGap(19, 19, 19))
-                            .addGroup(pnlCadCliLayout.createSequentialGroup()
-                                .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlCadCliLayout.createSequentialGroup()
-                                        .addComponent(lblDataNascimento)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtfDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(cmbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblSenha)
-                                    .addGroup(pnlCadCliLayout.createSequentialGroup()
-                                        .addComponent(lblCPF)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)))
-                        .addComponent(logoBoxbuster)
-                        .addGap(40, 40, 40))))
-            .addGroup(pnlCadCliLayout.createSequentialGroup()
-                .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblCPF)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblSenha)
                     .addGroup(pnlCadCliLayout.createSequentialGroup()
                         .addGap(52, 52, 52)
-                        .addComponent(lblPropaganda1))
-                    .addGroup(pnlCadCliLayout.createSequentialGroup()
-                        .addGap(58, 58, 58)
                         .addComponent(txtfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlCadCliLayout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(lblPropaganda2)))
-                .addContainerGap(79, Short.MAX_VALUE))
+                        .addComponent(lblNome)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 18, Short.MAX_VALUE)
+                .addComponent(logoBoxbuster)
+                .addGap(24, 24, 24))
             .addGroup(pnlCadCliLayout.createSequentialGroup()
-                .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlCadCliLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblSituacao))
-                    .addGroup(pnlCadCliLayout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(btnVoltar)
+                .addGap(60, 60, 60)
+                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLoja)
+                .addContainerGap())
+            .addGroup(pnlCadCliLayout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(lblPropaganda1)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(pnlCadCliLayout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addComponent(lblPropaganda2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlCadCliLayout.setVerticalGroup(
             pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCadCliLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
                 .addComponent(lblPropaganda1)
-                .addGap(2, 2, 2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblPropaganda2)
-                .addGap(3, 3, 3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblSituacao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(logoBoxbuster)
+                .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlCadCliLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
                         .addComponent(cmbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
+                        .addGap(18, 18, 18)
                         .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNome)
                             .addComponent(txtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -253,16 +218,18 @@ public class CadastroCliente extends javax.swing.JFrame {
                         .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblDataNascimento)
                             .addComponent(txtfDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
+                        .addGap(18, 18, 18)
                         .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblSenha)
-                            .addComponent(txtfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(20, 20, 20)
-                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnVoltar)
-                    .addComponent(btnLoja))
+                            .addComponent(txtfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(logoBoxbuster))
+                .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCadCliLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(pnlCadCliLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnVoltar)
+                            .addComponent(btnLoja)))
+                    .addComponent(btnLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -318,36 +285,35 @@ public class CadastroCliente extends javax.swing.JFrame {
     // realiza o cadastro/login do cliente, sendo ele cadastrado ou visitante, e leva para a área do cliente com suas informações
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         int index = cmbSituacao.getSelectedIndex();
+        
         if(index == 1){
             if(txtfNome.getText().equals("") || txtfCPF.getText().equals("") || txtfDataNascimento.getText().equals("") || txtfSenha.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
             }
             else{
-                
                 SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                 String nome = txtfNome.getText();
                 String CPF = txtfCPF.getText();
+                
                 if(!bdClientes.buscarPessoa(CPF).isEmpty()){
                     String[] palavras = bdClientes.buscarPessoa(CPF).get(0).split("_");
                     if(palavras[0].equals("Cadastrado")){
                         JOptionPane.showMessageDialog(null, "Esse CPF já está vinculado à outra conta", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-                    }
-                    else{
+                    } else {
                         bdClientes.removerPessoa(CPF);
                         Date dataNascimento = null;
                         String dataNascimentoString = txtfDataNascimento.getText();
-                        LocalDate dataAtual = LocalDate.now();
                         String divida = palavras[4];
+                        
                         try {
                             dataNascimento = formato.parse(dataNascimentoString);
                         } catch (ParseException ex) {
                             Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        LocalDate dataNascimentoLocal = dataNascimento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                        int idade = Period.between(dataNascimentoLocal, dataAtual).getYears();
-                        String idadeString = String.valueOf(idade);
+                        
                         String senha = txtfSenha.getText();
                         Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, Double.parseDouble(divida), senha);
+                        
                         BancoDeDadosClientes.setClienteAtual(cadastrado);
                         bdClientes.adicionarPessoa(cadastrado);
                         AreaCliente telaCliente = new AreaCliente();
@@ -355,25 +321,19 @@ public class CadastroCliente extends javax.swing.JFrame {
 
                         this.setVisible(false);
                     }
-                    
-                    
-                }
-                else{
-                    
-                
+                } else {
                     Date dataNascimento = null;
                     String dataNascimentoString = txtfDataNascimento.getText();
-                    LocalDate dataAtual = LocalDate.now();
+                    
                     try {
                         dataNascimento = formato.parse(dataNascimentoString);
                     } catch (ParseException ex) {
                         Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    LocalDate dataNascimentoLocal = dataNascimento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    int idade = Period.between(dataNascimentoLocal, dataAtual).getYears();
-                    String idadeString = String.valueOf(idade);
+                    
                     String senha = txtfSenha.getText();
                     Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, 0, senha);
+                    
                     BancoDeDadosClientes.setClienteAtual(cadastrado);
                     bdClientes.adicionarPessoa(cadastrado);
                     AreaCliente telaCliente = new AreaCliente();
@@ -381,28 +341,28 @@ public class CadastroCliente extends javax.swing.JFrame {
 
                     this.setVisible(false);
                 }
-                
             }
-        }
-        else if(index == 2){
+        } else if(index == 2){
             if(txtfNome.getText().equals("") || txtfCPF.getText().equals("") || txtfDataNascimento.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-            }
-            else{
+            } else {
                 String CPF = txtfCPF.getText();
                 ArrayList<String> lista = bdClientes.buscarPessoa(CPF);
+                
                 if(lista.isEmpty()){
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     String nome = txtfNome.getText();
                     Date dataNascimento = null;
                     String dataNascimentoString = txtfDataNascimento.getText();
-                    LocalDate dataAtual = LocalDate.now();
+                    
                     try {
                         dataNascimento = formato.parse(dataNascimentoString);
                     } catch (ParseException ex) {
                         Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    
                     Visitante visitante = new Visitante(nome, CPF, dataNascimento, 0);
+                    
                     bdClientes.adicionarPessoa(visitante);
                     BancoDeDadosClientes.setClienteAtual(visitante);
                     AreaCliente telaCliente = new AreaCliente();
@@ -410,62 +370,58 @@ public class CadastroCliente extends javax.swing.JFrame {
                 
                     this.setVisible(false);
                     
-                }
-                else{
+                } else {
                     Date dataNascimento = null;
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     String[] palavras = lista.get(0).split("_");
+                    
                     if (palavras[0].equals("Cadastrado")){
                         JOptionPane.showMessageDialog(null, "Esse CPF está associado à um cadastrado.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-                    }
-                    else{
-                        
-                    
+                    } else {
                         String nome = palavras[1];
                         String dataNascimentoString = palavras[3];
                         String divida = palavras[4];
+                        
                         try {
                             dataNascimento = formato.parse(dataNascimentoString);
                         } catch (ParseException ex) {
                             Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                        
                         Visitante visitante = new Visitante(nome, CPF, dataNascimento, Double.parseDouble(divida));
+                        
                         BancoDeDadosClientes.setClienteAtual(visitante);
+                        
                         AreaCliente telaCliente = new AreaCliente();
-
-
                         telaCliente.setVisible(true);
 
                         this.setVisible(false);
                     }
                 }
             }
-        }
-        else if(index == 3){
+        } else if(index == 3){
             if(txtfCPF.getText().equals("")|| txtfSenha.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-            }
-            else{
+            } else {
                 String CPF = txtfCPF.getText();
                 Date dataNascimento = null;
                 String senha = txtfSenha.getText();
                 ArrayList<String> lista = bdClientes.buscarPessoa(CPF);
+                
                 if(lista.isEmpty()){
                     JOptionPane.showMessageDialog(null, "Não existe nenhuma pessoa já cadastrada com esse CPF.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-                }
-                else{
+                } else {
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     String[] palavras = lista.get(0).split("_");
+                    
                     if (palavras[0].equals("Visitante")){
                         JOptionPane.showMessageDialog(null, "Esse CPF está associado à um visitante.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-                    }
-                    else{
-                        
-                    
+                    } else {
                         String nome = palavras[1];
                         String dataNascimentoString = palavras[3];
                         String divida = palavras[4];
                         String senhaChecar = palavras[5];
+                        
                         try {
                             dataNascimento = formato.parse(dataNascimentoString);
                         } catch (ParseException ex) {
@@ -474,11 +430,11 @@ public class CadastroCliente extends javax.swing.JFrame {
 
                         if(!senha.equals(senhaChecar)){
                             JOptionPane.showMessageDialog(null, "A senha está incorreta.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-
-                        }
-                        else{
+                        } else {
                             Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, Double.parseDouble(divida), senha);
-                            BancoDeDadosClientes.setClienteAtual(cadastrado);                         
+                            
+                            BancoDeDadosClientes.setClienteAtual(cadastrado);  
+                            
                             AreaCliente telaCliente = new AreaCliente();
                             telaCliente.setVisible(true);
 
@@ -486,11 +442,8 @@ public class CadastroCliente extends javax.swing.JFrame {
                         }
                     }
                 }
-                
-                
             }
         }
-        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     //volta para a tela principal
@@ -502,128 +455,121 @@ public class CadastroCliente extends javax.swing.JFrame {
     // realiza o cadastro/login do cliente, sendo ele cadastrado ou visitante, e leva para a loja com suas informações
     private void btnLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLojaActionPerformed
         int index = cmbSituacao.getSelectedIndex();
+        
         if(index == 1){
             if(txtfNome.getText().equals("") || txtfCPF.getText().equals("") || txtfDataNascimento.getText().equals("") || txtfSenha.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-            }
-            else{
+            } else {
                 SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                 String nome = txtfNome.getText();
                 String CPF = txtfCPF.getText();
                 Date dataNascimento = null;
                 String dataNascimentoString = txtfDataNascimento.getText();
-                LocalDate dataAtual = LocalDate.now();
+                
                 try {
                     dataNascimento = formato.parse(dataNascimentoString);
                 } catch (ParseException ex) {
                     Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                LocalDate dataNascimentoLocal = dataNascimento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                int idade = Period.between(dataNascimentoLocal, dataAtual).getYears();
-                String idadeString = String.valueOf(idade);
+                
                 String senha = txtfSenha.getText();
                 Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, 0, senha);
+                
                 BancoDeDadosClientes.setClienteAtual(cadastrado);
                 bdClientes.adicionarPessoa(cadastrado);
+                
                 Loja telaLoja = new Loja();
                 telaLoja.setVisible(true);
                 
                 this.setVisible(false);
-                
             }
-        }
-        
-        else if(index == 2){
+        } else if(index == 2){
             if(txtfNome.getText().equals("") || txtfCPF.getText().equals("") || txtfDataNascimento.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-            }
-            else{
+            } else {
                 String CPF = txtfCPF.getText();
                 ArrayList<String> lista = bdClientes.buscarPessoa(CPF);
+                
                 if(lista.isEmpty()){
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     String nome = txtfNome.getText();
                     Date dataNascimento = null;
                     String dataNascimentoString = txtfDataNascimento.getText();
-                    LocalDate dataAtual = LocalDate.now();
+                    
                     try {
                         dataNascimento = formato.parse(dataNascimentoString);
                     } catch (ParseException ex) {
                         Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    
                     Visitante visitante = new Visitante(nome, CPF, dataNascimento, 0);
+                    
                     bdClientes.adicionarPessoa(visitante);
                     BancoDeDadosClientes.setClienteAtual(visitante);
+                    
                     Loja telaLoja = new Loja();
                     telaLoja.setVisible(true);
                 
                     this.setVisible(false);
                     
-                }
-                else{
+                } else {
                     Date dataNascimento = null;
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     String[] palavras = lista.get(0).split("_");
+                    
                     if (palavras[0].equals("Cadastrado")){
                         JOptionPane.showMessageDialog(null, "Esse CPF está associado à um cadastrado.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-                    }
-                    else{
-                        
-                    
+                    } else {
                         String nome = palavras[1];
                         String dataNascimentoString = palavras[3];
                         String divida = palavras[4];
+                        
                         try {
                             dataNascimento = formato.parse(dataNascimentoString);
                         } catch (ParseException ex) {
                             Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                        
                         Visitante visitante = new Visitante(nome, CPF, dataNascimento, Double.parseDouble(divida));
+                        
                         BancoDeDadosClientes.setClienteAtual(visitante);
+                        
                         if(Double.parseDouble(divida) > 0){
                             JOptionPane.showMessageDialog(null, "Primeiro pague a dívida antes de usar a loja", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                             new AreaCliente().setVisible(true);
                             this.setVisible(false);
-                        }
-                        else{
+                        } else {
                             Loja telaLoja = new Loja();
-
-
                             telaLoja.setVisible(true);
 
                             this.setVisible(false);
                         }
-                        
                     }
                 }
             }
-        }
-        
-        else if(index == 3){
+        } else if(index == 3){
             if(txtfCPF.getText().equals("")|| txtfSenha.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser inseridos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-            }
-            else{
+            } else {
                 String CPF = txtfCPF.getText();
                 Date dataNascimento = null;
                 String senha = txtfSenha.getText();
                 ArrayList<String> lista = bdClientes.buscarPessoa(CPF);
+                
                 if(lista.isEmpty()){
                     JOptionPane.showMessageDialog(null, "Não existe nenhuma pessoa já cadastrada com esse CPF.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-                }
-                else{
+                } else {
                     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                     String[] palavras = lista.get(0).split("_");
+                    
                     if (palavras[0].equals("Visitante")){
                         JOptionPane.showMessageDialog(null, "Esse CPF está associado à um visitante.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-                    }
-                    else{
-                        
-                    
+                    } else {
                         String nome = palavras[1];
                         String dataNascimentoString = palavras[3];
                         String divida = palavras[4];
                         String senhaChecar = palavras[5];
+                        
                         try {
                             dataNascimento = formato.parse(dataNascimentoString);
                         } catch (ParseException ex) {
@@ -633,18 +579,15 @@ public class CadastroCliente extends javax.swing.JFrame {
                         if(!senha.equals(senhaChecar)){
                             JOptionPane.showMessageDialog(null, "A senha está incorreta.", "Mensagem", JOptionPane.PLAIN_MESSAGE);
 
-                        }
-                        else{
+                        } else {
                             Cadastrado cadastrado = new Cadastrado(nome, CPF, dataNascimento, Double.parseDouble(divida), senha);
                             BancoDeDadosClientes.setClienteAtual(cadastrado);
+                            
                             if(Double.parseDouble(divida) > 0){
                                 JOptionPane.showMessageDialog(null, "Primeiro pague a dívida antes de usar a loja", "Mensagem", JOptionPane.PLAIN_MESSAGE);
                                 new AreaCliente().setVisible(true);
                                 this.setVisible(false);
-                            }
-                            else{
-                                
-                            
+                            } else {
                                 Loja telaLoja = new Loja();
                                 telaLoja.setVisible(true);
 
@@ -653,18 +596,9 @@ public class CadastroCliente extends javax.swing.JFrame {
                         }
                     }
                 }
-                
-                
             }
         }
-        
-        
     }//GEN-LAST:event_btnLojaActionPerformed
-
-    private void txtfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfSenhaActionPerformed
-        new AreaCliente().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_txtfSenhaActionPerformed
     
     //deixa visível ou invisível os campos de acordo com o que foi selecionado na combo box
     private void cmbSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSituacaoActionPerformed
@@ -687,10 +621,7 @@ public class CadastroCliente extends javax.swing.JFrame {
             btnLogin.setText("Cadastrar-se");
             btnLoja.setVisible(true);
             btnLoja.setEnabled(true);
-            
-            
-        }
-        else if(index == 3){
+        } else if(index == 3){
             txtfNome.setEnabled(false);
             lblNome.setVisible(false);
             txtfNome.setVisible(false);
@@ -708,9 +639,7 @@ public class CadastroCliente extends javax.swing.JFrame {
             btnLogin.setText("Ver Perfil");
             btnLoja.setVisible(true);
             btnLoja.setEnabled(true);
-            
-        }
-        else if(index == 2){
+        } else if(index == 2){
             txtfNome.setEnabled(true);
             lblNome.setVisible(true);
             txtfNome.setVisible(true);
@@ -729,10 +658,7 @@ public class CadastroCliente extends javax.swing.JFrame {
             btnLogin.setText("Cadastrar-se");
             btnLoja.setVisible(true);
             btnLoja.setEnabled(true);
-            
-            
-        }
-        else{
+        } else{
             txtfNome.setEnabled(false);
             lblNome.setVisible(false);
             txtfNome.setVisible(false);
@@ -749,17 +675,12 @@ public class CadastroCliente extends javax.swing.JFrame {
             btnLogin.setVisible(false);
             btnLoja.setVisible(false);
             btnLoja.setEnabled(false);
-            
         }
     }//GEN-LAST:event_cmbSituacaoActionPerformed
 
     private void menuSairCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairCadCliActionPerformed
         System.exit(0);
     }//GEN-LAST:event_menuSairCadCliActionPerformed
-
-    private void txtfDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfDataNascimentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfDataNascimentoActionPerformed
 
     /**
      * @param args the command line arguments

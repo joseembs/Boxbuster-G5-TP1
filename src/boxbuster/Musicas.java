@@ -1,5 +1,4 @@
 package boxbuster;
-
 /**
  *
  * @author joseembs
