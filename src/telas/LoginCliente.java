@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 /**
  *
- * @author josembs
+ * @author hsaless
  */
 public class LoginCliente extends javax.swing.JFrame {
     
