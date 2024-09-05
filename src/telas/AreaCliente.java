@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author User
+ * @author hsaless
  */
 public class AreaCliente extends javax.swing.JFrame {
 
