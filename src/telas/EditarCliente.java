@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 /**
  *
- * @author elisrb
+ * @author hsaless
  */
 public class EditarCliente extends javax.swing.JFrame {
     
